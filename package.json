@@ -1,0 +1,36 @@
+{
+  "name": "trae-n8n-replica",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "analyze": "cross-env ANALYZE=true next build",
+    "scrape:youngstown": "node scripts/scrape-youngstown-full.js",
+    "upscale:logo": "node scripts/upscale-logo.js",
+    "test:forms": "node scripts/test-all-forms-simple.js"
+  },
+  "dependencies": {
+    "form-data": "^4.0.5",
+    "framer-motion": "^12.23.24",
+    "gsap": "^3.13.0",
+    "next": "14.2.10",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "three": "^0.181.2"
+  },
+  "devDependencies": {
+    "@next/bundle-analyzer": "^16.0.3",
+    "autoprefixer": "^10.4.20",
+    "critters": "^0.0.23",
+    "cross-env": "^10.1.0",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "14.2.10",
+    "postcss": "^8.4.47",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^3.4.15",
+    "web-vitals": "^5.1.0"
+  }
+}

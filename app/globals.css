@@ -1,0 +1,1214 @@
+/* @import rules must be at the very top of the stylesheet */
+@import url('/legacy-css/2bf253bf30ea09a7.css');
+@import url('/legacy-css/081a0afca5a9bd20.css');
+@import url('/legacy-css/2c4911ffbcbe7797.css');
+@import url('/legacy-css/6c1f9ac498836ab6.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Mobile Optimization - Prevent Horizontal Scroll */
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+/* Mobile Touch Targets - Ensure minimum 44x44px for accessibility */
+@media (max-width: 768px) {
+  button,
+  a.button,
+  input[type="submit"],
+  input[type="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Form inputs minimum height for touch */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="number"],
+  textarea,
+  select {
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+}
+
+/* Modal Scroll Optimization */
+.modal-content,
+[class*="fixed inset-0"][class*="overflow-y-auto"] {
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Ensure modals don't overflow viewport */
+@media (max-width: 768px) {
+  [class*="max-h-[90vh]"] {
+    max-height: 85vh !important;
+  }
+  
+  /* Improve button spacing on mobile */
+  button + button,
+  a.button + a.button {
+    margin-top: 0.5rem;
+  }
+  
+  /* Prevent text selection on buttons for better touch experience */
+  button,
+  a[role="button"] {
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Smooth scrolling on mobile */
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Design System Tokens */
+:root {
+  /* Colors */
+  --color-primary: #7BB9E8;
+  --color-primary-dark: #5fa6d6;
+  --color-primary-light: #9BC5E8;
+  --color-secondary: #6ba8d8;
+  
+  /* Backgrounds */
+  --bg-primary: #000000;
+  --bg-secondary: rgba(255, 255, 255, 0.05);
+  --bg-tertiary: rgba(255, 255, 255, 0.1);
+  
+  /* Text */
+  --text-primary: #FFFFFF;
+  --text-secondary: rgba(255, 255, 255, 0.9);
+  --text-tertiary: rgba(255, 255, 255, 0.8);
+  --text-muted: rgba(255, 255, 255, 0.6);
+  
+  /* Spacing Scale (8px base) */
+  --spacing-xs: 0.5rem;   /* 8px */
+  --spacing-sm: 1rem;     /* 16px */
+  --spacing-md: 1.5rem;   /* 24px */
+  --spacing-lg: 2rem;     /* 32px */
+  --spacing-xl: 3rem;     /* 48px */
+  --spacing-2xl: 4rem;    /* 64px */
+  --spacing-3xl: 6rem;    /* 96px */
+  
+  /* Typography */
+  --font-family-primary: 'Inter', 'Satoshi', system-ui, -apple-system, sans-serif;
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 1.875rem;  /* 30px */
+  --font-size-4xl: 2.25rem;   /* 36px */
+  --font-size-5xl: 3rem;      /* 48px */
+  --font-size-6xl: 3.75rem;   /* 60px */
+  --font-size-7xl: 4.5rem;    /* 72px */
+  --font-size-8xl: 6rem;      /* 96px */
+  
+  /* Border Radius */
+  --radius-sm: 0.5rem;   /* 8px */
+  --radius-md: 0.75rem;  /* 12px */
+  --radius-lg: 1rem;     /* 16px */
+  --radius-xl: 1.5rem;   /* 24px */
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.2);
+  --shadow-glow: 0 0 20px rgba(123, 185, 232, 0.3);
+  --shadow-glow-lg: 0 0 40px rgba(123, 185, 232, 0.4);
+}
+
+/* Utility Classes for Design System */
+@layer utilities {
+  /* Section Spacing - Minimal Heights */
+  .section-padding {
+    padding-top: 0.5rem; /* 8px */
+    padding-bottom: 0.5rem; /* 8px */
+  }
+  
+  @media (min-width: 640px) {
+    .section-padding {
+      padding-top: 0.75rem; /* 12px */
+      padding-bottom: 0.75rem; /* 12px */
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .section-padding {
+      padding-top: 1rem; /* 16px */
+      padding-bottom: 1rem; /* 16px */
+    }
+  }
+  
+  /* Overlapping Elements - Subtle depth effect */
+  .section-overlap {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .section-overlap-next {
+    position: relative;
+    z-index: 0;
+    margin-top: -0.5rem; /* Overlap by 8px on mobile */
+  }
+  
+  @media (min-width: 640px) {
+    .section-overlap-next {
+      margin-top: -0.75rem; /* Overlap by 12px on tablet */
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .section-overlap-next {
+      margin-top: -1rem; /* Overlap by 16px on desktop */
+    }
+  }
+  
+  /* Content Alignment Utilities */
+  .content-align-left {
+    text-align: left;
+  }
+  
+  .content-align-center {
+    text-align: center;
+  }
+  
+  .content-align-right {
+    text-align: right;
+  }
+  
+  @media (min-width: 1024px) {
+    .lg\:content-align-left {
+      text-align: left;
+    }
+    
+    .lg\:content-align-center {
+      text-align: center;
+    }
+  }
+  
+  /* Section Divider */
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+    margin: 0;
+  }
+  
+  /* Enhanced Button Styles */
+  .btn-primary {
+    @apply px-8 py-4 bg-gradient-to-r from-[#7BB9E8] via-[#6ba8d8] to-[#5fa6d6] text-white font-semibold rounded-xl shadow-lg shadow-[#7BB9E8]/30 hover:shadow-xl hover:shadow-[#7BB9E8]/50 hover:scale-105 active:scale-95 transition-all duration-300;
+  }
+  
+  .btn-secondary {
+    @apply px-8 py-4 bg-white/5 backdrop-blur-md border-2 border-white/30 text-white font-semibold rounded-xl hover:bg-white/10 hover:border-[#7BB9E8]/50 hover:text-[#7BB9E8] transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg;
+  }
+  
+  /* Card Styles */
+  .card {
+    @apply p-6 md:p-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl hover:bg-white/10 hover:border-white/20 hover:shadow-lg hover:shadow-[#7BB9E8]/10 transition-all duration-300;
+  }
+  
+  /* Typography Utilities */
+  .text-gradient-primary {
+    @apply bg-gradient-to-r from-[#7BB9E8] via-[#6ba8d8] to-[#5fa6d6] bg-clip-text text-transparent;
+  }
+  
+  /* Scroll Animations */
+  .scroll-fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  
+  .scroll-fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .scroll-slide-up {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  
+  .scroll-slide-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-fade-in,
+    .scroll-slide-up {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+  
+  /* 12-Column Grid System */
+  .grid-12 {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  
+  @media (min-width: 768px) {
+    .grid-12 {
+      gap: 1.5rem;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .grid-12 {
+      gap: 2rem;
+    }
+  }
+}
+
+/* Navbar Glassmorphism Styles */
+.nav-transparent {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  backdrop-filter: blur(20px) saturate(180%) brightness(1.1);
+  -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(1.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1), 
+              0 1px 0 rgba(255, 255, 255, 0.2) inset;
+}
+
+.nav-scrolled-modern {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+  backdrop-filter: blur(32px) saturate(200%) brightness(1.15);
+  -webkit-backdrop-filter: blur(32px) saturate(200%) brightness(1.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 
+              0 1px 0 rgba(255, 255, 255, 0.3) inset,
+              0 0 60px rgba(123, 185, 232, 0.1);
+}
+
+/* Performance optimizations - Image rendering */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  content-visibility: auto;
+}
+
+/* Optimize critical images */
+img[loading="eager"],
+img[fetchpriority="high"] {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 200px;
+  /* CRITICAL: Only set will-change when actually animating - remove after animation */
+  /* will-change causes repaints and flickering if left on */
+}
+
+/* Override legacy CSS marquee animations - must come after imports */
+
+body {
+  background-color: #040507;
+  color: #ffffff;
+  font-family: var(--font-inter, 'Inter'), 'Satoshi', 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  letter-spacing: -0.015em;
+  /* Performance optimizations */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  /* Ensure scrolling works on mobile */
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0;
+  padding: 0;
+  /* Prevent text size adjustment on mobile */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /* Better tap highlighting on mobile */
+  -webkit-tap-highlight-color: rgba(123, 185, 232, 0.2);
+}
+
+/* Performance optimizations for smooth scrolling */
+/* CRITICAL: Don't apply backface-visibility to all elements - causes flickering on hover */
+/* Only apply to elements that need it */
+
+/* Optimize images for better scroll performance */
+img {
+  /* Prevent images from causing layout shifts */
+  content-visibility: auto;
+  /* CRITICAL: Don't force translateZ(0) on all images - causes flickering on hover */
+  /* Only apply to images that need GPU acceleration */
+  /* Ensure images don't overflow */
+  max-width: 100%;
+  height: auto;
+  /* Better image rendering */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* CRITICAL: Fix hover flickering - prevent will-change and transform conflicts */
+/* Remove will-change from hover states - only set when actively animating */
+*:hover {
+  /* Don't set will-change on hover - causes flickering */
+  /* will-change should only be set before animation starts, not on hover */
+}
+
+/* Fix transition-all conflicts - use specific properties */
+button,
+a,
+[class*="hover:scale"],
+[class*="group-hover"] {
+  /* Use specific transitions instead of transition-all to prevent conflicts */
+  /* This prevents flickering when multiple properties change */
+}
+
+/* Isolate hover transforms from GSAP animations */
+button:hover,
+a:hover,
+[class*="hover:scale"]:hover {
+  /* Ensure hover transforms are isolated from parent GSAP transforms */
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  /* Use transform isolation to prevent conflicts */
+  isolation: isolate;
+}
+
+/* Optimize sections for scroll performance */
+section {
+  /* Removed contain: layout style - it was causing layout issues and flickering */
+  /* Use transform for animations instead of position changes */
+  will-change: auto;
+  /* Better mobile scrolling */
+  -webkit-overflow-scrolling: touch;
+  /* Prevent horizontal scroll on mobile */
+  overflow-x: hidden;
+}
+
+/* Optimize carousels and animated elements */
+.animate-scroll,
+.animate-scroll-left,
+.ecom-marquee,
+.portfolio-carousel-scroll {
+  /* Only set will-change when animation is active */
+  /* Remove will-change when animation is paused */
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* CRITICAL: Prevent flickering on buttons and interactive elements */
+button,
+a[href],
+[role="button"],
+[tabindex] {
+  /* Remove will-change from interactive elements - causes flickering on hover */
+  /* Only set will-change when actively animating */
+  will-change: auto;
+  /* Use specific transitions, not transition-all */
+  /* This prevents conflicts with GSAP and other animations */
+}
+
+/* REMOVED: CSS hover scale - GSAP handles all hover transforms now */
+/* All hover effects are handled by GSAP for consistency and no conflicts */
+
+/* REMOVED: All CSS hover rules - GSAP handles all hover effects now */
+/* GSAP controls all transforms including hover for consistency */
+
+/* CRITICAL: Global fix for transition-all causing flickering */
+/* Replace transition-all with specific properties */
+.transition-all {
+  /* Override transition-all to use specific properties */
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* REMOVED: CSS hover scale classes - GSAP handles all hover transforms */
+
+/* Fix logo tilt flickering */
+.tilt-logo,
+.logo.tilt-logo {
+  /* Don't set will-change permanently - only when animating */
+  /* will-change causes repaints and flickering */
+  transform-style: preserve-3d;
+  transform-origin: center center;
+}
+
+/* Service cards and other interactive elements */
+.service-card,
+.glass-card,
+[class*="card"] {
+  /* Prevent flickering on hover */
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  /* Use isolation to prevent parent transform interference */
+  isolation: isolate;
+}
+
+/* REMOVED: CSS hover transitions - GSAP handles all hover effects */
+
+/* Navbar links */
+.nav-link,
+[class*="nav"] a {
+  /* Prevent flickering on hover */
+  isolation: isolate;
+  transform-origin: center center;
+}
+
+/* REMOVED: CSS hover scale for buttons - GSAP handles all hover effects */
+
+/* REMOVED: All CSS hover conflict rules - GSAP handles everything now */
+/* GSAP controls all transforms including hover for complete consistency */
+
+/* ============================================
+   RESTORE MISSING CSS RULES
+   ============================================ */
+
+/* Navbar styles */
+.nav-link-underline {
+  position: relative;
+  transition: width 0.35s ease, left 0.35s ease;
+}
+
+.nav-link-underline:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+}
+
+/* Partner carousel images - only scale on hover, don't interfere with carousel animation */
+.partner-carousel a {
+  display: inline-block; /* Create transform context for child */
+}
+
+.partner-carousel a img {
+  transition: transform 0.3s ease, filter 0.3s ease;
+  /* Ensure image transform doesn't conflict with parent carousel translateX */
+  transform-origin: center center;
+}
+
+/* REMOVED: CSS hover for partner carousel images - GSAP handles all hover effects */
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Marquee animations - match previous version exactly */
+@keyframes scroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes portfolio-scroll-mobile {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(var(--scroll-distance), 0, 0);
+  }
+}
+
+/* Success Stories Carousel - Simple hover effects for performance */
+.card-content {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-content:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5) !important;
+}
+
+.card-content img {
+  transition: transform 0.5s ease;
+}
+
+.card-content:hover img {
+  transform: scale(1.05);
+}
+
+@keyframes ecom-marquee-scroll-reverse {
+  0% {
+    /* Start at -50% offset by half a card (172px) to show full cards */
+    transform: translate3d(calc(-50% + 172px), 0, 0);
+  }
+  100% {
+    /* End at 0% offset by half a card (172px) for seamless loop */
+    transform: translate3d(172px, 0, 0);
+  }
+}
+
+/* Partner carousel - moves LEFT (0% to -50%) - CSS Animation */
+.partner-carousel .animate-scroll,
+section.partner-carousel .animate-scroll,
+.partner-carousel > div > div.animate-scroll {
+  animation: scroll 40s linear infinite !important;
+  will-change: transform !important;
+  animation-fill-mode: both !important;
+  transition: none !important;
+  animation-delay: 0s !important;
+  position: relative;
+  z-index: 1;
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  animation-iteration-count: infinite !important;
+}
+
+/* Keep running on hover */
+.partner-carousel .animate-scroll:hover,
+section.partner-carousel .animate-scroll:hover,
+.partner-carousel > div > div.animate-scroll:hover {
+  animation-play-state: running !important;
+}
+
+/* Client logos section - moves LEFT (0% to -50%) - CSS Animation */
+.client-logos-section .animate-scroll-left,
+section.client-logos-section .animate-scroll-left,
+.client-logos-section > div > div.animate-scroll-left {
+  animation: scroll-left 40s linear infinite !important;
+  will-change: transform !important;
+  animation-fill-mode: both !important;
+  transition: none !important;
+  animation-delay: 0s !important;
+  position: relative;
+  z-index: 1;
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  animation-iteration-count: infinite !important;
+}
+
+/* Keep running on hover */
+.client-logos-section .animate-scroll-left:hover,
+section.client-logos-section .animate-scroll-left:hover,
+.client-logos-section > div > div.animate-scroll-left:hover {
+  animation-play-state: running !important;
+}
+
+/* CPG brands section - moves RIGHT (-50% to 0%) - CSS Animation */
+#cpg-brands .ecom-marquee,
+section#cpg-brands .ecom-marquee,
+#cpg-brands > div > div.ecom-marquee {
+  animation: ecom-marquee-scroll-reverse 40s linear infinite !important;
+  will-change: transform !important;
+  animation-fill-mode: both !important;
+  transition: none !important;
+  animation-delay: 0s !important;
+  position: relative;
+  z-index: 1;
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  animation-iteration-count: infinite !important;
+}
+
+/* Keep running on hover */
+#cpg-brands .ecom-marquee:hover,
+section#cpg-brands .ecom-marquee:hover,
+#cpg-brands > div > div.ecom-marquee:hover {
+  animation-play-state: running !important;
+}
+
+/* Local business growth section - moves RIGHT (-50% to 0%) - CSS Animation */
+#local-business-growth .ecom-marquee,
+section#local-business-growth .ecom-marquee,
+#local-business-growth > div > div.ecom-marquee {
+  animation: ecom-marquee-scroll-reverse 40s linear infinite !important;
+  will-change: transform !important;
+  animation-fill-mode: both !important;
+  transition: none !important;
+  animation-delay: 0s !important;
+  position: relative;
+  z-index: 1;
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  animation-iteration-count: infinite !important;
+  width: fit-content;
+  min-width: 200%;
+}
+
+/* Keep running on hover */
+#local-business-growth .ecom-marquee:hover,
+section#local-business-growth .ecom-marquee:hover,
+#local-business-growth > div > div.ecom-marquee:hover {
+  animation-play-state: running !important;
+}
+
+/* Portfolio carousel - GSAP handles the animation with 3D transforms */
+.portfolio-carousel-scroll {
+  /* Ensure carousel has its own transform context */
+  position: relative;
+  z-index: 1;
+  /* GSAP will handle transform via x property (translateX) */
+  /* transform-style: preserve-3d is set by GSAP */
+}
+
+/* Card hover tilt effects - GSAP handles 3D rotation (CSS fallback available) */
+/* The parent carousel (.portfolio-carousel-scroll) uses GSAP translateX or CSS animation */
+/* The child cards (.card-content) use GSAP rotationX/rotationY or CSS custom properties for 3D tilt */
+#portfolio .card-content {
+  /* CSS custom properties for fallback */
+  --rotate-x: 0deg;
+  --rotate-y: 0deg;
+  /* GSAP will handle transform via rotationX/rotationY, or CSS will use custom properties */
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  transform: perspective(1000px) rotateX(var(--rotate-x)) rotateY(var(--rotate-y)) translateZ(0);
+  /* Performance optimization */
+  will-change: transform;
+  /* Ensure cards can be transformed independently */
+  position: relative;
+  /* Prevent flickering and improve performance */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  /* GPU acceleration */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  /* CRITICAL: Only transition box-shadow, NOT transform - GSAP handles transform to prevent flickering */
+  transition: box-shadow 0.2s ease-out;
+  /* Optimize rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent GSAP from interfering with hover scale on card images */
+#portfolio .card-content img,
+#portfolio .card-content picture {
+  /* Isolate image transforms from parent card GSAP transforms */
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  /* CRITICAL: Don't set will-change on images - causes flickering on hover */
+  /* will-change: transform; */
+  /* Smooth hover scale without flickering */
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Ensure image transforms are independent of parent */
+  transform-origin: center center;
+  /* Isolate from parent GSAP transforms */
+  isolation: isolate;
+}
+
+/* Prevent flickering on hover - ensure GSAP doesn't override CSS hover transforms */
+#portfolio .card-content:hover {
+  /* When hovered, prevent GSAP from animating scale */
+  will-change: transform, box-shadow;
+}
+
+/* CPG Brand Cards - Fixed size, scoped to prevent affecting other sections */
+#cpg-brands .service-card,
+section#cpg-brands .service-card,
+.ecom-marquee .service-card {
+  width: 344px !important;
+  height: 344px !important;
+  min-width: 344px !important;
+  min-height: 344px !important;
+  max-width: 344px !important;
+  max-height: 344px !important;
+  flex-shrink: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Ensure cards are fully visible on mobile */
+@media (max-width: 768px) {
+  /* Service section mobile cards */
+  .service-card {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* Flip Card Styles */
+.flip-card {
+  perspective: 1000px;
+  width: 100%;
+  min-height: auto;
+  position: relative;
+  max-width: none;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  margin-top: -1rem !important; /* Match Growth Plan's -mt-4 */
+  box-sizing: border-box;
+}
+
+.flip-card.pricing-card {
+  margin-top: -1rem !important; /* Match Growth Plan's -mt-4 */
+}
+
+/* Override for mobile - remove negative margin */
+@media (max-width: 768px) {
+  .flip-card.pricing-card {
+    margin-top: 0 !important;
+  }
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  text-align: start;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  height: 100%;
+  min-height: 100%;
+}
+
+.flip-card-spacer {
+  position: relative;
+  width: 100%;
+  pointer-events: none;
+  height: 100%;
+  min-height: 626px;
+  margin: 0;
+  visibility: hidden;
+}
+
+.flip-card-inner::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.flip-card-inner.flipped {
+  transform: none !important;
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 1.5rem;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+}
+
+/* Ensure padding classes work on flip card faces */
+.flip-card-front.p-6,
+.flip-card-back.p-6 {
+  padding: 1.5rem !important;
+}
+
+@media (min-width: 1024px) {
+  .flip-card-front.p-6.lg\:p-8,
+  .flip-card-back.p-6.lg\:p-8 {
+    padding: 2rem !important;
+  }
+}
+
+.flip-card-front > *,
+.flip-card-back > * {
+  flex-shrink: 0;
+}
+
+.flip-card-front > .flex-grow,
+.flip-card-back > .flex-grow {
+  flex-shrink: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.flip-card-front {
+  z-index: 2;
+  opacity: 1;
+  visibility: visible;
+}
+
+.flip-card-back {
+  /* No rotation - just hidden by default */
+  z-index: 1;
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* When flipped, fade out front and fade in back */
+.flip-card-inner.flipped .flip-card-front {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+}
+
+.flip-card-inner.flipped .flip-card-back {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  z-index: 2;
+  transition: opacity 0.3s ease-in 0.2s, visibility 0s ease-in 0.2s;
+}
+
+/* Toggle Switch Styles - Small on/off switch */
+/* Toggle button wrapper - positioned at top right */
+.flip-card-front > div.absolute.top-2.right-2,
+.flip-card-back > div.absolute.top-2.right-2 {
+  position: absolute !important;
+  top: 0.5rem !important;
+  right: 0.5rem !important;
+  z-index: 50 !important;
+}
+
+.flip-card-front button[aria-label],
+.flip-card-back button[aria-label] {
+  position: relative;
+  min-width: 3rem;
+  height: auto;
+  padding: 0.25rem 0.25rem;
+  border: none;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Toggle circle (first span) */
+.flip-card-front button[aria-label] > span:first-child,
+.flip-card-back button[aria-label] > span:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: white;
+  border-radius: 9999px;
+  transition: none;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+/* Label text (second span) */
+.flip-card-front button[aria-label] > span:last-child,
+.flip-card-back button[aria-label] > span:last-child {
+  display: flex;
+  align-items: center;
+  line-height: 1;
+  height: 100%;
+}
+
+/* Toggle state - Front (Executive Coaching) - OFF state */
+.flip-card-front button[aria-label] {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.flip-card-front button[aria-label] > span:first-child {
+  transform: translateX(0);
+}
+
+/* Toggle state - Back (Campaign Management) - ON state */
+.flip-card-back button[aria-label] {
+  background-color: rgba(123, 185, 232, 0.4);
+  justify-content: flex-end;
+}
+
+.flip-card-back button[aria-label] > span:first-child {
+  transform: translateX(0);
+  order: 2;
+}
+
+.flip-card-back button[aria-label] > span:last-child {
+  order: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-card-inner {
+    transition: none;
+  }
+  
+  .flip-card:hover .flip-card-inner {
+    transform: none;
+  }
+  
+  .flip-card-back {
+    transform: none;
+    position: relative;
+  }
+}
+
+/* Pricing Section Enhancements */
+.pricing-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.pricing-card:hover {
+  transform: translateY(-0.5rem) scale(1.02);
+}
+
+/* Smart hover effects for flip card - allow visual feedback while preserving flip functionality */
+.flip-card.pricing-card {
+  transition: transform 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.flip-card.pricing-card:hover,
+.flip-card:hover {
+  /* Add subtle lift and scale on hover */
+  transform: translateY(-0.5rem) scale(1.05) !important;
+  border-color: rgba(123, 185, 232, 0.8) !important;
+  box-shadow: 0 25px 50px -12px rgba(123, 185, 232, 0.5) !important;
+}
+
+@media (min-width: 1024px) {
+  .flip-card.pricing-card:hover,
+  .flip-card:hover {
+    transform: translateY(-0.5rem) scale(1.1) !important;
+  }
+}
+
+/* No transforms needed - using fade only */
+.flip-card:hover .flip-card-inner,
+.flip-card:hover .flip-card-front,
+.flip-card:hover .flip-card-back {
+  /* No transform overrides needed */
+}
+
+/* Allow glow effects and opacity transitions inside flip card */
+.flip-card .absolute.inset-0,
+.flip-card-front .absolute.inset-0,
+.flip-card-back .absolute.inset-0 {
+  transition: opacity 0.5s ease !important;
+}
+
+/* Allow button hover effects inside flip card */
+.flip-card a,
+.flip-card-front a,
+.flip-card-back a {
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.flip-card a:hover,
+.flip-card-front a:hover,
+.flip-card-back a:hover {
+  transform: scale(1.05) !important;
+  box-shadow: 0 10px 25px -5px rgba(123, 185, 232, 0.6) !important;
+}
+
+/* Allow price scaling on hover */
+.flip-card .text-6xl,
+.flip-card .text-5xl {
+  transition: transform 0.3s ease !important;
+}
+
+.flip-card:hover .text-6xl,
+.flip-card:hover .text-5xl {
+  transform: scale(1.1) !important;
+}
+
+.featured-plan {
+  animation: subtle-pulse 3s ease-in-out infinite;
+}
+
+@keyframes subtle-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(123, 185, 232, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(123, 185, 232, 0);
+  }
+}
+
+/* Feature Item Animations */
+.feature-item {
+  opacity: 0;
+  transform: translateX(-10px);
+  animation: fadeInLeft 0.6s ease-out forwards;
+}
+
+/* Disable animations for flip card feature items */
+.flip-card .feature-item {
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+.feature-item:nth-child(1) { animation-delay: 0.1s; }
+.feature-item:nth-child(2) { animation-delay: 0.2s; }
+.feature-item:nth-child(3) { animation-delay: 0.3s; }
+.feature-item:nth-child(4) { animation-delay: 0.4s; }
+.feature-item:nth-child(5) { animation-delay: 0.5s; }
+.feature-item:nth-child(6) { animation-delay: 0.6s; }
+.feature-item:nth-child(7) { animation-delay: 0.7s; }
+
+@keyframes fadeInLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Enhanced Button Hover Effects */
+.pricing-card a {
+  position: relative;
+  overflow: hidden;
+}
+
+.flip-card a::before,
+.flip-card-front a::before,
+.flip-card-back a::before {
+  display: none !important;
+}
+
+.pricing-card a::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.pricing-card a:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Staggered Card Heights for Visual Interest */
+@media (min-width: 1024px) {
+  .pricing-card:nth-child(1) {
+    margin-top: 0;
+  }
+  
+  .pricing-card:nth-child(2) {
+    margin-top: -1rem;
+  }
+  
+  .pricing-card:nth-child(3) {
+    margin-top: 0;
+  }
+  
+  .pricing-card:nth-child(4) {
+    margin-top: -1rem;
+  }
+}
+
+/* Custom Scrollbar for Flip Card Feature List */
+.flip-card-back .overflow-y-auto::-webkit-scrollbar {
+  width: 8px !important;
+}
+
+.flip-card-back .overflow-y-auto::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-radius: 10px !important;
+}
+
+.flip-card-back .overflow-y-auto::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, rgba(123, 185, 232, 0.6), rgba(123, 185, 232, 0.8)) !important;
+  border-radius: 10px !important;
+  border: 1px solid rgba(123, 185, 232, 0.3) !important;
+}
+
+.flip-card-back .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, rgba(123, 185, 232, 0.8), rgba(123, 185, 232, 1)) !important;
+}
+
+/* Firefox scrollbar */
+.flip-card-back .overflow-y-auto {
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(123, 185, 232, 0.8) rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  .pricing-card {
+    margin-top: 0 !important;
+  }
+  
+  .pricing-card:hover {
+    transform: translateY(-0.25rem) scale(1.01);
+  }
+
+  .featured-plan {
+    scale: 1 !important;
+    transform: scale(1) !important;
+  }
+  
+  /* Remove negative margin on flip card for mobile to maintain proper gap */
+  .flip-card.pricing-card {
+    margin-top: 0 !important;
+  }
+  
+  /* Ensure proper gap between cards on mobile */
+  .pricing-card.featured-plan:not(.flip-card) {
+    margin-bottom: 0 !important;
+  }
+}
+
+/* Cristina Message Bubble Tail */
+.cristina-message-bubble {
+  position: relative;
+}
+
+.speech-bubble-tail {
+  width: 18px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-left: none;
+  border-radius: 0 0 0 8px;
+  clip-path: polygon(0 0, 100% 50%, 0 100%, 0 55%, 10px 50%, 0 45%);
+  transform: translateX(2px);
+  filter: drop-shadow(0 2px 4px rgba(123, 185, 232, 0.2));
+}

@@ -1,0 +1,226 @@
+/**
+ * TiltCarousel.module.css
+ * 
+ * Tweak guide - CSS Variables:
+ * - --card-width-desktop: Card width on desktop (default: 320px)
+ * - --card-height-desktop: Card height on desktop (default: 420px)
+ * - --card-width-mobile: Card width on mobile (default: 260px)
+ * - --card-height-mobile: Card height on mobile (default: 360px)
+ * - --card-gap: Gap between card centers (default: 36px)
+ * - --perspective: 3D perspective depth (default: 1200px)
+ * - --border-radius: Card border radius (default: 14px)
+ */
+
+.container {
+  width: 100%;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  background: linear-gradient(to bottom, #0a0a0a, #10151a, #181c22);
+  position: relative;
+  overflow: hidden;
+}
+
+.perspectiveWrapper {
+  perspective: var(--perspective, 1200px);
+  perspective-origin: center center;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.carousel {
+  position: relative;
+  width: 100%;
+  height: var(--card-height-desktop, 420px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+}
+
+.card {
+  position: absolute;
+  width: var(--card-width-desktop, 320px);
+  height: var(--card-height-desktop, 420px);
+  border-radius: var(--border-radius, 14px);
+  overflow: hidden;
+  cursor: pointer;
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  isolation: isolate;
+}
+
+.cardGlow {
+  position: absolute;
+  inset: -2px;
+  border-radius: var(--border-radius, 14px);
+  background: linear-gradient(
+    135deg,
+    rgba(123, 185, 232, 0.3) 0%,
+    rgba(255, 122, 232, 0.2) 25%,
+    rgba(123, 243, 142, 0.2) 50%,
+    rgba(255, 122, 232, 0.2) 75%,
+    rgba(123, 185, 232, 0.3) 100%
+  );
+  filter: blur(8px);
+  opacity: 0.6;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.cardImage {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.cardImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 40%,
+    rgba(0, 0, 0, 0.3) 70%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+.cardContent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 20px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cardTag {
+  display: inline-block;
+  padding: 4px 12px;
+  background: rgba(123, 185, 232, 0.2);
+  border: 1px solid rgba(123, 185, 232, 0.4);
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #7BB9E8;
+  width: fit-content;
+  backdrop-filter: blur(8px);
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.cardSubtitle {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.4;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Dark glass background effect */
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(10, 15, 25, 0.8) 0%,
+    rgba(16, 21, 30, 0.6) 50%,
+    rgba(10, 15, 25, 0.8) 100%
+  );
+  border-radius: var(--border-radius, 14px);
+  z-index: 0;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Soft shadow */
+.card::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 40px;
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.4) 0%, transparent 70%);
+  filter: blur(12px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Mobile responsive */
+@media (max-width: 720px) {
+  .container {
+    min-height: 360px;
+    padding: 40px 16px;
+  }
+
+  .carousel {
+    height: var(--card-height-mobile, 360px);
+  }
+
+  .card {
+    width: var(--card-width-mobile, 260px);
+    height: var(--card-height-mobile, 360px);
+  }
+
+  .cardContent {
+    padding: 20px 16px;
+  }
+
+  .cardTitle {
+    font-size: 20px;
+  }
+
+  .cardSubtitle {
+    font-size: 13px;
+  }
+}
+
+/* Accessibility */
+.card:focus-visible {
+  outline: 2px solid #7BB9E8;
+  outline-offset: 4px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    will-change: auto;
+  }
+  
+  .carousel {
+    animation: none;
+  }
+}
+
