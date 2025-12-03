@@ -1049,7 +1049,7 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
           </button>
         </div>
       </header>
-      <section className="hero relative z-10 w-full flex flex-col justify-center items-center pt-8 pb-16 mb-0 overflow-hidden">
+      <section className="hero relative z-10 w-full flex flex-col justify-center items-center pt-10 pb-16 mb-0 overflow-hidden">
         <div className="max-w-5xl mx-auto w-full px-4 sm:px-6 md:px-8 flex flex-col items-center justify-center text-center">
           <div className="flex items-center space-x-4 mb-4 md:mb-5 mt-0 md:mt-1">
             <div className="flex items-center space-x-1.5 md:space-x-2.5 bg-white/10 px-1.5 py-0.5 md:px-2.5 md:py-1.5 rounded-full border-2 border-white/30 overflow-visible shadow-md shadow-white/5 backdrop-blur-sm ring-1 ring-white/10">
