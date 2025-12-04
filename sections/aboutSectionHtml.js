@@ -71,7 +71,7 @@ export const aboutSectionHtml = String.raw`
      <div class="relative">
       <div class="absolute -inset-3 bg-gradient-to-r from-[#7BB9E8]/20 to-[#5fa6db]/20 rounded-2xl blur-xl opacity-50 group-hover:opacity-100 transition-opacity duration-500">
       </div>
-      <div class="relative w-full max-w-[200px] md:max-w-[220px] mx-auto aspect-[3/4] rounded-xl overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent">
+      <div class="relative w-full max-w-[225px] md:max-w-[255px] mx-auto aspect-[3/4] rounded-xl overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent">
        <img alt="Dom - Founder & CEO" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="/images/dom photo.jpeg"/>
       </div>
      </div>
@@ -117,9 +117,9 @@ export const aboutSectionHtml = String.raw`
   
   <!-- Cristina & Other Team Members Section -->
   <div class="max-w-6xl mx-auto mb-12 px-4 md:px-0 overflow-visible">
-   <div class="flex flex-col md:flex-row items-center md:items-end gap-8 md:gap-0 overflow-visible">
+   <div class="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-0 overflow-visible">
     <!-- Other Team Members Row (Evan + 3) -->
-     <div class="order-2 md:order-1 flex-1 flex flex-row flex-wrap md:flex-nowrap justify-center md:justify-end gap-6 md:gap-10 mt-0 md:mt-16 lg:mt-20 w-full">
+     <div class="order-2 md:order-1 flex-1 flex flex-row flex-wrap md:flex-nowrap justify-center md:justify-end gap-4 md:gap-6 mt-0 md:mt-24 lg:mt-32 w-full">
      
      <!-- Evan - Sales Manager -->
      <div class="flex flex-col items-center text-center space-y-3">
@@ -217,21 +217,36 @@ export const aboutSectionHtml = String.raw`
     </div>
     
     <!-- Cristina - Designer (Special Position) -->
-    <div class="order-1 md:order-2 flex flex-col md:flex-row items-center md:items-start justify-center md:justify-end gap-4 md:gap-6 flex-shrink-0 md:-ml-20 lg:-ml-40 md:-mt-12 lg:-mt-16 w-full md:w-auto overflow-visible">
+    <div class="cristina-section order-1 md:order-2 flex flex-col md:flex-row items-center md:items-start justify-center md:justify-end gap-4 md:gap-6 flex-shrink-0 md:-ml-32 lg:-ml-56 w-full md:w-auto overflow-visible">
+    <style>
+     .cristina-section {
+       margin-top: 0px !important;
+     }
+     @media (min-width: 768px) {
+      .cristina-section {
+       margin-top: 16px !important;
+      }
+     }
+     @media (min-width: 1024px) {
+      .cristina-section {
+       margin-top: 24px !important;
+      }
+     }
+    </style>
      
      <!-- Cristina Photo Section (First on Mobile) -->
      <div class="group flex-shrink-0 w-full sm:w-auto flex justify-center md:block order-1 md:order-2">
       <div class="relative">
        <div class="absolute -inset-3 bg-gradient-to-r from-[#7BB9E8]/20 to-[#5fa6db]/20 rounded-2xl blur-xl opacity-50 group-hover:opacity-100 transition-opacity duration-500">
        </div>
-       <div class="relative w-48 sm:w-52 md:w-56 lg:w-60 max-w-[200px] md:max-w-[220px] aspect-[3/4] rounded-xl overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent mx-auto">
+       <div class="relative w-52 sm:w-56 md:w-64 lg:w-72 max-w-[225px] md:max-w-[255px] aspect-[3/4] rounded-xl overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent mx-auto">
         <img alt="Cristina - Designer" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="/images/cristina.jpeg?v=2" loading="eager" fetchpriority="high" decoding="async"/>
        </div>
       </div>
      </div>
      
      <!-- Message Bubble - Name Section (Second on Mobile, with tail pointing up) -->
-     <div class="cristina-chat-bubble bg-white/10 backdrop-blur-md rounded-2xl p-4 md:p-5 border border-white/20 shadow-lg shadow-[#7BB9E8]/20 mt-0 md:-mt-6 overflow-visible text-center md:text-left max-w-xs md:max-w-none order-2 md:order-1">
+     <div class="cristina-chat-bubble bg-white/10 backdrop-blur-md rounded-2xl p-4 md:p-5 border border-white/20 shadow-lg shadow-[#7BB9E8]/20 mt-0 md:-mt-10 lg:-mt-12 overflow-visible text-center md:text-left max-w-xs md:max-w-none order-2 md:order-1">
       <h3 class="text-xl md:text-2xl font-bold text-white mb-1" style="font-family:Inter, Satoshi, sans-serif">
        Hey, I&apos;m Cristina.
       </h3>
