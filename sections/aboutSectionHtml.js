@@ -45,7 +45,7 @@ export const aboutSectionHtml = String.raw`
     }
   }
 </style>
-<section class="w-full pt-12 pb-20 bg-gradient-to-b from-[#181c22] via-[#10151a] to-[#181c22] relative overflow-hidden" id="about" style="scroll-margin-top:120px">
+<section class="w-full pt-12 pb-8 md:pb-20 bg-gradient-to-b from-[#181c22] via-[#10151a] to-[#181c22] relative overflow-hidden" id="about" style="scroll-margin-top:120px">
  <div class="absolute inset-0 opacity-5">
   <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(123,185,232,0.1),transparent_50%)]">
   </div>
@@ -64,14 +64,14 @@ export const aboutSectionHtml = String.raw`
   
   <!-- Founder Section - Side by Side -->
   <div class="max-w-6xl mx-auto mb-12">
-   <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6 md:gap-8">
+   <div class="grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-6 md:gap-8">
     
     <!-- Founder Photo Section -->
     <div class="group">
      <div class="relative">
       <div class="absolute -inset-3 bg-gradient-to-r from-[#7BB9E8]/20 to-[#5fa6db]/20 rounded-2xl blur-xl opacity-50 group-hover:opacity-100 transition-opacity duration-500">
       </div>
-      <div class="relative w-full max-w-[225px] md:max-w-[255px] mx-auto aspect-[3/4] rounded-xl overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent">
+      <div class="relative w-full max-w-[180px] sm:max-w-[200px] md:max-w-[240px] lg:max-w-[255px] mx-auto aspect-[3/4] rounded-xl overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent">
        <img alt="Dom - Founder & CEO" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="/images/dom photo.jpeg"/>
       </div>
      </div>
@@ -80,9 +80,9 @@ export const aboutSectionHtml = String.raw`
     <!-- Founder Content Section -->
     <div class="bg-white/5 rounded-2xl p-4 md:p-6 border border-white/10">
      <!-- Header -->
-     <div class="mb-3">
-      <div class="flex items-center gap-2 mb-1">
-       <h3 class="text-xl md:text-2xl font-bold text-white" style="font-family:Inter, Satoshi, sans-serif">
+     <div class="mb-2">
+      <div class="flex items-center gap-2 mb-0.5">
+       <h3 class="text-2xl md:text-3xl font-bold text-white leading-tight" style="font-family:Inter, Satoshi, sans-serif">
         Hey, I&apos;m Dom.
        </h3>
        <!-- Instagram Link -->
@@ -93,20 +93,20 @@ export const aboutSectionHtml = String.raw`
         </svg>
        </a>
       </div>
-      <p class="text-[#7BB9E8] font-semibold text-sm md:text-base">
+      <p class="text-[#7BB9E8] font-semibold text-sm md:text-base leading-tight">
        Founder &amp; CEO
       </p>
      </div>
      
      <!-- Bio -->
-     <div class="space-y-2">
-      <p class="text-white/80 leading-relaxed text-xs md:text-sm" style="font-family:Inter, Satoshi, sans-serif">
+     <div class="space-y-1.5">
+      <p class="text-white/80 leading-snug text-sm md:text-base" style="font-family:Inter, Satoshi, sans-serif">
        I&apos;m the founder of Yo Marketing, and over the years I&apos;ve worked hands-on with 100+ small businesses, dozens of creators, and several political campaigns. I&apos;ve been part of some incredible marketing wins—and have personally led campaigns that doubled client revenue through strategic ads and smart digital execution.
       </p>
-      <p class="text-white/80 leading-relaxed text-xs md:text-sm" style="font-family:Inter, Satoshi, sans-serif">
+      <p class="text-white/80 leading-snug text-sm md:text-base" style="font-family:Inter, Satoshi, sans-serif">
        I have a genuine passion for helping businesses grow and sharing the strategies that actually work. At Yo Marketing, we don&apos;t just create beautiful websites—we build websites that convert, backed by systems that keep your business growing on autopilot.
       </p>
-      <p class="text-white/80 leading-relaxed text-xs md:text-sm" style="font-family:Inter, Satoshi, sans-serif">
+      <p class="text-white/80 leading-snug text-sm md:text-base" style="font-family:Inter, Satoshi, sans-serif">
        From automation setups and CRM optimization to high-impact advertising campaigns, we help you get more customers, streamline operations, and scale effectively. Our mission is simple: help you grow, then help you handle the growth.
       </p>
      </div>
@@ -116,10 +116,10 @@ export const aboutSectionHtml = String.raw`
   </div>
   
   <!-- Cristina & Other Team Members Section -->
-  <div class="max-w-6xl mx-auto mb-12 px-4 md:px-0 overflow-visible">
+  <div class="max-w-6xl mx-auto mb-2 md:mb-12 px-4 md:px-0 overflow-visible">
    <div class="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-0 overflow-visible">
     <!-- Other Team Members Row (Evan + 3) -->
-     <div class="order-2 md:order-1 flex-1 flex flex-row flex-wrap md:flex-nowrap justify-center md:justify-end gap-4 md:gap-6 mt-0 md:mt-24 lg:mt-32 w-full">
+     <div class="order-2 md:order-1 flex-1 grid grid-cols-2 md:flex md:flex-row md:flex-nowrap justify-center md:justify-end gap-4 md:gap-6 mt-0 md:mt-24 lg:mt-32 w-full">
      
      <!-- Evan - Sales Manager -->
      <div class="flex flex-col items-center text-center space-y-3">
@@ -239,14 +239,14 @@ export const aboutSectionHtml = String.raw`
       <div class="relative">
        <div class="absolute -inset-3 bg-gradient-to-r from-[#7BB9E8]/20 to-[#5fa6db]/20 rounded-2xl blur-xl opacity-50 group-hover:opacity-100 transition-opacity duration-500">
        </div>
-       <div class="relative w-52 sm:w-56 md:w-64 lg:w-72 max-w-[225px] md:max-w-[255px] aspect-[3/4] rounded-xl overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent mx-auto">
+       <div class="relative w-40 sm:w-48 md:w-56 lg:w-64 xl:w-72 max-w-[160px] sm:max-w-[192px] md:max-w-[224px] lg:max-w-[255px] aspect-[3/4] rounded-xl overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent mx-auto">
         <img alt="Cristina - Designer" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="/images/cristina.jpeg?v=2" loading="eager" fetchpriority="high" decoding="async"/>
        </div>
       </div>
      </div>
      
      <!-- Message Bubble - Name Section (Second on Mobile, with tail pointing up) -->
-     <div class="cristina-chat-bubble bg-white/10 backdrop-blur-md rounded-2xl p-4 md:p-5 border border-white/20 shadow-lg shadow-[#7BB9E8]/20 mt-0 md:-mt-10 lg:-mt-12 overflow-visible text-center md:text-left max-w-xs md:max-w-none order-2 md:order-1">
+     <div class="cristina-chat-bubble bg-white/10 backdrop-blur-md rounded-2xl p-3 sm:p-4 md:p-5 border border-white/20 shadow-lg shadow-[#7BB9E8]/20 mt-0 md:-mt-10 lg:-mt-12 overflow-visible text-center md:text-left max-w-[200px] sm:max-w-xs md:max-w-none order-2 md:order-1">
       <h3 class="text-xl md:text-2xl font-bold text-white mb-1" style="font-family:Inter, Satoshi, sans-serif">
        Hey, I&apos;m Cristina.
       </h3>
