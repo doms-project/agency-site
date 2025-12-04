@@ -247,10 +247,10 @@ export const aboutSectionHtml = String.raw`
      
      <!-- Message Bubble - Name Section (Second on Mobile, with tail pointing up) -->
      <div class="cristina-chat-bubble bg-white/10 backdrop-blur-md rounded-2xl p-3 sm:p-4 md:p-5 border border-white/20 shadow-lg shadow-[#7BB9E8]/20 mt-0 md:-mt-10 lg:-mt-12 overflow-visible text-center md:text-left max-w-[200px] sm:max-w-xs md:max-w-none order-2 md:order-1">
-      <h3 class="text-base sm:text-lg md:text-2xl font-bold text-white mb-0.5 sm:mb-1" style="font-family:Inter, Satoshi, sans-serif">
+      <h3 class="text-sm sm:text-base md:text-2xl font-bold text-white mb-0.5 sm:mb-1" style="font-family:Inter, Satoshi, sans-serif">
        Hey, I&apos;m Cristina.
       </h3>
-      <p class="text-[#7BB9E8] font-semibold text-xs sm:text-sm md:text-base">
+      <p class="text-[#7BB9E8] font-semibold text-[10px] sm:text-xs md:text-base">
        Brand Strategist &amp; Designer
       </p>
      </div>
