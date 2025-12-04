@@ -50,8 +50,8 @@ const nextConfig = {
     maxInactiveAge: 25 * 1000,
     pagesBufferLength: 2,
   },
-  // Output configuration
-  output: 'standalone',
+  // Output configuration - removed 'standalone' for Vercel (not needed)
+  // output: 'standalone', // Only needed for Docker/self-hosting
   async rewrites() {
     return legacyCssFiles.map((file) => ({
       source: `/_next/static/css/${file}`,
