@@ -8,14 +8,24 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Mobile Optimization - Prevent Horizontal Scroll */
-body {
-  overflow-x: hidden;
-  max-width: 100vw;
+/* Remove default margins and padding - Fix Vercel gap */
+* {
+  margin: 0;
+  padding: 0;
 }
 
 html {
+  margin: 0 !important;
+  padding: 0 !important;
   overflow-x: hidden;
+}
+
+/* Mobile Optimization - Prevent Horizontal Scroll */
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 /* Mobile Touch Targets - Ensure minimum 44x44px for accessibility */
@@ -72,6 +82,12 @@ html {
   html {
     scroll-behavior: smooth;
   }
+}
+
+/* Main container - ensure no top gaps */
+main {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
 }
 
 /* Hero Section - Override legacy CSS */
@@ -285,6 +301,19 @@ section[aria-label="Homepage Hero Banner"] {
       gap: 2rem;
     }
   }
+}
+
+/* Navbar - Remove any gaps at the top */
+nav {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Ensure nav sticks to the very top */
+nav.sticky,
+nav[class*="sticky"] {
+  top: 0 !important;
+  margin-top: 0 !important;
 }
 
 /* Navbar Glassmorphism Styles */
