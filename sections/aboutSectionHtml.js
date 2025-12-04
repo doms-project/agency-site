@@ -198,7 +198,7 @@ export const aboutSectionHtml = String.raw`
       </div>
       <div class="relative w-32 h-36 md:w-36 md:h-40 rounded-xl overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent">
        <img
-        src="/images/dom photo.jpeg"
+        src="/images/musaraf.png"
         alt="Musaraf - Backend Dev"
         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
        />
