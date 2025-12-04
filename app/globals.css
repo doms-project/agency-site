@@ -519,6 +519,25 @@ a[href],
   transform-origin: center center;
 }
 
+/* Ensure Mailchimp logo is properly sized */
+.partner-carousel img[alt="MailChimp"] {
+  min-height: 56px !important;
+  max-height: 96px !important;
+  height: auto !important;
+}
+
+@media (min-width: 768px) {
+  .partner-carousel img[alt="MailChimp"] {
+    min-height: 80px !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .partner-carousel img[alt="MailChimp"] {
+    min-height: 96px !important;
+  }
+}
+
 /* REMOVED: CSS hover for partner carousel images - GSAP handles all hover effects */
 
 .reveal-on-scroll {
