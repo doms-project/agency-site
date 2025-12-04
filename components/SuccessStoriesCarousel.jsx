@@ -143,10 +143,12 @@ export default function SuccessStoriesCarousel() {
   const swipeStateRef = useRef({
     isDragging: false,
     startX: 0,
+    startY: 0,
     currentX: 0,
     startTime: 0,
     velocity: 0,
     animationPaused: false,
+    isSwipe: false, // Track if this is a swipe gesture
   })
   
   // Use fewer card duplicates on mobile for better performance
@@ -225,12 +227,10 @@ export default function SuccessStoriesCarousel() {
       const handleTouchStart = (e) => {
         swipeState.isDragging = true
         swipeState.startX = e.touches[0].clientX
+        swipeState.startY = e.touches[0].clientY
         swipeState.currentX = e.touches[0].clientX
         swipeState.startTime = Date.now()
-        
-        // Pause auto-scroll animation
-        carousel.style.animationPlayState = 'paused'
-        swipeState.animationPaused = true
+        swipeState.isSwipe = false // Reset swipe flag
         
         // Get current transform position
         const transform = window.getComputedStyle(carousel).transform
@@ -246,12 +246,30 @@ export default function SuccessStoriesCarousel() {
         if (!swipeState.isDragging) return
         
         const currentX = e.touches[0].clientX
-        const deltaX = currentX - swipeState.startX
+        const currentY = e.touches[0].clientY
+        const deltaX = Math.abs(currentX - swipeState.startX)
+        const deltaY = Math.abs(currentY - swipeState.startY)
         
-        // Update carousel position
-        const newTranslateX = (swipeState.currentTranslateX || 0) + deltaX
-        carousel.style.animation = 'none'
-        carousel.style.transform = `translateX(${newTranslateX}px)`
+        // Determine if this is a swipe gesture (more horizontal than vertical movement)
+        // and if movement exceeds threshold (10px)
+        if (!swipeState.isSwipe && (deltaX > 10 || deltaY > 10)) {
+          swipeState.isSwipe = deltaX > deltaY // Horizontal movement = swipe
+          
+          if (swipeState.isSwipe) {
+            // Pause auto-scroll animation only when confirmed swipe
+            carousel.style.animationPlayState = 'paused'
+            swipeState.animationPaused = true
+          }
+        }
+        
+        // Only update carousel position if this is confirmed as a swipe
+        if (swipeState.isSwipe) {
+          const delta = currentX - swipeState.startX
+          const newTranslateX = (swipeState.currentTranslateX || 0) + delta
+          carousel.style.animation = 'none'
+          carousel.style.transform = `translateX(${newTranslateX}px)`
+          e.preventDefault() // Prevent scrolling when swiping
+        }
         
         swipeState.currentX = currentX
       }
@@ -259,46 +277,59 @@ export default function SuccessStoriesCarousel() {
       const handleTouchEnd = (e) => {
         if (!swipeState.isDragging) return
         
-        const deltaX = swipeState.currentX - swipeState.startX
-        const deltaTime = Date.now() - swipeState.startTime
-        const velocity = deltaX / deltaTime // pixels per ms
-        
+        const wasSwiping = swipeState.isSwipe
         swipeState.isDragging = false
+        swipeState.isSwipe = false
         
-        // Calculate momentum
-        const momentum = velocity * 200 // Adjust multiplier for desired momentum
-        const finalDeltaX = deltaX + momentum
-        
-        // Get current position
-        const currentTransform = window.getComputedStyle(carousel).transform
-        let currentTranslateX = 0
-        if (currentTransform !== 'none') {
-          const matrix = new DOMMatrix(currentTransform)
-          currentTranslateX = matrix.m41
-        }
-        
-        // Apply momentum with smooth animation
-        const newTranslateX = currentTranslateX
-        carousel.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-        carousel.style.transform = `translateX(${newTranslateX}px)`
-        
-        // Resume auto-scroll after momentum animation
-        setTimeout(() => {
-          carousel.style.transition = ''
-          const animationDuration = isMobileDevice ? 70 : 100
-          carousel.style.animation = `portfolio-scroll-mobile ${animationDuration}s linear infinite`
-          carousel.style.animationPlayState = 'running'
+        // Only apply momentum if this was a swipe gesture
+        if (wasSwiping) {
+          const deltaX = swipeState.currentX - swipeState.startX
+          const deltaTime = Date.now() - swipeState.startTime
+          const velocity = deltaX / deltaTime // pixels per ms
           
-          // Calculate current position as percentage
-          const rect = carousel.getBoundingClientRect()
-          const progress = Math.abs(newTranslateX) / (halfWidth || 1)
-          carousel.style.animationDelay = `-${progress * animationDuration}s`
-        }, 500)
+          // Calculate momentum
+          const momentum = velocity * 200 // Adjust multiplier for desired momentum
+          const finalDeltaX = deltaX + momentum
+          
+          // Get current position
+          const currentTransform = window.getComputedStyle(carousel).transform
+          let currentTranslateX = 0
+          if (currentTransform !== 'none') {
+            const matrix = new DOMMatrix(currentTransform)
+            currentTranslateX = matrix.m41
+          }
+          
+          // Apply momentum with smooth animation
+          const newTranslateX = currentTranslateX
+          carousel.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+          carousel.style.transform = `translateX(${newTranslateX}px)`
+          
+          // Resume auto-scroll after momentum animation
+          setTimeout(() => {
+            carousel.style.transition = ''
+            const animationDuration = isMobileDevice ? 70 : 100
+            carousel.style.animation = `portfolio-scroll-mobile ${animationDuration}s linear infinite`
+            carousel.style.animationPlayState = 'running'
+            
+            // Calculate current position as percentage
+            const rect = carousel.getBoundingClientRect()
+            const progress = Math.abs(newTranslateX) / (halfWidth || 1)
+            carousel.style.animationDelay = `-${progress * animationDuration}s`
+          }, 500)
+        } else {
+          // If not swiping, just resume animation immediately
+          if (swipeState.animationPaused) {
+            carousel.style.animationPlayState = 'running'
+            swipeState.animationPaused = false
+          }
+        }
       }
       
+      // Use passive: false for touchmove to allow preventDefault
       carousel.addEventListener('touchstart', handleTouchStart, { passive: true })
       carousel.addEventListener('touchmove', handleTouchMove, { passive: false })
       carousel.addEventListener('touchend', handleTouchEnd, { passive: true })
+      carousel.addEventListener('touchcancel', handleTouchEnd, { passive: true })
       
       carousel._swipeTouchStart = handleTouchStart
       carousel._swipeTouchMove = handleTouchMove
@@ -313,10 +344,19 @@ export default function SuccessStoriesCarousel() {
         const handleCardTouchStart = (e) => {
           if (!isMobileDevice) return
           card._tiltActive = true
+          card._tiltStartTime = Date.now()
         }
         
         const handleCardTouchMove = (e) => {
-          if (!isMobileDevice || !card._tiltActive || swipeStateRef.current.isDragging) return
+          if (!isMobileDevice || !card._tiltActive) return
+          
+          // Disable tilt if carousel is being swiped
+          if (swipeStateRef.current.isSwipe) {
+            card._tiltActive = false
+            card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) translateY(0) translateZ(0) scale(1)'
+            card.style.boxShadow = '0 8px 16px rgba(0, 0, 0, 0.4)'
+            return
+          }
           
           const touch = e.touches[0]
           const rect = card.getBoundingClientRect()
