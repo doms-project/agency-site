@@ -217,7 +217,7 @@ export const aboutSectionHtml = String.raw`
     </div>
     
     <!-- Cristina - Designer (Special Position) -->
-    <div class="order-1 md:order-2 flex flex-col md:flex-row items-center md:items-start justify-center md:justify-end gap-4 md:gap-6 flex-shrink-0 md:-ml-20 lg:-ml-40 w-full md:w-auto overflow-visible">
+    <div class="order-1 md:order-2 flex flex-col md:flex-row items-center md:items-start justify-center md:justify-end gap-4 md:gap-6 flex-shrink-0 md:-ml-20 lg:-ml-40 md:-mt-12 lg:-mt-16 w-full md:w-auto overflow-visible">
      
      <!-- Cristina Photo Section (First on Mobile) -->
      <div class="group flex-shrink-0 w-full sm:w-auto flex justify-center md:block order-1 md:order-2">
