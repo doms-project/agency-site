@@ -132,7 +132,7 @@ header.lg\:hidden {
 
 /* Add spacing below mobile header */
 header.lg\:hidden + section {
-  padding-top: 5rem !important;
+  padding-top: 2.5rem !important;
 }
 
 @media (max-width: 1023px) {
