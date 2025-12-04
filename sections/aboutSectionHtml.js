@@ -119,7 +119,7 @@ export const aboutSectionHtml = String.raw`
   <div class="max-w-6xl mx-auto mb-12 px-4 md:px-0 overflow-visible">
    <div class="flex flex-col md:flex-row items-center md:items-end gap-8 md:gap-0 overflow-visible">
     <!-- Other Team Members Row (Evan + 3) -->
-     <div class="order-2 md:order-1 flex-1 flex flex-row flex-wrap md:flex-nowrap justify-center md:justify-end gap-6 md:gap-10 mt-0 md:-mt-12 w-full">
+     <div class="order-2 md:order-1 flex-1 flex flex-row flex-wrap md:flex-nowrap justify-center md:justify-end gap-6 md:gap-10 mt-0 md:mt-4 w-full">
      
      <!-- Evan - Sales Manager -->
      <div class="flex flex-col items-center text-center space-y-3">
