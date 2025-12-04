@@ -164,12 +164,13 @@ export default function SharedNavbar() {
             <img 
               src="/images/logo-hq.png" 
               alt="Yo Marketing" 
-              width={80}
-              height={80}
-              className="logo tilt-logo h-20 w-auto group-hover:scale-110 transition-all duration-300 drop-shadow-lg" 
+              width={100}
+              height={100}
+              className="logo tilt-logo h-24 w-auto group-hover:scale-110 transition-all duration-300 drop-shadow-lg" 
               loading="eager"
               decoding="async"
               fetchPriority="high"
+              style={{ minHeight: '96px', minWidth: '96px' }}
             />
             </a>
 
@@ -229,12 +230,13 @@ export default function SharedNavbar() {
             <img 
               src="/images/logo-hq.png" 
               alt="Yo Marketing" 
-              width={48}
-              height={48}
-              className="logo tilt-logo h-12 w-auto transition-transform duration-300 group-hover:scale-105 drop-shadow-lg" 
+              width={64}
+              height={64}
+              className="logo tilt-logo h-16 w-auto transition-transform duration-300 group-hover:scale-105 drop-shadow-lg" 
               loading="eager"
               decoding="async"
               fetchPriority="high"
+              style={{ minHeight: '64px', minWidth: '64px' }}
             />
           </a>
           <button 
