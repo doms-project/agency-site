@@ -1117,19 +1117,19 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
             </button>
           </div>
           {/* Stats - Horizontal Layout */}
-          <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 lg:gap-8 mt-4 mb-6 md:mb-8 pb-4 md:pb-6">
+          <div className="flex flex-wrap items-center justify-center gap-2 md:gap-6 lg:gap-8 mt-4 mb-6 md:mb-8 pb-4 md:pb-6">
             {heroStats.map((stat, index) => (
-              <div key={stat.label} className="flex items-center gap-2.5 md:gap-3">
+              <div key={stat.label} className="flex items-center gap-2 md:gap-3">
                 {index > 0 && (
-                  <div className="h-6 md:h-8 w-px bg-white/20" />
+                  <div className="h-4 md:h-8 w-px bg-white/20" />
                 )}
-                <div className="flex items-center gap-2 md:gap-2.5">
-                  <div className="text-[#7BB9E8] opacity-80">
+                <div className="flex items-center gap-1.5 md:gap-2.5">
+                  <div className="text-[#7BB9E8] opacity-80 scale-75 md:scale-100">
                     {stat.icon}
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-base md:text-lg lg:text-xl font-bold text-[#7BB9E8] leading-none">{stat.value}</span>
-                    <span className="text-white/60 text-[9px] md:text-[10px] font-medium uppercase tracking-wide">{stat.label}</span>
+                    <span className="text-sm md:text-lg lg:text-xl font-bold text-[#7BB9E8] leading-none">{stat.value}</span>
+                    <span className="text-white/60 text-[8px] md:text-[10px] font-medium uppercase tracking-wide">{stat.label}</span>
                   </div>
                 </div>
               </div>
