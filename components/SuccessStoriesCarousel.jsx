@@ -114,7 +114,7 @@ const portfolioCards = [
       { label: 'Customer Rating', value: '5-Star' },
       { label: 'Repeat Customers', value: '92%' },
     ],
-    link: '#contact',
+    link: 'https://bloughswindowcleaningpropertymaintenance.com/',
     design: {
       brightness: 1.1,
       contrast: 1.2,
