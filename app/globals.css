@@ -95,6 +95,36 @@ main {
 section#hero,
 section[aria-label="Homepage Hero Banner"] {
   padding-top: 40px !important;
+  margin-top: 0 !important;
+}
+
+/* Mobile header - ensure no gap at top */
+header.lg\:hidden {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  top: 0 !important;
+}
+
+@media (max-width: 1023px) {
+  /* Ensure everything starts from the very top on mobile */
+  body > div,
+  body > div > main {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  
+  header.sticky,
+  header[class*="sticky"] {
+    top: 0 !important;
+    margin-top: 0 !important;
+  }
+  
+  /* Hero section should start at the top */
+  #hero,
+  section#hero,
+  section[aria-label="Homepage Hero Banner"] {
+    margin-top: 0 !important;
+  }
 }
 
 /* Design System Tokens */

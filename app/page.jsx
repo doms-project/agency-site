@@ -999,7 +999,7 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
     <section
       id="hero"
       className="hero w-full relative font-sans pb-12 md:pb-16"
-      style={{ backgroundColor: 'transparent', paddingTop: '40px !important' }}
+      style={{ backgroundColor: 'transparent', paddingTop: '40px !important', marginTop: '0 !important' }}
       role="region"
       aria-label="Homepage Hero Banner"
     >
@@ -1012,7 +1012,7 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
             ? 'border-white/5 bg-gradient-to-b from-[rgba(4,5,7,0.3)] to-[rgba(4,5,7,0.2)]' 
             : 'border-white/15 bg-gradient-to-b from-[rgba(4,5,7,0.85)] to-[rgba(4,5,7,0.6)]'
         }`} 
-        style={{ position: 'sticky', top: 0, zIndex: 50, marginTop: 0, WebkitBackdropFilter: 'blur(24px) saturate(180%)' }}
+        style={{ position: 'sticky', top: '0 !important', zIndex: 50, marginTop: '0 !important', paddingTop: '0 !important', WebkitBackdropFilter: 'blur(24px) saturate(180%)' }}
       >
         <div className="max-w-7xl mx-auto flex justify-between items-center px-5 py-4">
           <a aria-label="Yo Marketing Home" href="#hero" className="group relative">
