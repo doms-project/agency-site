@@ -31,7 +31,7 @@ export const partnerSectionHtml = String.raw`<section class="partner-carousel pb
      <img alt="N8N" class="h-8 md:h-12 w-auto object-contain filter brightness-0 invert partner-logo" decoding="sync" style="will-change: transform;" draggable="false" fetchpriority="high" loading="eager" src="/images/n8n-logo.png" width="80" height="80"/>
     </div>
     <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="MailChimp" class="h-14 md:h-20 lg:h-24 w-auto object-contain filter brightness-0 invert partner-logo" decoding="sync" style="will-change: transform; max-height: 96px !important;" draggable="false" fetchpriority="high" loading="eager" src="/images/mailchimp.png" width="80" height="80"/>
+     <img alt="MailChimp" class="h-20 md:h-28 lg:h-32 w-auto object-contain filter brightness-0 invert partner-logo" decoding="sync" style="will-change: transform; min-height: 80px !important; max-height: 128px !important;" draggable="false" fetchpriority="high" loading="eager" src="/images/mailchimp.png" width="80" height="80"/>
     </div>
     <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
      <img alt="Stripe" class="h-10 md:h-14 w-auto object-contain filter brightness-0 invert partner-logo" decoding="sync" style="will-change: transform;" draggable="false" fetchpriority="high" loading="eager" src="/images/stripe-logo.png" width="80" height="80"/>
@@ -55,7 +55,7 @@ export const partnerSectionHtml = String.raw`<section class="partner-carousel pb
      <img alt="N8N" class="h-8 md:h-12 w-auto object-contain filter brightness-0 invert partner-logo" decoding="sync" style="will-change: transform;" draggable="false" fetchpriority="high" loading="eager" src="/images/n8n-logo.png" width="80" height="80"/>
     </div>
     <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="MailChimp" class="h-14 md:h-20 lg:h-24 w-auto object-contain filter brightness-0 invert partner-logo" decoding="sync" style="will-change: transform; max-height: 96px !important;" draggable="false" fetchpriority="high" loading="eager" src="/images/mailchimp.png" width="80" height="80"/>
+     <img alt="MailChimp" class="h-20 md:h-28 lg:h-32 w-auto object-contain filter brightness-0 invert partner-logo" decoding="sync" style="will-change: transform; min-height: 80px !important; max-height: 128px !important;" draggable="false" fetchpriority="high" loading="eager" src="/images/mailchimp.png" width="80" height="80"/>
     </div>
     <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
      <img alt="Stripe" class="h-10 md:h-14 w-auto object-contain filter brightness-0 invert partner-logo" decoding="sync" style="will-change: transform;" draggable="false" fetchpriority="high" loading="eager" src="/images/stripe-logo.png" width="80" height="80"/>

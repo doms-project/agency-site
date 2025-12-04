@@ -519,22 +519,22 @@ a[href],
   transform-origin: center center;
 }
 
-/* Ensure Mailchimp logo is properly sized */
+/* Ensure Mailchimp logo is properly sized - EXTRA LARGE */
 .partner-carousel img[alt="MailChimp"] {
-  min-height: 56px !important;
-  max-height: 96px !important;
+  min-height: 80px !important;
+  max-height: 128px !important;
   height: auto !important;
 }
 
 @media (min-width: 768px) {
   .partner-carousel img[alt="MailChimp"] {
-    min-height: 80px !important;
+    min-height: 112px !important;
   }
 }
 
 @media (min-width: 1024px) {
   .partner-carousel img[alt="MailChimp"] {
-    min-height: 96px !important;
+    min-height: 128px !important;
   }
 }
 
