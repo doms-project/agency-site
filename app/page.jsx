@@ -200,6 +200,30 @@ export default function Page() {
         link.setAttribute('fetchPriority', 'high')
         document.head.appendChild(link)
       })
+      
+      // Initialize aggressive image loading after page is interactive
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => {
+          // Aggressive image observer for smooth scrolling
+          const imageObserver = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  const img = entry.target
+                  // Stop observing once loaded
+                  imageObserver.unobserve(img)
+                }
+              })
+            },
+            {
+              rootMargin: isMobile ? '400px 0px 400px 0px' : '300px 0px 300px 0px',
+              threshold: 0
+            }
+          )
+          // Observe all lazy images
+          document.querySelectorAll('img[loading="lazy"]').forEach((img) => imageObserver.observe(img))
+        }, { timeout: 1000 })
+      }
     }
     
     return () => {
@@ -258,7 +282,7 @@ export default function Page() {
     return () => clearTimeout(timer)
   }, [])
 
-  // Scroll animations for sections
+  // Scroll animations for sections - optimized for mobile
   useEffect(() => {
     if (typeof window === 'undefined') return
     
@@ -266,20 +290,26 @@ export default function Page() {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (prefersReducedMotion) return
     
+    const isMobile = window.innerWidth < 768
+    
     const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
+      threshold: isMobile ? 0.05 : 0.1, // Lower threshold on mobile for earlier loading
+      rootMargin: isMobile ? '200px 0px 200px 0px' : '100px 0px 100px 0px' // Larger margin on mobile to preload earlier
     }
     
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible')
-          // Optional: unobserve after animation to improve performance
-          // observer.unobserve(entry.target)
-        }
-      })
-    }, observerOptions)
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible')
+            // Unobserve after animation to improve performance
+            observer.unobserve(entry.target)
+            // Clean up will-change after animation
+            setTimeout(() => {
+              entry.target.style.willChange = 'auto'
+            }, isMobile ? 300 : 600)
+          }
+        })
+      }, observerOptions)
     
     // Observe all elements with scroll animation classes
     const animatedElements = document.querySelectorAll('.scroll-fade-in, .scroll-slide-up')
@@ -296,7 +326,7 @@ export default function Page() {
     const isMobileDevice = window.innerWidth < 768
     let ticking = false
     let lastScrollY = 0
-    const scrollThreshold = isMobileDevice ? 80 : 50 // Increased threshold for better performance
+    const scrollThreshold = isMobileDevice ? 120 : 50 // Higher threshold on mobile for better performance
     
     // Store initial navbar position on first load
     const nav = document.querySelector('nav.hidden.lg\\:block')
@@ -542,9 +572,11 @@ export default function Page() {
     }
   }, [])
 
-  // Scroll reveal for Services section - make visible immediately on mount
+  // Scroll reveal for Services section - optimized for mobile
   // Completely isolated from all carousel/marquee sections
   useEffect(() => {
+    const isMobile = window.innerWidth < 768
+    
     const isMarqueeElement = (el) => {
       if (!el) return true
       // Check if element or any parent has marquee classes
@@ -608,11 +640,10 @@ export default function Page() {
     revealOnLoad()
     
     // Set up scroll observer for future elements with optimized settings
-    // More aggressive settings on mobile for better performance
-    const isMobileDevice = window.innerWidth < 768
+    // More aggressive preloading on mobile for smoother experience
     const observerOptions = {
-      threshold: isMobileDevice ? 0.15 : 0.1, // Higher threshold for better performance
-      rootMargin: isMobileDevice ? '0px 0px -30px 0px' : '0px 0px -80px 0px', // Smaller margin for earlier trigger
+      threshold: isMobile ? 0.05 : 0.1, // Lower threshold on mobile for earlier loading
+      rootMargin: isMobile ? '300px 0px 300px 0px' : '150px 0px 150px 0px', // Much larger margin for preloading
     }
 
     const observer = new IntersectionObserver((entries) => {

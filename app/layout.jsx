@@ -77,10 +77,10 @@ export default function RootLayout({ children }) {
         {/* Other images lazy loaded on demand for faster initial load */}
         {/* Note: CSS is automatically bundled by Next.js when imported in layout.jsx */}
         {/* Font preloading is handled automatically by Next.js font optimization */}
-        {/* DNS prefetch for faster connection */}
-        <link rel="dns-prefetch" href="https://esm.sh" />
-        {/* Preconnect for critical third-party resources */}
-        <link rel="preconnect" href="https://esm.sh" crossOrigin="anonymous" />
+        {/* DNS prefetch for faster connection - only on desktop */}
+        <link rel="dns-prefetch" href="https://esm.sh" media="(min-width: 768px)" />
+        {/* Preconnect for critical third-party resources - only on desktop */}
+        <link rel="preconnect" href="https://esm.sh" crossOrigin="anonymous" media="(min-width: 768px)" />
         {/* Google Fonts preconnect - handled by next/font but added for explicit control */}
         <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
