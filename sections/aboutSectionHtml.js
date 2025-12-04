@@ -128,7 +128,7 @@ export const aboutSectionHtml = String.raw`
        </div>
        <div class="relative w-32 h-36 md:w-36 md:h-40 rounded-xl overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent">
         <img
-         src="/images/Evan sales manger.jpeg"
+         src="/images/Evan new.jpg"
          alt="Evan - Sales Manager"
          class="w-full h-full object-cover scale-125 group-hover:scale-130 transition-transform duration-500"
          style="object-position: center 20%;"
