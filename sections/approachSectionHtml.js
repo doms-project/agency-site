@@ -6,7 +6,7 @@ export const approachSectionHtml = String.raw`<section class="w-full py-20 bg-gr
   </div>
  </div>
  <div class="max-w-6xl mx-auto px-4 md:px-6 relative z-10">
-  <div class="text-center mb-20 opacity-0 translate-y-8">
+  <div class="text-center mb-20">
    <span class="inline-block px-4 py-2 bg-[#7BB9E8]/10 border border-[#7BB9E8]/20 rounded-full uppercase tracking-[0.25em] text-xs text-[#7BB9E8] font-semibold mb-6">
     Our Approach
    </span>
@@ -21,7 +21,7 @@ export const approachSectionHtml = String.raw`<section class="w-full py-20 bg-gr
     We&apos;re not just another agency — we&apos;re digital marketing experts who understand businesses because we&apos;re building ours, too.
    </p>
   </div>
-  <div class="max-w-5xl mx-auto mb-16 opacity-0 translate-y-12">
+  <div class="max-w-5xl mx-auto mb-16">
    <div class="grid md:grid-cols-3 gap-8">
     <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-[#7BB9E8]/30 transition-all duration-500 group">
      <div class="w-12 h-12 bg-gradient-to-r from-[#7BB9E8] to-[#5fa6db] rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
