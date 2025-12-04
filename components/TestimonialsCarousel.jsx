@@ -211,8 +211,9 @@ function TestimonialsCarousel() {
               key={index}
               aria-label={`Go to review ${index + 1}`}
               onClick={() => goToReview(index)}
-              className="p-2 touch-manipulation transition-all duration-300"
-              style={index === 0 ? { marginTop: '8px' } : {}}
+              className={`p-2 touch-manipulation transition-all duration-300 ${
+                index === 0 ? 'mt-2 md:mt-0' : ''
+              }`}
             >
               <div 
                 className={`w-2 h-2 rounded-full transition-all duration-300 ${
