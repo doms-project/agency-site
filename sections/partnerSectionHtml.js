@@ -14,7 +14,14 @@ export const partnerSectionHtml = String.raw`<section class="partner-carousel pb
    </div>
   </div>
   <div class="relative overflow-hidden w-full" style="padding-left:0;padding-right:0;">
-   <div class="flex items-center gap-8 md:gap-12 lg:gap-16 animate-scroll whitespace-nowrap min-w-max" style="will-change:transform;">
+   <div class="flex items-center gap-8 md:gap-12 lg:gap-16 animate-scroll whitespace-nowrap min-w-max" style="animation: scroll 50s linear infinite;">
+   <style>
+    @media (max-width: 768px) {
+      .partner-carousel .animate-scroll {
+        animation: scroll 50s linear infinite !important;
+      }
+    }
+   </style>
     <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
      <img alt="Zapier" class="h-6 md:h-10 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="low" loading="lazy" src="/images/zapier-logo_white.png" width="80" height="80"/>
     </div>

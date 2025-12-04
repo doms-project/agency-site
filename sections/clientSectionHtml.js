@@ -14,7 +14,7 @@ export const clientSectionHtml = String.raw`<section class="client-logos-section
  <div class="w-full relative z-10">
   <div class="text-center mb-4 md:mb-6 mt-4 md:mt-6 px-4 sm:px-6 lg:px-8">
    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4" style="font-family:Inter, Satoshi, sans-serif">
-    Trusted by 50+ brands
+    Trusted by 100+ brands
    </h2>
    <div class="w-24 h-1 rounded-full bg-[#7BB9E8] mb-6 mt-2 mx-auto shadow-lg shadow-[#7BB9E8]/50">
    </div>
@@ -23,7 +23,14 @@ export const clientSectionHtml = String.raw`<section class="client-logos-section
    </p>
   </div>
   <div class="relative overflow-hidden w-full">
-   <div class="flex items-center gap-8 md:gap-12 animate-scroll-left whitespace-nowrap min-w-max relative z-30 py-4 md:py-6">
+   <div class="flex items-center gap-8 md:gap-12 animate-scroll-left whitespace-nowrap min-w-max relative z-30 py-4 md:py-6" style="animation: scroll-left 50s linear infinite;">
+   <style>
+    @media (max-width: 768px) {
+      .client-logos-section .animate-scroll-left {
+        animation: scroll-left 50s linear infinite !important;
+      }
+    }
+   </style>
     <div class="flex items-center justify-center h-36 md:h-40 w-[160px] md:w-[180px]">
      <img alt="ATV Tulum" class="client-logo" draggable="false" loading="lazy" src="/logo/atv%20tulum%20logo%20(1)%20(1).jpg" width="180" height="160"/>
     </div>

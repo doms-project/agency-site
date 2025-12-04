@@ -142,7 +142,7 @@ export const contactSectionHtml = String.raw`<section class="w-full pb-16 md:pb-
    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
     <div class="space-y-2">
      <div class="text-3xl md:text-4xl font-bold text-[#7BB9E8]" style="font-family:Inter, Satoshi, sans-serif">
-      50+
+      100+
      </div>
      <div class="text-white/60 text-sm uppercase tracking-wide" style="font-family:Inter, Satoshi, sans-serif">
       Businesses Helped

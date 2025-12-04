@@ -140,11 +140,19 @@ export default function SuccessStoriesCarousel() {
   const animationRef = useRef(null)
   const rafRef = useRef(null)
   const [isMobile, setIsMobile] = useState(false)
+  const swipeStateRef = useRef({
+    isDragging: false,
+    startX: 0,
+    currentX: 0,
+    startTime: 0,
+    velocity: 0,
+    animationPaused: false,
+  })
   
   // Use fewer card duplicates on mobile for better performance
-  // On very low-end devices, use even fewer cards
+  // Keep 2 sets for smooth infinite loop
   const cardsToRender = isMobile 
-    ? portfolioCards // Only 1 set on mobile (5 cards) for faster load
+    ? [...portfolioCards, ...portfolioCards] // 2 sets on mobile (10 cards) for smooth loop
     : duplicatedCards // 2 sets on desktop (10 cards total) - reduced from 3 for performance
 
   useEffect(() => {
@@ -199,14 +207,145 @@ export default function SuccessStoriesCarousel() {
     // Create infinite scrolling animation (right to left)
     // Use CSS animation for both mobile and desktop for best performance
     carousel.style.setProperty('--scroll-distance', `-${halfWidth}px`)
-    carousel.style.animation = `portfolio-scroll-mobile ${80}s linear infinite`
+    // Much slower animation for better viewing experience - especially mobile
+    const animationDuration = isMobileDevice ? 70 : 100 // Faster on mobile for better experience
+    carousel.style.animation = `portfolio-scroll-mobile ${animationDuration}s linear infinite`
+    carousel.style.animationDuration = `${animationDuration}s`
       carousel.style.willChange = 'transform'
+      
+      // Force slow animation on mobile with inline style
+      if (isMobileDevice) {
+        carousel.setAttribute('data-mobile-carousel', 'true')
+      }
 
-    // Disable 3D tilt effects for better performance - use simple CSS hover instead
-    // Add simple CSS hover effects to cards
+    // Add swipe functionality for manual control on mobile
+    if (isMobileDevice && carousel) {
+      const swipeState = swipeStateRef.current
+      
+      const handleTouchStart = (e) => {
+        swipeState.isDragging = true
+        swipeState.startX = e.touches[0].clientX
+        swipeState.currentX = e.touches[0].clientX
+        swipeState.startTime = Date.now()
+        
+        // Pause auto-scroll animation
+        carousel.style.animationPlayState = 'paused'
+        swipeState.animationPaused = true
+        
+        // Get current transform position
+        const transform = window.getComputedStyle(carousel).transform
+        if (transform !== 'none') {
+          const matrix = new DOMMatrix(transform)
+          swipeState.currentTranslateX = matrix.m41
+        } else {
+          swipeState.currentTranslateX = 0
+        }
+      }
+      
+      const handleTouchMove = (e) => {
+        if (!swipeState.isDragging) return
+        
+        const currentX = e.touches[0].clientX
+        const deltaX = currentX - swipeState.startX
+        
+        // Update carousel position
+        const newTranslateX = (swipeState.currentTranslateX || 0) + deltaX
+        carousel.style.animation = 'none'
+        carousel.style.transform = `translateX(${newTranslateX}px)`
+        
+        swipeState.currentX = currentX
+      }
+      
+      const handleTouchEnd = (e) => {
+        if (!swipeState.isDragging) return
+        
+        const deltaX = swipeState.currentX - swipeState.startX
+        const deltaTime = Date.now() - swipeState.startTime
+        const velocity = deltaX / deltaTime // pixels per ms
+        
+        swipeState.isDragging = false
+        
+        // Calculate momentum
+        const momentum = velocity * 200 // Adjust multiplier for desired momentum
+        const finalDeltaX = deltaX + momentum
+        
+        // Get current position
+        const currentTransform = window.getComputedStyle(carousel).transform
+        let currentTranslateX = 0
+        if (currentTransform !== 'none') {
+          const matrix = new DOMMatrix(currentTransform)
+          currentTranslateX = matrix.m41
+        }
+        
+        // Apply momentum with smooth animation
+        const newTranslateX = currentTranslateX
+        carousel.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+        carousel.style.transform = `translateX(${newTranslateX}px)`
+        
+        // Resume auto-scroll after momentum animation
+        setTimeout(() => {
+          carousel.style.transition = ''
+          const animationDuration = isMobileDevice ? 70 : 100
+          carousel.style.animation = `portfolio-scroll-mobile ${animationDuration}s linear infinite`
+          carousel.style.animationPlayState = 'running'
+          
+          // Calculate current position as percentage
+          const rect = carousel.getBoundingClientRect()
+          const progress = Math.abs(newTranslateX) / (halfWidth || 1)
+          carousel.style.animationDelay = `-${progress * animationDuration}s`
+        }, 500)
+      }
+      
+      carousel.addEventListener('touchstart', handleTouchStart, { passive: true })
+      carousel.addEventListener('touchmove', handleTouchMove, { passive: false })
+      carousel.addEventListener('touchend', handleTouchEnd, { passive: true })
+      
+      carousel._swipeTouchStart = handleTouchStart
+      carousel._swipeTouchMove = handleTouchMove
+      carousel._swipeTouchEnd = handleTouchEnd
+    }
+    
+    // Add 3D tilt effects for cards (on individual cards, not carousel)
       cards.forEach((card) => {
         if (!card) return
-      // Simple CSS transitions will handle hover effects via CSS classes
+        
+        // Touch events for mobile 3D tilt (only when not swiping carousel)
+        const handleCardTouchStart = (e) => {
+          if (!isMobileDevice) return
+          card._tiltActive = true
+        }
+        
+        const handleCardTouchMove = (e) => {
+          if (!isMobileDevice || !card._tiltActive || swipeStateRef.current.isDragging) return
+          
+          const touch = e.touches[0]
+          const rect = card.getBoundingClientRect()
+          const x = touch.clientX - rect.left
+          const y = touch.clientY - rect.top
+          const centerX = rect.width / 2
+          const centerY = rect.height / 2
+          const rotateX = ((y - centerY) / centerY) * 15 // Max 15 degrees
+          const rotateY = ((centerX - x) / centerX) * 15 // Max 15 degrees
+          
+          card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-20px) translateZ(60px) scale(1.05)`
+          card.style.boxShadow = '0 30px 60px rgba(0, 0, 0, 0.8)'
+        }
+        
+        const handleCardTouchEnd = () => {
+          if (!isMobileDevice) return
+          card._tiltActive = false
+          card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) translateY(0) translateZ(0) scale(1)'
+          card.style.boxShadow = '0 8px 16px rgba(0, 0, 0, 0.4)'
+        }
+        
+        if (isMobileDevice) {
+          card.addEventListener('touchstart', handleCardTouchStart, { passive: true })
+          card.addEventListener('touchmove', handleCardTouchMove, { passive: true })
+          card.addEventListener('touchend', handleCardTouchEnd, { passive: true })
+          card._cardTouchStart = handleCardTouchStart
+          card._cardTouchMove = handleCardTouchMove
+          card._cardTouchEnd = handleCardTouchEnd
+        }
     })
 
     // Pause animation when not visible (IntersectionObserver) - especially important for mobile
@@ -259,6 +398,19 @@ export default function SuccessStoriesCarousel() {
           carousel.style.animation = ''
           carousel.style.willChange = ''
         }
+        // Clean up swipe handlers on carousel
+        if (carousel) {
+          if (carousel._swipeTouchStart) {
+            carousel.removeEventListener('touchstart', carousel._swipeTouchStart)
+          }
+          if (carousel._swipeTouchMove) {
+            carousel.removeEventListener('touchmove', carousel._swipeTouchMove)
+          }
+          if (carousel._swipeTouchEnd) {
+            carousel.removeEventListener('touchend', carousel._swipeTouchEnd)
+          }
+        }
+        
         // Clean up hover handlers and animations
         cards.forEach((card) => {
           if (card) {
@@ -268,6 +420,16 @@ export default function SuccessStoriesCarousel() {
             }
             if (card._hoverLeave) {
               card.removeEventListener('mouseleave', card._hoverLeave)
+            }
+            // Remove card tilt touch event listeners
+            if (card._cardTouchStart) {
+              card.removeEventListener('touchstart', card._cardTouchStart)
+            }
+            if (card._cardTouchMove) {
+              card.removeEventListener('touchmove', card._cardTouchMove)
+            }
+            if (card._cardTouchEnd) {
+              card.removeEventListener('touchend', card._cardTouchEnd)
             }
             // Kill GSAP animations
             gsap.killTweensOf(card)
@@ -303,7 +465,8 @@ export default function SuccessStoriesCarousel() {
         const cardTotalWidth = cardWidth + gap
         const mobileHalfWidth = (cards.length * cardTotalWidth) / 2
         carousel.style.setProperty('--scroll-distance', `-${mobileHalfWidth}px`)
-        carousel.style.animation = `portfolio-scroll-mobile ${80}s linear infinite`
+        // Much slower animation for better viewing on mobile
+        carousel.style.animation = `portfolio-scroll-mobile ${70}s linear infinite`
       }
     })
 
@@ -359,7 +522,15 @@ export default function SuccessStoriesCarousel() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-[240px] sm:w-[280px] md:w-[320px] lg:w-[400px] flex-shrink-0 block"
-                  style={{ pointerEvents: 'auto', position: 'relative', zIndex: 1, marginTop: '20px', marginBottom: '20px' }}
+                  style={{ 
+                    pointerEvents: 'auto', 
+                    position: 'relative', 
+                    zIndex: 1, 
+                    marginTop: '20px', 
+                    marginBottom: '20px',
+                    userSelect: 'none',
+                    WebkitUserSelect: 'none',
+                  }}
                 >
                   <div
                     ref={(el) => {
@@ -367,13 +538,15 @@ export default function SuccessStoriesCarousel() {
                     }}
                     className="card-content relative rounded-3xl overflow-hidden cursor-pointer group"
                     style={{ 
-                      willChange: isMobile ? 'auto' : 'transform, box-shadow', 
-                      transformStyle: isMobile ? 'flat' : 'preserve-3d',
-                      backfaceVisibility: isMobile ? 'visible' : 'hidden',
-                      WebkitBackfaceVisibility: isMobile ? 'visible' : 'hidden',
-                      boxShadow: isMobile ? '0 4px 8px rgba(0, 0, 0, 0.3)' : '0 10px 20px 5px rgba(0, 0, 0, 0.4)',
+                      willChange: 'transform, box-shadow', 
+                      transformStyle: 'preserve-3d',
+                      backfaceVisibility: 'hidden',
+                      WebkitBackfaceVisibility: 'hidden',
+                      boxShadow: isMobile ? '0 8px 16px rgba(0, 0, 0, 0.4)' : '0 10px 20px 5px rgba(0, 0, 0, 0.4)',
                       maxHeight: isMobile ? '360px' : 'none',
                       touchAction: isMobile ? 'pan-y' : 'auto',
+                      transform: 'perspective(800px) rotateX(0deg) rotateY(0deg) translateY(0) translateZ(0) scale(1)',
+                      transition: 'transform 0.2s ease, box-shadow 0.2s ease',
                     }}
                   >
                     {/* Background Layer - Image or Solid Color */}

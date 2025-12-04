@@ -20,7 +20,7 @@ export const trustSectionHtml = String.raw`<section class="w-full py-20 md:py-24
     <span class="text-[#00B67A]">
      4.97/5
     </span>
-    by 50+ brands
+    by 100+ brands
    </h2>
    <div class="flex justify-center mb-4">
     <div class="flex items-center gap-1">

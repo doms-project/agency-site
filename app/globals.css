@@ -40,10 +40,22 @@ body {
 
 /* Mobile performance - reduce animations */
 @media (max-width: 768px) {
-  /* Faster animations on mobile */
-  body * {
+  /* Optimize animations on mobile - but EXCLUDE all carousels */
+  body *:not(.flip-card):not(.flip-card-inner):not(.flip-card-front):not(.flip-card-back):not(.featured-plan):not(.animate-scroll):not(.animate-scroll-left):not(.ecom-marquee):not(.portfolio-carousel-scroll):not([class*="animate-scroll"]):not([class*="marquee"]):not([class*="carousel"]) {
     animation-duration: 0.3s !important;
     transition-duration: 0.2s !important;
+  }
+  
+  /* Disable all animations on pricing cards to prevent flickering */
+  .pricing-card,
+  .pricing-card *,
+  .flip-card,
+  .flip-card *,
+  .flip-card-inner,
+  .flip-card-front,
+  .flip-card-back {
+    animation: none !important;
+    will-change: auto !important;
   }
   
   /* Reduce blur on mobile for better performance */
@@ -800,9 +812,21 @@ a[href],
   }
 }
 
-/* Success Stories Carousel - Simple hover effects for performance */
+/* Force slow animation for success stories on mobile */
+@media (max-width: 768px) {
+  [data-mobile-carousel="true"],
+  .portfolio-carousel-scroll,
+  #portfolio .flex.gap-3 {
+    animation-duration: 70s !important;
+  }
+}
+
+/* Success Stories Carousel - 3D hover/touch effects */
 .card-content {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .card-content:hover {
@@ -816,6 +840,25 @@ a[href],
 
 .card-content:hover img {
   transform: scale(1.05);
+}
+
+/* Mobile: Enable 3D tilt on touch */
+@media (max-width: 768px) {
+  .card-content {
+    transform: perspective(800px) rotateX(0deg) rotateY(0deg) translateY(0) translateZ(0) scale(1);
+    transform-style: preserve-3d !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+    will-change: transform, box-shadow;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  /* Touch/tap animation for mobile */
+  .card-content:active {
+    transform: perspective(800px) rotateX(10deg) rotateY(-10deg) translateY(-25px) translateZ(80px) scale(1.08) !important;
+    box-shadow: 0 35px 70px rgba(0, 0, 0, 0.8) !important;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
 }
 
 @keyframes ecom-marquee-scroll-reverse {
@@ -833,7 +876,7 @@ a[href],
 .partner-carousel .animate-scroll,
 section.partner-carousel .animate-scroll,
 .partner-carousel > div > div.animate-scroll {
-  animation: scroll 40s linear infinite !important;
+  animation: scroll 120s linear infinite !important;
   will-change: transform !important;
   animation-fill-mode: both !important;
   transition: none !important;
@@ -846,6 +889,16 @@ section.partner-carousel .animate-scroll,
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   animation-iteration-count: infinite !important;
+}
+
+/* Much slower on mobile for better viewing - OVERRIDE ALL OTHER RULES */
+@media (max-width: 768px) {
+  .partner-carousel .animate-scroll,
+  section.partner-carousel .animate-scroll,
+  .partner-carousel > div > div.animate-scroll {
+    animation: scroll 50s linear infinite !important;
+    animation-duration: 50s !important;
+  }
 }
 
 /* Keep running on hover */
@@ -859,7 +912,7 @@ section.partner-carousel .animate-scroll:hover,
 .client-logos-section .animate-scroll-left,
 section.client-logos-section .animate-scroll-left,
 .client-logos-section > div > div.animate-scroll-left {
-  animation: scroll-left 40s linear infinite !important;
+  animation: scroll-left 120s linear infinite !important;
   will-change: transform !important;
   animation-fill-mode: both !important;
   transition: none !important;
@@ -872,6 +925,17 @@ section.client-logos-section .animate-scroll-left,
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   animation-iteration-count: infinite !important;
+}
+
+/* Much slower on mobile for better viewing - OVERRIDE ALL OTHER RULES */
+@media (max-width: 768px) {
+  .client-logos-section .animate-scroll-left,
+  section.client-logos-section .animate-scroll-left,
+  .client-logos-section > div > div.animate-scroll-left,
+  .animate-scroll-left {
+    animation: scroll-left 50s linear infinite !important;
+    animation-duration: 50s !important;
+  }
 }
 
 /* Keep running on hover */
@@ -885,7 +949,7 @@ section.client-logos-section .animate-scroll-left:hover,
 #cpg-brands .ecom-marquee,
 section#cpg-brands .ecom-marquee,
 #cpg-brands > div > div.ecom-marquee {
-  animation: ecom-marquee-scroll-reverse 40s linear infinite !important;
+  animation: ecom-marquee-scroll-reverse 120s linear infinite !important;
   will-change: transform !important;
   animation-fill-mode: both !important;
   transition: none !important;
@@ -900,6 +964,17 @@ section#cpg-brands .ecom-marquee,
   animation-iteration-count: infinite !important;
 }
 
+/* Much slower on mobile - OVERRIDE ALL OTHER RULES */
+@media (max-width: 768px) {
+  #cpg-brands .ecom-marquee,
+  section#cpg-brands .ecom-marquee,
+  #cpg-brands > div > div.ecom-marquee,
+  .ecom-marquee {
+    animation: ecom-marquee-scroll-reverse 190s linear infinite !important;
+    animation-duration: 190s !important;
+  }
+}
+
 /* Keep running on hover */
 #cpg-brands .ecom-marquee:hover,
 section#cpg-brands .ecom-marquee:hover,
@@ -911,7 +986,7 @@ section#cpg-brands .ecom-marquee:hover,
 #local-business-growth .ecom-marquee,
 section#local-business-growth .ecom-marquee,
 #local-business-growth > div > div.ecom-marquee {
-  animation: ecom-marquee-scroll-reverse 40s linear infinite !important;
+  animation: ecom-marquee-scroll-reverse 120s linear infinite !important;
   will-change: transform !important;
   animation-fill-mode: both !important;
   transition: none !important;
@@ -926,6 +1001,16 @@ section#local-business-growth .ecom-marquee,
   animation-iteration-count: infinite !important;
   width: fit-content;
   min-width: 200%;
+}
+
+/* Much slower on mobile - OVERRIDE ALL OTHER RULES */
+@media (max-width: 768px) {
+  #local-business-growth .ecom-marquee,
+  section#local-business-growth .ecom-marquee,
+  #local-business-growth > div > div.ecom-marquee {
+    animation: ecom-marquee-scroll-reverse 190s linear infinite !important;
+    animation-duration: 190s !important;
+  }
 }
 
 /* Keep running on hover */
@@ -1432,7 +1517,7 @@ section#cpg-brands .service-card,
     transform: scale(1) !important;
   }
   
-  /* Fix flip card for mobile */
+  /* Fix flip card for mobile - prevent flickering */
   .flip-card {
     perspective: none !important;
     will-change: auto !important;
@@ -1440,25 +1525,38 @@ section#cpg-brands .service-card,
     height: auto !important;
     min-height: auto !important;
     overflow: visible !important;
+    animation: none !important;
+    transition: none !important;
   }
   
   .flip-card.pricing-card {
     margin-top: 0 !important;
     transform: none !important;
+    animation: none !important;
   }
   
-  .flip-card:hover {
+  .flip-card:hover,
+  .flip-card.pricing-card:hover {
     transform: none !important;
+    animation: none !important;
+    box-shadow: 0 10px 20px -5px rgba(123, 185, 232, 0.3) !important;
   }
   
   /* Fix flip card inner for mobile */
   .flip-card-inner {
     transform-style: flat !important;
-    transition: none !important;
+    transition: opacity 0.3s ease !important;
     will-change: auto !important;
     height: auto !important;
     min-height: auto !important;
     position: relative !important;
+    transform: none !important;
+    animation: none !important;
+  }
+  
+  .flip-card-inner.flipped {
+    transform: none !important;
+    animation: none !important;
   }
   
   /* Fix card faces positioning on mobile */
@@ -1473,12 +1571,18 @@ section#cpg-brands .service-card,
     will-change: auto !important;
     transform: none !important;
     backface-visibility: visible !important;
+    animation: none !important;
   }
   
   /* Ensure spacer maintains card height */
   .flip-card-spacer {
     min-height: 500px !important;
     height: auto !important;
+  }
+  
+  /* Disable featured plan pulse animation on mobile */
+  .featured-plan {
+    animation: none !important;
   }
   
   /* Ensure proper gap between cards on mobile */
@@ -1502,4 +1606,28 @@ section#cpg-brands .service-card,
   clip-path: polygon(0 0, 100% 50%, 0 100%, 0 55%, 10px 50%, 0 45%);
   transform: translateX(2px);
   filter: drop-shadow(0 2px 4px rgba(123, 185, 232, 0.2));
+}
+
+/* FINAL MOBILE CAROUSEL SPEED OVERRIDE - Must be at the end */
+@media (max-width: 768px) {
+  /* Partner and Client carousels - fastest */
+  .animate-scroll,
+  [class*="animate-scroll"],
+  .animate-scroll-left,
+  [class*="animate-scroll-left"] {
+    animation-duration: 50s !important;
+  }
+  
+  /* Success Stories carousel - medium speed */
+  .portfolio-carousel-scroll,
+  [class*="portfolio-carousel"],
+  [data-mobile-carousel="true"] {
+    animation-duration: 70s !important;
+  }
+  
+  /* Other carousels (CPG, Local Business) - slower */
+  .ecom-marquee,
+  [class*="ecom-marquee"] {
+    animation-duration: 190s !important;
+  }
 }

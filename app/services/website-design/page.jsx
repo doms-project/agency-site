@@ -68,7 +68,7 @@ export default function WebsiteDesignPage() {
                 <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#7BB9E8] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <span className="text-white/70 text-xs sm:text-sm md:text-base text-center">Trusted by 80+ businesses to bring their vision online</span>
+                <span className="text-white/70 text-xs sm:text-sm md:text-base text-center">Trusted by 100+ brands to bring their vision online</span>
               </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
@@ -177,7 +177,7 @@ export default function WebsiteDesignPage() {
             So What Are You <span className="bg-gradient-to-r from-[#7BB9E8] to-[#4A90E2] bg-clip-text text-transparent">Waiting For?</span>
           </h2>
           <p className="text-xl md:text-2xl text-white/80 mb-10 max-w-3xl mx-auto leading-relaxed" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
-            Join 80+ businesses growing with no money out of pocket. Sign up and if you qualify, we&apos;ll help transform your business growth.
+            Join 100+ businesses growing with no money out of pocket. Sign up and if you qualify, we&apos;ll help transform your business growth.
           </p>
           <div className="mb-10">
             <button

@@ -33,7 +33,7 @@ const heroPhrases = [
   'Our system helps businesses rank higher on Google and get more views guaranteed.',
   'We give you cutting edge, proven winning strategies to get more leads and views on Google',
   'We can automate your texts, emails, calls, sales, fulfillment; any process in your business',
-  'We currently are helping over 50+ businesses grow their business with no money out of pocket',
+  'We currently are helping over 100+ businesses grow their business with no money out of pocket',
   'If you don\'t have a website, we will make you one for free if you qualify',
   'Empowering businesses with expert website design, optimized Google profiles, and targeted lead generation',
 ]
@@ -1050,14 +1050,10 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
       role="region"
       aria-label="Homepage Hero Banner"
     >
-      {/* Skip heavy Three.js background on mobile for faster load */}
-      {!isMobile ? (
-        <Suspense fallback={<div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black" />}>
-          <BlackHoleBackground />
-        </Suspense>
-      ) : (
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black" />
-      )}
+      {/* Load background on all devices but with suspense fallback */}
+      <Suspense fallback={<div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black" />}>
+        <BlackHoleBackground />
+      </Suspense>
       <header 
         className={`lg:hidden sticky top-0 z-50 w-full border-b backdrop-blur-[24px] shadow-[0_4px_24px_rgba(0,0,0,0.4),0_0_0_1px_rgba(255,255,255,0.05)_inset] transition-all duration-300 ${
           isMobileNavOpen 
