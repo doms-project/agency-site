@@ -95,7 +95,7 @@ export default function RootLayout({ children }) {
         {/* Performance hints */}
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
       </head>
-      <body className={inter.className} suppressHydrationWarning>
+      <body className={inter.className} suppressHydrationWarning style={{ margin: 0, padding: 0 }}>
         <Script
           id="structured-data"
           type="application/ld+json"

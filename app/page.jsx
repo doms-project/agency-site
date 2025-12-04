@@ -692,9 +692,9 @@ export default function Page() {
   }, [])
 
   return (
-    <div className="bg-black text-white min-h-screen">
+    <div className="bg-black text-white min-h-screen" style={{ margin: 0, padding: 0 }}>
       <DesktopNav navSolid={navSolid} />
-      <main>
+      <main style={{ margin: 0, padding: 0 }}>
         <ErrorBoundary>
           <Suspense fallback={<HeroSectionSkeleton onOpenMobileNav={() => setMobileNavOpen(true)} typedText={typedText} isMobileNavOpen={isMobileNavOpen} />}>
             <HeroSection onOpenMobileNav={() => setMobileNavOpen(true)} typedText={typedText} isMobileNavOpen={isMobileNavOpen} />
