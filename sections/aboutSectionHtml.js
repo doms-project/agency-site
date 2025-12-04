@@ -80,33 +80,33 @@ export const aboutSectionHtml = String.raw`
     <!-- Founder Content Section -->
     <div class="bg-white/5 rounded-2xl p-4 md:p-6 border border-white/10">
      <!-- Header -->
-     <div class="mb-4">
-      <div class="flex items-center gap-2 mb-2">
-       <h3 class="text-2xl md:text-3xl font-bold text-white" style="font-family:Inter, Satoshi, sans-serif">
+     <div class="mb-3">
+      <div class="flex items-center gap-2 mb-1">
+       <h3 class="text-xl md:text-2xl font-bold text-white" style="font-family:Inter, Satoshi, sans-serif">
         Hey, I&apos;m Dom.
        </h3>
        <!-- Instagram Link -->
-       <a class="group flex items-center justify-center w-7 h-7 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#7BB9E8]/50 text-white/60 hover:text-[#7BB9E8] transition-all duration-300 hover:scale-110 flex-shrink-0" href="https://www.instagram.com/dbcooper5?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" rel="noopener noreferrer" target="_blank">
-        <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24">
+       <a class="group flex items-center justify-center w-6 h-6 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#7BB9E8]/50 text-white/60 hover:text-[#7BB9E8] transition-all duration-300 hover:scale-110 flex-shrink-0" href="https://www.instagram.com/dbcooper5?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" rel="noopener noreferrer" target="_blank">
+        <svg class="w-3.5 h-3.5" fill="currentColor" viewbox="0 0 24 24">
          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z">
          </path>
         </svg>
        </a>
       </div>
-      <p class="text-[#7BB9E8] font-semibold text-base md:text-lg">
+      <p class="text-[#7BB9E8] font-semibold text-sm md:text-base">
        Founder &amp; CEO
       </p>
      </div>
      
      <!-- Bio -->
-     <div class="space-y-3">
-      <p class="text-white/80 leading-relaxed text-sm md:text-base" style="font-family:Inter, Satoshi, sans-serif">
+     <div class="space-y-2">
+      <p class="text-white/80 leading-relaxed text-xs md:text-sm" style="font-family:Inter, Satoshi, sans-serif">
        I&apos;m the founder of Yo Marketing, and over the years I&apos;ve worked hands-on with 100+ small businesses, dozens of creators, and several political campaigns. I&apos;ve been part of some incredible marketing wins—and have personally led campaigns that doubled client revenue through strategic ads and smart digital execution.
       </p>
-      <p class="text-white/80 leading-relaxed text-sm md:text-base" style="font-family:Inter, Satoshi, sans-serif">
+      <p class="text-white/80 leading-relaxed text-xs md:text-sm" style="font-family:Inter, Satoshi, sans-serif">
        I have a genuine passion for helping businesses grow and sharing the strategies that actually work. At Yo Marketing, we don&apos;t just create beautiful websites—we build websites that convert, backed by systems that keep your business growing on autopilot.
       </p>
-      <p class="text-white/80 leading-relaxed text-sm md:text-base" style="font-family:Inter, Satoshi, sans-serif">
+      <p class="text-white/80 leading-relaxed text-xs md:text-sm" style="font-family:Inter, Satoshi, sans-serif">
        From automation setups and CRM optimization to high-impact advertising campaigns, we help you get more customers, streamline operations, and scale effectively. Our mission is simple: help you grow, then help you handle the growth.
       </p>
      </div>
