@@ -109,8 +109,17 @@ main {
 #hero,
 section#hero,
 section[aria-label="Homepage Hero Banner"] {
-  padding-top: 40px !important;
+  padding-top: 0 !important; /* No padding on mobile */
   margin-top: 0 !important;
+}
+
+/* Desktop only - add padding since nav is outside hero */
+@media (min-width: 1024px) {
+  #hero,
+  section#hero,
+  section[aria-label="Homepage Hero Banner"] {
+    padding-top: 40px !important;
+  }
 }
 
 /* Mobile header - ensure no gap at top */
