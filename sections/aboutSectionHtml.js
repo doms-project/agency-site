@@ -71,7 +71,7 @@ export const aboutSectionHtml = String.raw`
      <div class="relative">
       <div class="absolute -inset-3 bg-gradient-to-r from-[#7BB9E8]/20 to-[#5fa6db]/20 rounded-2xl blur-xl opacity-50 group-hover:opacity-100 transition-opacity duration-500">
       </div>
-      <div class="relative w-full max-w-xs mx-auto aspect-[3/4] rounded-xl overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent">
+      <div class="relative w-full max-w-[200px] md:max-w-[220px] mx-auto aspect-[3/4] rounded-xl overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent">
        <img alt="Dom - Founder & CEO" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="/images/dom photo.jpeg"/>
       </div>
      </div>
@@ -126,7 +126,7 @@ export const aboutSectionHtml = String.raw`
       <div class="group relative">
        <div class="absolute -inset-2 bg-gradient-to-r from-[#7BB9E8]/20 to-[#5fa6db]/20 rounded-2xl blur-lg opacity-40 group-hover:opacity-90 transition-opacity duration-500">
        </div>
-       <div class="relative w-32 h-36 md:w-36 md:h-40 rounded-xl overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent">
+       <div class="relative w-40 h-44 md:w-44 md:h-48 lg:w-48 lg:h-52 rounded-xl overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent">
         <img
          src="/images/Evan new.jpg"
          alt="Evan - Sales Manager"
@@ -150,7 +150,7 @@ export const aboutSectionHtml = String.raw`
       <div class="group relative">
        <div class="absolute -inset-2 bg-gradient-to-r from-[#7BB9E8]/20 to-[#5fa6db]/20 rounded-2xl blur-lg opacity-40 group-hover:opacity-90 transition-opacity duration-500">
        </div>
-       <div class="relative w-32 h-36 md:w-36 md:h-40 rounded-xl overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent">
+       <div class="relative w-40 h-44 md:w-44 md:h-48 lg:w-48 lg:h-52 rounded-xl overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent">
         <img
          src="/images/andrianne.jpg"
          alt="Andrianne - Lead Generation"
@@ -173,7 +173,7 @@ export const aboutSectionHtml = String.raw`
      <div class="group relative">
       <div class="absolute -inset-2 bg-gradient-to-r from-[#7BB9E8]/20 to-[#5fa6db]/20 rounded-2xl blur-lg opacity-40 group-hover:opacity-90 transition-opacity duration-500">
       </div>
-      <div class="relative w-32 h-36 md:w-36 md:h-40 rounded-xl overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent">
+      <div class="relative w-40 h-44 md:w-44 md:h-48 lg:w-48 lg:h-52 rounded-xl overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent">
        <img
         src="/images/Muzaib.jpeg"
         alt="Muzaib - Front End Dev"
@@ -196,7 +196,7 @@ export const aboutSectionHtml = String.raw`
      <div class="group relative">
       <div class="absolute -inset-2 bg-gradient-to-r from-[#7BB9E8]/20 to-[#5fa6db]/20 rounded-2xl blur-lg opacity-40 group-hover:opacity-90 transition-opacity duration-500">
       </div>
-      <div class="relative w-32 h-36 md:w-36 md:h-40 rounded-xl overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent">
+      <div class="relative w-40 h-44 md:w-44 md:h-48 lg:w-48 lg:h-52 rounded-xl overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent">
        <img
         src="/images/musaraf.png"
         alt="Musaraf - Backend Dev"
@@ -224,7 +224,7 @@ export const aboutSectionHtml = String.raw`
       <div class="relative">
        <div class="absolute -inset-3 bg-gradient-to-r from-[#7BB9E8]/20 to-[#5fa6db]/20 rounded-2xl blur-xl opacity-50 group-hover:opacity-100 transition-opacity duration-500">
        </div>
-       <div class="relative w-56 sm:w-64 md:w-72 lg:w-80 max-w-xs aspect-[3/4] rounded-xl overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent mx-auto">
+       <div class="relative w-48 sm:w-52 md:w-56 lg:w-60 max-w-[200px] md:max-w-[220px] aspect-[3/4] rounded-xl overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent mx-auto">
         <img alt="Cristina - Designer" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="/images/cristina.jpeg?v=2" loading="eager" fetchpriority="high" decoding="async"/>
        </div>
       </div>
