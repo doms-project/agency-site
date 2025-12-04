@@ -999,7 +999,7 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
     <section
       id="hero"
       className="hero w-full relative font-sans pb-12 md:pb-16"
-      style={{ backgroundColor: 'transparent', paddingTop: 0 }}
+      style={{ backgroundColor: 'transparent', paddingTop: '40px' }}
       role="region"
       aria-label="Homepage Hero Banner"
     >
