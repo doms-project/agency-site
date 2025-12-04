@@ -1,4 +1,4 @@
-export const approachSectionHtml = String.raw`<section class="w-full py-20 bg-gradient-to-b from-[#181c22] via-[#10151a] to-[#181c22] relative overflow-hidden" id="approach" style="scroll-margin-top:120px">
+export const approachSectionHtml = String.raw`<section class="w-full py-20 md:py-24 bg-gradient-to-b from-[#181c22] via-[#10151a] to-[#181c22] relative overflow-hidden" id="approach" style="scroll-margin-top:120px;padding-top:6rem !important;">
  <div class="absolute inset-0 opacity-10">
   <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-[#7BB9E8] rounded-full mix-blend-multiply filter blur-3xl animate-pulse">
   </div>
@@ -7,7 +7,7 @@ export const approachSectionHtml = String.raw`<section class="w-full py-20 bg-gr
  </div>
  <div class="max-w-6xl mx-auto px-4 md:px-6 relative z-10">
   <div class="text-center mb-20">
-   <span class="inline-block px-4 py-2 bg-[#7BB9E8]/10 border border-[#7BB9E8]/20 rounded-full uppercase tracking-[0.25em] text-xs text-[#7BB9E8] font-semibold mb-6">
+   <span class="inline-block px-4 py-2 mt-8 md:mt-12 bg-[#7BB9E8]/10 border border-[#7BB9E8]/20 rounded-full uppercase tracking-[0.25em] text-xs text-[#7BB9E8] font-semibold mb-6">
     Our Approach
    </span>
    <h2 class="text-5xl md:text-6xl font-bold text-white mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-300 bg-clip-text text-transparent" style="font-family:Inter, Satoshi, sans-serif">
