@@ -8,6 +8,8 @@ const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
+  preload: true,
+  adjustFontFallback: true,
 })
 
 const poppins = Poppins({
@@ -15,6 +17,8 @@ const poppins = Poppins({
   variable: '--font-poppins',
   weight: ['500', '600'],
   display: 'swap',
+  preload: true,
+  adjustFontFallback: true,
 })
 
 export const metadata = {
@@ -67,19 +71,10 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${inter.variable} ${poppins.variable}`} suppressHydrationWarning>
       <head>
         {/* Three.js is loaded via esm.sh CDN which handles module resolution */}
-        {/* Preload critical resources - Hero and above-the-fold images */}
+        {/* Preload ONLY critical resources - Logo and GoHighLevel badge only */}
         <link rel="preload" href="/images/logo-hq.png" as="image" type="image/png" fetchPriority="high" />
-        {/* Preload partner logos that appear above the fold */}
-        <link rel="preload" href="/images/vercel-logotype-dark.png" as="image" type="image/png" fetchPriority="high" />
-        <link rel="preload" href="/images/monday.png" as="image" type="image/png" fetchPriority="high" />
-        <link rel="preload" href="/images/zapier-logo_white.png" as="image" type="image/png" fetchPriority="high" />
-        <link rel="preload" href="/images/ghl.png" as="image" type="image/png" fetchPriority="high" />
-        <link rel="preload" href="/images/Celigo.png" as="image" type="image/png" fetchPriority="high" />
-        <link rel="preload" href="/images/supabase-logo-wordmark--dark.png" as="image" type="image/png" fetchPriority="high" />
-        <link rel="preload" href="/images/Framer_Logo_Dark-Mode_Core.png" as="image" type="image/png" fetchPriority="high" />
-        <link rel="preload" href="/images/klaviyo-logo-white.png" as="image" type="image/png" fetchPriority="high" />
-        <link rel="preload" href="/images/meta-logo-white.png" as="image" type="image/png" fetchPriority="high" />
-        <link rel="preload" href="/images/Full_Logo_Blue_White.png" as="image" type="image/png" fetchPriority="high" />
+        <link rel="preload" href="/images/orig.png" as="image" type="image/png" fetchPriority="high" />
+        {/* Other images lazy loaded on demand for faster initial load */}
         {/* Note: CSS is automatically bundled by Next.js when imported in layout.jsx */}
         {/* Font preloading is handled automatically by Next.js font optimization */}
         {/* DNS prefetch for faster connection */}
@@ -91,7 +86,13 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         {/* Three.js is loaded dynamically via esm.sh CDN */}
         {/* Viewport meta for mobile optimization */}
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover, user-scalable=yes" />
+        {/* Theme color for mobile browsers */}
+        <meta name="theme-color" content="#040507" />
+        {/* Mobile web app capable */}
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         {/* Performance hints */}
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
       </head>
@@ -99,6 +100,7 @@ export default function RootLayout({ children }) {
         <Script
           id="structured-data"
           type="application/ld+json"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `{"@context":"https://schema.org","@type":"Organization","name":"Yo Marketing","url":"https://youngstownmarketing.com","logo":"https://youngstownmarketing.com/images/logo-hq.png","description":"Yo Marketing helps businesses grow online with expert website design, SEO services, Google Business Profile optimization, and lead generation.","foundingDate":"2023","founder":{"@type":"Person","name":"Dom"},"address":{"@type":"PostalAddress","addressCountry":"US"},"contactPoint":{"@type":"ContactPoint","contactType":"Customer Service","telephone":"+1-330-299-5179","email":"youngstownmarketingco@gmail.com","url":"https://youngstownmarketing.com"},"sameAs":["https://www.instagram.com/dbcooper5"],"serviceType":["Website Design","SEO Services","Google Business Profile Optimization","Lead Generation","Digital Marketing"]}`,
           }}

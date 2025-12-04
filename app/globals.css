@@ -1,8 +1,11 @@
 /* @import rules must be at the very top of the stylesheet */
-@import url('/legacy-css/2bf253bf30ea09a7.css');
-@import url('/legacy-css/081a0afca5a9bd20.css');
-@import url('/legacy-css/2c4911ffbcbe7797.css');
-@import url('/legacy-css/6c1f9ac498836ab6.css');
+/* Legacy CSS only on desktop for better mobile performance */
+@media (min-width: 1024px) {
+  @import url('/legacy-css/2bf253bf30ea09a7.css');
+  @import url('/legacy-css/081a0afca5a9bd20.css');
+  @import url('/legacy-css/2c4911ffbcbe7797.css');
+  @import url('/legacy-css/6c1f9ac498836ab6.css');
+}
 
 @tailwind base;
 @tailwind components;
@@ -32,6 +35,29 @@ body {
   /* Remove any iOS safe area padding */
   padding-top: 0 !important;
   padding-top: env(safe-area-inset-top, 0) !important;
+}
+
+/* Mobile performance - reduce animations */
+@media (max-width: 768px) {
+  body.reduce-motion * {
+    animation-duration: 0.01s !important;
+    transition-duration: 0.1s !important;
+  }
+  
+  /* Disable blur effects on mobile for better performance */
+  body.reduce-motion .backdrop-blur-md,
+  body.reduce-motion .backdrop-blur-xl,
+  body.reduce-motion .backdrop-blur-2xl,
+  body.reduce-motion [class*="backdrop-blur"] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  
+  /* Reduce blur on mobile */
+  .blur-3xl,
+  .blur-[128px] {
+    filter: blur(32px) !important;
+  }
 }
 
 /* Root div - ensure no spacing */
@@ -482,6 +508,19 @@ img {
   /* Better image rendering */
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
+}
+
+/* Mobile image optimization - reduce quality/size */
+@media (max-width: 768px) {
+  img:not([loading="eager"]):not([fetchpriority="high"]) {
+    loading: lazy;
+    decoding: async;
+  }
+  
+  /* Disable will-change on mobile for better performance */
+  img[style*="will-change"] {
+    will-change: auto !important;
+  }
 }
 
 /* CRITICAL: Fix hover flickering - prevent will-change and transform conflicts */

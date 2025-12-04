@@ -144,7 +144,7 @@ export default function SuccessStoriesCarousel() {
   // Use fewer card duplicates on mobile for better performance
   // On very low-end devices, use even fewer cards
   const cardsToRender = isMobile 
-    ? [...portfolioCards, ...portfolioCards] // 2 sets on mobile (10 cards total)
+    ? portfolioCards // Only 1 set on mobile (5 cards) for faster load
     : duplicatedCards // 2 sets on desktop (10 cards total) - reduced from 3 for performance
 
   useEffect(() => {

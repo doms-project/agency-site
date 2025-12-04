@@ -32,12 +32,23 @@ const nextConfig = {
   poweredByHeader: false,
   // Optimize production builds
   swcMinify: true,
+  // Enable compiler optimizations
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
   // Experimental features for better performance
   experimental: {
     // optimizeCss: true, // Disabled - requires 'critters' package
     // Removed 'three' from optimizePackageImports to avoid conflicts
     // 'three' works fine without optimization
     optimizePackageImports: ['gsap', 'framer-motion'],
+    // Optimize font loading
+    optimizeFonts: true,
+  },
+  // Reduce JavaScript bundle size
+  onDemandEntries: {
+    maxInactiveAge: 25 * 1000,
+    pagesBufferLength: 2,
   },
   // Output configuration
   output: 'standalone',

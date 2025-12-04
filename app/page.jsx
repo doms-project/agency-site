@@ -175,15 +175,22 @@ export default function Page() {
   useEffect(() => {
     document.body.classList.add('homepage')
     
-    // Preload critical images programmatically for better control
+    // Preload ONLY critical above-the-fold images
     if (typeof window !== 'undefined') {
+      const isMobile = window.innerWidth < 768
       const criticalImages = [
         '/images/logo-hq.png',
         '/images/orig.png',
-        '/images/vercel-icon-light.png',
-        '/images/monday.png',
-        '/images/Celigo.png'
       ]
+      
+      // Only preload partner logos on desktop - defer on mobile for faster load
+      if (!isMobile) {
+        criticalImages.push(
+          '/images/vercel-icon-light.png',
+          '/images/monday.png',
+          '/images/Celigo.png'
+        )
+      }
       
       criticalImages.forEach((src) => {
         const link = document.createElement('link')
@@ -200,13 +207,17 @@ export default function Page() {
     }
   }, [])
 
-  // Defer non-critical animations until after initial render
+  // Defer non-critical animations until after initial render - mobile optimization
   useEffect(() => {
+    const isMobile = window.innerWidth < 768
     // Wait for page to be interactive before starting heavy animations
     if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
       requestIdleCallback(() => {
-        // Trigger any deferred animations here if needed
-      }, { timeout: 2000 })
+        // On mobile, disable heavy animations for better performance
+        if (isMobile) {
+          document.body.classList.add('reduce-motion')
+        }
+      }, { timeout: isMobile ? 500 : 2000 })
     }
   }, [])
 
@@ -994,6 +1005,11 @@ function NavTextLink({ href, label }) {
 }
 
 function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
+  const [isMobile, setIsMobile] = useState(false)
+  
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768)
+  }, [])
 
   return (
     <section
@@ -1003,9 +1019,14 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
       role="region"
       aria-label="Homepage Hero Banner"
     >
-      <Suspense fallback={<div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black" />}>
-        <BlackHoleBackground />
-      </Suspense>
+      {/* Skip heavy Three.js background on mobile for faster load */}
+      {!isMobile ? (
+        <Suspense fallback={<div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black" />}>
+          <BlackHoleBackground />
+        </Suspense>
+      ) : (
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black" />
+      )}
       <header 
         className={`lg:hidden sticky top-0 z-50 w-full border-b backdrop-blur-[24px] shadow-[0_4px_24px_rgba(0,0,0,0.4),0_0_0_1px_rgba(255,255,255,0.05)_inset] transition-all duration-300 ${
           isMobileNavOpen 
