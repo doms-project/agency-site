@@ -372,6 +372,8 @@ export default function SuccessStoriesCarousel() {
                       backfaceVisibility: isMobile ? 'visible' : 'hidden',
                       WebkitBackfaceVisibility: isMobile ? 'visible' : 'hidden',
                       boxShadow: isMobile ? '0 4px 8px rgba(0, 0, 0, 0.3)' : '0 10px 20px 5px rgba(0, 0, 0, 0.4)',
+                      maxHeight: isMobile ? '360px' : 'none',
+                      touchAction: isMobile ? 'pan-y' : 'auto',
                     }}
                   >
                     {/* Background Layer - Image or Solid Color */}
