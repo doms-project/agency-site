@@ -14,14 +14,12 @@ import ErrorBoundary from '@/components/ErrorBoundary'
 // Lazy load heavy components - but preload hero background for faster initial render
 const SuccessStoriesCarousel = lazy(() => import('@/components/SuccessStoriesCarousel'))
 const TestimonialsCarousel = lazy(() => import('@/components/TestimonialsCarousel'))
-// Preload BlackHoleBackground for hero section - critical for above-the-fold
-const BlackHoleBackground = lazy(() => {
-  // Preload the component module
-  if (typeof window !== 'undefined') {
-    import('@/components/BlackHoleBackground').catch(() => {})
-  }
-  return import('@/components/BlackHoleBackground')
-})
+// Hero backgrounds - Multiple options
+const BlackHoleBackground = lazy(() => import('@/components/BlackHoleBackground'))
+const LightweightHeroBackground = lazy(() => import('@/components/LightweightHeroBackground'))
+const PyramidHeroBackground = lazy(() => import('@/components/PyramidHeroBackground'))
+const ParticleNetworkBackground = lazy(() => import('@/components/ParticleNetworkBackground'))
+const RingParticlesBackground = lazy(() => import('@/components/RingParticlesBackground'))
 // Lazy load modals - only load when needed
 const WebsiteSurveyModal = lazy(() => import('@/components/WebsiteSurveyModal'))
 const WebsiteRevisionModal = lazy(() => import('@/components/WebsiteRevisionModal'))
@@ -195,9 +193,9 @@ export default function Page() {
         )
       } else {
         criticalImages.push(
-          '/images/vercel-icon-light.png',
-          '/images/monday.png',
-          '/images/Celigo.png'
+        '/images/vercel-icon-light.png',
+        '/images/monday.png',
+        '/images/Celigo.png'
         )
       }
       
@@ -316,19 +314,19 @@ export default function Page() {
       rootMargin: isMobile ? '200px 0px 200px 0px' : '100px 0px 100px 0px' // Larger margin on mobile to preload earlier
     }
     
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible')
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible')
             // Unobserve after animation to improve performance
             observer.unobserve(entry.target)
             // Clean up will-change after animation
             setTimeout(() => {
               entry.target.style.willChange = 'auto'
             }, isMobile ? 300 : 600)
-          }
-        })
-      }, observerOptions)
+        }
+      })
+    }, observerOptions)
     
     // Observe all elements with scroll animation classes
     const animatedElements = document.querySelectorAll('.scroll-fade-in, .scroll-slide-up')
@@ -1056,9 +1054,16 @@ function NavTextLink({ href, label }) {
 
 function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
   const [isMobile, setIsMobile] = useState(false)
+  // Animation options: 'blackhole', 'pyramid', 'gradient', 'particles', 'ringParticles'
+  const [heroAnimation, setHeroAnimation] = useState('ringParticles')
+  // Color options: 'multiColor' (all 4 colors), 'websiteDesign', 'leadGeneration', 'googleBusiness', 'seoServices'
+  const [particleColor, setParticleColor] = useState('multiColor')
   
   useEffect(() => {
-    setIsMobile(window.innerWidth < 768)
+    const checkMobile = window.innerWidth < 768
+    setIsMobile(checkMobile)
+    // Default to ring particles (Google Antigravity style)
+    setHeroAnimation('ringParticles')
   }, [])
 
   return (
@@ -1069,17 +1074,20 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
       role="region"
       aria-label="Homepage Hero Banner"
     >
-      {/* Load background on all devices but with improved fallback */}
+      {/* Load background based on selection */}
       <Suspense fallback={
         <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black">
-          {/* Loading skeleton - animated gradient that looks similar */}
           <div className="absolute inset-0 opacity-40">
             <div className="absolute inset-0 bg-gradient-radial from-[#7BB9E8]/20 via-[#4A90E2]/10 to-transparent animate-pulse" 
                  style={{ animationDuration: '3s' }} />
           </div>
         </div>
       }>
-        <BlackHoleBackground />
+        {heroAnimation === 'blackhole' && <BlackHoleBackground />}
+        {heroAnimation === 'pyramid' && <PyramidHeroBackground />}
+        {heroAnimation === 'gradient' && <LightweightHeroBackground />}
+        {heroAnimation === 'particles' && <ParticleNetworkBackground colorScheme={particleColor} />}
+        {heroAnimation === 'ringParticles' && <RingParticlesBackground colorScheme={particleColor} />}
       </Suspense>
       <header 
         className={`lg:hidden sticky top-0 z-50 w-full border-b backdrop-blur-[24px] shadow-[0_4px_24px_rgba(0,0,0,0.4),0_0_0_1px_rgba(255,255,255,0.05)_inset] transition-all duration-300 ${
