@@ -139,6 +139,7 @@ export default function SuccessStoriesCarousel() {
   const cardsRef = useRef([])
   const animationRef = useRef(null)
   const rafRef = useRef(null)
+  const perspectiveTickerRef = useRef(null)
   const [isMobile, setIsMobile] = useState(false)
   const swipeStateRef = useRef({
     isDragging: false,
@@ -356,93 +357,57 @@ export default function SuccessStoriesCarousel() {
       carousel._swipeTouchEnd = handleTouchEnd
     }
     
-    // Add 3D tilt effects for cards (on individual cards, not carousel)
+    // Add automatic 3D perspective tilt based on card position in carousel
+    const update3DPerspective = () => {
+      if (!container) return
+      
+      const containerRect = container.getBoundingClientRect()
+      const containerCenter = containerRect.left + containerRect.width / 2
+      
       cards.forEach((card) => {
         if (!card) return
         
-        // Touch events for mobile 3D tilt (only when not swiping carousel)
-        let tiltStartX = 0
-        let tiltStartY = 0
-        let hasMoved = false
+        const cardRect = card.getBoundingClientRect()
+        const cardCenter = cardRect.left + cardRect.width / 2
         
-        const handleCardTouchStart = (e) => {
-          if (!isMobileDevice) return
-          card._tiltActive = true
-          card._tiltStartTime = Date.now()
-          tiltStartX = e.touches[0].clientX
-          tiltStartY = e.touches[0].clientY
-          hasMoved = false
-        }
+        // Calculate distance from center (-1 to 1, where 0 is center)
+        const distanceFromCenter = (cardCenter - containerCenter) / (containerRect.width / 2)
         
-        const handleCardTouchMove = (e) => {
-          if (!isMobileDevice || !card._tiltActive) return
-          
-          const currentX = e.touches[0].clientX
-          const currentY = e.touches[0].clientY
-          const moveX = Math.abs(currentX - tiltStartX)
-          const moveY = Math.abs(currentY - tiltStartY)
-          
-          // If moved more than 5px in any direction, it's likely a swipe
-          if (moveX > 5 || moveY > 5) {
-            hasMoved = true
-          }
-          
-          // Disable tilt if carousel is being swiped OR if significant movement detected
-          if (swipeStateRef.current.isSwipe || hasMoved) {
-            card._tiltActive = false
-            card.classList.remove('tilt-enabled')
-            // Reset to flat immediately when swiping
-            card.style.transition = 'none'
-            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0) translateZ(0) scale(1)'
-            card.style.boxShadow = ''
-            return
-          }
-          
-          // Only apply tilt if staying relatively still (< 5px movement)
-          if (!hasMoved) {
-            card.classList.add('tilt-enabled')
-            const touch = e.touches[0]
-            const rect = card.getBoundingClientRect()
-            const x = touch.clientX - rect.left
-            const y = touch.clientY - rect.top
-            const centerX = rect.width / 2
-            const centerY = rect.height / 2
-            const rotateX = ((y - centerY) / centerY) * 8 // Reduced to 8 degrees
-            const rotateY = ((centerX - x) / centerX) * 8
-            
-            // Very minimal lift - almost flat
-            card.style.transition = 'none'
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-3px) translateZ(10px) scale(1.01)`
-            card.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.5)'
-          }
-        }
+        // Calculate rotation: right side tilts left (negative), left side tilts right (positive)
+        const maxRotation = 15 // degrees
+        const rotateY = -distanceFromCenter * maxRotation // Inverted for correct tilt direction
         
-        const handleCardTouchEnd = () => {
-          if (!isMobileDevice) return
-          card._tiltActive = false
-          hasMoved = false
-          card.classList.remove('tilt-enabled')
-          
-          // Smooth return to normal state
-          card.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease'
-          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0) translateZ(0) scale(1)'
-          card.style.boxShadow = ''
-          
-          // Remove transition after animation completes
-          setTimeout(() => {
-            card.style.transition = ''
-          }, 300)
-        }
+        // Calculate Y-axis lift: highest at center, normal at edges
+        const maxLift = 15 // pixels
+        const liftY = -Math.abs(distanceFromCenter) * maxLift + maxLift // Inverted parabola
         
-        if (isMobileDevice) {
-          card.addEventListener('touchstart', handleCardTouchStart, { passive: true })
-          card.addEventListener('touchmove', handleCardTouchMove, { passive: true })
-          card.addEventListener('touchend', handleCardTouchEnd, { passive: true })
-          card._cardTouchStart = handleCardTouchStart
-          card._cardTouchMove = handleCardTouchMove
-          card._cardTouchEnd = handleCardTouchEnd
-        }
-    })
+        // Calculate scale: slightly larger at center
+        const maxScale = 1.05
+        const minScale = 0.95
+        const scale = maxScale - Math.abs(distanceFromCenter) * (maxScale - minScale)
+        
+        // Calculate opacity: full at center, slightly faded at edges
+        const opacity = 1 - Math.abs(distanceFromCenter) * 0.3
+        
+        // Apply transforms smoothly
+        card.style.transition = 'transform 0.3s ease-out, opacity 0.3s ease-out'
+        card.style.transform = `perspective(1200px) rotateY(${rotateY}deg) translateY(${liftY}px) scale(${scale})`
+        card.style.opacity = Math.max(0.7, opacity)
+      })
+    }
+    
+    // Update 3D perspective on scroll and animation frame
+    const startPerspectiveUpdates = () => {
+      const updateLoop = () => {
+        update3DPerspective()
+        perspectiveTickerRef.current = requestAnimationFrame(updateLoop)
+      }
+      updateLoop()
+    }
+    
+    startPerspectiveUpdates()
+    
+    // Removed touch tilt - only using automatic carousel 3D perspective
 
     // Pause animation when not visible (IntersectionObserver) - especially important for mobile
     const observer = new IntersectionObserver(
@@ -517,16 +482,7 @@ export default function SuccessStoriesCarousel() {
             if (card._hoverLeave) {
               card.removeEventListener('mouseleave', card._hoverLeave)
             }
-            // Remove card tilt touch event listeners
-            if (card._cardTouchStart) {
-              card.removeEventListener('touchstart', card._cardTouchStart)
-            }
-            if (card._cardTouchMove) {
-              card.removeEventListener('touchmove', card._cardTouchMove)
-            }
-            if (card._cardTouchEnd) {
-              card.removeEventListener('touchend', card._cardTouchEnd)
-            }
+            // Touch tilt removed - using automatic 3D perspective only
             // Kill GSAP animations
             gsap.killTweensOf(card)
             // Kill hover timelines on card images
@@ -567,6 +523,12 @@ export default function SuccessStoriesCarousel() {
 
     // Cleanup function for useEffect
     return () => {
+      // Cancel perspective animation loop
+      if (perspectiveTickerRef.current) {
+        cancelAnimationFrame(perspectiveTickerRef.current)
+        perspectiveTickerRef.current = null
+      }
+      
       // Call GSAP cleanup if it was set
       if (gsapCleanup) {
         gsapCleanup()
