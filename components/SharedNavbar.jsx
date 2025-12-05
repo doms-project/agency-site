@@ -230,13 +230,13 @@ export default function SharedNavbar() {
             <img 
               src="/images/logo-hq.png" 
               alt="Yo Marketing" 
-              width={64}
-              height={64}
-              className="logo tilt-logo h-16 w-auto transition-transform duration-300 group-hover:scale-105 drop-shadow-lg" 
+              width={72}
+              height={72}
+              className="logo tilt-logo h-18 w-auto transition-transform duration-300 group-hover:scale-105 drop-shadow-lg" 
               loading="eager"
               decoding="async"
               fetchPriority="high"
-              style={{ minHeight: '64px', minWidth: '64px' }}
+              style={{ minHeight: '72px', minWidth: '72px' }}
             />
           </a>
           <button 
@@ -263,16 +263,17 @@ export default function SharedNavbar() {
             <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-transparent pointer-events-none" />
             <div className="relative flex items-center justify-between px-6 py-5 border-b border-white/10 bg-white/5 backdrop-blur-sm">
               <a aria-label="Yo Marketing Home" href="/" onClick={() => setMobileNavOpen(false)} className="group">
-                <img 
-                  src="/images/logo-hq.png" 
-                  alt="Yo Marketing" 
-                  width={56}
-                  height={56}
-                  className="logo tilt-logo h-14 w-auto transition-transform duration-300 group-hover:scale-105 drop-shadow-lg" 
-                  loading="eager"
-                  decoding="async"
-                  fetchPriority="high"
-                />
+            <img 
+              src="/images/logo-hq.png" 
+              alt="Yo Marketing" 
+              width={80}
+              height={80}
+              className="logo tilt-logo h-20 w-auto transition-transform duration-300 group-hover:scale-105 drop-shadow-lg" 
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+              style={{ minHeight: '80px', minWidth: '80px' }}
+            />
               </a>
               <button 
                 suppressHydrationWarning 

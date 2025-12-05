@@ -1068,13 +1068,13 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
             <img 
               src="/images/logo-hq.png" 
               alt="Yo Marketing" 
-              width={56}
-              height={56}
-              className="logo tilt-logo h-14 w-auto transition-all duration-300 cursor-pointer group-hover:scale-105 group-active:scale-95 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]" 
+              width={80}
+              height={80}
+              className="logo tilt-logo h-20 w-auto transition-all duration-300 cursor-pointer group-hover:scale-105 group-active:scale-95 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]" 
               loading="eager"
               decoding="sync"
               fetchPriority="high"
-              style={{ willChange: 'transform' }}
+              style={{ willChange: 'transform', minHeight: '80px', minWidth: '80px' }}
             />
           </a>
           <button 
@@ -1206,13 +1206,13 @@ function MobileDrawer({ onClose }) {
             <img 
               src="/images/logo-hq.png" 
               alt="Yo Marketing" 
-              width={56}
-              height={56}
-              className="logo tilt-logo h-14 w-auto transition-transform duration-300 group-hover:scale-105 drop-shadow-lg" 
+              width={80}
+              height={80}
+              className="logo tilt-logo h-20 w-auto transition-transform duration-300 group-hover:scale-105 drop-shadow-lg" 
               loading="eager"
               decoding="sync"
               fetchPriority="high"
-              style={{ willChange: 'transform' }}
+              style={{ willChange: 'transform', minHeight: '80px', minWidth: '80px' }}
             />
           </a>
           <button 
