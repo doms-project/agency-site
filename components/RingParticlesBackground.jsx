@@ -134,7 +134,18 @@ export default function RingParticlesBackground({
         ctx.translate(this.x, this.y)
         ctx.rotate(this.rotation)
 
-        // Draw ring with segments (Google Antigravity style)
+        // Draw outer glow halo (for all particles)
+        const outerGlow = ctx.createRadialGradient(0, 0, 0, 0, 0, radius * 4)
+        outerGlow.addColorStop(0, `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, ${opacity * 0.4})`)
+        outerGlow.addColorStop(0.3, `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, ${opacity * 0.2})`)
+        outerGlow.addColorStop(1, `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, 0)`)
+        
+        ctx.beginPath()
+        ctx.arc(0, 0, radius * 4, 0, Math.PI * 2)
+        ctx.fillStyle = outerGlow
+        ctx.fill()
+
+        // Draw ring with segments (Google Antigravity style) - with enhanced glow
         const segmentAngle = (Math.PI * 2) / this.segments
         const gapAngle = this.segmentGap
 
@@ -142,30 +153,30 @@ export default function RingParticlesBackground({
           const startAngle = i * segmentAngle + gapAngle / 2
           const endAngle = (i + 1) * segmentAngle - gapAngle / 2
 
+          // Enhanced shadow/glow
+          ctx.shadowBlur = mobile ? 12 : 20
+          ctx.shadowColor = `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, ${opacity * 1.2})`
+
           ctx.beginPath()
           ctx.arc(0, 0, radius, startAngle, endAngle)
-          ctx.strokeStyle = `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, ${opacity})`
-          ctx.lineWidth = this.ringWidth
+          ctx.strokeStyle = `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, ${opacity * 1.3})`
+          ctx.lineWidth = this.ringWidth * 1.2
           ctx.lineCap = 'round'
-          
-          if (!mobile) {
-            ctx.shadowBlur = 8
-            ctx.shadowColor = `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, 0.6)`
-          }
-          
           ctx.stroke()
-          if (!mobile) ctx.shadowBlur = 0
         }
+        
+        ctx.shadowBlur = 0
 
-        // Optional: Draw subtle center glow (only for some particles, determined at creation)
-        if (!mobile && this.hasGlow) {
-          const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, radius * 2)
-          gradient.addColorStop(0, `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, ${opacity * 0.3})`)
-          gradient.addColorStop(1, `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, 0)`)
+        // Draw bright center glow (for particles with glow)
+        if (this.hasGlow) {
+          const centerGlow = ctx.createRadialGradient(0, 0, 0, 0, 0, radius * 2.5)
+          centerGlow.addColorStop(0, `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, ${opacity * 0.6})`)
+          centerGlow.addColorStop(0.4, `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, ${opacity * 0.3})`)
+          centerGlow.addColorStop(1, `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, 0)`)
           
           ctx.beginPath()
-          ctx.arc(0, 0, radius * 2, 0, Math.PI * 2)
-          ctx.fillStyle = gradient
+          ctx.arc(0, 0, radius * 2.5, 0, Math.PI * 2)
+          ctx.fillStyle = centerGlow
           ctx.fill()
         }
 
@@ -223,29 +234,38 @@ export default function RingParticlesBackground({
             const distance = Math.sqrt(dx * dx + dy * dy)
 
             if (distance < maxDistance) {
-              const opacity = 0.25 * (1 - distance / maxDistance)
+              const opacity = 0.35 * (1 - distance / maxDistance)
               
-              // Gradient line connecting two particles
+              // Gradient line connecting two particles with glow
               const gradient = ctx.createLinearGradient(
                 particles[i].x, particles[i].y,
                 particles[j].x, particles[j].y
               )
               gradient.addColorStop(0, `rgba(${particles[i].colorRGB.r}, ${particles[i].colorRGB.g}, ${particles[i].colorRGB.b}, ${opacity})`)
+              gradient.addColorStop(0.5, `rgba(
+                ${Math.floor((particles[i].colorRGB.r + particles[j].colorRGB.r) / 2)},
+                ${Math.floor((particles[i].colorRGB.g + particles[j].colorRGB.g) / 2)},
+                ${Math.floor((particles[i].colorRGB.b + particles[j].colorRGB.b) / 2)},
+                ${opacity * 1.2}
+              )`)
               gradient.addColorStop(1, `rgba(${particles[j].colorRGB.r}, ${particles[j].colorRGB.g}, ${particles[j].colorRGB.b}, ${opacity})`)
               
-              if (!mobile) {
-                ctx.shadowBlur = 6
-                const shadowColor = colorPalette[0]
-                ctx.shadowColor = `rgba(${shadowColor.r}, ${shadowColor.g}, ${shadowColor.b}, 0.3)`
-              }
+              // Enhanced shadow glow for connections
+              ctx.shadowBlur = mobile ? 10 : 15
+              ctx.shadowColor = `rgba(
+                ${Math.floor((particles[i].colorRGB.r + particles[j].colorRGB.r) / 2)},
+                ${Math.floor((particles[i].colorRGB.g + particles[j].colorRGB.g) / 2)},
+                ${Math.floor((particles[i].colorRGB.b + particles[j].colorRGB.b) / 2)},
+                ${opacity * 0.8}
+              )`
               
               ctx.beginPath()
               ctx.strokeStyle = gradient
-              ctx.lineWidth = mobile ? 0.8 : 1
+              ctx.lineWidth = mobile ? 1 : 1.5
               ctx.moveTo(particles[i].x, particles[i].y)
               ctx.lineTo(particles[j].x, particles[j].y)
               ctx.stroke()
-              if (!mobile) ctx.shadowBlur = 0
+              ctx.shadowBlur = 0
               connectionCount++
             }
           }
