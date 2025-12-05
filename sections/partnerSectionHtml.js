@@ -23,52 +23,52 @@ export const partnerSectionHtml = String.raw`<section class="partner-carousel pb
     }
    </style>
     <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="Zapier" class="h-6 md:h-10 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="low" loading="lazy" src="/images/zapier-logo_white.png" width="80" height="80"/>
+     <img alt="Zapier" class="h-6 md:h-10 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="high" loading="eager" src="/images/zapier-logo_white.png" width="80" height="80"/>
     </div>
     <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="GoHighLevel" class="h-6 md:h-10 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="low" loading="lazy" src="/images/ghl.png" width="80" height="80"/>
+     <img alt="GoHighLevel" class="h-6 md:h-10 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="high" loading="eager" src="/images/ghl.png" width="80" height="80"/>
     </div>
     <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="Supabase" class="h-8 md:h-12 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="low" loading="lazy" src="/images/supabase-logo-wordmark--dark.png" width="80" height="80"/>
+     <img alt="Supabase" class="h-8 md:h-12 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="high" loading="eager" src="/images/supabase-logo-wordmark--dark.png" width="80" height="80"/>
     </div>
     <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="Meta" class="h-16 md:h-20 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="low" loading="lazy" src="/images/meta-logo-white.png" width="80" height="80"/>
+     <img alt="Meta" class="h-16 md:h-20 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="high" loading="eager" src="/images/meta-logo-white.png" width="80" height="80"/>
     </div>
     <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="N8N" class="h-8 md:h-12 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="low" loading="lazy" src="/images/n8n-logo.png" width="80" height="80"/>
+     <img alt="N8N" class="h-8 md:h-12 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="high" loading="eager" src="/images/n8n-logo.png" width="80" height="80"/>
     </div>
     <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="MailChimp" class="h-20 md:h-28 lg:h-32 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" style="min-height: 80px !important; max-height: 128px !important;" draggable="false" fetchpriority="low" loading="lazy" src="/images/mailchimp.png" width="80" height="80"/>
+     <img alt="MailChimp" class="h-20 md:h-28 lg:h-32 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" style="min-height: 80px !important; max-height: 128px !important;" draggable="false" fetchpriority="high" loading="eager" src="/images/mailchimp.png" width="80" height="80"/>
     </div>
     <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="Stripe" class="h-10 md:h-14 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="low" loading="lazy" src="/images/stripe-logo.png" width="80" height="80"/>
+     <img alt="Stripe" class="h-10 md:h-14 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="high" loading="eager" src="/images/stripe-logo.png" width="80" height="80"/>
     </div>
     <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="WordPress" class="h-12 md:h-16 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="low" loading="lazy" src="/images/wordpress-logo.png" width="80" height="80"/>
+     <img alt="WordPress" class="h-12 md:h-16 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="high" loading="eager" src="/images/wordpress-logo.png" width="80" height="80"/>
     </div>
     <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="Zapier" class="h-6 md:h-10 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="low" loading="lazy" src="/images/zapier-logo_white.png" width="80" height="80"/>
+     <img alt="Zapier" class="h-6 md:h-10 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="high" loading="eager" src="/images/zapier-logo_white.png" width="80" height="80"/>
     </div>
     <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="GoHighLevel" class="h-6 md:h-10 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="low" loading="lazy" src="/images/ghl.png" width="80" height="80"/>
+     <img alt="GoHighLevel" class="h-6 md:h-10 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="high" loading="eager" src="/images/ghl.png" width="80" height="80"/>
     </div>
     <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="Supabase" class="h-8 md:h-12 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="low" loading="lazy" src="/images/supabase-logo-wordmark--dark.png" width="80" height="80"/>
+     <img alt="Supabase" class="h-8 md:h-12 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="high" loading="eager" src="/images/supabase-logo-wordmark--dark.png" width="80" height="80"/>
     </div>
     <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="Meta" class="h-16 md:h-20 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="low" loading="lazy" src="/images/meta-logo-white.png" width="80" height="80"/>
+     <img alt="Meta" class="h-16 md:h-20 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="high" loading="eager" src="/images/meta-logo-white.png" width="80" height="80"/>
     </div>
     <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="N8N" class="h-8 md:h-12 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="low" loading="lazy" src="/images/n8n-logo.png" width="80" height="80"/>
+     <img alt="N8N" class="h-8 md:h-12 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="high" loading="eager" src="/images/n8n-logo.png" width="80" height="80"/>
     </div>
     <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="MailChimp" class="h-20 md:h-28 lg:h-32 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" style="min-height: 80px !important; max-height: 128px !important;" draggable="false" fetchpriority="low" loading="lazy" src="/images/mailchimp.png" width="80" height="80"/>
+     <img alt="MailChimp" class="h-20 md:h-28 lg:h-32 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" style="min-height: 80px !important; max-height: 128px !important;" draggable="false" fetchpriority="high" loading="eager" src="/images/mailchimp.png" width="80" height="80"/>
     </div>
     <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="Stripe" class="h-10 md:h-14 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="low" loading="lazy" src="/images/stripe-logo.png" width="80" height="80"/>
+     <img alt="Stripe" class="h-10 md:h-14 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="high" loading="eager" src="/images/stripe-logo.png" width="80" height="80"/>
     </div>
     <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="WordPress" class="h-12 md:h-16 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="low" loading="lazy" src="/images/wordpress-logo.png" width="80" height="80"/>
+     <img alt="WordPress" class="h-12 md:h-16 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" fetchpriority="high" loading="eager" src="/images/wordpress-logo.png" width="80" height="80"/>
     </div>
    </div>
   </div>

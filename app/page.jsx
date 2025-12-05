@@ -175,7 +175,7 @@ export default function Page() {
   useEffect(() => {
     document.body.classList.add('homepage')
     
-    // Preload ONLY critical above-the-fold images
+    // Preload critical images and setup aggressive image loading
     if (typeof window !== 'undefined') {
       const isMobile = window.innerWidth < 768
       const criticalImages = [
@@ -183,8 +183,17 @@ export default function Page() {
         '/images/orig.png',
       ]
       
-      // Only preload partner logos on desktop - defer on mobile for faster load
-      if (!isMobile) {
+      // Preload MORE images on mobile for instant visibility
+      if (isMobile) {
+        criticalImages.push(
+          '/images/zapier-logo_white.png',
+          '/images/ghl.png',
+          '/images/mailchimp.png',
+          '/images/supabase-logo-wordmark--dark.png',
+          '/images/meta-logo-white.png',
+          '/logo/atv%20tulum%20logo%20(1)%20(1).jpg'
+        )
+      } else {
         criticalImages.push(
           '/images/vercel-icon-light.png',
           '/images/monday.png',
@@ -201,28 +210,38 @@ export default function Page() {
         document.head.appendChild(link)
       })
       
-      // Initialize aggressive image loading after page is interactive
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(() => {
-          // Aggressive image observer for smooth scrolling
-          const imageObserver = new IntersectionObserver(
-            (entries) => {
-              entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                  const img = entry.target
-                  // Stop observing once loaded
-                  imageObserver.unobserve(img)
+      // Initialize very aggressive image loading on mobile - IMMEDIATE
+      const setupImageLoading = () => {
+        // Very aggressive image observer - load images way before they're visible
+        const imageObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const img = entry.target
+                if (img.dataset.src) {
+                  img.src = img.dataset.src
                 }
-              })
-            },
-            {
-              rootMargin: isMobile ? '400px 0px 400px 0px' : '300px 0px 300px 0px',
-              threshold: 0
-            }
-          )
-          // Observe all lazy images
-          document.querySelectorAll('img[loading="lazy"]').forEach((img) => imageObserver.observe(img))
-        }, { timeout: 1000 })
+                imageObserver.unobserve(img)
+              }
+            })
+          },
+          {
+            // VERY aggressive on mobile - load 5 screens ahead!
+            rootMargin: isMobile ? '500% 0px 500% 0px' : '300% 0px 300% 0px',
+            threshold: 0
+          }
+        )
+        // Observe all lazy images
+        document.querySelectorAll('img[loading="lazy"]').forEach((img) => imageObserver.observe(img))
+      }
+      
+      // Mobile: Load immediately, Desktop: Defer
+      if (isMobile) {
+        setupImageLoading() // Immediate on mobile - no delay
+      } else if ('requestIdleCallback' in window) {
+        requestIdleCallback(setupImageLoading, { timeout: 500 })
+      } else {
+        setTimeout(setupImageLoading, 100)
       }
     }
     
