@@ -149,6 +149,7 @@ export default function SuccessStoriesCarousel() {
     velocity: 0,
     animationPaused: false,
     isSwipe: false, // Track if this is a swipe gesture
+    rafId: null, // RAF ID for smooth updates
   })
   
   // Use fewer card duplicates on mobile for better performance
@@ -259,6 +260,7 @@ export default function SuccessStoriesCarousel() {
             // Pause auto-scroll animation only when confirmed swipe
             carousel.style.animationPlayState = 'paused'
             swipeState.animationPaused = true
+            carousel.style.willChange = 'transform'
           }
         }
         
@@ -266,8 +268,16 @@ export default function SuccessStoriesCarousel() {
         if (swipeState.isSwipe) {
           const delta = currentX - swipeState.startX
           const newTranslateX = (swipeState.currentTranslateX || 0) + delta
-          carousel.style.animation = 'none'
-          carousel.style.transform = `translateX(${newTranslateX}px)`
+          
+          // Use requestAnimationFrame for smooth updates
+          if (!swipeState.rafId) {
+            swipeState.rafId = requestAnimationFrame(() => {
+              carousel.style.animation = 'none'
+              carousel.style.transform = `translate3d(${newTranslateX}px, 0, 0)`
+              swipeState.rafId = null
+            })
+          }
+          
           e.preventDefault() // Prevent scrolling when swiping
         }
         
@@ -276,6 +286,12 @@ export default function SuccessStoriesCarousel() {
       
       const handleTouchEnd = (e) => {
         if (!swipeState.isDragging) return
+        
+        // Cancel any pending RAF
+        if (swipeState.rafId) {
+          cancelAnimationFrame(swipeState.rafId)
+          swipeState.rafId = null
+        }
         
         const wasSwiping = swipeState.isSwipe
         swipeState.isDragging = false
@@ -288,8 +304,7 @@ export default function SuccessStoriesCarousel() {
           const velocity = deltaX / deltaTime // pixels per ms
           
           // Calculate momentum
-          const momentum = velocity * 200 // Adjust multiplier for desired momentum
-          const finalDeltaX = deltaX + momentum
+          const momentum = velocity * 150 // Reduced for smoother feel
           
           // Get current position
           const currentTransform = window.getComputedStyle(carousel).transform
@@ -299,37 +314,42 @@ export default function SuccessStoriesCarousel() {
             currentTranslateX = matrix.m41
           }
           
-          // Apply momentum with smooth animation
-          const newTranslateX = currentTranslateX
-          carousel.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-          carousel.style.transform = `translateX(${newTranslateX}px)`
+          // Apply momentum with smooth animation using translate3d for GPU acceleration
+          const newTranslateX = currentTranslateX + momentum
+          carousel.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+          carousel.style.transform = `translate3d(${newTranslateX}px, 0, 0)`
           
           // Resume auto-scroll after momentum animation
           setTimeout(() => {
             carousel.style.transition = ''
+            carousel.style.willChange = 'auto'
             const animationDuration = isMobileDevice ? 70 : 100
             carousel.style.animation = `portfolio-scroll-mobile ${animationDuration}s linear infinite`
             carousel.style.animationPlayState = 'running'
             
-            // Calculate current position as percentage
-            const rect = carousel.getBoundingClientRect()
+            // Calculate current position as percentage for seamless resume
             const progress = Math.abs(newTranslateX) / (halfWidth || 1)
             carousel.style.animationDelay = `-${progress * animationDuration}s`
-          }, 500)
+          }, 400)
         } else {
           // If not swiping, just resume animation immediately
           if (swipeState.animationPaused) {
             carousel.style.animationPlayState = 'running'
             swipeState.animationPaused = false
+            carousel.style.willChange = 'auto'
           }
         }
       }
       
-      // Use passive: false for touchmove to allow preventDefault
+      // Optimize touch event listeners for smooth performance
       carousel.addEventListener('touchstart', handleTouchStart, { passive: true })
-      carousel.addEventListener('touchmove', handleTouchMove, { passive: false })
+      carousel.addEventListener('touchmove', handleTouchMove, { passive: false }) // passive: false to allow preventDefault
       carousel.addEventListener('touchend', handleTouchEnd, { passive: true })
       carousel.addEventListener('touchcancel', handleTouchEnd, { passive: true })
+      
+      // Ensure GPU acceleration
+      carousel.style.transform = carousel.style.transform || 'translateZ(0)'
+      carousel.style.WebkitTransform = carousel.style.WebkitTransform || 'translateZ(0)'
       
       carousel._swipeTouchStart = handleTouchStart
       carousel._swipeTouchMove = handleTouchMove

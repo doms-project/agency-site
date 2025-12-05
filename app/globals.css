@@ -858,6 +858,9 @@ a[href],
   transform-style: preserve-3d;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  /* GPU acceleration for smooth touch */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 .card-content:hover {
@@ -871,6 +874,16 @@ a[href],
 
 .card-content:hover img {
   transform: scale(1.05);
+}
+
+/* Smooth swipe on carousel */
+.portfolio-carousel-scroll,
+#portfolio .flex.gap-3 {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: auto;
+  /* Enable momentum scrolling */
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Mobile: Enable 3D tilt on touch */
