@@ -845,19 +845,22 @@ a[href],
 /* Mobile: Enable 3D tilt on touch */
 @media (max-width: 768px) {
   .card-content {
-    transform: perspective(800px) rotateX(0deg) rotateY(0deg) translateY(0) translateZ(0) scale(1);
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0) translateZ(0) scale(1);
     transform-style: preserve-3d !important;
     backface-visibility: hidden !important;
     -webkit-backface-visibility: hidden !important;
-    will-change: transform, box-shadow;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    will-change: auto;
   }
   
-  /* Touch/tap animation for mobile - reduced lift */
+  /* DISABLE CSS :active state - JavaScript handles all touch interactions */
+  /* This prevents card from lifting during swipe */
   .card-content:active {
-    transform: perspective(800px) rotateX(5deg) rotateY(-5deg) translateY(-8px) translateZ(20px) scale(1.03) !important;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7) !important;
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    /* No transform on active - let JavaScript handle it */
+  }
+  
+  /* Add class for when tilt is enabled */
+  .card-content.tilt-enabled {
+    will-change: transform, box-shadow;
   }
 }
 

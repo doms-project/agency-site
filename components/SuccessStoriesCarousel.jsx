@@ -341,44 +341,72 @@ export default function SuccessStoriesCarousel() {
         if (!card) return
         
         // Touch events for mobile 3D tilt (only when not swiping carousel)
+        let tiltStartX = 0
+        let tiltStartY = 0
+        let hasMoved = false
+        
         const handleCardTouchStart = (e) => {
           if (!isMobileDevice) return
           card._tiltActive = true
           card._tiltStartTime = Date.now()
+          tiltStartX = e.touches[0].clientX
+          tiltStartY = e.touches[0].clientY
+          hasMoved = false
         }
         
         const handleCardTouchMove = (e) => {
           if (!isMobileDevice || !card._tiltActive) return
           
-          // Disable tilt if carousel is being swiped
-          if (swipeStateRef.current.isSwipe) {
+          const currentX = e.touches[0].clientX
+          const currentY = e.touches[0].clientY
+          const moveX = Math.abs(currentX - tiltStartX)
+          const moveY = Math.abs(currentY - tiltStartY)
+          
+          // If moved more than 5px in any direction, it's likely a swipe
+          if (moveX > 5 || moveY > 5) {
+            hasMoved = true
+          }
+          
+          // Disable tilt if carousel is being swiped OR if significant movement detected
+          if (swipeStateRef.current.isSwipe || hasMoved) {
             card._tiltActive = false
-            card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) translateY(0) translateZ(0) scale(1)'
-            card.style.boxShadow = '0 8px 16px rgba(0, 0, 0, 0.4)'
+            card.classList.remove('tilt-enabled')
+            // Reset to flat immediately when swiping
+            card.style.transition = 'none'
+            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0) translateZ(0) scale(1)'
+            card.style.boxShadow = ''
             return
           }
           
-          const touch = e.touches[0]
-          const rect = card.getBoundingClientRect()
-          const x = touch.clientX - rect.left
-          const y = touch.clientY - rect.top
-          const centerX = rect.width / 2
-          const centerY = rect.height / 2
-          const rotateX = ((y - centerY) / centerY) * 10 // Reduced from 15 to 10 degrees
-          const rotateY = ((centerX - x) / centerX) * 10 // Reduced from 15 to 10 degrees
-          
-          // Much reduced lift on mobile - only slight elevation
-          card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px) translateZ(15px) scale(1.02)`
-          card.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.6)'
+          // Only apply tilt if staying relatively still (< 5px movement)
+          if (!hasMoved) {
+            card.classList.add('tilt-enabled')
+            const touch = e.touches[0]
+            const rect = card.getBoundingClientRect()
+            const x = touch.clientX - rect.left
+            const y = touch.clientY - rect.top
+            const centerX = rect.width / 2
+            const centerY = rect.height / 2
+            const rotateX = ((y - centerY) / centerY) * 8 // Reduced to 8 degrees
+            const rotateY = ((centerX - x) / centerX) * 8
+            
+            // Very minimal lift - almost flat
+            card.style.transition = 'none'
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-3px) translateZ(10px) scale(1.01)`
+            card.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.5)'
+          }
         }
         
         const handleCardTouchEnd = () => {
           if (!isMobileDevice) return
           card._tiltActive = false
+          hasMoved = false
+          card.classList.remove('tilt-enabled')
+          
           // Smooth return to normal state
           card.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease'
-          card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) translateY(0) translateZ(0) scale(1)'
-          card.style.boxShadow = '0 8px 16px rgba(0, 0, 0, 0.4)'
+          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0) translateZ(0) scale(1)'
+          card.style.boxShadow = ''
           
           // Remove transition after animation completes
           setTimeout(() => {
