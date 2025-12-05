@@ -1074,7 +1074,7 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
               loading="eager"
               decoding="sync"
               fetchPriority="high"
-              style={{ willChange: 'transform', minHeight: '80px', minWidth: '80px' }}
+              style={{ willChange: 'transform', height: '80px', width: 'auto', minHeight: '80px', minWidth: '80px' }}
             />
           </a>
           <button 
@@ -1212,7 +1212,7 @@ function MobileDrawer({ onClose }) {
               loading="eager"
               decoding="sync"
               fetchPriority="high"
-              style={{ willChange: 'transform', minHeight: '80px', minWidth: '80px' }}
+              style={{ willChange: 'transform', height: '80px', width: 'auto', minHeight: '80px', minWidth: '80px' }}
             />
           </a>
           <button 
