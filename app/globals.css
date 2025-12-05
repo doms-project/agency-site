@@ -1169,7 +1169,7 @@ section#cpg-brands .service-card,
   right: 0;
   bottom: 0;
   transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
-  overflow: hidden;
+  overflow: hidden; /* Desktop: hidden for clean look */
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -1572,12 +1572,54 @@ section#cpg-brands .service-card,
     transform: none !important;
     backface-visibility: visible !important;
     animation: none !important;
+    overflow: visible !important; /* Allow content to show - don't cut off text */
   }
   
-  /* Ensure spacer maintains card height */
+  /* Ensure spacer maintains card height - increased for more content */
   .flip-card-spacer {
-    min-height: 500px !important;
+    min-height: 600px !important; /* Increased from 500px to accommodate more text */
     height: auto !important;
+  }
+  
+  /* Ensure flip card container expands with content */
+  .flip-card {
+    min-height: 600px !important; /* Match spacer height */
+  }
+  
+  /* Allow text wrapping on mobile */
+  .flip-card-front *,
+  .flip-card-back * {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+  
+  /* Reduce text size on flip cards for mobile to fit more content */
+  .flip-card-front h3,
+  .flip-card-back h3 {
+    font-size: 1.25rem !important; /* text-xl instead of text-2xl or text-3xl */
+    line-height: 1.4 !important;
+  }
+  
+  .flip-card-front .text-6xl,
+  .flip-card-back .text-6xl {
+    font-size: 2.5rem !important; /* Reduce from 3.75rem */
+  }
+  
+  .flip-card-front p,
+  .flip-card-back p {
+    font-size: 0.875rem !important; /* text-sm */
+    line-height: 1.5 !important;
+  }
+  
+  /* Make feature list items more compact on mobile */
+  .flip-card-front .space-y-4,
+  .flip-card-back .space-y-4 {
+    gap: 0.5rem !important; /* Reduce spacing between items */
+  }
+  
+  /* Ensure all content is visible */
+  .flip-card-inner {
+    overflow: visible !important;
   }
   
   /* Disable featured plan pulse animation on mobile */
