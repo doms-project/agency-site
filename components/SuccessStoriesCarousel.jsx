@@ -529,10 +529,10 @@ export default function SuccessStoriesCarousel() {
             }
             // Kill GSAP animations
             gsap.killTweensOf(card)
-            // Kill hover timelines
-            const cardImage = imageRefs.get(card)
-            if (cardImage) {
-              gsap.killTweensOf(cardImage)
+            // Kill hover timelines on card images
+            const cardImages = card.querySelectorAll('img')
+            if (cardImages) {
+              cardImages.forEach((img) => gsap.killTweensOf(img))
             }
           }
         })
@@ -548,7 +548,6 @@ export default function SuccessStoriesCarousel() {
           }
           gsap.killTweensOf(target)
         })
-        cardStates.clear()
       }
     }).catch((error) => {
       if (process.env.NODE_ENV === 'development') {
