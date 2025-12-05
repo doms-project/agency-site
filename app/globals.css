@@ -853,10 +853,10 @@ a[href],
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
   
-  /* Touch/tap animation for mobile */
+  /* Touch/tap animation for mobile - reduced lift */
   .card-content:active {
-    transform: perspective(800px) rotateX(10deg) rotateY(-10deg) translateY(-25px) translateZ(80px) scale(1.08) !important;
-    box-shadow: 0 35px 70px rgba(0, 0, 0, 0.8) !important;
+    transform: perspective(800px) rotateX(5deg) rotateY(-5deg) translateY(-8px) translateZ(20px) scale(1.03) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7) !important;
     transition: transform 0.1s ease, box-shadow 0.1s ease;
   }
 }

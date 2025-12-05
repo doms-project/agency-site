@@ -364,18 +364,26 @@ export default function SuccessStoriesCarousel() {
           const y = touch.clientY - rect.top
           const centerX = rect.width / 2
           const centerY = rect.height / 2
-          const rotateX = ((y - centerY) / centerY) * 15 // Max 15 degrees
-          const rotateY = ((centerX - x) / centerX) * 15 // Max 15 degrees
+          const rotateX = ((y - centerY) / centerY) * 10 // Reduced from 15 to 10 degrees
+          const rotateY = ((centerX - x) / centerX) * 10 // Reduced from 15 to 10 degrees
           
-          card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-20px) translateZ(60px) scale(1.05)`
-          card.style.boxShadow = '0 30px 60px rgba(0, 0, 0, 0.8)'
+          // Much reduced lift on mobile - only slight elevation
+          card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px) translateZ(15px) scale(1.02)`
+          card.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.6)'
         }
         
         const handleCardTouchEnd = () => {
           if (!isMobileDevice) return
           card._tiltActive = false
+          // Smooth return to normal state
+          card.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease'
           card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) translateY(0) translateZ(0) scale(1)'
           card.style.boxShadow = '0 8px 16px rgba(0, 0, 0, 0.4)'
+          
+          // Remove transition after animation completes
+          setTimeout(() => {
+            card.style.transition = ''
+          }, 300)
         }
         
         if (isMobileDevice) {
@@ -578,15 +586,15 @@ export default function SuccessStoriesCarousel() {
                     }}
                     className="card-content relative rounded-3xl overflow-hidden cursor-pointer group"
                     style={{ 
-                      willChange: 'transform, box-shadow', 
+                      willChange: isMobile ? 'auto' : 'transform, box-shadow',
                       transformStyle: 'preserve-3d',
                       backfaceVisibility: 'hidden',
                       WebkitBackfaceVisibility: 'hidden',
                       boxShadow: isMobile ? '0 8px 16px rgba(0, 0, 0, 0.4)' : '0 10px 20px 5px rgba(0, 0, 0, 0.4)',
                       maxHeight: isMobile ? '360px' : 'none',
-                      touchAction: isMobile ? 'pan-y' : 'auto',
-                      transform: 'perspective(800px) rotateX(0deg) rotateY(0deg) translateY(0) translateZ(0) scale(1)',
-                      transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                      touchAction: 'pan-x pan-y', // Allow both horizontal and vertical panning
+                      transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0) translateZ(0) scale(1)',
+                      WebkitTransform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0) translateZ(0) scale(1)',
                     }}
                   >
                     {/* Background Layer - Image or Solid Color */}
