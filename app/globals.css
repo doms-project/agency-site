@@ -184,6 +184,8 @@ header.lg\:hidden {
   padding-top: 0 !important;
   top: 0 !important;
   margin-bottom: 0 !important;
+  height: auto !important; /* Allow navbar to expand for larger logo */
+  min-height: 96px !important; /* Ensure enough height for 80px logo + padding */
 }
 
 /* Add spacing below mobile header */
@@ -692,6 +694,35 @@ a[href],
   /* will-change causes repaints and flickering */
   transform-style: preserve-3d;
   transform-origin: center center;
+}
+
+/* CRITICAL: Enforce logo sizes - override any legacy CSS */
+/* Desktop logo in navbar */
+@media (min-width: 1024px) {
+  nav .logo,
+  nav img.logo,
+  nav img.tilt-logo {
+    height: 96px !important;
+    width: auto !important;
+    min-height: 96px !important;
+    min-width: 96px !important;
+    max-height: 96px !important;
+  }
+}
+
+/* Mobile logo in navbar - MUST match h-20 (80px) */
+@media (max-width: 1023px) {
+  nav .logo,
+  nav img.logo,
+  nav img.tilt-logo,
+  header img.logo,
+  header img.tilt-logo {
+    height: 80px !important;
+    width: auto !important;
+    min-height: 80px !important;
+    min-width: 80px !important;
+    max-height: 80px !important;
+  }
 }
 
 /* Service cards and other interactive elements */
