@@ -230,13 +230,13 @@ export default function SharedNavbar() {
             <img 
               src="/images/logo-hq.png" 
               alt="Yo Marketing" 
-              width={72}
-              height={72}
-              className="logo tilt-logo h-18 w-auto transition-transform duration-300 group-hover:scale-105 drop-shadow-lg" 
+              width={80}
+              height={80}
+              className="logo tilt-logo h-20 w-auto transition-transform duration-300 group-hover:scale-105 drop-shadow-lg" 
               loading="eager"
               decoding="async"
               fetchPriority="high"
-              style={{ minHeight: '72px', minWidth: '72px' }}
+              style={{ height: '80px !important', width: 'auto', minHeight: '80px', minWidth: '80px' }}
             />
           </a>
           <button 
