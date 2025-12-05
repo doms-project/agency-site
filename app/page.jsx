@@ -1069,8 +1069,16 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
       role="region"
       aria-label="Homepage Hero Banner"
     >
-      {/* Load background on all devices but with suspense fallback */}
-      <Suspense fallback={<div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black" />}>
+      {/* Load background on all devices but with improved fallback */}
+      <Suspense fallback={
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black">
+          {/* Loading skeleton - animated gradient that looks similar */}
+          <div className="absolute inset-0 opacity-40">
+            <div className="absolute inset-0 bg-gradient-radial from-[#7BB9E8]/20 via-[#4A90E2]/10 to-transparent animate-pulse" 
+                 style={{ animationDuration: '3s' }} />
+          </div>
+        </div>
+      }>
         <BlackHoleBackground />
       </Suspense>
       <header 

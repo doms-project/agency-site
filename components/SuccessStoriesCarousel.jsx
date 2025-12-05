@@ -215,7 +215,7 @@ export default function SuccessStoriesCarousel() {
     carousel.style.animation = `portfolio-scroll-mobile ${animationDuration}s linear infinite`
     carousel.style.animationDuration = `${animationDuration}s`
       carousel.style.willChange = 'transform'
-      
+
       // Force slow animation on mobile with inline style
       if (isMobileDevice) {
         carousel.setAttribute('data-mobile-carousel', 'true')
@@ -633,7 +633,7 @@ export default function SuccessStoriesCarousel() {
                     }}
                     className="card-content relative rounded-3xl overflow-hidden cursor-pointer group"
                     style={{ 
-                      willChange: isMobile ? 'auto' : 'transform, box-shadow',
+                      willChange: isMobile ? 'auto' : 'transform, box-shadow', 
                       transformStyle: 'preserve-3d',
                       backfaceVisibility: 'hidden',
                       WebkitBackfaceVisibility: 'hidden',
