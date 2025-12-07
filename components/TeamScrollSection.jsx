@@ -266,8 +266,8 @@ export default function TeamScrollSection() {
 
             {/* Mobile/Tablet Layout - Horizontal with smaller elements */}
             <div className="lg:hidden w-full px-2">
-              <div className="flex flex-row items-start gap-3 sm:gap-4">
-                {/* Photo - Smaller on mobile */}
+              <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
+                {/* Photo - Bigger on mobile but stacked so text fits */}
                 <div 
                   className="relative flex-shrink-0"
                   key={`mobile-photo-${currentMember.id}`}
@@ -276,7 +276,7 @@ export default function TeamScrollSection() {
                   }}
                 >
                   <div className="absolute -inset-2 bg-gradient-to-r from-[#7BB9E8]/20 to-[#5fa6db]/20 rounded-xl blur-lg opacity-50" />
-                  <div className="relative w-[100px] sm:w-[120px] md:w-[140px] aspect-[3/4] rounded-lg overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent">
+                  <div className="relative w-[140px] sm:w-[160px] md:w-[180px] max-w-[48vw] aspect-[3/4] rounded-lg overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent">
                     <img
                       src={currentMember.image}
                       alt={`${currentMember.name} - ${currentMember.role}`}
@@ -326,9 +326,9 @@ export default function TeamScrollSection() {
                       {currentMember.role}
                     </p>
 
-                    {/* Bio - Condensed on mobile */}
+                    {/* Bio - Slightly less clamped on mobile; full on sm+ */}
                     <p 
-                      className="text-white/70 leading-snug text-xs sm:text-sm line-clamp-4"
+                      className="text-white/70 leading-snug text-xs sm:text-sm line-clamp-6 sm:line-clamp-none"
                       style={{ fontFamily: "'DM Sans', sans-serif" }}
                     >
                       {currentMember.bio[0]}
