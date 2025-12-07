@@ -6,7 +6,8 @@ import { clientSectionHtml } from '@/sections/clientSectionHtml'
 import { cpgSectionHtml } from '@/sections/cpgSectionHtml'
 import { partnerSectionHtml } from '@/sections/partnerSectionHtml'
 import { servicesSectionHtml } from '@/sections/servicesSectionHtml'
-import { aboutSectionHtml } from '@/sections/aboutSectionHtml'
+// aboutSectionHtml replaced with TeamScrollSection component
+const TeamScrollSection = lazy(() => import('@/components/TeamScrollSection'))
 import { approachSectionHtml } from '@/sections/approachSectionHtml'
 import { contactSectionHtml } from '@/sections/contactSectionHtml'
 import { pricingSectionHtml } from '@/sections/pricingSectionHtml'
@@ -161,6 +162,7 @@ const connectLinks = [
 
 export default function Page() {
   const [navSolid, setNavSolid] = useState(false)
+  const [hideDesktopNav, setHideDesktopNav] = useState(false)
   const [isMobileNavOpen, setMobileNavOpen] = useState(false)
   const [isSurveyModalOpen, setIsSurveyModalOpen] = useState(false)
   const [isWebsiteRevisionModalOpen, setIsWebsiteRevisionModalOpen] = useState(false)
@@ -336,12 +338,25 @@ export default function Page() {
 
   useEffect(() => {
     // Simple scroll handler - navbar is always fixed, just updates nav background state
+    // Also hides desktop navbar when past services section
     let ticking = false
     
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           setNavSolid(window.scrollY > 40)
+          
+          // Hide desktop navbar when past testimonials section (desktop only)
+          if (window.innerWidth >= 1024) {
+            const testimonialsSection = document.getElementById('testimonials')
+            if (testimonialsSection) {
+              const testimonialsTop = testimonialsSection.getBoundingClientRect().top
+              // Hide navbar when testimonials section reaches near top of viewport
+              // Account for scroll-margin-top (120px) + navbar height (~80px)
+              setHideDesktopNav(testimonialsTop <= 150)
+            }
+          }
+          
           ticking = false
         })
         ticking = true
@@ -716,7 +731,7 @@ export default function Page() {
 
   return (
     <div className="bg-black text-white min-h-screen" style={{ margin: 0, padding: 0 }}>
-      <DesktopNav navSolid={navSolid} />
+      <DesktopNav navSolid={navSolid} hideNav={hideDesktopNav} />
       {/* Mobile Header - Fixed at page level for proper sticky behavior */}
       <header 
         className={`lg:hidden w-full border-b border-white/10 shadow-lg transition-all duration-300 ${(isSurveyModalOpen || isWebsiteRevisionModalOpen || isGetStartedModalOpen) ? 'hidden' : ''}`} 
@@ -820,9 +835,9 @@ export default function Page() {
         </ErrorBoundary>
         
         <ErrorBoundary>
-          <div className="scroll-fade-in section-overlap bg-gradient-to-b from-black via-[#0a0a0a] to-black" style={{ paddingTop: '0', paddingBottom: '0', marginTop: '-1rem' }}>
-            <RawHtml html={aboutSectionHtml} />
-          </div>
+          <Suspense fallback={<div className="min-h-screen bg-[#0a0a0a]" />}>
+            <TeamScrollSection />
+          </Suspense>
         </ErrorBoundary>
         
         <ErrorBoundary>
@@ -863,7 +878,7 @@ export default function Page() {
   )
 }
 
-function DesktopNav({ navSolid }) {
+function DesktopNav({ navSolid, hideNav }) {
   // Use ref for the nav element
   const navRef = useRef(null)
   
@@ -873,7 +888,7 @@ function DesktopNav({ navSolid }) {
       <div className="hidden lg:block h-20" aria-hidden="true" />
       <nav
         ref={navRef}
-        className={`hidden lg:block w-full transition-all duration-300 ease-out border-b border-white/10`}
+        className={`hidden lg:block w-full border-b border-white/10`}
         style={{ 
           position: 'fixed', 
           top: 0,
@@ -881,8 +896,12 @@ function DesktopNav({ navSolid }) {
           right: 0,
           width: '100%',
           zIndex: 10000,
-          transform: 'none',
-          WebkitTransform: 'none',
+          // Smooth fade + slide animation
+          transform: hideNav ? 'translateY(-100%)' : 'translateY(0)',
+          opacity: hideNav ? 0 : 1,
+          filter: hideNav ? 'blur(8px)' : 'blur(0px)',
+          transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), filter 0.4s ease-out',
+          pointerEvents: hideNav ? 'none' : 'auto',
           // Very transparent glassy effect - shows particles through
           background: 'linear-gradient(to bottom, rgba(255,255,255,0.03), rgba(255,255,255,0.01))',
           WebkitBackdropFilter: 'blur(16px) saturate(180%)',

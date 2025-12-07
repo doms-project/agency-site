@@ -16,6 +16,20 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Hide scrollbar for pricing carousel */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
+
+/* Pricing carousel card styles */
+.pricing-carousel-card {
+  min-height: 580px;
+}
+
 /* Remove default margins and padding - Fix Vercel gap */
 * {
   margin: 0;
@@ -1176,7 +1190,7 @@ section#cpg-brands .service-card,
 
 /* Flip Card Styles */
 .flip-card {
-  perspective: 1000px;
+  /* Same hover behavior as Growth Plan - no 3D */
   width: 100%;
   min-height: auto;
   position: relative;
@@ -1186,6 +1200,15 @@ section#cpg-brands .service-card,
   align-items: flex-start;
   margin-top: -1rem !important; /* Match Growth Plan's -mt-4 */
   box-sizing: border-box;
+  /* Override [class*="card"] 3D settings to match Growth Plan */
+  transform-style: flat !important;
+}
+
+.flip-card-front,
+.flip-card-back,
+.flip-card-inner {
+  /* Override [class*="card"] 3D settings */
+  transform-style: flat !important;
 }
 
 .flip-card.pricing-card {
@@ -1203,8 +1226,7 @@ section#cpg-brands .service-card,
   position: relative;
   width: 100%;
   text-align: start;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
+  transition: none; /* No transition - parent handles all hover animation */
   height: 100%;
   min-height: 100%;
 }
@@ -1239,7 +1261,7 @@ section#cpg-brands .service-card,
   left: 0;
   right: 0;
   bottom: 0;
-  transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+  transition: none; /* No transition - parent handles all hover animation */
   overflow: hidden; /* Desktop: hidden for clean look */
   box-sizing: border-box;
   display: flex;
@@ -1388,73 +1410,12 @@ section#cpg-brands .service-card,
 }
 
 /* Pricing Section Enhancements */
-.pricing-card {
-  transform-style: preserve-3d;
-  will-change: transform;
-}
+/* Pricing cards use Tailwind hover classes (hover:-translate-y-2) */
 
-.pricing-card:hover {
-  transform: translateY(-0.5rem) scale(1.02);
-}
+/* Flip card now uses same Tailwind transitions as Growth Plan */
 
-/* Smart hover effects for flip card - allow visual feedback while preserving flip functionality */
-.flip-card.pricing-card {
-  transition: transform 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
-}
+/* Flip card inner elements - no extra transitions, use Tailwind classes */
 
-.flip-card.pricing-card:hover,
-.flip-card:hover {
-  /* Add subtle lift and scale on hover */
-  transform: translateY(-0.5rem) scale(1.05) !important;
-  border-color: rgba(123, 185, 232, 0.8) !important;
-  box-shadow: 0 25px 50px -12px rgba(123, 185, 232, 0.5) !important;
-}
-
-@media (min-width: 1024px) {
-  .flip-card.pricing-card:hover,
-  .flip-card:hover {
-    transform: translateY(-0.5rem) scale(1.1) !important;
-  }
-}
-
-/* No transforms needed - using fade only */
-.flip-card:hover .flip-card-inner,
-.flip-card:hover .flip-card-front,
-.flip-card:hover .flip-card-back {
-  /* No transform overrides needed */
-}
-
-/* Allow glow effects and opacity transitions inside flip card */
-.flip-card .absolute.inset-0,
-.flip-card-front .absolute.inset-0,
-.flip-card-back .absolute.inset-0 {
-  transition: opacity 0.5s ease !important;
-}
-
-/* Allow button hover effects inside flip card */
-.flip-card a,
-.flip-card-front a,
-.flip-card-back a {
-  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
-}
-
-.flip-card a:hover,
-.flip-card-front a:hover,
-.flip-card-back a:hover {
-  transform: scale(1.05) !important;
-  box-shadow: 0 10px 25px -5px rgba(123, 185, 232, 0.6) !important;
-}
-
-/* Allow price scaling on hover */
-.flip-card .text-6xl,
-.flip-card .text-5xl {
-  transition: transform 0.3s ease !important;
-}
-
-.flip-card:hover .text-6xl,
-.flip-card:hover .text-5xl {
-  transform: scale(1.1) !important;
-}
 
 .featured-plan {
   animation: subtle-pulse 3s ease-in-out infinite;
@@ -1525,11 +1486,7 @@ section#cpg-brands .service-card,
   overflow: hidden;
 }
 
-.flip-card a::before,
-.flip-card-front a::before,
-.flip-card-back a::before {
-  display: none !important;
-}
+/* Flip card buttons now use same ripple effect as Growth Plan */
 
 .pricing-card a::before {
   content: '';
@@ -1603,9 +1560,7 @@ section#cpg-brands .service-card,
     height: auto !important; /* Allow cards to expand with content */
   }
   
-  .pricing-card:hover {
-    transform: translateY(-0.25rem) scale(1.01);
-  }
+  /* Mobile pricing cards use Tailwind hover classes */
 
   .featured-plan {
     scale: 1 !important;
@@ -1637,17 +1592,11 @@ section#cpg-brands .service-card,
     animation: none !important;
   }
   
-  .flip-card:hover,
-  .flip-card.pricing-card:hover {
-    transform: none !important;
-    animation: none !important;
-    box-shadow: 0 10px 20px -5px rgba(123, 185, 232, 0.3) !important;
-  }
+  /* Flip card mobile hover - use same as Growth Plan (Tailwind classes handle it) */
   
   /* Fix flip card inner for mobile */
   .flip-card-inner {
     transform-style: flat !important;
-    transition: opacity 0.3s ease !important;
     will-change: auto !important;
     height: auto !important;
     min-height: auto !important;
@@ -1669,7 +1618,6 @@ section#cpg-brands .service-card,
     height: auto !important;
     min-height: 500px !important;
     max-height: none !important;
-    transition: opacity 0.3s ease !important;
     will-change: auto !important;
     transform: none !important;
     backface-visibility: visible !important;
