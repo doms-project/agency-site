@@ -1,21 +1,13 @@
 /* eslint-disable @next/next/no-css-tags */
-import { Inter, Poppins } from 'next/font/google'
+import { DM_Sans } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
 import WebVitals from './components/WebVitals'
 
-const inter = Inter({
+const dmSans = DM_Sans({
   subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-  preload: true,
-  adjustFontFallback: true,
-})
-
-const poppins = Poppins({
-  subsets: ['latin'],
-  variable: '--font-poppins',
-  weight: ['500', '600'],
+  variable: '--font-dm-sans',
+  weight: ['400', '500', '600', '700'],
   display: 'swap',
   preload: true,
   adjustFontFallback: true,
@@ -68,7 +60,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${inter.variable} ${poppins.variable}`} suppressHydrationWarning>
+    <html lang="en" className={dmSans.variable} suppressHydrationWarning>
       <head>
         {/* Three.js is loaded via esm.sh CDN which handles module resolution */}
         {/* Preload ONLY critical resources - Logo and GoHighLevel badge only */}
@@ -96,7 +88,7 @@ export default function RootLayout({ children }) {
         {/* Performance hints */}
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
       </head>
-      <body className={inter.className} suppressHydrationWarning style={{ margin: 0, padding: 0 }}>
+      <body className={dmSans.className} suppressHydrationWarning style={{ margin: 0, padding: 0 }}>
         <Script
           id="structured-data"
           type="application/ld+json"
@@ -112,4 +104,5 @@ export default function RootLayout({ children }) {
     </html>
   )
 }
+
 

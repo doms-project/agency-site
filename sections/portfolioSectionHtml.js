@@ -4,7 +4,7 @@ export const portfolioSectionHtml = String.raw`<section class="py-20 bg-gradient
    <span class="block uppercase tracking-[0.25em] text-xs text-neutral-400 font-semibold mb-4">
     Success Stories
    </span>
-   <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4" style="font-family:Inter, Satoshi, sans-serif">
+   <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4" style="font-family:'DM Sans', sans-serif">
     Ready to Scale?
     <span class="text-[#7BB9E8]">
      We've Done It Before
@@ -22,7 +22,7 @@ export const portfolioSectionHtml = String.raw`<section class="py-20 bg-gradient
      <a class="w-[240px] sm:w-[280px] md:w-[320px] lg:w-[400px] flex-shrink-0 block" href="https://savannahbee.com/" rel="noopener noreferrer" style="pointer-events:auto;position:relative;z-index:1" target="_blank">
       <div class="card-content relative rounded-3xl overflow-hidden shadow-2xl cursor-pointer" style="will-change:transform, opacity">
        <div class="aspect-[2/3] w-full">
-        <img alt="Savannah Bee Wholesale" class="w-full h-full object-cover" src="/images/4.png"/>
+        <img alt="Savannah Bee Wholesale" class="w-full h-full object-cover" src="/images/4.webp" loading="lazy"/>
        </div>
        <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-8 z-20">
         <div class="bg-white text-gray-900 px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm shadow-lg border border-white/30 inline-flex items-center gap-2 z-30" style="font-family:Poppins, sans-serif">
@@ -40,7 +40,7 @@ export const portfolioSectionHtml = String.raw`<section class="py-20 bg-gradient
      <a class="w-[240px] sm:w-[280px] md:w-[320px] lg:w-[400px] flex-shrink-0 block" href="https://charliescrunch.com" rel="noopener noreferrer" style="transform-style:preserve-3d;pointer-events:auto;position:relative;z-index:1" target="_blank">
       <div class="card-content relative rounded-3xl overflow-hidden shadow-2xl cursor-pointer" style="will-change:transform, opacity">
        <div class="aspect-[2/3] w-full">
-        <img alt="Charlie's Crunch" class="w-full h-full object-cover" src="/images/3.png"/>
+        <img alt="Charlie's Crunch" class="w-full h-full object-cover" src="/images/3.webp" loading="lazy"/>
        </div>
        <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-8 z-20">
         <div class="bg-white text-gray-900 px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm shadow-lg border border-white/30 inline-flex items-center gap-2 z-30" style="font-family:Poppins, sans-serif">
@@ -58,7 +58,7 @@ export const portfolioSectionHtml = String.raw`<section class="py-20 bg-gradient
      <a class="w-[240px] sm:w-[280px] md:w-[320px] lg:w-[400px] flex-shrink-0 block" href="https://gumofgods.us/" rel="noopener noreferrer" style="transform-style:preserve-3d;pointer-events:auto;position:relative;z-index:1" target="_blank">
       <div class="card-content relative rounded-3xl overflow-hidden shadow-2xl cursor-pointer" style="will-change:transform, opacity">
        <div class="aspect-[2/3] w-full">
-        <img alt="Gum of Gods" class="w-full h-full object-cover" src="/images/gods.png"/>
+        <img alt="Gum of Gods" class="w-full h-full object-cover" src="/images/gods.webp" loading="lazy"/>
        </div>
        <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-8 z-20">
         <div class="bg-white text-gray-900 px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm shadow-lg border border-white/30 inline-flex items-center gap-2 z-30" style="font-family:Poppins, sans-serif">
@@ -76,7 +76,7 @@ export const portfolioSectionHtml = String.raw`<section class="py-20 bg-gradient
      <a class="w-[240px] sm:w-[280px] md:w-[320px] lg:w-[400px] flex-shrink-0 block" href="https://savannahbee.com" rel="noopener noreferrer" style="transform-style:preserve-3d;pointer-events:auto;position:relative;z-index:1" target="_blank">
       <div class="card-content relative rounded-3xl overflow-hidden shadow-2xl cursor-pointer" style="will-change:transform, opacity">
        <div class="aspect-[2/3] w-full">
-        <img alt="Savannah Bee Company" class="w-full h-full object-cover" src="/images/$50k.png"/>
+        <img alt="Savannah Bee Company" class="w-full h-full object-cover" src="/images/50k.webp" loading="lazy"/>
        </div>
        <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-8 z-20">
         <div class="bg-white text-gray-900 px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm shadow-lg border border-white/30 inline-flex items-center gap-2 z-30" style="font-family:Poppins, sans-serif">
@@ -94,7 +94,7 @@ export const portfolioSectionHtml = String.raw`<section class="py-20 bg-gradient
      <a class="w-[240px] sm:w-[280px] md:w-[320px] lg:w-[400px] flex-shrink-0 block" href="https://nonnasoliveoil.com/" rel="noopener noreferrer" style="transform-style:preserve-3d;pointer-events:auto;position:relative;z-index:1" target="_blank">
       <div class="card-content relative rounded-3xl overflow-hidden shadow-2xl cursor-pointer" style="will-change:transform, opacity">
        <div class="aspect-[2/3] w-full">
-        <img alt="Nonna's Olive Oil" class="w-full h-full object-cover" src="/images/oil.png"/>
+        <img alt="Nonna's Olive Oil" class="w-full h-full object-cover" src="/images/oil.webp" loading="lazy"/ loading="lazy">
        </div>
        <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-8 z-20">
         <div class="bg-white text-gray-900 px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm shadow-lg border border-white/30 inline-flex items-center gap-2 z-30" style="font-family:Poppins, sans-serif">
@@ -112,7 +112,7 @@ export const portfolioSectionHtml = String.raw`<section class="py-20 bg-gradient
      <a class="w-[240px] sm:w-[280px] md:w-[320px] lg:w-[400px] flex-shrink-0 block" href="https://savannahbee.com/" rel="noopener noreferrer" style="pointer-events:auto;position:relative;z-index:1" target="_blank">
       <div class="card-content relative rounded-3xl overflow-hidden shadow-2xl cursor-pointer" style="will-change:transform, opacity">
        <div class="aspect-[2/3] w-full">
-        <img alt="Savannah Bee Wholesale" class="w-full h-full object-cover" src="/images/4.png"/>
+        <img alt="Savannah Bee Wholesale" class="w-full h-full object-cover" src="/images/4.webp" loading="lazy"/>
        </div>
        <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-8 z-20">
         <div class="bg-white text-gray-900 px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm shadow-lg border border-white/30 inline-flex items-center gap-2 z-30" style="font-family:Poppins, sans-serif">
@@ -130,7 +130,7 @@ export const portfolioSectionHtml = String.raw`<section class="py-20 bg-gradient
      <a class="w-[240px] sm:w-[280px] md:w-[320px] lg:w-[400px] flex-shrink-0 block" href="https://charliescrunch.com" rel="noopener noreferrer" style="transform-style:preserve-3d;pointer-events:auto;position:relative;z-index:1" target="_blank">
       <div class="card-content relative rounded-3xl overflow-hidden shadow-2xl cursor-pointer" style="will-change:transform, opacity">
        <div class="aspect-[2/3] w-full">
-        <img alt="Charlie's Crunch" class="w-full h-full object-cover" src="/images/3.png"/>
+        <img alt="Charlie's Crunch" class="w-full h-full object-cover" src="/images/3.webp" loading="lazy"/>
        </div>
        <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-8 z-20">
         <div class="bg-white text-gray-900 px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm shadow-lg border border-white/30 inline-flex items-center gap-2 z-30" style="font-family:Poppins, sans-serif">
@@ -148,7 +148,7 @@ export const portfolioSectionHtml = String.raw`<section class="py-20 bg-gradient
      <a class="w-[240px] sm:w-[280px] md:w-[320px] lg:w-[400px] flex-shrink-0 block" href="https://gumofgods.us/" rel="noopener noreferrer" style="transform-style:preserve-3d;pointer-events:auto;position:relative;z-index:1" target="_blank">
       <div class="card-content relative rounded-3xl overflow-hidden shadow-2xl cursor-pointer" style="will-change:transform, opacity">
        <div class="aspect-[2/3] w-full">
-        <img alt="Gum of Gods" class="w-full h-full object-cover" src="/images/gods.png"/>
+        <img alt="Gum of Gods" class="w-full h-full object-cover" src="/images/gods.webp" loading="lazy"/>
        </div>
        <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-8 z-20">
         <div class="bg-white text-gray-900 px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm shadow-lg border border-white/30 inline-flex items-center gap-2 z-30" style="font-family:Poppins, sans-serif">
@@ -166,7 +166,7 @@ export const portfolioSectionHtml = String.raw`<section class="py-20 bg-gradient
      <a class="w-[240px] sm:w-[280px] md:w-[320px] lg:w-[400px] flex-shrink-0 block" href="https://savannahbee.com" rel="noopener noreferrer" style="transform-style:preserve-3d;pointer-events:auto;position:relative;z-index:1" target="_blank">
       <div class="card-content relative rounded-3xl overflow-hidden shadow-2xl cursor-pointer" style="will-change:transform, opacity">
        <div class="aspect-[2/3] w-full">
-        <img alt="Savannah Bee Company" class="w-full h-full object-cover" src="/images/$50k.png"/>
+        <img alt="Savannah Bee Company" class="w-full h-full object-cover" src="/images/50k.webp" loading="lazy"/>
        </div>
        <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-8 z-20">
         <div class="bg-white text-gray-900 px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm shadow-lg border border-white/30 inline-flex items-center gap-2 z-30" style="font-family:Poppins, sans-serif">
@@ -184,7 +184,7 @@ export const portfolioSectionHtml = String.raw`<section class="py-20 bg-gradient
      <a class="w-[240px] sm:w-[280px] md:w-[320px] lg:w-[400px] flex-shrink-0 block" href="https://nonnasoliveoil.com/" rel="noopener noreferrer" style="transform-style:preserve-3d;pointer-events:auto;position:relative;z-index:1" target="_blank">
       <div class="card-content relative rounded-3xl overflow-hidden shadow-2xl cursor-pointer" style="will-change:transform, opacity">
        <div class="aspect-[2/3] w-full">
-        <img alt="Nonna's Olive Oil" class="w-full h-full object-cover" src="/images/oil.png"/>
+        <img alt="Nonna's Olive Oil" class="w-full h-full object-cover" src="/images/oil.webp" loading="lazy"/ loading="lazy">
        </div>
        <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-8 z-20">
         <div class="bg-white text-gray-900 px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm shadow-lg border border-white/30 inline-flex items-center gap-2 z-30" style="font-family:Poppins, sans-serif">
@@ -202,7 +202,7 @@ export const portfolioSectionHtml = String.raw`<section class="py-20 bg-gradient
      <a class="w-[240px] sm:w-[280px] md:w-[320px] lg:w-[400px] flex-shrink-0 block" href="https://savannahbee.com/" rel="noopener noreferrer" style="pointer-events:auto;position:relative;z-index:1" target="_blank">
       <div class="card-content relative rounded-3xl overflow-hidden shadow-2xl cursor-pointer" style="will-change:transform, opacity">
        <div class="aspect-[2/3] w-full">
-        <img alt="Savannah Bee Wholesale" class="w-full h-full object-cover" src="/images/4.png"/>
+        <img alt="Savannah Bee Wholesale" class="w-full h-full object-cover" src="/images/4.webp" loading="lazy"/>
        </div>
        <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-8 z-20">
         <div class="bg-white text-gray-900 px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm shadow-lg border border-white/30 inline-flex items-center gap-2 z-30" style="font-family:Poppins, sans-serif">
@@ -220,7 +220,7 @@ export const portfolioSectionHtml = String.raw`<section class="py-20 bg-gradient
      <a class="w-[240px] sm:w-[280px] md:w-[320px] lg:w-[400px] flex-shrink-0 block" href="https://charliescrunch.com" rel="noopener noreferrer" style="transform-style:preserve-3d;pointer-events:auto;position:relative;z-index:1" target="_blank">
       <div class="card-content relative rounded-3xl overflow-hidden shadow-2xl cursor-pointer" style="will-change:transform, opacity">
        <div class="aspect-[2/3] w-full">
-        <img alt="Charlie's Crunch" class="w-full h-full object-cover" src="/images/3.png"/>
+        <img alt="Charlie's Crunch" class="w-full h-full object-cover" src="/images/3.webp" loading="lazy"/>
        </div>
        <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-8 z-20">
         <div class="bg-white text-gray-900 px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm shadow-lg border border-white/30 inline-flex items-center gap-2 z-30" style="font-family:Poppins, sans-serif">
@@ -238,7 +238,7 @@ export const portfolioSectionHtml = String.raw`<section class="py-20 bg-gradient
      <a class="w-[240px] sm:w-[280px] md:w-[320px] lg:w-[400px] flex-shrink-0 block" href="https://gumofgods.us/" rel="noopener noreferrer" style="transform-style:preserve-3d;pointer-events:auto;position:relative;z-index:1" target="_blank">
       <div class="card-content relative rounded-3xl overflow-hidden shadow-2xl cursor-pointer" style="will-change:transform, opacity">
        <div class="aspect-[2/3] w-full">
-        <img alt="Gum of Gods" class="w-full h-full object-cover" src="/images/gods.png"/>
+        <img alt="Gum of Gods" class="w-full h-full object-cover" src="/images/gods.webp" loading="lazy"/>
        </div>
        <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-8 z-20">
         <div class="bg-white text-gray-900 px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm shadow-lg border border-white/30 inline-flex items-center gap-2 z-30" style="font-family:Poppins, sans-serif">
@@ -256,7 +256,7 @@ export const portfolioSectionHtml = String.raw`<section class="py-20 bg-gradient
      <a class="w-[240px] sm:w-[280px] md:w-[320px] lg:w-[400px] flex-shrink-0 block" href="https://savannahbee.com" rel="noopener noreferrer" style="transform-style:preserve-3d;pointer-events:auto;position:relative;z-index:1" target="_blank">
       <div class="card-content relative rounded-3xl overflow-hidden shadow-2xl cursor-pointer" style="will-change:transform, opacity">
        <div class="aspect-[2/3] w-full">
-        <img alt="Savannah Bee Company" class="w-full h-full object-cover" src="/images/$50k.png"/>
+        <img alt="Savannah Bee Company" class="w-full h-full object-cover" src="/images/50k.webp" loading="lazy"/>
        </div>
        <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-8 z-20">
         <div class="bg-white text-gray-900 px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm shadow-lg border border-white/30 inline-flex items-center gap-2 z-30" style="font-family:Poppins, sans-serif">
@@ -274,7 +274,7 @@ export const portfolioSectionHtml = String.raw`<section class="py-20 bg-gradient
      <a class="w-[240px] sm:w-[280px] md:w-[320px] lg:w-[400px] flex-shrink-0 block" href="https://nonnasoliveoil.com/" rel="noopener noreferrer" style="transform-style:preserve-3d;pointer-events:auto;position:relative;z-index:1" target="_blank">
       <div class="card-content relative rounded-3xl overflow-hidden shadow-2xl cursor-pointer" style="will-change:transform, opacity">
        <div class="aspect-[2/3] w-full">
-        <img alt="Nonna's Olive Oil" class="w-full h-full object-cover" src="/images/oil.png"/>
+        <img alt="Nonna's Olive Oil" class="w-full h-full object-cover" src="/images/oil.webp" loading="lazy"/ loading="lazy">
        </div>
        <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-8 z-20">
         <div class="bg-white text-gray-900 px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm shadow-lg border border-white/30 inline-flex items-center gap-2 z-30" style="font-family:Poppins, sans-serif">
@@ -292,7 +292,7 @@ export const portfolioSectionHtml = String.raw`<section class="py-20 bg-gradient
      <a class="w-[240px] sm:w-[280px] md:w-[320px] lg:w-[400px] flex-shrink-0 block" href="https://savannahbee.com/" rel="noopener noreferrer" style="pointer-events:auto;position:relative;z-index:1" target="_blank">
       <div class="card-content relative rounded-3xl overflow-hidden shadow-2xl cursor-pointer" style="will-change:transform, opacity">
        <div class="aspect-[2/3] w-full">
-        <img alt="Savannah Bee Wholesale" class="w-full h-full object-cover" src="/images/4.png"/>
+        <img alt="Savannah Bee Wholesale" class="w-full h-full object-cover" src="/images/4.webp" loading="lazy"/>
        </div>
        <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-8 z-20">
         <div class="bg-white text-gray-900 px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm shadow-lg border border-white/30 inline-flex items-center gap-2 z-30" style="font-family:Poppins, sans-serif">
@@ -310,7 +310,7 @@ export const portfolioSectionHtml = String.raw`<section class="py-20 bg-gradient
      <a class="w-[240px] sm:w-[280px] md:w-[320px] lg:w-[400px] flex-shrink-0 block" href="https://charliescrunch.com" rel="noopener noreferrer" style="transform-style:preserve-3d;pointer-events:auto;position:relative;z-index:1" target="_blank">
       <div class="card-content relative rounded-3xl overflow-hidden shadow-2xl cursor-pointer" style="will-change:transform, opacity">
        <div class="aspect-[2/3] w-full">
-        <img alt="Charlie's Crunch" class="w-full h-full object-cover" src="/images/3.png"/>
+        <img alt="Charlie's Crunch" class="w-full h-full object-cover" src="/images/3.webp" loading="lazy"/>
        </div>
        <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-8 z-20">
         <div class="bg-white text-gray-900 px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm shadow-lg border border-white/30 inline-flex items-center gap-2 z-30" style="font-family:Poppins, sans-serif">
@@ -328,7 +328,7 @@ export const portfolioSectionHtml = String.raw`<section class="py-20 bg-gradient
      <a class="w-[240px] sm:w-[280px] md:w-[320px] lg:w-[400px] flex-shrink-0 block" href="https://gumofgods.us/" rel="noopener noreferrer" style="transform-style:preserve-3d;pointer-events:auto;position:relative;z-index:1" target="_blank">
       <div class="card-content relative rounded-3xl overflow-hidden shadow-2xl cursor-pointer" style="will-change:transform, opacity">
        <div class="aspect-[2/3] w-full">
-        <img alt="Gum of Gods" class="w-full h-full object-cover" src="/images/gods.png"/>
+        <img alt="Gum of Gods" class="w-full h-full object-cover" src="/images/gods.webp" loading="lazy"/>
        </div>
        <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-8 z-20">
         <div class="bg-white text-gray-900 px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm shadow-lg border border-white/30 inline-flex items-center gap-2 z-30" style="font-family:Poppins, sans-serif">
@@ -346,7 +346,7 @@ export const portfolioSectionHtml = String.raw`<section class="py-20 bg-gradient
      <a class="w-[240px] sm:w-[280px] md:w-[320px] lg:w-[400px] flex-shrink-0 block" href="https://savannahbee.com" rel="noopener noreferrer" style="transform-style:preserve-3d;pointer-events:auto;position:relative;z-index:1" target="_blank">
       <div class="card-content relative rounded-3xl overflow-hidden shadow-2xl cursor-pointer" style="will-change:transform, opacity">
        <div class="aspect-[2/3] w-full">
-        <img alt="Savannah Bee Company" class="w-full h-full object-cover" src="/images/$50k.png"/>
+        <img alt="Savannah Bee Company" class="w-full h-full object-cover" src="/images/50k.webp" loading="lazy"/>
        </div>
        <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-8 z-20">
         <div class="bg-white text-gray-900 px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm shadow-lg border border-white/30 inline-flex items-center gap-2 z-30" style="font-family:Poppins, sans-serif">
@@ -364,7 +364,7 @@ export const portfolioSectionHtml = String.raw`<section class="py-20 bg-gradient
      <a class="w-[240px] sm:w-[280px] md:w-[320px] lg:w-[400px] flex-shrink-0 block" href="https://nonnasoliveoil.com/" rel="noopener noreferrer" style="transform-style:preserve-3d;pointer-events:auto;position:relative;z-index:1" target="_blank">
       <div class="card-content relative rounded-3xl overflow-hidden shadow-2xl cursor-pointer" style="will-change:transform, opacity">
        <div class="aspect-[2/3] w-full">
-        <img alt="Nonna's Olive Oil" class="w-full h-full object-cover" src="/images/oil.png"/>
+        <img alt="Nonna's Olive Oil" class="w-full h-full object-cover" src="/images/oil.webp" loading="lazy"/ loading="lazy">
        </div>
        <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-center pb-8 z-20">
         <div class="bg-white text-gray-900 px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm shadow-lg border border-white/30 inline-flex items-center gap-2 z-30" style="font-family:Poppins, sans-serif">
@@ -384,7 +384,7 @@ export const portfolioSectionHtml = String.raw`<section class="py-20 bg-gradient
   </div>
   <div class="text-center mt-20">
    <div class="max-w-4xl mx-auto">
-    <h3 class="text-3xl lg:text-5xl font-bold text-white mb-4 leading-tight" style="font-family:Inter, Satoshi, sans-serif">
+    <h3 class="text-3xl lg:text-5xl font-bold text-white mb-4 leading-tight" style="font-family:'DM Sans', sans-serif">
      Ready to be our
      <span class="text-[#7BB9E8]">
       next success story?
@@ -401,3 +401,4 @@ export const portfolioSectionHtml = String.raw`<section class="py-20 bg-gradient
  </div>
 </section>
 `;
+

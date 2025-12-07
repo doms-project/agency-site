@@ -93,7 +93,7 @@ function SEOServicesModal({ isOpen, onClose }) {
         {/* Header */}
         <div className="sticky top-0 bg-[#0a0a0a]/95 backdrop-blur-sm border-b border-white/10 px-6 py-4 flex items-center justify-between z-10">
           <div>
-            <h2 className="text-2xl font-bold text-white" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+            <h2 className="text-2xl font-bold text-white" style={{ fontFamily: 'DM Sans, sans-serif' }}>
               SEO Services Request
             </h2>
             <p className="text-sm text-white/60 mt-1">
@@ -316,4 +316,5 @@ function SEOServicesModal({ isOpen, onClose }) {
 
 // Memoize component to prevent unnecessary re-renders
 export default memo(SEOServicesModal)
+
 

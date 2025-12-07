@@ -14,16 +14,16 @@ export default function TermsOfServicePage() {
       <section className="w-full py-20 md:py-24 px-4 md:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="mb-12 text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight" style={{ fontFamily: 'DM Sans, sans-serif' }}>
               Terms of Service
             </h1>
-            <p className="text-xl md:text-2xl text-white/70 max-w-2xl mx-auto" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+            <p className="text-xl md:text-2xl text-white/70 max-w-2xl mx-auto" style={{ fontFamily: 'DM Sans, sans-serif' }}>
               Please read these terms carefully before using our services.
             </p>
             <div className="w-24 h-1 bg-[#7BB9E8] rounded-full mx-auto mt-6"></div>
           </div>
 
-          <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-white/10 space-y-8" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+          <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-white/10 space-y-8" style={{ fontFamily: 'DM Sans, sans-serif' }}>
             <div>
               <p className="text-white/60 mb-4">
                 <strong>Last Updated:</strong> {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
@@ -229,4 +229,5 @@ export default function TermsOfServicePage() {
     </div>
   )
 }
+
 

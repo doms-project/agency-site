@@ -52,12 +52,12 @@ export const aboutSectionHtml = String.raw`
  </div>
  <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 relative z-10 overflow-visible">
   <div class="text-center mb-16 pt-12">
-   <h2 class="text-5xl md:text-6xl font-bold text-white mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent" style="font-family:Inter, Satoshi, sans-serif">
+   <h2 class="text-5xl md:text-6xl font-bold text-white mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent" style="font-family:'DM Sans', sans-serif">
     Meet the Team
    </h2>
    <div class="w-20 h-1 rounded-full bg-gradient-to-r from-[#7BB9E8] to-[#5fa6db] mb-6 mt-2 mx-auto shadow-lg shadow-[#7BB9E8]/50">
    </div>
-   <p class="text-xl text-white/70 max-w-2xl mx-auto" style="font-family:Inter, Satoshi, sans-serif">
+   <p class="text-xl text-white/70 max-w-2xl mx-auto" style="font-family:'DM Sans', sans-serif">
     Helping businesses grow, scale, and win online.
    </p>
   </div>
@@ -72,7 +72,7 @@ export const aboutSectionHtml = String.raw`
       <div class="absolute -inset-3 bg-gradient-to-r from-[#7BB9E8]/20 to-[#5fa6db]/20 rounded-2xl blur-xl opacity-50 group-hover:opacity-100 transition-opacity duration-500">
       </div>
       <div class="relative w-full max-w-[180px] sm:max-w-[200px] md:max-w-[240px] lg:max-w-[255px] mx-auto aspect-[3/4] rounded-xl overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent">
-       <img alt="Dom - Founder & CEO" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="/images/dom photo.jpeg"/>
+       <img alt="Dom - Founder & CEO" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="/images/dom photo.jpeg" loading="lazy"/>
       </div>
      </div>
     </div>
@@ -82,7 +82,7 @@ export const aboutSectionHtml = String.raw`
      <!-- Header -->
      <div class="mb-2">
       <div class="flex items-center gap-2 mb-0.5">
-       <h3 class="text-2xl md:text-3xl font-bold text-white leading-tight" style="font-family:Inter, Satoshi, sans-serif">
+       <h3 class="text-2xl md:text-3xl font-bold text-white leading-tight" style="font-family:'DM Sans', sans-serif">
         Hey, I&apos;m Dom.
        </h3>
        <!-- Instagram Link -->
@@ -100,13 +100,13 @@ export const aboutSectionHtml = String.raw`
      
      <!-- Bio -->
      <div class="space-y-1.5">
-      <p class="text-white/80 leading-snug text-sm md:text-base" style="font-family:Inter, Satoshi, sans-serif">
+      <p class="text-white/80 leading-snug text-sm md:text-base" style="font-family:'DM Sans', sans-serif">
        I&apos;m the founder of Yo Marketing, and over the years I&apos;ve worked hands-on with 100+ small businesses, dozens of creators, and several political campaigns. I&apos;ve been part of some incredible marketing wins—and have personally led campaigns that doubled client revenue through strategic ads and smart digital execution.
       </p>
-      <p class="text-white/80 leading-snug text-sm md:text-base" style="font-family:Inter, Satoshi, sans-serif">
+      <p class="text-white/80 leading-snug text-sm md:text-base" style="font-family:'DM Sans', sans-serif">
        I have a genuine passion for helping businesses grow and sharing the strategies that actually work. At Yo Marketing, we don&apos;t just create beautiful websites—we build websites that convert, backed by systems that keep your business growing on autopilot.
       </p>
-      <p class="text-white/80 leading-snug text-sm md:text-base" style="font-family:Inter, Satoshi, sans-serif">
+      <p class="text-white/80 leading-snug text-sm md:text-base" style="font-family:'DM Sans', sans-serif">
        From automation setups and CRM optimization to high-impact advertising campaigns, we help you get more customers, streamline operations, and scale effectively. Our mission is simple: help you grow, then help you handle the growth.
       </p>
      </div>
@@ -136,10 +136,10 @@ export const aboutSectionHtml = String.raw`
        </div>
       </div>
       <div>
-       <p class="text-white font-semibold text-base" style="font-family:Inter, Satoshi, sans-serif">
+       <p class="text-white font-semibold text-base" style="font-family:'DM Sans', sans-serif">
         Evan
        </p>
-       <p class="text-white/60 text-sm" style="font-family:Inter, Satoshi, sans-serif">
+       <p class="text-white/60 text-sm" style="font-family:'DM Sans', sans-serif">
         Sales Manager
        </p>
       </div>
@@ -159,10 +159,10 @@ export const aboutSectionHtml = String.raw`
        </div>
       </div>
       <div>
-       <p class="text-white font-semibold text-base" style="font-family:Inter, Satoshi, sans-serif">
+       <p class="text-white font-semibold text-base" style="font-family:'DM Sans', sans-serif">
         Andrianne
        </p>
-       <p class="text-white/60 text-sm" style="font-family:Inter, Satoshi, sans-serif">
+       <p class="text-white/60 text-sm" style="font-family:'DM Sans', sans-serif">
         Lead Generation
        </p>
       </div>
@@ -182,10 +182,10 @@ export const aboutSectionHtml = String.raw`
       </div>
      </div>
      <div>
-      <p class="text-white font-semibold text-base" style="font-family:Inter, Satoshi, sans-serif">
+      <p class="text-white font-semibold text-base" style="font-family:'DM Sans', sans-serif">
        Muzaib
       </p>
-      <p class="text-white/60 text-sm" style="font-family:Inter, Satoshi, sans-serif">
+      <p class="text-white/60 text-sm" style="font-family:'DM Sans', sans-serif">
        Front End Dev
       </p>
      </div>
@@ -198,17 +198,17 @@ export const aboutSectionHtml = String.raw`
       </div>
       <div class="relative w-40 h-44 md:w-44 md:h-48 lg:w-48 lg:h-52 rounded-xl overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent">
        <img
-        src="/images/musaraf.png"
+        src="/images/musaraf.webp"
         alt="Musaraf - Backend Dev"
         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
        />
       </div>
      </div>
      <div>
-      <p class="text-white font-semibold text-base" style="font-family:Inter, Satoshi, sans-serif">
+      <p class="text-white font-semibold text-base" style="font-family:'DM Sans', sans-serif">
        Musaraf
       </p>
-      <p class="text-white/60 text-sm" style="font-family:Inter, Satoshi, sans-serif">
+      <p class="text-white/60 text-sm" style="font-family:'DM Sans', sans-serif">
        Backend Dev
       </p>
      </div>
@@ -240,14 +240,14 @@ export const aboutSectionHtml = String.raw`
        <div class="absolute -inset-3 bg-gradient-to-r from-[#7BB9E8]/20 to-[#5fa6db]/20 rounded-2xl blur-xl opacity-50 group-hover:opacity-100 transition-opacity duration-500">
        </div>
        <div class="relative w-40 sm:w-48 md:w-56 lg:w-64 xl:w-72 max-w-[160px] sm:max-w-[192px] md:max-w-[224px] lg:max-w-[255px] aspect-[3/4] rounded-xl overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent mx-auto">
-        <img alt="Cristina - Designer" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="/images/cristina.jpeg?v=2" loading="eager" fetchpriority="high" decoding="async"/>
+        <img alt="Cristina - Designer" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="/images/cristina.jpeg?v=2" decoding="async" loading="lazy"/>
        </div>
       </div>
      </div>
      
      <!-- Message Bubble - Name Section (Second on Mobile, with tail pointing up) -->
      <div class="cristina-chat-bubble bg-white/10 backdrop-blur-md rounded-2xl p-3 sm:p-4 md:p-5 border border-white/20 shadow-lg shadow-[#7BB9E8]/20 mt-0 md:-mt-10 lg:-mt-12 overflow-visible text-center md:text-left max-w-[200px] sm:max-w-xs md:max-w-none order-2 md:order-1">
-      <h3 class="text-sm sm:text-base md:text-2xl font-bold text-white mb-0.5 sm:mb-1" style="font-family:Inter, Satoshi, sans-serif">
+      <h3 class="text-sm sm:text-base md:text-2xl font-bold text-white mb-0.5 sm:mb-1" style="font-family:'DM Sans', sans-serif">
        Hey, I&apos;m Cristina.
       </h3>
       <p class="text-[#7BB9E8] font-semibold text-[10px] sm:text-xs md:text-base">
@@ -261,3 +261,4 @@ export const aboutSectionHtml = String.raw`
  </div>
 </section>
 `;
+

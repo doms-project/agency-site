@@ -106,15 +106,15 @@ function TestimonialsCarousel() {
               <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
               </svg>
-              <span className="text-white font-bold text-lg" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+              <span className="text-white font-bold text-lg" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                 Google Reviews
               </span>
             </div>
           </div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 md:mb-6 leading-tight px-4" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 md:mb-6 leading-tight px-4" style={{ fontFamily: 'DM Sans, sans-serif' }}>
             Trusted by Businesses
           </h1>
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 px-4" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 px-4" style={{ fontFamily: 'DM Sans, sans-serif' }}>
             Rated <span className="text-[#7BB9E8]">4.9/5</span> by business owners
           </h2>
           <div className="flex justify-center mb-4">
@@ -126,7 +126,7 @@ function TestimonialsCarousel() {
               ))}
             </div>
           </div>
-          <p className="text-white/70 text-lg" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+          <p className="text-white/70 text-lg" style={{ fontFamily: 'DM Sans, sans-serif' }}>
             Trusted Reviews
           </p>
           </div>
@@ -149,7 +149,7 @@ function TestimonialsCarousel() {
                       </svg>
                     ))}
                   </div>
-                  <span className="text-sm font-medium text-[#7BB9E8]" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+                  <span className="text-sm font-medium text-[#7BB9E8]" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                     Verified Review
                   </span>
                 </div>
@@ -157,18 +157,18 @@ function TestimonialsCarousel() {
                   <svg className="w-4 h-4 text-[#7BB9E8]" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                   </svg>
-                  <span className="text-xs text-gray-500 uppercase tracking-wide font-medium" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+                  <span className="text-xs text-gray-500 uppercase tracking-wide font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                     Google
                   </span>
                 </div>
               </div>
-              <h4 className="text-lg md:text-2xl font-bold text-gray-900 mb-4 leading-tight" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+              <h4 className="text-lg md:text-2xl font-bold text-gray-900 mb-4 leading-tight" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                 {currentReview.quote}
               </h4>
-              <blockquote className="text-gray-700 text-sm md:text-lg leading-relaxed mb-4 flex-grow overflow-y-auto" style={{ fontFamily: 'Inter, Satoshi, sans-serif', maxHeight: '200px' }}>
+              <blockquote className="text-gray-700 text-sm md:text-lg leading-relaxed mb-4 flex-grow overflow-y-auto" style={{ fontFamily: 'DM Sans, sans-serif', maxHeight: '200px' }}>
                 {currentReview.text}
               </blockquote>
-              <div className="text-sm text-gray-500 mb-4" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+              <div className="text-sm text-gray-500 mb-4" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                 {currentReview.date}
               </div>
               <div className="flex items-center justify-between pt-4 border-t border-gray-200 mt-auto">
@@ -178,14 +178,14 @@ function TestimonialsCarousel() {
                   </div>
                   <div>
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="font-bold text-gray-900 text-base md:text-lg" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+                      <span className="font-bold text-gray-900 text-base md:text-lg" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                         {currentReview.author}
                       </span>
                       <svg className="w-4 h-4 text-[#7BB9E8]" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     </div>
-                    <div className="text-gray-600 text-sm" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+                    <div className="text-gray-600 text-sm" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                       {currentReview.role}, {currentReview.company}
                     </div>
                   </div>
@@ -227,10 +227,10 @@ function TestimonialsCarousel() {
         </div>
 
         <div className="text-center mt-20 pt-12 border-t border-white/10 pb-8">
-          <h3 className="text-2xl md:text-3xl font-bold text-white mb-4" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+          <h3 className="text-2xl md:text-3xl font-bold text-white mb-4" style={{ fontFamily: 'DM Sans, sans-serif' }}>
             Ready to grow your business?
           </h3>
-          <p className="text-white/70 text-lg mb-8 max-w-lg mx-auto" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+          <p className="text-white/70 text-lg mb-8 max-w-lg mx-auto" style={{ fontFamily: 'DM Sans, sans-serif' }}>
             Join other businesses getting real results with our marketing services
           </p>
           <button
@@ -242,7 +242,7 @@ function TestimonialsCarousel() {
               }
             }}
             className="inline-flex items-center justify-center gap-2 md:gap-3 px-8 py-4 md:px-10 md:py-5 rounded-xl bg-gradient-to-r from-[#7BB9E8] to-[#5fa6d6] hover:from-[#5fa6d6] hover:to-[#7BB9E8] text-black text-lg md:text-xl font-bold shadow-xl hover:shadow-2xl hover:shadow-[#7BB9E8]/25 transform hover:scale-105 active:scale-95 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-[#7BB9E8]/30 w-full sm:w-auto max-w-md sm:max-w-none touch-manipulation"
-            style={{ fontFamily: 'Inter, Satoshi, sans-serif', minHeight: '56px' }}
+            style={{ fontFamily: 'DM Sans, sans-serif', minHeight: '56px' }}
           >
             Get Started Today
             <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -257,4 +257,5 @@ function TestimonialsCarousel() {
 
 // Memoize component to prevent unnecessary re-renders
 export default memo(TestimonialsCarousel)
+
 

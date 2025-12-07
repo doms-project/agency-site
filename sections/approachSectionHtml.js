@@ -10,14 +10,14 @@ export const approachSectionHtml = String.raw`<section class="w-full py-20 md:py
    <span class="inline-block px-4 py-2 mt-8 md:mt-12 bg-[#7BB9E8]/10 border border-[#7BB9E8]/20 rounded-full uppercase tracking-[0.25em] text-xs text-[#7BB9E8] font-semibold mb-6">
     Our Approach
    </span>
-   <h2 class="text-5xl md:text-6xl font-bold text-white mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-300 bg-clip-text text-transparent" style="font-family:Inter, Satoshi, sans-serif">
+   <h2 class="text-5xl md:text-6xl font-bold text-white mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-300 bg-clip-text text-transparent" style="font-family:'DM Sans', sans-serif">
     <span class="md:block">
      Your Partners. Your Digital Success Story.
     </span>
    </h2>
    <div class="w-20 h-1 rounded-full bg-gradient-to-r from-[#7BB9E8] to-[#5fa6db] mb-8 mt-4 mx-auto shadow-lg shadow-[#7BB9E8]/50">
    </div>
-   <p class="text-xl text-white/70 mb-8 max-w-3xl mx-auto" style="font-family:Inter, Satoshi, sans-serif">
+   <p class="text-xl text-white/70 mb-8 max-w-3xl mx-auto" style="font-family:'DM Sans', sans-serif">
     We&apos;re not just another agency — we&apos;re digital marketing experts who understand businesses because we&apos;re building ours, too.
    </p>
   </div>
@@ -32,10 +32,10 @@ export const approachSectionHtml = String.raw`<section class="w-full py-20 md:py
        </path>
       </svg>
      </div>
-     <h3 class="text-xl font-bold text-white mb-4" style="font-family:Inter, Satoshi, sans-serif">
+     <h3 class="text-xl font-bold text-white mb-4" style="font-family:'DM Sans', sans-serif">
       Market Expertise
      </h3>
-     <p class="text-white/80 leading-relaxed" style="font-family:Inter, Satoshi, sans-serif">
+     <p class="text-white/80 leading-relaxed" style="font-family:'DM Sans', sans-serif">
       We understand the market, the community, and the challenges businesses face every day.
      </p>
     </div>
@@ -46,10 +46,10 @@ export const approachSectionHtml = String.raw`<section class="w-full py-20 md:py
        </path>
       </svg>
      </div>
-     <h3 class="text-xl font-bold text-white mb-4" style="font-family:Inter, Satoshi, sans-serif">
+     <h3 class="text-xl font-bold text-white mb-4" style="font-family:'DM Sans', sans-serif">
       Strategy & Results
      </h3>
-     <p class="text-white/80 leading-relaxed" style="font-family:Inter, Satoshi, sans-serif">
+     <p class="text-white/80 leading-relaxed" style="font-family:'DM Sans', sans-serif">
       Every project is guided by strategy, creativity, and measurable results — whether that&apos;s getting you noticed on Google, converting visitors into customers, or building a website that reflects your brand&apos;s professionalism.
      </p>
     </div>
@@ -60,10 +60,10 @@ export const approachSectionHtml = String.raw`<section class="w-full py-20 md:py
        </path>
       </svg>
      </div>
-     <h3 class="text-xl font-bold text-white mb-4" style="font-family:Inter, Satoshi, sans-serif">
+     <h3 class="text-xl font-bold text-white mb-4" style="font-family:'DM Sans', sans-serif">
       Lasting Relationships
      </h3>
-     <p class="text-white/80 leading-relaxed" style="font-family:Inter, Satoshi, sans-serif">
+     <p class="text-white/80 leading-relaxed" style="font-family:'DM Sans', sans-serif">
       We believe in transparency, collaboration, and building lasting relationships with the people behind the businesses we serve. Your success isn&apos;t just our goal — it&apos;s our mission.
      </p>
     </div>
@@ -71,7 +71,7 @@ export const approachSectionHtml = String.raw`<section class="w-full py-20 md:py
   </div>
   <div class="text-center">
    <div class="relative inline-block">
-    <button type="button" onclick="document.getElementById('services')?.scrollIntoView({behavior:'smooth',block:'start'})" class="relative inline-flex items-center gap-2 md:gap-3 px-6 py-3 md:px-10 md:py-5 bg-gradient-to-r from-[#7BB9E8] to-[#5fa6db] text-white rounded-2xl font-semibold text-base md:text-lg hover:from-[#5fa6db] hover:to-[#7BB9E8] transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#7BB9E8]/25 group w-full sm:w-auto" style="font-family:Inter, Satoshi, sans-serif">
+    <button type="button" onclick="document.getElementById('services')?.scrollIntoView({behavior:'smooth',block:'start'})" class="relative inline-flex items-center gap-2 md:gap-3 px-6 py-3 md:px-10 md:py-5 bg-gradient-to-r from-[#7BB9E8] to-[#5fa6db] text-white rounded-2xl font-semibold text-base md:text-lg hover:from-[#5fa6db] hover:to-[#7BB9E8] transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#7BB9E8]/25 group w-full sm:w-auto" style="font-family:'DM Sans', sans-serif">
      Get Started Today
      <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewbox="0 0 24 24">
       <path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -85,3 +85,4 @@ export const approachSectionHtml = String.raw`<section class="w-full py-20 md:py
  </div>
 </section>
 `;
+

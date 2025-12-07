@@ -7,9 +7,9 @@ export default function WebVitals() {
   useEffect(() => {
     // Report Web Vitals to console in development, or to analytics in production
     const reportMetric = (metric) => {
-      // In development, log to console
+      // In development, log to console with proper formatting
       if (process.env.NODE_ENV === 'development') {
-        console.log(metric)
+        console.log(`[Web Vitals] ${metric.name}: ${metric.value.toFixed(2)}ms (Rating: ${metric.rating})`)
       }
       
       // In production, you can send to analytics service
@@ -34,4 +34,5 @@ export default function WebVitals() {
 
   return null // This component doesn't render anything
 }
+
 

@@ -1,12 +1,12 @@
 export const servicesSectionHtml = String.raw`<section class="w-full py-12 sm:py-16 md:py-20 font-sans bg-gradient-to-br from-[#0a0a0a] via-[#10151a] to-[#181c22] min-h-[80vh] flex flex-col justify-center" id="services" style="scroll-margin-top:120px;overflow-x:hidden;overflow-y:visible;">
  <div class="w-full mx-auto px-4 sm:px-5 md:px-6 lg:px-8 xl:px-12" style="max-width:100%;box-sizing:border-box;overflow-x:visible;overflow-y:visible;">
   <div class="mb-8 sm:mb-10 md:mb-20 mt-8 sm:mt-12 transform transition-all duration-1000 ease-out reveal-on-scroll">
-   <h2 class="text-2xl sm:text-[2.1rem] xs:text-3xl md:text-4xl lg:text-6xl font-extrabold leading-tight text-white mb-4 sm:mb-6 max-w-4xl mx-auto text-center opacity-0 translate-y-8 px-2" style="font-family:Inter, Satoshi, sans-serif;line-height:1.1">
+   <h2 class="text-2xl sm:text-[2.1rem] xs:text-3xl md:text-4xl lg:text-6xl font-extrabold leading-tight text-white mb-4 sm:mb-6 max-w-4xl mx-auto text-center opacity-0 translate-y-8 px-2" style="font-family:'DM Sans', sans-serif;line-height:1.1">
     Services
    </h2>
    <div class="w-16 sm:w-20 h-1 rounded-full bg-[#7BB9E8] mb-4 sm:mb-6 mt-2 mx-auto opacity-0 translate-y-8">
    </div>
-   <p class="text-sm sm:text-base xs:text-lg text-white/80 max-w-3xl mx-auto text-center font-light opacity-0 translate-y-8 px-4" style="font-family:Inter, Satoshi, sans-serif">
+   <p class="text-sm sm:text-base xs:text-lg text-white/80 max-w-3xl mx-auto text-center font-light opacity-0 translate-y-8 px-4" style="font-family:'DM Sans', sans-serif">
     Empowering businesses with expert website design, optimized Google profiles, SEO, and targeted lead generation solutions.
    </p>
   </div>
@@ -25,10 +25,10 @@ export const servicesSectionHtml = String.raw`<section class="w-full py-12 sm:py
       </div>
      </div>
      <div class="flex-1 min-w-0">
-      <h3 class="text-base sm:text-lg md:text-xl font-bold text-white mb-2 sm:mb-3 leading-tight break-words" style="font-family:Inter, Satoshi, sans-serif">
+      <h3 class="text-base sm:text-lg md:text-xl font-bold text-white mb-2 sm:mb-3 leading-tight break-words" style="font-family:'DM Sans', sans-serif">
        Website Design & Build
       </h3>
-      <p class="text-xs sm:text-sm text-white/80 leading-relaxed mb-3 sm:mb-4 break-words" style="font-family:Inter, Satoshi, sans-serif">
+      <p class="text-xs sm:text-sm text-white/80 leading-relaxed mb-3 sm:mb-4 break-words" style="font-family:'DM Sans', sans-serif">
        We craft modern websites built to outperform your competitors. You get as many custom revisions as you want.
       </p>
       <div class="space-y-1.5 sm:space-y-2">
@@ -70,10 +70,10 @@ export const servicesSectionHtml = String.raw`<section class="w-full py-12 sm:py
       </div>
      </div>
      <div class="flex-1 min-w-0">
-      <h3 class="text-base sm:text-lg md:text-xl font-bold text-white mb-2 sm:mb-3 leading-tight break-words" style="font-family:Inter, Satoshi, sans-serif">
+      <h3 class="text-base sm:text-lg md:text-xl font-bold text-white mb-2 sm:mb-3 leading-tight break-words" style="font-family:'DM Sans', sans-serif">
        Google Business Profile Optimization
       </h3>
-      <p class="text-xs sm:text-sm text-white/80 leading-relaxed mb-3 sm:mb-4 break-words" style="font-family:Inter, Satoshi, sans-serif">
+      <p class="text-xs sm:text-sm text-white/80 leading-relaxed mb-3 sm:mb-4 break-words" style="font-family:'DM Sans', sans-serif">
        Get found faster on Google Search and Maps. We optimize your profile to boost visibility, build trust, and turn local searches into real customers.
       </p>
       <div class="space-y-1.5 sm:space-y-2">
@@ -114,10 +114,10 @@ export const servicesSectionHtml = String.raw`<section class="w-full py-12 sm:py
       </div>
      </div>
      <div class="flex-1 min-w-0">
-      <h3 class="text-base sm:text-lg md:text-xl font-bold text-white mb-2 sm:mb-3 leading-tight break-words" style="font-family:Inter, Satoshi, sans-serif">
+      <h3 class="text-base sm:text-lg md:text-xl font-bold text-white mb-2 sm:mb-3 leading-tight break-words" style="font-family:'DM Sans', sans-serif">
        SEO Services
       </h3>
-      <p class="text-xs sm:text-sm text-white/80 leading-relaxed mb-3 sm:mb-4 break-words" style="font-family:Inter, Satoshi, sans-serif">
+      <p class="text-xs sm:text-sm text-white/80 leading-relaxed mb-3 sm:mb-4 break-words" style="font-family:'DM Sans', sans-serif">
        We help businesses climb the Google ranks with proven SEO strategies. From keyword research to local optimization, we drive real traffic, real leads, and real growth.
       </p>
       <div class="space-y-1.5 sm:space-y-2">
@@ -158,10 +158,10 @@ export const servicesSectionHtml = String.raw`<section class="w-full py-12 sm:py
       </div>
      </div>
      <div class="flex-1 min-w-0">
-      <h3 class="text-base sm:text-lg md:text-xl font-bold text-white mb-2 sm:mb-3 leading-tight break-words" style="font-family:Inter, Satoshi, sans-serif">
+      <h3 class="text-base sm:text-lg md:text-xl font-bold text-white mb-2 sm:mb-3 leading-tight break-words" style="font-family:'DM Sans', sans-serif">
        Lead Generation & Ads
       </h3>
-      <p class="text-xs sm:text-sm text-white/80 leading-relaxed mb-3 sm:mb-4 break-words" style="font-family:Inter, Satoshi, sans-serif">
+      <p class="text-xs sm:text-sm text-white/80 leading-relaxed mb-3 sm:mb-4 break-words" style="font-family:'DM Sans', sans-serif">
        Turn clicks into customers. Grow smarter, not harder. We create targeted ad campaigns that capture real leads and convert them into loyal customers.
       </p>
       <div class="space-y-1.5 sm:space-y-2">
@@ -190,7 +190,7 @@ export const servicesSectionHtml = String.raw`<section class="w-full py-12 sm:py
    </a>
   </div>
   <!-- Desktop: Single Row - Full Width -->
-  <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-12 w-full">
+  <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-12 w-full services-grid-fix">
    <!-- Desktop: Website Design & Build -->
    <a class="bg-gradient-to-br from-[#7BB9E8]/30 via-[#5fa6d6]/20 to-[#4A90E2]/30 hover:from-[#7BB9E8]/40 hover:via-[#5fa6d6]/30 hover:to-[#4A90E2]/40 backdrop-blur-sm rounded-3xl border-[#7BB9E8]/40 hover:border-[#7BB9E8]/70 p-6 flex flex-col min-h-[420px] min-w-[280px] transition-all duration-700 hover:scale-[1.02] hover:-translate-y-2 hover:shadow-[#7BB9E8]/30 hover:shadow-2xl group relative overflow-hidden transform-gpu cursor-pointer" href="/services/website-design" style="backdrop-filter:blur(15px);transition-delay:0ms">
     <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
@@ -226,10 +226,10 @@ export const servicesSectionHtml = String.raw`<section class="w-full py-12 sm:py
       </div>
      </div>
      <div class="mb-6 group-hover:transform group-hover:-translate-y-1 transition-transform duration-500 delay-100">
-      <h3 class="text-xl font-black text-white mb-3 leading-tight group-hover:text-white transition-colors duration-300" style="font-family:Inter, Satoshi, sans-serif">
+      <h3 class="text-xl font-black text-white mb-3 leading-tight group-hover:text-white transition-colors duration-300" style="font-family:'DM Sans', sans-serif">
        Website Design & Build
       </h3>
-      <p class="text-sm text-[#7BB9E8] font-semibold mb-4 leading-relaxed group-hover:text-opacity-100 transition-all duration-300" style="font-family:Inter, Satoshi, sans-serif">
+      <p class="text-sm text-[#7BB9E8] font-semibold mb-4 leading-relaxed group-hover:text-opacity-100 transition-all duration-300" style="font-family:'DM Sans', sans-serif">
        We craft modern websites built to outperform your competitors. You get as many custom revisions as you want.
       </p>
       <div class="relative">
@@ -327,10 +327,10 @@ export const servicesSectionHtml = String.raw`<section class="w-full py-12 sm:py
       </div>
      </div>
      <div class="mb-6 group-hover:transform group-hover:-translate-y-1 transition-transform duration-500 delay-100">
-      <h3 class="text-xl font-black text-white mb-3 leading-tight group-hover:text-white transition-colors duration-300" style="font-family:Inter, Satoshi, sans-serif">
+      <h3 class="text-xl font-black text-white mb-3 leading-tight group-hover:text-white transition-colors duration-300" style="font-family:'DM Sans', sans-serif">
        Google Business Profile Optimization
       </h3>
-      <p class="text-sm text-emerald-400 font-semibold mb-4 leading-relaxed group-hover:text-opacity-100 transition-all duration-300" style="font-family:Inter, Satoshi, sans-serif">
+      <p class="text-sm text-emerald-400 font-semibold mb-4 leading-relaxed group-hover:text-opacity-100 transition-all duration-300" style="font-family:'DM Sans', sans-serif">
        Get found faster on Google Search and Maps. We optimize your profile to boost visibility, build trust, and turn local searches into real customers.
       </p>
       <div class="relative">
@@ -427,10 +427,10 @@ export const servicesSectionHtml = String.raw`<section class="w-full py-12 sm:py
       </div>
      </div>
      <div class="mb-6 group-hover:transform group-hover:-translate-y-1 transition-transform duration-500 delay-100">
-      <h3 class="text-xl font-black text-white mb-3 leading-tight group-hover:text-white transition-colors duration-300" style="font-family:Inter, Satoshi, sans-serif">
+      <h3 class="text-xl font-black text-white mb-3 leading-tight group-hover:text-white transition-colors duration-300" style="font-family:'DM Sans', sans-serif">
        SEO Services
       </h3>
-      <p class="text-sm text-purple-400 font-semibold mb-4 leading-relaxed group-hover:text-opacity-100 transition-all duration-300" style="font-family:Inter, Satoshi, sans-serif">
+      <p class="text-sm text-purple-400 font-semibold mb-4 leading-relaxed group-hover:text-opacity-100 transition-all duration-300" style="font-family:'DM Sans', sans-serif">
        We help businesses climb the Google ranks with proven SEO strategies. From keyword research to local optimization, we drive real traffic, real leads, and real growth.
       </p>
       <div class="relative">
@@ -527,10 +527,10 @@ export const servicesSectionHtml = String.raw`<section class="w-full py-12 sm:py
       </div>
      </div>
      <div class="mb-6 group-hover:transform group-hover:-translate-y-1 transition-transform duration-500 delay-100">
-      <h3 class="text-xl font-black text-white mb-3 leading-tight group-hover:text-white transition-colors duration-300" style="font-family:Inter, Satoshi, sans-serif">
+      <h3 class="text-xl font-black text-white mb-3 leading-tight group-hover:text-white transition-colors duration-300" style="font-family:'DM Sans', sans-serif">
        Lead Generation & Ads
       </h3>
-      <p class="text-sm text-orange-400 font-semibold mb-4 leading-relaxed group-hover:text-opacity-100 transition-all duration-300" style="font-family:Inter, Satoshi, sans-serif">
+      <p class="text-sm text-orange-400 font-semibold mb-4 leading-relaxed group-hover:text-opacity-100 transition-all duration-300" style="font-family:'DM Sans', sans-serif">
        Turn clicks into customers. Grow smarter, not harder. We create targeted ad campaigns that capture real leads and convert them into loyal customers.
       </p>
       <div class="relative">
@@ -595,14 +595,14 @@ export const servicesSectionHtml = String.raw`<section class="w-full py-12 sm:py
   </div>
   <div class="flex flex-col items-center mt-8 sm:mt-12 md:mt-16 text-center transform transition-all duration-1000 ease-out px-4" style="transition-delay:0ms">
    <div class="mb-6 sm:mb-8">
-    <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 sm:mb-4" style="font-family:Inter, Satoshi, sans-serif">
+    <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 sm:mb-4" style="font-family:'DM Sans', sans-serif">
      Ready to start your growth journey?
     </h3>
     <p class="text-white/70 text-sm sm:text-base max-w-md mx-auto">
      Get a free audit and custom roadmap for your brand's success
     </p>
    </div>
-   <button type="button" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" class="inline-flex items-center justify-center gap-2 md:gap-3 px-6 py-3.5 sm:px-8 sm:py-4 md:px-10 md:py-5 rounded-full bg-gradient-to-r from-[#7BB9E8] to-[#4A90E2] text-white text-base sm:text-lg md:text-xl font-bold shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#7BB9E8] focus:ring-offset-2 w-full sm:w-auto max-w-sm sm:max-w-none touch-manipulation" style="font-family:Inter, Satoshi, sans-serif; min-height: 52px;">
+   <button type="button" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" class="inline-flex items-center justify-center gap-2 md:gap-3 px-6 py-3.5 sm:px-8 sm:py-4 md:px-10 md:py-5 rounded-full bg-gradient-to-r from-[#7BB9E8] to-[#4A90E2] text-white text-base sm:text-lg md:text-xl font-bold shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#7BB9E8] focus:ring-offset-2 w-full sm:w-auto max-w-sm sm:max-w-none touch-manipulation" style="font-family:'DM Sans', sans-serif; min-height: 52px;">
     Start Your Journey
     <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
      <path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -613,4 +613,5 @@ export const servicesSectionHtml = String.raw`<section class="w-full py-12 sm:py
  </div>
 </section>
 `;
+
 

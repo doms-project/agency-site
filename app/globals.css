@@ -1,8 +1,16 @@
-/* @import rules must be at the very top of the stylesheet */
+/* @import rules - reduced from 4 to 2 (inlined small files) */
 @import url('/legacy-css/2bf253bf30ea09a7.css');
 @import url('/legacy-css/081a0afca5a9bd20.css');
-@import url('/legacy-css/2c4911ffbcbe7797.css');
-@import url('/legacy-css/6c1f9ac498836ab6.css');
+
+/* Inlined from 2c4911ffbcbe7797.css - Infinite scroll styles */
+.infinite-scroll-wrapper{overflow:hidden;position:relative;height:100%}
+.infinite-scroll-container{cursor:grab;overflow:visible;will-change:transform;transform-style:preserve-3d;perspective:1000px}
+.infinite-scroll-container:active{cursor:grabbing}
+.infinite-scroll-item{display:flex;align-items:center;justify-content:center;will-change:transform;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform-style:preserve-3d}
+
+/* Inlined from 6c1f9ac498836ab6.css - Prism container styles */
+.prism-container{width:100%;height:100%;position:relative}
+.prism-container canvas{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0}
 
 @tailwind base;
 @tailwind components;
@@ -244,7 +252,7 @@ header.lg\:hidden + section {
   --spacing-3xl: 6rem;    /* 96px */
   
   /* Typography */
-  --font-family-primary: 'Inter', 'Satoshi', system-ui, -apple-system, sans-serif;
+  --font-family-primary: 'DM Sans', system-ui, -apple-system, sans-serif;
   --font-size-xs: 0.75rem;    /* 12px */
   --font-size-sm: 0.875rem;   /* 14px */
   --font-size-base: 1rem;     /* 16px */
@@ -478,29 +486,45 @@ nav[class*="sticky"] {
 /* Navbar Glassmorphism Styles */
 .nav-transparent {
   background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0.05) 100%
+    135deg,
+    rgba(30, 35, 45, 0.65) 0%,
+    rgba(20, 25, 35, 0.55) 50%,
+    rgba(25, 30, 40, 0.6) 100%
   );
-  backdrop-filter: blur(20px) saturate(180%) brightness(1.1);
-  -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(1.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1), 
-              0 1px 0 rgba(255, 255, 255, 0.2) inset;
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2), 
+              0 1px 0 rgba(255, 255, 255, 0.05) inset,
+              inset 0 -1px 0 rgba(255, 255, 255, 0.02);
 }
 
 .nav-scrolled-modern {
   background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.15) 0%,
-    rgba(255, 255, 255, 0.08) 100%
+    135deg,
+    rgba(30, 35, 45, 0.75) 0%,
+    rgba(20, 25, 35, 0.65) 50%,
+    rgba(25, 30, 40, 0.7) 100%
   );
-  backdrop-filter: blur(32px) saturate(200%) brightness(1.15);
-  -webkit-backdrop-filter: blur(32px) saturate(200%) brightness(1.15);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 
-              0 1px 0 rgba(255, 255, 255, 0.3) inset,
-              0 0 60px rgba(123, 185, 232, 0.1);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25), 
+              0 1px 0 rgba(255, 255, 255, 0.06) inset,
+              inset 0 -1px 0 rgba(255, 255, 255, 0.03),
+              0 0 60px rgba(123, 185, 232, 0.05);
+}
+
+/* Navbar CTA Button - Smaller size */
+.nav-cta-btn {
+  padding: 6px 14px !important;
+  font-size: 11px !important;
+  font-family: 'DM Sans', sans-serif !important;
+  box-shadow: 0 2px 10px rgba(123, 185, 232, 0.25);
+}
+
+.nav-cta-btn:hover {
+  box-shadow: 0 4px 16px rgba(123, 185, 232, 0.4);
 }
 
 /* Performance optimizations - Image rendering */
@@ -524,7 +548,7 @@ img[fetchpriority="high"] {
 body {
   background-color: #040507;
   color: #ffffff;
-  font-family: var(--font-inter, 'Inter'), 'Satoshi', 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-dm-sans, 'DM Sans'), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   letter-spacing: -0.015em;
   /* Performance optimizations */
   -webkit-font-smoothing: antialiased;
@@ -580,15 +604,14 @@ img[loading="lazy"] {
     will-change: auto !important;
   }
   
+  /* DISABLED: This breaks position:fixed elements */
   /* Force hardware acceleration for smooth scrolling */
-  * {
+  /* * {
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    -webkit-perspective: 1000;
-    perspective: 1000;
-  }
+  } */
 }
 
 /* CRITICAL: Fix hover flickering - prevent will-change and transform conflicts */
@@ -702,26 +725,26 @@ a[href],
   nav .logo,
   nav img.logo,
   nav img.tilt-logo {
-    height: 96px !important;
+    height: 64px !important;
     width: auto !important;
-    min-height: 96px !important;
-    min-width: 96px !important;
-    max-height: 96px !important;
+    min-height: 64px !important;
+    min-width: 64px !important;
+    max-height: 64px !important;
   }
 }
 
-/* Mobile logo in navbar - MUST match h-20 (80px) */
+/* Mobile logo in navbar - MUST match h-14 (56px) */
 @media (max-width: 1023px) {
   nav .logo,
   nav img.logo,
   nav img.tilt-logo,
   header img.logo,
   header img.tilt-logo {
-    height: 80px !important;
+    height: 52px !important;
     width: auto !important;
-    min-height: 80px !important;
-    min-width: 80px !important;
-    max-height: 80px !important;
+    min-height: 52px !important;
+    min-width: 52px !important;
+    max-height: 52px !important;
   }
 }
 
@@ -1751,4 +1774,66 @@ section#cpg-brands .service-card,
   [class*="ecom-marquee"] {
     animation-duration: 190s !important;
   }
+}
+
+/* Fix for Services and Pricing grid - force 4 columns at lg+ */
+/* This fixes a Tailwind CSS cascade issue where md:grid-cols-2 overrides lg:grid-cols-4 */
+@media (min-width: 1024px) {
+  .services-grid-fix,
+  .pricing-grid-fix,
+  /* Also target Tailwind classes directly as fallback */
+  .lg\:grid-cols-4,
+  [class*="lg:grid-cols-4"] {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
+/* CSS Glow Background Animations - Lightweight alternative to particle animation */
+@keyframes glow-pulse {
+  0%, 100% {
+    opacity: 0.8;
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.05);
+  }
+}
+
+@keyframes glow-drift {
+  0%, 100% {
+    transform: translate(0, 0);
+    opacity: 0.7;
+  }
+  33% {
+    transform: translate(30px, -20px);
+    opacity: 0.9;
+  }
+  66% {
+    transform: translate(-20px, 30px);
+    opacity: 0.6;
+  }
+}
+
+@keyframes glow-float {
+  0%, 100% {
+    transform: translate(0, 0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate(-30px, -40px);
+    opacity: 0.8;
+  }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 8s ease-in-out infinite;
+}
+
+.animate-glow-drift {
+  animation: glow-drift 12s ease-in-out infinite;
+}
+
+.animate-glow-float {
+  animation: glow-float 10s ease-in-out infinite;
 }

@@ -7,8 +7,8 @@ const portfolioCards = [
   {
     id: 1,
     title: 'Real Estate Success',
-    backgroundImage: '/images/johnson-U6Q6zVDgmSs-unsplash.jpg',
-    logo: '/images/ChatGPT Image Sep 18, 2025, 11_14_48 PM.png',
+    backgroundImage: '/images/johnson.webp',
+    logo: '/images/chatgpt-logo.webp',
     description: 'Transforming real estate businesses with cutting-edge digital strategies and proven growth systems.',
     stats: [
       { label: 'Leads Generated', value: '250+' },
@@ -357,8 +357,15 @@ export default function SuccessStoriesCarousel() {
       carousel._swipeTouchEnd = handleTouchEnd
     }
     
-    // Add automatic 3D perspective tilt based on card position in carousel
-    const update3DPerspective = () => {
+    // OPTIMIZED: Add automatic 3D perspective tilt with throttling
+    let perspectiveLastUpdate = 0
+    const perspectiveThrottle = isMobileDevice ? 100 : 50 // Update less frequently on mobile
+    
+    const update3DPerspective = (forceUpdate = false) => {
+      const now = Date.now()
+      if (!forceUpdate && now - perspectiveLastUpdate < perspectiveThrottle) return
+      perspectiveLastUpdate = now
+      
       if (!container) return
       
       const containerRect = container.getBoundingClientRect()
@@ -373,33 +380,35 @@ export default function SuccessStoriesCarousel() {
         // Calculate distance from center (-1 to 1, where 0 is center)
         const distanceFromCenter = (cardCenter - containerCenter) / (containerRect.width / 2)
         
-        // Calculate rotation: right side tilts left (negative), left side tilts right (positive)
-        const maxRotation = 15 // degrees
-        const rotateY = -distanceFromCenter * maxRotation // Inverted for correct tilt direction
+        // OPTIMIZED: Reduced rotation effect (was 15, now 10)
+        const maxRotation = isMobileDevice ? 8 : 10
+        const rotateY = -distanceFromCenter * maxRotation
         
-        // Calculate Y-axis lift: highest at center, normal at edges
-        const maxLift = 15 // pixels
-        const liftY = -Math.abs(distanceFromCenter) * maxLift + maxLift // Inverted parabola
+        // OPTIMIZED: Reduced lift effect (was 15, now 10)
+        const maxLift = isMobileDevice ? 6 : 10
+        const liftY = -Math.abs(distanceFromCenter) * maxLift + maxLift
         
-        // Calculate scale: slightly larger at center
-        const maxScale = 1.05
-        const minScale = 0.95
+        // OPTIMIZED: Reduced scale effect
+        const maxScale = 1.03
+        const minScale = 0.97
         const scale = maxScale - Math.abs(distanceFromCenter) * (maxScale - minScale)
         
-        // Calculate opacity: full at center, slightly faded at edges
-        const opacity = 1 - Math.abs(distanceFromCenter) * 0.3
+        // OPTIMIZED: Less opacity variation
+        const opacity = 1 - Math.abs(distanceFromCenter) * 0.2
         
-        // Apply transforms smoothly
-        card.style.transition = 'transform 0.3s ease-out, opacity 0.3s ease-out'
-        card.style.transform = `perspective(1200px) rotateY(${rotateY}deg) translateY(${liftY}px) scale(${scale})`
-        card.style.opacity = Math.max(0.7, opacity)
+        // Apply transforms - use CSS transition for smoothing
+        card.style.transform = `perspective(1000px) rotateY(${rotateY}deg) translateY(${liftY}px) scale(${scale})`
+        card.style.opacity = Math.max(0.8, opacity)
       })
     }
     
-    // Update 3D perspective on scroll and animation frame
+    // OPTIMIZED: Update 3D perspective with visibility check
+    let isCarouselVisible = true
     const startPerspectiveUpdates = () => {
       const updateLoop = () => {
-        update3DPerspective()
+        if (isCarouselVisible) {
+          update3DPerspective()
+        }
         perspectiveTickerRef.current = requestAnimationFrame(updateLoop)
       }
       updateLoop()
@@ -413,6 +422,9 @@ export default function SuccessStoriesCarousel() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          // OPTIMIZED: Also pause perspective updates when not visible
+          isCarouselVisible = entry.isIntersecting
+          
           if (entry.isIntersecting) {
             // Resume animation when visible
             if (isMobileDevice && carousel) {
@@ -559,7 +571,7 @@ export default function SuccessStoriesCarousel() {
           <span className="block uppercase tracking-[0.25em] text-xs text-neutral-400 font-semibold mb-4">
             OUR WORK
           </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4" style={{ fontFamily: 'DM Sans, sans-serif' }}>
             Real Results. Real Businesses.{' '}
             <span className="text-[#7BB9E8]">Real Growth.</span>
           </h2>
@@ -595,15 +607,16 @@ export default function SuccessStoriesCarousel() {
                     }}
                     className="card-content relative rounded-3xl overflow-hidden cursor-pointer group"
                     style={{ 
-                      willChange: isMobile ? 'auto' : 'transform, box-shadow', 
+                      willChange: isMobile ? 'auto' : 'transform', 
                       transformStyle: 'preserve-3d',
                       backfaceVisibility: 'hidden',
                       WebkitBackfaceVisibility: 'hidden',
                       boxShadow: isMobile ? '0 8px 16px rgba(0, 0, 0, 0.4)' : '0 10px 20px 5px rgba(0, 0, 0, 0.4)',
                       maxHeight: isMobile ? '360px' : 'none',
-                      touchAction: 'pan-x pan-y', // Allow both horizontal and vertical panning
+                      touchAction: 'pan-x pan-y',
                       transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0) translateZ(0) scale(1)',
                       WebkitTransform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0) translateZ(0) scale(1)',
+                      transition: 'transform 0.15s ease-out, opacity 0.15s ease-out', // OPTIMIZED: Smoother CSS transition
                     }}
                   >
                     {/* Background Layer - Image or Solid Color */}
@@ -798,7 +811,7 @@ export default function SuccessStoriesCarousel() {
                                 <div
                                   key={statIndex}
                                   className={card.design?.statsLayout === 'vertical' ? 'flex items-center gap-3 sm:gap-4 group/stat' : 'text-center group/stat'}
-                                  style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}
+                                  style={{ fontFamily: 'DM Sans, sans-serif' }}
                                 >
                                   <div className={`flex items-center ${card.design?.statsLayout === 'vertical' ? 'gap-2 sm:gap-3' : 'justify-center gap-1.5 sm:gap-2 mb-1'} opacity-80 group-hover/stat:opacity-100 transition-opacity duration-300`}>
                                     <div className={`${iconColorClass} group-hover/stat:${isLightBackground ? 'text-gray-900' : 'text-white/80'} transition-colors duration-300`}>
@@ -845,7 +858,7 @@ export default function SuccessStoriesCarousel() {
                         <div className={`flex justify-center ${card.design?.cardColor && !card.backgroundImage ? 'relative z-30' : ''}`}>
                           <div
                             className={`${card.design?.cardColor && !card.backgroundImage ? 'bg-white text-black hover:bg-gray-100' : 'bg-white text-black hover:bg-gray-100'} px-5 py-3 sm:px-7 sm:py-4 rounded-xl font-bold text-sm sm:text-base shadow-xl inline-flex items-center gap-2`}
-                            style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}
+                            style={{ fontFamily: 'DM Sans, sans-serif' }}
                             data-gsap-hover-target="true"
                       >
                         See Case Study
@@ -907,10 +920,10 @@ export default function SuccessStoriesCarousel() {
         
         {/* CTA Section */}
         <div className="text-center mt-20 max-w-4xl mx-auto pb-8">
-          <h3 className="text-2xl md:text-3xl font-bold text-white mb-4" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+          <h3 className="text-2xl md:text-3xl font-bold text-white mb-4" style={{ fontFamily: 'DM Sans, sans-serif' }}>
             Ready to be our next success story?
           </h3>
-          <p className="text-white/70 text-lg mb-8 max-w-lg mx-auto" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+          <p className="text-white/70 text-lg mb-8 max-w-lg mx-auto" style={{ fontFamily: 'DM Sans, sans-serif' }}>
             Join the businesses that chose growth over stagnation.
           </p>
           <button
@@ -923,7 +936,7 @@ export default function SuccessStoriesCarousel() {
             }}
             className="inline-flex items-center justify-center gap-2 h-11 bg-[#7BB9E8] hover:bg-[#5fa6d6] text-white px-6 py-3 md:px-10 md:py-4 rounded-xl font-semibold text-base md:text-lg shadow-xl border border-[#7BB9E8]/30 w-full sm:w-auto"
             data-gsap-hover-target="true"
-            style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}
+            style={{ fontFamily: 'DM Sans, sans-serif' }}
             suppressHydrationWarning
           >
             Schedule Your Call
@@ -936,4 +949,5 @@ export default function SuccessStoriesCarousel() {
     </section>
   )
 }
+
 

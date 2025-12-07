@@ -3,14 +3,14 @@ export const footerSectionHtml = String.raw`<footer class="w-full bg-gradient-to
   <div class="flex flex-col md:grid md:grid-cols-12 gap-4 md:gap-6 mb-6">
    <div class="flex flex-col md:hidden items-center text-center mb-8">
     <a aria-label="Yo Marketing Home" href="/">
-     <img alt="Yo Marketing" class="h-12 w-auto mb-4" src="/images/logo-hq.png"/>
+     <img alt="Yo Marketing" class="h-12 w-auto mb-4" src="/images/logo-hq.png" loading="lazy"/>
     </a>
-    <p class="text-white/70 text-base font-medium tracking-wide" style="font-family:Inter, Satoshi, sans-serif">
+    <p class="text-white/70 text-base font-medium tracking-wide" style="font-family:'DM Sans', sans-serif">
      Empowering Business
     </p>
    </div>
    <div class="flex flex-col md:hidden items-center text-center mb-8 px-4">
-    <h3 class="text-white font-semibold text-xl mb-3 tracking-wide" style="font-family:Inter, Satoshi, sans-serif">
+    <h3 class="text-white font-semibold text-xl mb-3 tracking-wide" style="font-family:'DM Sans', sans-serif">
      Stay in the loop
     </h3>
     <p class="text-white/60 text-sm mb-5 font-light max-w-md">
@@ -81,9 +81,9 @@ export const footerSectionHtml = String.raw`<footer class="w-full bg-gradient-to
    </div>
    <div class="hidden md:flex flex-col items-start text-left md:col-span-4">
     <a aria-label="Yo Marketing Home" href="/">
-     <img alt="Yo Marketing" class="h-10 w-auto mb-3" src="/images/logo-hq.png"/>
+     <img alt="Yo Marketing" class="h-10 w-auto mb-3" src="/images/logo-hq.png" loading="lazy"/>
     </a>
-    <p class="text-white/70 text-sm font-medium tracking-wide mb-1.5" style="font-family:Inter, Satoshi, sans-serif">
+    <p class="text-white/70 text-sm font-medium tracking-wide mb-1.5" style="font-family:'DM Sans', sans-serif">
      Empowering Business
     </p>
     <p class="text-white/50 text-xs font-light max-w-xs leading-relaxed">
@@ -91,7 +91,7 @@ export const footerSectionHtml = String.raw`<footer class="w-full bg-gradient-to
     </p>
    </div>
    <div class="hidden md:flex flex-col items-start text-left md:col-span-2">
-    <h3 class="text-white font-semibold text-xs mb-3 tracking-wider uppercase opacity-80" style="font-family:Inter, Satoshi, sans-serif">
+    <h3 class="text-white font-semibold text-xs mb-3 tracking-wider uppercase opacity-80" style="font-family:'DM Sans', sans-serif">
      COMPANY
     </h3>
     <div class="flex flex-col gap-2">
@@ -113,7 +113,7 @@ export const footerSectionHtml = String.raw`<footer class="w-full bg-gradient-to
     </div>
    </div>
    <div class="hidden md:flex flex-col items-start text-left md:col-span-3">
-    <h3 class="text-white font-semibold text-xs mb-3 tracking-wider uppercase opacity-80" style="font-family:Inter, Satoshi, sans-serif">
+    <h3 class="text-white font-semibold text-xs mb-3 tracking-wider uppercase opacity-80" style="font-family:'DM Sans', sans-serif">
      CUSTOMER CARE
     </h3>
     <div class="flex flex-col gap-2">
@@ -137,7 +137,7 @@ export const footerSectionHtml = String.raw`<footer class="w-full bg-gradient-to
     </div>
    </div>
    <div class="hidden md:flex flex-col items-start text-left md:col-span-3">
-    <h3 class="text-white font-semibold text-xs mb-3 tracking-wider uppercase opacity-80" style="font-family:Inter, Satoshi, sans-serif">
+    <h3 class="text-white font-semibold text-xs mb-3 tracking-wider uppercase opacity-80" style="font-family:'DM Sans', sans-serif">
      LEGAL
     </h3>
     <div class="flex flex-col gap-2 mb-4">
@@ -148,7 +148,7 @@ export const footerSectionHtml = String.raw`<footer class="w-full bg-gradient-to
       Terms of Service
      </a>
     </div>
-    <h3 class="text-white font-semibold text-xs mb-2 tracking-wider uppercase opacity-80" style="font-family:Inter, Satoshi, sans-serif">
+    <h3 class="text-white font-semibold text-xs mb-2 tracking-wider uppercase opacity-80" style="font-family:'DM Sans', sans-serif">
      Follow Us
     </h3>
     <div class="flex items-center gap-2.5">
@@ -175,7 +175,7 @@ export const footerSectionHtml = String.raw`<footer class="w-full bg-gradient-to
   </div>
   <div class="flex flex-col gap-4 pt-6 border-t border-white/10">
    <div class="flex flex-col md:flex-row items-center justify-center md:justify-between gap-3 pb-4 border-b border-white/5">
-    <h3 class="text-white font-semibold text-xs tracking-wider uppercase opacity-80 whitespace-nowrap" style="font-family:Inter, Satoshi, sans-serif">
+    <h3 class="text-white font-semibold text-xs tracking-wider uppercase opacity-80 whitespace-nowrap" style="font-family:'DM Sans', sans-serif">
      Stay in the loop
     </h3>
     <form class="w-full md:w-auto">
@@ -205,3 +205,4 @@ export const footerSectionHtml = String.raw`<footer class="w-full bg-gradient-to
  </div>
 </footer>
 `;
+

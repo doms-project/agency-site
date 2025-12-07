@@ -34,7 +34,7 @@ function NavTextLink({ href, label }) {
       href={href}
       onClick={handleClick}
       className="group relative px-4 py-2 text-white/80 hover:text-white text-sm font-medium transition-all duration-300 cursor-pointer rounded-lg hover:bg-white/5"
-      style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}
+      style={{ fontFamily: 'DM Sans, sans-serif' }}
     >
       <span className="relative z-10">{label}</span>
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-[#7BB9E8] via-[#6ba8d8] to-[#5fa6d6] group-hover:w-3/4 transition-all duration-500 rounded-full" />
@@ -147,7 +147,8 @@ export default function SharedNavbar() {
           left: '0', 
           right: '0', 
           width: '100%',
-          WebkitBackdropFilter: 'blur(32px) saturate(200%)'
+          backdropFilter: 'blur(20px) saturate(150%)',
+          WebkitBackdropFilter: 'blur(20px) saturate(150%)'
         }}
         suppressHydrationWarning
       >
@@ -164,13 +165,12 @@ export default function SharedNavbar() {
             <img 
               src="/images/logo-hq.png" 
               alt="Yo Marketing" 
-              width={100}
-              height={100}
-              className="logo tilt-logo h-24 w-auto group-hover:scale-110 transition-all duration-300 drop-shadow-lg" 
+              width={64}
+              height={64}
+              className="logo tilt-logo h-16 w-auto group-hover:scale-105 transition-all duration-300 drop-shadow-lg" 
               loading="eager"
               decoding="async"
               fetchPriority="high"
-              style={{ minHeight: '96px', minWidth: '96px' }}
             />
             </a>
 
@@ -180,16 +180,16 @@ export default function SharedNavbar() {
                 <NavTextLink href="/#services" label="Services" />
                 <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-[#0a0a0a]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                   <div className="py-2">
-                    <a href="/services/website-design" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+                    <a href="/services/website-design" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                       Website Design & Build
                     </a>
-                    <a href="/services/google-business-profile" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+                    <a href="/services/google-business-profile" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                       Google Business Profile
                     </a>
-                    <a href="/services/seo-services" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+                    <a href="/services/seo-services" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                       SEO Services
                     </a>
-                    <a href="/services/lead-generation" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+                    <a href="/services/lead-generation" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                       Lead Generation & Ads
                     </a>
                   </div>
@@ -207,16 +207,29 @@ export default function SharedNavbar() {
                 onClick={() => {
                   window.location.href = '/#contact'
                 }}
-                className="group relative px-8 py-3 bg-gradient-to-r from-[#7BB9E8] via-[#6ba8d8] to-[#5fa6d6] text-black font-bold text-sm tracking-wide transition-all duration-300 rounded-full overflow-hidden shadow-[0_4px_20px_rgba(123,185,232,0.3)] hover:shadow-[0_6px_30px_rgba(123,185,232,0.5)] hover:scale-105 active:scale-95"
-                style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}
+                style={{
+                  background: 'linear-gradient(to right, #7BB9E8, #6ba8d8, #5fa6d6)',
+                  color: '#000',
+                  fontFamily: 'DM Sans, sans-serif',
+                  fontWeight: 500,
+                  fontSize: '11px',
+                  padding: '6px 14px',
+                  borderRadius: '9999px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                  boxShadow: '0 2px 8px rgba(123, 185, 232, 0.3)',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
               >
-                <span className="relative z-10 flex items-center gap-2">
-                  GET STARTED
-                  <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                GET STARTED
+                <svg style={{ width: '10px', height: '10px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
               </button>
             </div>
           </div>
@@ -225,18 +238,17 @@ export default function SharedNavbar() {
 
       {/* Mobile Navbar */}
       <nav className="lg:hidden w-full z-[9999] sticky top-0 nav-transparent" style={{ position: 'sticky', top: '0px', zIndex: 9999 }}>
-        <div className="flex items-center justify-between px-4 py-2 h-24">
+        <div className="flex items-center justify-between px-4 py-2 h-16">
           <a aria-label="Yo Marketing Home" href="/" className="flex items-center group">
             <img 
               src="/images/logo-hq.png" 
               alt="Yo Marketing" 
-              width={80}
-              height={80}
-              className="logo tilt-logo h-20 w-auto transition-transform duration-300 group-hover:scale-105 drop-shadow-lg" 
+              width={48}
+              height={48}
+              className="logo tilt-logo h-12 w-auto transition-transform duration-300 group-hover:scale-105 drop-shadow-lg" 
               loading="eager"
               decoding="async"
               fetchPriority="high"
-              style={{ height: '80px !important', width: 'auto', minHeight: '80px', minWidth: '80px' }}
             />
           </a>
           <button 
@@ -261,18 +273,17 @@ export default function SharedNavbar() {
           <div className="fixed inset-0 z-[998] bg-black/30 backdrop-blur-md lg:hidden transition-opacity duration-300" onClick={() => setMobileNavOpen(false)} />
           <div className="fixed inset-y-0 right-0 z-[999] w-full max-w-sm bg-gradient-to-b from-[rgba(4,5,7,0.85)] via-[rgba(4,5,7,0.75)] to-[rgba(4,5,7,0.85)] backdrop-blur-[20px] border-l border-white/15 shadow-[0_0_60px_rgba(0,0,0,0.6)] flex flex-col lg:hidden animate-slide-in-drawer overflow-y-auto" style={{ WebkitBackdropFilter: 'blur(20px) saturate(180%)' }}>
             <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-transparent pointer-events-none" />
-            <div className="relative flex items-center justify-between px-6 py-5 border-b border-white/10 bg-white/5 backdrop-blur-sm">
+            <div className="relative flex items-center justify-between px-6 py-4 border-b border-white/10 bg-white/5 backdrop-blur-sm">
               <a aria-label="Yo Marketing Home" href="/" onClick={() => setMobileNavOpen(false)} className="group">
             <img 
               src="/images/logo-hq.png" 
               alt="Yo Marketing" 
-              width={80}
-              height={80}
-              className="logo tilt-logo h-20 w-auto transition-transform duration-300 group-hover:scale-105 drop-shadow-lg" 
+              width={48}
+              height={48}
+              className="logo tilt-logo h-12 w-auto transition-transform duration-300 group-hover:scale-105 drop-shadow-lg" 
               loading="eager"
               decoding="async"
               fetchPriority="high"
-              style={{ height: '80px', width: 'auto', minHeight: '80px', minWidth: '80px' }}
             />
               </a>
               <button 
@@ -318,7 +329,7 @@ export default function SharedNavbar() {
                       href={link.href}
                       onClick={handleClick}
                       className="group relative px-4 py-3.5 text-white/95 hover:text-white text-base font-medium transition-all duration-300 rounded-xl"
-                      style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}
+                      style={{ fontFamily: 'DM Sans, sans-serif' }}
                     >
                       <span className="relative flex items-center justify-between z-10">
                         {link.label}
@@ -335,7 +346,7 @@ export default function SharedNavbar() {
                     href="/services/website-design"
                     onClick={() => setMobileNavOpen(false)}
                     className="group relative px-4 py-2.5 text-white/80 hover:text-white text-sm font-medium transition-all duration-300 rounded-lg"
-                    style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}
+                    style={{ fontFamily: 'DM Sans, sans-serif' }}
                   >
                     <span className="relative flex items-center justify-between z-10">
                       Website Design & Build
@@ -348,7 +359,7 @@ export default function SharedNavbar() {
                     href="/services/google-business-profile"
                     onClick={() => setMobileNavOpen(false)}
                     className="group relative px-4 py-2.5 text-white/80 hover:text-white text-sm font-medium transition-all duration-300 rounded-lg"
-                    style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}
+                    style={{ fontFamily: 'DM Sans, sans-serif' }}
                   >
                     <span className="relative flex items-center justify-between z-10">
                       Google Business Profile
@@ -361,7 +372,7 @@ export default function SharedNavbar() {
                     href="/services/seo-services"
                     onClick={() => setMobileNavOpen(false)}
                     className="group relative px-4 py-2.5 text-white/80 hover:text-white text-sm font-medium transition-all duration-300 rounded-lg"
-                    style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}
+                    style={{ fontFamily: 'DM Sans, sans-serif' }}
                   >
                     <span className="relative flex items-center justify-between z-10">
                       SEO Services
@@ -374,7 +385,7 @@ export default function SharedNavbar() {
                     href="/services/lead-generation"
                     onClick={() => setMobileNavOpen(false)}
                     className="group relative px-4 py-2.5 text-white/80 hover:text-white text-sm font-medium transition-all duration-300 rounded-lg"
-                    style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}
+                    style={{ fontFamily: 'DM Sans, sans-serif' }}
                   >
                     <span className="relative flex items-center justify-between z-10">
                       Lead Generation & Ads
@@ -394,7 +405,7 @@ export default function SharedNavbar() {
                   window.location.href = '/#contact';
                 }}
                 className="w-full px-6 py-3 bg-gradient-to-r from-[#7BB9E8] to-[#5fa6d6] text-white font-bold text-base rounded-full hover:scale-105 transition-all duration-300 shadow-lg"
-                style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}
+                style={{ fontFamily: 'DM Sans, sans-serif' }}
               >
                 GET STARTED
               </button>
@@ -405,4 +416,5 @@ export default function SharedNavbar() {
     </>
   )
 }
+
 

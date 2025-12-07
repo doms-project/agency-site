@@ -352,3 +352,4 @@ function SocialPlatformCard() {
 // Memoize component to prevent unnecessary re-renders
 // This component uses Framer Motion, so it should be lazy loaded when used
 export default memo(SocialPlatformCard)
+

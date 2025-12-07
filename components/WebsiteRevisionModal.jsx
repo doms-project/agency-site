@@ -172,7 +172,7 @@ function WebsiteRevisionModal({ isOpen, onClose }) {
         {/* Header */}
         <div className="sticky top-0 bg-[#0a0a0a]/95 backdrop-blur-sm border-b border-white/10 px-6 py-4 flex items-center justify-between z-10">
           <div>
-            <h2 className="text-2xl font-bold text-white" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+            <h2 className="text-2xl font-bold text-white" style={{ fontFamily: 'DM Sans, sans-serif' }}>
               Website Revision Request
             </h2>
             <p className="text-sm text-white/60 mt-1">
@@ -477,7 +477,7 @@ function WebsiteRevisionModal({ isOpen, onClose }) {
               form="website-revision-form"
               disabled={isSubmitting}
               className="px-6 py-2 bg-[#7BB9E8] hover:bg-[#5fa6d6] text-black font-bold rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-              style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}
+              style={{ fontFamily: 'DM Sans, sans-serif' }}
             >
               {isSubmitting ? 'Submitting...' : 'Submit Revision Request'}
             </button>
@@ -490,4 +490,5 @@ function WebsiteRevisionModal({ isOpen, onClose }) {
 
 // Memoize component to prevent unnecessary re-renders
 export default memo(WebsiteRevisionModal)
+
 

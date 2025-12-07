@@ -7,15 +7,15 @@ export const trustSectionHtml = String.raw`<section class="w-full py-20 md:py-24
       <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
       </path>
      </svg>
-     <span class="text-white font-bold text-lg" style="font-family:Inter, Satoshi, sans-serif">
+     <span class="text-white font-bold text-lg" style="font-family:'DM Sans', sans-serif">
       Trustpilot
      </span>
     </div>
    </div>
-   <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight" style="font-family:Inter, Satoshi, sans-serif">
+   <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight" style="font-family:'DM Sans', sans-serif">
     Trusted by Industry Leaders
    </h1>
-   <h2 class="text-2xl md:text-3xl font-bold text-white mb-3" style="font-family:Inter, Satoshi, sans-serif">
+   <h2 class="text-2xl md:text-3xl font-bold text-white mb-3" style="font-family:'DM Sans', sans-serif">
     Rated
     <span class="text-[#00B67A]">
      4.97/5
@@ -46,7 +46,7 @@ export const trustSectionHtml = String.raw`<section class="w-full py-20 md:py-24
      </svg>
     </div>
    </div>
-   <p class="text-white/70 text-lg" style="font-family:Inter, Satoshi, sans-serif">
+   <p class="text-white/70 text-lg" style="font-family:'DM Sans', sans-serif">
     Trusted Reviews
    </p>
   </div>
@@ -79,7 +79,7 @@ export const trustSectionHtml = String.raw`<section class="w-full py-20 md:py-24
          </path>
         </svg>
        </div>
-       <span class="text-sm font-medium text-[#00B67A]" style="font-family:Inter, Satoshi, sans-serif">
+       <span class="text-sm font-medium text-[#00B67A]" style="font-family:'DM Sans', sans-serif">
         Verified Review
        </span>
       </div>
@@ -88,22 +88,22 @@ export const trustSectionHtml = String.raw`<section class="w-full py-20 md:py-24
         <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
         </path>
        </svg>
-       <span class="text-xs text-gray-500 uppercase tracking-wide font-medium" style="font-family:Inter, Satoshi, sans-serif">
+       <span class="text-xs text-gray-500 uppercase tracking-wide font-medium" style="font-family:'DM Sans', sans-serif">
         Trustpilot
        </span>
       </div>
      </div>
-     <h4 class="text-xl md:text-2xl font-bold text-gray-900 mb-4" style="font-family:Inter, Satoshi, sans-serif">
+     <h4 class="text-xl md:text-2xl font-bold text-gray-900 mb-4" style="font-family:'DM Sans', sans-serif">
       "
       <!-- -->
       Amazing B2B site with incredible functionality!
       <!-- -->
       "
      </h4>
-     <blockquote class="text-gray-700 text-base md:text-lg leading-relaxed mb-4 flex-grow overflow-hidden" style="font-family:Inter, Satoshi, sans-serif">
+     <blockquote class="text-gray-700 text-base md:text-lg leading-relaxed mb-4 flex-grow overflow-hidden" style="font-family:'DM Sans', sans-serif">
       Thank you again for doing such a wonderful job on the B2B site. The ease of use is crazy good! I love how the product images will move on the page based on sales performance. Great job! Both you and Alex did such a good job of listening to our business needs and executing appropriately. And so quickly!!!
      </blockquote>
-     <div class="text-sm text-gray-500 mb-4" style="font-family:Inter, Satoshi, sans-serif">
+     <div class="text-sm text-gray-500 mb-4" style="font-family:'DM Sans', sans-serif">
       Date of experience:
       <!-- -->
       <!-- -->
@@ -116,7 +116,7 @@ export const trustSectionHtml = String.raw`<section class="w-full py-20 md:py-24
        </div>
        <div>
         <div class="flex items-center gap-2 mb-1">
-         <span class="font-bold text-gray-900 text-base md:text-lg" style="font-family:Inter, Satoshi, sans-serif">
+         <span class="font-bold text-gray-900 text-base md:text-lg" style="font-family:'DM Sans', sans-serif">
           Kathy
          </span>
          <svg class="w-4 h-4 text-[#00B67A]" fill="currentColor" viewbox="0 0 24 24">
@@ -124,7 +124,7 @@ export const trustSectionHtml = String.raw`<section class="w-full py-20 md:py-24
           </path>
          </svg>
         </div>
-        <div class="text-gray-600 text-sm" style="font-family:Inter, Satoshi, sans-serif">
+        <div class="text-gray-600 text-sm" style="font-family:'DM Sans', sans-serif">
          Head of Sales
          <!-- -->
          ,
@@ -133,7 +133,7 @@ export const trustSectionHtml = String.raw`<section class="w-full py-20 md:py-24
         </div>
        </div>
       </div>
-      <img alt="Savannah Bee Company logo" class="h-10 w-10 md:h-12 md:w-12 object-contain opacity-70 flex-shrink-0" src="/images/bee.png"/>
+      <img alt="Savannah Bee Company logo" class="h-10 w-10 md:h-12 md:w-12 object-contain opacity-70 flex-shrink-0" src="/images/bee.png" loading="lazy"/>
      </div>
     </div>
    </div>
@@ -151,13 +151,13 @@ export const trustSectionHtml = String.raw`<section class="w-full py-20 md:py-24
    </button>
   </div>
   <div class="text-center mt-20 pt-12 border-t border-white/10">
-   <h3 class="text-2xl md:text-3xl font-bold text-white mb-4" style="font-family:Inter, Satoshi, sans-serif">
+   <h3 class="text-2xl md:text-3xl font-bold text-white mb-4" style="font-family:'DM Sans', sans-serif">
     Ready to join our happy clients?
    </h3>
-   <p class="text-white/70 text-lg mb-8 max-w-lg mx-auto" style="font-family:Inter, Satoshi, sans-serif">
+   <p class="text-white/70 text-lg mb-8 max-w-lg mx-auto" style="font-family:'DM Sans', sans-serif">
     Get the same results that earned us these 5-star reviews
    </p>
-   <button type="button" class="inline-flex items-center gap-2 md:gap-3 px-6 py-3 md:px-10 md:py-5 rounded-full bg-[#00B67A] hover:bg-[#00A366] text-white text-base md:text-xl font-bold shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-[#00B67A]/30 w-full sm:w-auto" style="font-family:Inter, Satoshi, sans-serif">
+   <button type="button" class="inline-flex items-center gap-2 md:gap-3 px-6 py-3 md:px-10 md:py-5 rounded-full bg-[#00B67A] hover:bg-[#00A366] text-white text-base md:text-xl font-bold shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-[#00B67A]/30 w-full sm:w-auto" style="font-family:'DM Sans', sans-serif">
     Apply to work with us
     <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
      <path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-linecap="round" stroke-linejoin="round">
@@ -168,3 +168,4 @@ export const trustSectionHtml = String.raw`<section class="w-full py-20 md:py-24
  </div>
 </section>
 `;
+

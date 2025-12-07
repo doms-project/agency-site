@@ -20,6 +20,7 @@ const LightweightHeroBackground = lazy(() => import('@/components/LightweightHer
 const PyramidHeroBackground = lazy(() => import('@/components/PyramidHeroBackground'))
 const ParticleNetworkBackground = lazy(() => import('@/components/ParticleNetworkBackground'))
 const RingParticlesBackground = lazy(() => import('@/components/RingParticlesBackground'))
+const CSSGlowBackground = lazy(() => import('@/components/CSSGlowBackground'))
 // Lazy load modals - only load when needed
 const WebsiteSurveyModal = lazy(() => import('@/components/WebsiteSurveyModal'))
 const WebsiteRevisionModal = lazy(() => import('@/components/WebsiteRevisionModal'))
@@ -159,7 +160,6 @@ const connectLinks = [
 
 export default function Page() {
   const [navSolid, setNavSolid] = useState(false)
-  const navInitialTopRef = useRef(0)
   const [isMobileNavOpen, setMobileNavOpen] = useState(false)
   const [isSurveyModalOpen, setIsSurveyModalOpen] = useState(false)
   const [isWebsiteRevisionModalOpen, setIsWebsiteRevisionModalOpen] = useState(false)
@@ -191,13 +191,9 @@ export default function Page() {
           '/images/meta-logo-white.png',
           '/logo/atv%20tulum%20logo%20(1)%20(1).jpg'
         )
-      } else {
-        criticalImages.push(
-        '/images/vercel-icon-light.png',
-        '/images/monday.png',
-        '/images/Celigo.png'
-        )
       }
+      // Note: Removed desktop image preloads (vercel-icon-light.png, monday.png, Celigo.png) 
+      // as they are below the fold and cause preload warnings
       
       criticalImages.forEach((src) => {
         const link = document.createElement('link')
@@ -338,68 +334,13 @@ export default function Page() {
   }, [])
 
   useEffect(() => {
-    // Optimized scroll handler - updates nav state only
-    // Removed opacity manipulation that was causing content to disappear
-    const isMobileDevice = window.innerWidth < 768
+    // Simple scroll handler - navbar is always fixed, just updates nav background state
     let ticking = false
-    let lastScrollY = 0
-    const scrollThreshold = isMobileDevice ? 120 : 50 // Higher threshold on mobile for better performance
-    
-    // Store initial navbar position on first load
-    const nav = document.querySelector('nav.hidden.lg\\:block')
-    if (nav && navInitialTopRef.current === 0) {
-      navInitialTopRef.current = nav.offsetTop || 0
-    }
     
     const handleScroll = () => {
-      const currentScrollY = window.scrollY
-      
-      // Skip if scroll change is too small (reduces updates)
-      if (Math.abs(currentScrollY - lastScrollY) < scrollThreshold && ticking) {
-        return
-      }
-      
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          setNavSolid(currentScrollY > 40)
-          
-          // Check if navbar sticky is working and apply fixed fallback if needed
-          // Only check occasionally to prevent flickering
-          if (currentScrollY > 150 && currentScrollY % 10 === 0) { // Only check every 10th scroll
-            const nav = document.querySelector('nav.hidden.lg\\:block')
-            if (nav) {
-              const rect = nav.getBoundingClientRect()
-              const computed = window.getComputedStyle(nav)
-              const initialTop = navInitialTopRef.current || 0
-              
-              // If navbar is scrolled off top and position is sticky, switch to fixed
-              if (rect.top < -20 && computed.position === 'sticky') {
-                // Sticky isn't working, use fixed as fallback
-                nav.style.setProperty('position', 'fixed', 'important')
-                nav.style.setProperty('top', '0', 'important')
-                nav.style.setProperty('left', '0', 'important')
-                nav.style.setProperty('right', '0', 'important')
-                nav.style.setProperty('width', '100%', 'important')
-                nav.style.setProperty('z-index', '50', 'important')
-              }
-            }
-          } else if (currentScrollY <= 50) {
-            // Back at top, ensure sticky is set
-            const nav = document.querySelector('nav.hidden.lg\\:block')
-            if (nav) {
-              const computed = window.getComputedStyle(nav)
-              if (computed.position !== 'sticky') {
-                nav.style.setProperty('position', 'sticky', 'important')
-                nav.style.setProperty('top', '0', 'important')
-                nav.style.setProperty('z-index', '50', 'important')
-                nav.style.removeProperty('left')
-                nav.style.removeProperty('right')
-                nav.style.removeProperty('width')
-              }
-            }
-          }
-          
-          lastScrollY = currentScrollY
+          setNavSolid(window.scrollY > 40)
           ticking = false
         })
         ticking = true
@@ -490,12 +431,34 @@ export default function Page() {
 
   useEffect(() => {
     if (isMobileNavOpen) {
+      // Lock body scroll when drawer is open
+      const scrollY = window.scrollY
+      document.body.style.position = 'fixed'
+      document.body.style.top = `-${scrollY}px`
+      document.body.style.left = '0'
+      document.body.style.right = '0'
       document.body.style.overflow = 'hidden'
+      document.body.style.width = '100%'
     } else {
+      // Restore scroll position when drawer closes
+      const scrollY = document.body.style.top
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.left = ''
+      document.body.style.right = ''
       document.body.style.overflow = ''
+      document.body.style.width = ''
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1)
+      }
     }
     return () => {
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.left = ''
+      document.body.style.right = ''
       document.body.style.overflow = ''
+      document.body.style.width = ''
     }
   }, [isMobileNavOpen])
 
@@ -753,6 +716,57 @@ export default function Page() {
   return (
     <div className="bg-black text-white min-h-screen" style={{ margin: 0, padding: 0 }}>
       <DesktopNav navSolid={navSolid} />
+      {/* Mobile Header - Fixed at page level for proper sticky behavior */}
+      <header 
+        className={`lg:hidden w-full border-b border-white/10 shadow-lg transition-all duration-300`} 
+        style={{ 
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          width: '100%',
+          zIndex: 10000,
+          transform: 'none',
+          WebkitTransform: 'none',
+          // Very transparent glassy effect - shows particles through
+          background: 'linear-gradient(to bottom, rgba(255,255,255,0.03), rgba(255,255,255,0.01))',
+          WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+          backdropFilter: 'blur(16px) saturate(180%)',
+          boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255,255,255,0.08), inset 0 -1px 0 rgba(255,255,255,0.02)'
+        }}
+      >
+        <div className="max-w-7xl mx-auto flex justify-between items-center px-5 py-3">
+          <a aria-label="Yo Marketing Home" href="#hero" className="group relative">
+            <div className="absolute -inset-2 bg-gradient-to-r from-[#7BB9E8]/20 via-[#7BB9E8]/10 to-transparent rounded-xl blur-lg opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-300 -z-10" />
+            <img 
+              src="/images/logo-hq.png" 
+              alt="Yo Marketing" 
+              width={64}
+              height={64}
+              className="logo h-14 w-auto transition-all duration-300 cursor-pointer group-hover:scale-105 group-active:scale-95 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]" 
+              loading="eager"
+              decoding="sync"
+              fetchPriority="high"
+            />
+          </a>
+          <button 
+            suppressHydrationWarning 
+            className="group relative p-3 text-white/90 hover:text-white transition-all duration-200 focus:outline-none rounded-2xl active:scale-95" 
+            aria-label={isMobileNavOpen ? "Close navigation menu" : "Open navigation menu"}
+            onClick={() => setMobileNavOpen(!isMobileNavOpen)}
+            type="button"
+          >
+            <div className="absolute inset-0 bg-white/5 rounded-2xl opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-200" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#7BB9E8]/10 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 blur-sm" />
+            {/* Animated hamburger/X icon */}
+            <div className="relative w-5 h-5 flex flex-col justify-center items-center">
+              <span className={`block w-5 h-0.5 bg-current rounded-full transition-all duration-300 group-hover:bg-[#7BB9E8] ${isMobileNavOpen ? 'rotate-45 translate-y-[3px]' : ''}`} />
+              <span className={`block w-5 h-0.5 bg-current rounded-full transition-all duration-300 group-hover:bg-[#7BB9E8] ${isMobileNavOpen ? 'opacity-0' : 'mt-1.5'}`} />
+              <span className={`block w-5 h-0.5 bg-current rounded-full transition-all duration-300 group-hover:bg-[#7BB9E8] ${isMobileNavOpen ? '-rotate-45 -translate-y-[3px]' : 'mt-1.5'}`} />
+            </div>
+          </button>
+        </div>
+      </header>
       <main style={{ margin: 0, padding: 0 }}>
         <ErrorBoundary>
           <Suspense fallback={<HeroSectionSkeleton onOpenMobileNav={() => setMobileNavOpen(true)} typedText={typedText} isMobileNavOpen={isMobileNavOpen} />}>
@@ -851,66 +865,36 @@ export default function Page() {
 }
 
 function DesktopNav({ navSolid }) {
-  // Use ref to ensure sticky is applied
+  // Use ref for the nav element
   const navRef = useRef(null)
-  const navInitialTopRef = useRef(0) // Local ref for this component
-  
-  useEffect(() => {
-    if (navRef.current && typeof window !== 'undefined') {
-      const nav = navRef.current
-      navInitialTopRef.current = nav.offsetTop || 0
-      
-      // Set sticky positioning on mount and ensure it's applied
-      const setInitialSticky = () => {
-        // Always set sticky on mount
-        nav.style.setProperty('position', 'sticky', 'important')
-        nav.style.setProperty('top', '0', 'important')
-        nav.style.setProperty('z-index', '50', 'important')
-        nav.style.removeProperty('left')
-        nav.style.removeProperty('right')
-        nav.style.removeProperty('width')
-        navInitialTopRef.current = nav.offsetTop || 0
-      }
-      
-      // Apply immediately and after a short delay
-      setInitialSticky()
-      const timeoutId = setTimeout(setInitialSticky, 100)
-      
-      // Re-check on resize
-      const handleResize = () => {
-        setInitialSticky()
-        navInitialTopRef.current = nav.offsetTop || 0
-      }
-      window.addEventListener('resize', handleResize, { passive: true })
-      
-      return () => {
-        clearTimeout(timeoutId)
-        window.removeEventListener('resize', handleResize)
-      }
-    }
-  }, [])
   
   return (
-    <nav
-      ref={navRef}
-      className={`hidden lg:block w-full z-50 sticky top-0 transition-all duration-300 ease-out ${
-        navSolid 
-          ? 'nav-scrolled-modern' 
-          : 'nav-transparent'
-      }`}
-      style={{ 
-        position: 'sticky', 
-        top: '0px', 
-        zIndex: 50, 
-        left: 'auto', 
-        right: 'auto',
-        WebkitBackdropFilter: 'blur(20px) saturate(180%)'
-      }}
-      suppressHydrationWarning
-    >
+    <>
+      {/* Spacer for fixed navbar - same height as navbar */}
+      <div className="hidden lg:block h-20" aria-hidden="true" />
+      <nav
+        ref={navRef}
+        className={`hidden lg:block w-full transition-all duration-300 ease-out border-b border-white/10`}
+        style={{ 
+          position: 'fixed', 
+          top: 0,
+          left: 0,
+          right: 0,
+          width: '100%',
+          zIndex: 10000,
+          transform: 'none',
+          WebkitTransform: 'none',
+          // Very transparent glassy effect - shows particles through
+          background: 'linear-gradient(to bottom, rgba(255,255,255,0.03), rgba(255,255,255,0.01))',
+          WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+          backdropFilter: 'blur(16px) saturate(180%)',
+          boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255,255,255,0.08), inset 0 -1px 0 rgba(255,255,255,0.02)'
+        }}
+        suppressHydrationWarning
+      >
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative">
         {/* Glassmorphism overlay effect */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/[0.03] via-transparent to-transparent pointer-events-none" />
         <div className="flex items-center justify-center h-20 relative z-10">
           {/* Logo - Absolute positioned on left */}
           <a 
@@ -922,13 +906,12 @@ function DesktopNav({ navSolid }) {
             <img 
               src="/images/logo-hq.png" 
               alt="Yo Marketing" 
-              width={80}
-              height={80}
-              className="logo tilt-logo h-20 w-auto group-hover:scale-110 transition-all duration-300 drop-shadow-lg" 
+              width={64}
+              height={64}
+              className="logo tilt-logo h-16 w-auto group-hover:scale-105 transition-all duration-300 drop-shadow-lg" 
               loading="eager"
               decoding="sync"
               fetchPriority="high"
-              style={{ willChange: 'transform' }}
             />
           </a>
 
@@ -939,16 +922,16 @@ function DesktopNav({ navSolid }) {
               <NavTextLink href="#services" label="Services" />
               <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-[#0a0a0a]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                 <div className="py-2">
-                  <a href="/services/website-design" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+                  <a href="/services/website-design" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                     Website Design & Build
                   </a>
-                  <a href="/services/google-business-profile" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+                  <a href="/services/google-business-profile" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                     Google Business Profile
                   </a>
-                  <a href="/services/seo-services" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+                  <a href="/services/seo-services" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                     SEO Services
                   </a>
-                  <a href="/services/lead-generation" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+                  <a href="/services/lead-generation" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                     Lead Generation & Ads
                   </a>
                 </div>
@@ -976,12 +959,12 @@ function DesktopNav({ navSolid }) {
                   });
                 }
               }}
-              className="group relative px-6 py-2.5 md:px-8 md:py-3 bg-gradient-to-r from-[#7BB9E8] via-[#6ba8d8] to-[#5fa6d6] text-white font-bold text-xs md:text-sm tracking-wide transition-all duration-300 rounded-xl overflow-hidden shadow-lg shadow-[#7BB9E8]/30 hover:shadow-xl hover:shadow-[#7BB9E8]/50 hover:scale-105 active:scale-95"
-              style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}
+              className="group relative px-4 py-1.5 md:px-5 md:py-2 bg-gradient-to-r from-[#7BB9E8] via-[#6ba8d8] to-[#5fa6d6] text-white font-semibold text-[10px] md:text-xs tracking-wide transition-all duration-300 rounded-full overflow-hidden shadow-md shadow-[#7BB9E8]/25 hover:shadow-lg hover:shadow-[#7BB9E8]/40 hover:scale-105 active:scale-95"
+              style={{ fontFamily: 'DM Sans, sans-serif' }}
             >
-              <span className="relative z-10 flex items-center gap-2">
+              <span className="relative z-10 flex items-center gap-1.5">
                 GET STARTED
-                <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
               </span>
@@ -991,6 +974,7 @@ function DesktopNav({ navSolid }) {
         </div>
       </div>
     </nav>
+    </>
   )
 }
 
@@ -1039,7 +1023,7 @@ function NavTextLink({ href, label }) {
           ? 'text-[#7BB9E8] bg-white/5' 
           : 'text-white/80 hover:text-white hover:bg-white/5'
       }`}
-      style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}
+      style={{ fontFamily: 'DM Sans, sans-serif' }}
     >
       <span className="relative z-10">{label}</span>
       {/* Animated underline */}
@@ -1054,7 +1038,9 @@ function NavTextLink({ href, label }) {
 
 function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
   const [isMobile, setIsMobile] = useState(false)
-  // Animation options: 'blackhole', 'pyramid', 'gradient', 'particles', 'ringParticles'
+  // Animation options: 'blackhole', 'pyramid', 'gradient', 'particles', 'ringParticles', 'cssGlow'
+  // 'ringParticles' - enhanced glowing particles (current)
+  // 'pyramid' - 3D rotating pyramid like dumodigital.com
   const [heroAnimation, setHeroAnimation] = useState('ringParticles')
   // Color options: 'multiColor' (all 4 colors), 'websiteDesign', 'leadGeneration', 'googleBusiness', 'seoServices'
   const [particleColor, setParticleColor] = useState('multiColor')
@@ -1088,80 +1074,36 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
         {heroAnimation === 'gradient' && <LightweightHeroBackground />}
         {heroAnimation === 'particles' && <ParticleNetworkBackground colorScheme={particleColor} />}
         {heroAnimation === 'ringParticles' && <RingParticlesBackground colorScheme={particleColor} />}
+        {heroAnimation === 'cssGlow' && <CSSGlowBackground variant="default" animated={true} />}
       </Suspense>
-      <header 
-        className={`lg:hidden sticky top-0 z-50 w-full border-b backdrop-blur-[24px] shadow-[0_4px_24px_rgba(0,0,0,0.4),0_0_0_1px_rgba(255,255,255,0.05)_inset] transition-all duration-300 ${
-          isMobileNavOpen 
-            ? 'border-white/5 bg-gradient-to-b from-[rgba(4,5,7,0.3)] to-[rgba(4,5,7,0.2)]' 
-            : 'border-white/15 bg-gradient-to-b from-[rgba(4,5,7,0.85)] to-[rgba(4,5,7,0.6)]'
-        }`} 
-        style={{ position: 'sticky', top: '0 !important', zIndex: 50, marginTop: '0 !important', paddingTop: '0 !important', WebkitBackdropFilter: 'blur(24px) saturate(180%)' }}
-      >
-        <div className="max-w-7xl mx-auto flex justify-between items-center px-5 py-4">
-          <a aria-label="Yo Marketing Home" href="#hero" className="group relative">
-            <div className="absolute -inset-2 bg-gradient-to-r from-[#7BB9E8]/20 via-[#7BB9E8]/10 to-transparent rounded-xl blur-lg opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-300 -z-10" />
-            <img 
-              src="/images/logo-hq.png" 
-              alt="Yo Marketing" 
-              width={80}
-              height={80}
-              className="logo tilt-logo h-20 w-auto transition-all duration-300 cursor-pointer group-hover:scale-105 group-active:scale-95 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]" 
-              loading="eager"
-              decoding="sync"
-              fetchPriority="high"
-              style={{ willChange: 'transform', height: '80px', width: 'auto', minHeight: '80px', minWidth: '80px' }}
-            />
-          </a>
-          <button 
-            suppressHydrationWarning 
-            className="group relative p-3 text-white/90 hover:text-white transition-all duration-200 focus:outline-none rounded-2xl active:scale-95" 
-            aria-label="Open navigation menu" 
-            onClick={onOpenMobileNav}
-            type="button"
-          >
-            {/* Button background glow */}
-            <div className="absolute inset-0 bg-white/5 rounded-2xl opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-200" />
-            <div className="absolute inset-0 bg-gradient-to-br from-[#7BB9E8]/10 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 blur-sm" />
-            
-            {/* Hamburger icon */}
-            <div className="relative flex flex-col gap-1.5 w-5 h-5 justify-center items-center">
-              <span className="block w-5 h-0.5 bg-current rounded-full transition-all duration-300 group-hover:bg-[#7BB9E8] group-hover:shadow-[0_0_8px_rgba(123,185,232,0.4)]" />
-              <span className="block w-5 h-0.5 bg-current rounded-full transition-all duration-300 group-hover:bg-[#7BB9E8] group-hover:shadow-[0_0_8px_rgba(123,185,232,0.4)]" />
-              <span className="block w-5 h-0.5 bg-current rounded-full transition-all duration-300 group-hover:bg-[#7BB9E8] group-hover:shadow-[0_0_8px_rgba(123,185,232,0.4)]" />
-            </div>
-          </button>
-        </div>
-      </header>
-      <section className="hero relative z-10 w-full flex flex-col justify-center items-center pb-16 mb-0 overflow-hidden" style={{ paddingTop: '2.5rem' }}>
+      {/* Mobile header now at page level - spacer for fixed navbar */}
+      <div className="lg:hidden h-24" aria-hidden="true" />
+      <section className="hero relative z-10 w-full flex flex-col justify-center items-center pb-16 mb-0 overflow-hidden lg:pt-8">
         <div className="max-w-5xl mx-auto w-full px-4 sm:px-6 md:px-8 flex flex-col items-center justify-center text-center">
-          <div className="flex items-center space-x-4 mb-4 md:mb-5 mt-0 md:mt-1">
-            <div className="flex items-center space-x-1.5 md:space-x-2.5 bg-white/10 px-1.5 py-0.5 md:px-2.5 md:py-1.5 rounded-full border-2 border-white/30 overflow-visible shadow-md shadow-white/5 backdrop-blur-sm ring-1 ring-white/10">
+          <div className="flex items-center justify-center mb-4 md:mb-5 mt-4">
+            <div className="flex items-center gap-2 md:gap-2.5 bg-white/10 px-3 py-1.5 md:px-2.5 md:py-1.5 rounded-full border-2 border-white/30 shadow-md shadow-white/5 backdrop-blur-sm ring-1 ring-white/10">
               <img
                 src="/images/orig.png"
                 alt="GoHighLevel"
                 width={32}
                 height={32}
-                className="h-6 sm:h-7 md:h-8 w-auto object-contain -mt-1 md:-mt-2.5 scale-105 transition-all duration-300 hover:scale-110"
+                className="h-7 sm:h-7 md:h-8 w-auto object-contain scale-105"
                 loading="eager"
                 decoding="sync"
                 fetchPriority="high"
-                style={{
-                  filter: 'drop-shadow(0 0 2px rgba(255, 255, 255, 0.1))',
-                  willChange: 'transform'
-                }}
               />
-              <div className="h-3 md:h-5 w-[1px] bg-gradient-to-b from-transparent via-white/30 to-transparent mx-0.5 md:mx-1 animate-pulse" />
-              <span className="text-[#7BB9E8] font-medium text-[8px] md:text-xs tracking-widest uppercase transition-all duration-300 hover:text-[#7BB9E8] hover:scale-105" style={{ textShadow: '0 0 4px rgba(123, 185, 232, 0.2)' }}>
+              <div className="h-4 md:h-5 w-[1px] bg-gradient-to-b from-transparent via-white/40 to-transparent" />
+              <span className="text-[#7BB9E8] font-medium text-[10px] md:text-xs tracking-widest uppercase" style={{ textShadow: '0 0 4px rgba(123, 185, 232, 0.2)' }}>
                 GoHighLevel Plus Partner
               </span>
             </div>
           </div>
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-extrabold text-white leading-[1.1] tracking-tight mb-4 md:mb-6 relative text-center break-words overflow-hidden" style={{ textShadow: '0 4px 20px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(0, 0, 0, 0.3)', fontFamily: 'Inter, Satoshi, sans-serif' }}>
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-extrabold text-white leading-[1.1] tracking-tight mb-4 md:mb-6 relative text-center break-words overflow-hidden" style={{ textShadow: '0 4px 20px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(0, 0, 0, 0.3)', fontFamily: 'DM Sans, sans-serif' }}>
             <span className="block break-words">We Make</span>
             <span className="block text-white break-words">Websites</span>
           </h1>
           <div className="mb-6 md:mb-8 h-[5rem] md:h-[4rem] flex items-center justify-center">
-            <span className="text-xl md:text-2xl lg:text-3xl text-white/90 font-light max-w-4xl leading-relaxed break-words line-clamp-4 sm:line-clamp-none" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+            <span className="text-lg md:text-xl lg:text-2xl text-white/90 font-light max-w-4xl leading-relaxed break-words line-clamp-4 sm:line-clamp-none" style={{ fontFamily: 'DM Sans, sans-serif' }}>
               {typedText}
               <span className="typewriter-cursor text-[#7BB9E8] animate-pulse">|</span>
             </span>
@@ -1228,10 +1170,10 @@ function MobileDrawer({ onClose }) {
   return (
     <>
       {/* Refined transparent overlay */}
-      <div className="fixed inset-0 z-[998] bg-black/30 backdrop-blur-md md:hidden transition-opacity duration-300" onClick={onClose} />
+      <div className="fixed inset-0 bg-black/50 backdrop-blur-sm lg:hidden transition-opacity duration-300" style={{ zIndex: 10001 }} onClick={onClose} />
       
       {/* Transparent glassmorphism drawer - Better approach */}
-      <div className="fixed inset-y-0 right-0 z-[999] w-full max-w-sm bg-gradient-to-b from-[rgba(4,5,7,0.85)] via-[rgba(4,5,7,0.75)] to-[rgba(4,5,7,0.85)] backdrop-blur-[20px] border-l border-white/15 shadow-[0_0_60px_rgba(0,0,0,0.6)] flex flex-col md:hidden animate-slide-in-drawer overflow-y-auto" style={{ WebkitBackdropFilter: 'blur(20px) saturate(180%)' }}>
+      <div className="fixed inset-y-0 right-0 w-full max-w-sm bg-gradient-to-b from-[rgba(4,5,7,0.95)] via-[rgba(4,5,7,0.9)] to-[rgba(4,5,7,0.95)] backdrop-blur-[20px] border-l border-white/15 shadow-[0_0_60px_rgba(0,0,0,0.6)] flex flex-col lg:hidden animate-slide-in-drawer overflow-y-auto" style={{ zIndex: 10002, WebkitBackdropFilter: 'blur(20px) saturate(180%)' }}>
         {/* Subtle inner glow */}
         <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-transparent pointer-events-none" />
         
@@ -1296,7 +1238,7 @@ function MobileDrawer({ onClose }) {
                   onClick={handleClick}
                   className="group relative px-4 py-3.5 text-white/95 hover:text-white text-base font-medium transition-all duration-300 rounded-xl"
                   style={{ 
-                    fontFamily: 'Inter, Satoshi, sans-serif'
+                    fontFamily: 'DM Sans, sans-serif'
                   }}
                 >
                   <span className="relative flex items-center justify-between z-10">
@@ -1316,7 +1258,7 @@ function MobileDrawer({ onClose }) {
                 href="/services/website-design"
                 onClick={onClose}
                 className="group relative px-4 py-2.5 text-white/80 hover:text-white text-sm font-medium transition-all duration-300 rounded-lg"
-                style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}
+                style={{ fontFamily: 'DM Sans, sans-serif' }}
               >
                 <span className="relative flex items-center justify-between z-10">
                   Website Design & Build
@@ -1329,7 +1271,7 @@ function MobileDrawer({ onClose }) {
                 href="/services/google-business-profile"
                 onClick={onClose}
                 className="group relative px-4 py-2.5 text-white/80 hover:text-white text-sm font-medium transition-all duration-300 rounded-lg"
-                style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}
+                style={{ fontFamily: 'DM Sans, sans-serif' }}
               >
                 <span className="relative flex items-center justify-between z-10">
                   Google Business Profile
@@ -1342,7 +1284,7 @@ function MobileDrawer({ onClose }) {
                 href="/services/seo-services"
                 onClick={onClose}
                 className="group relative px-4 py-2.5 text-white/80 hover:text-white text-sm font-medium transition-all duration-300 rounded-lg"
-                style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}
+                style={{ fontFamily: 'DM Sans, sans-serif' }}
               >
                 <span className="relative flex items-center justify-between z-10">
                   SEO Services
@@ -1355,7 +1297,7 @@ function MobileDrawer({ onClose }) {
                 href="/services/lead-generation"
                 onClick={onClose}
                 className="group relative px-4 py-2.5 text-white/80 hover:text-white text-sm font-medium transition-all duration-300 rounded-lg"
-                style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}
+                style={{ fontFamily: 'DM Sans, sans-serif' }}
               >
                 <span className="relative flex items-center justify-between z-10">
                   Lead Generation & Ads
@@ -1388,7 +1330,7 @@ function MobileDrawer({ onClose }) {
               }
             }}
             className="group relative w-full text-center px-5 py-3 rounded-full bg-gradient-to-r from-[#7BB9E8] via-[#6ba8d8] to-[#5fa6d6] text-black font-bold text-sm shadow-[0_4px_20px_rgba(123,185,232,0.4)] hover:shadow-[0_6px_30px_rgba(123,185,232,0.6)] hover:scale-105 transition-all duration-300 active:scale-95"
-            style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}
+            style={{ fontFamily: 'DM Sans, sans-serif' }}
           >
             <span className="relative flex items-center justify-center gap-2 z-10">
               GET STARTED
@@ -1470,30 +1412,12 @@ function HeroSectionSkeleton({ onOpenMobileNav, typedText, isMobileNavOpen = fal
     <section
       id="hero"
       className="hero w-full relative font-sans pb-12 md:pb-16"
-      style={{ backgroundColor: 'transparent', paddingTop: 0 }}
+      style={{ backgroundColor: 'transparent' }}
       role="region"
       aria-label="Homepage Hero Banner"
     >
       <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black animate-pulse" />
-      <header 
-        className={`lg:hidden sticky top-0 z-50 w-full border-b backdrop-blur-[24px] shadow-[0_4px_24px_rgba(0,0,0,0.4),0_0_0_1px_rgba(255,255,255,0.05)_inset] transition-all duration-300 ${
-          isMobileNavOpen 
-            ? 'border-white/5 bg-gradient-to-b from-[rgba(4,5,7,0.3)] to-[rgba(4,5,7,0.2)]' 
-            : 'border-white/15 bg-gradient-to-b from-[rgba(4,5,7,0.85)] to-[rgba(4,5,7,0.6)]'
-        }`} 
-        style={{ position: 'sticky', top: 0, zIndex: 50, marginTop: 0, WebkitBackdropFilter: 'blur(24px) saturate(180%)' }}
-      >
-        <div className="max-w-7xl mx-auto flex justify-between items-center px-5 py-4">
-          <div className="h-14 w-40 bg-white/10 rounded-lg animate-pulse" />
-          <button suppressHydrationWarning className="p-3 text-white/90 hover:text-white transition-all duration-200 focus:outline-none rounded-2xl active:scale-95" aria-label="Open navigation menu" onClick={onOpenMobileNav} type="button">
-            <div className="flex flex-col gap-1.5 w-5 h-5 justify-center items-center">
-              <div className="w-5 h-0.5 bg-current rounded-full" />
-              <div className="w-5 h-0.5 bg-current rounded-full" />
-              <div className="w-5 h-0.5 bg-current rounded-full" />
-            </div>
-          </button>
-        </div>
-      </header>
+      {/* Mobile header now at page level for proper sticky behavior */}
       <section className="hero relative z-10 w-full flex flex-col justify-center items-center pt-16 lg:pt-24 pb-20 md:pb-24 mb-0 overflow-hidden">
         <div className="max-w-5xl mx-auto w-full px-4 md:px-8 flex flex-col items-center justify-center text-center pt-0 pb-0 mb-0 overflow-hidden">
           <div className="h-8 w-48 bg-white/10 rounded-full animate-pulse mb-10 mt-0" />
@@ -1551,4 +1475,5 @@ function CarouselSkeleton() {
     </section>
   )
 }
+
 

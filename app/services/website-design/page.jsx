@@ -53,14 +53,14 @@ export default function WebsiteDesignPage() {
         </div>
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-8 sm:mb-12">
-            <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold mb-4 sm:mb-6 mt-8 sm:mt-12 md:mt-16 lg:mt-24 leading-tight px-2" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+            <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold mb-4 sm:mb-6 mt-8 sm:mt-12 md:mt-16 lg:mt-24 leading-tight px-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>
               We Build
               <br />
               <span className="bg-gradient-to-r from-[#7BB9E8] to-[#4A90E2] bg-clip-text text-transparent">
                 {buildTexts[currentText]}
               </span>
             </h1>
-            <p className="text-base sm:text-lg md:text-xl text-white/80 mb-6 sm:mb-8 max-w-3xl mx-auto px-4 leading-relaxed" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+            <p className="text-base sm:text-lg md:text-xl text-white/80 mb-6 sm:mb-8 max-w-3xl mx-auto px-4 leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>
               We craft modern, high-performing websites with sleek design, lightning-fast performance, and mobile-first responsiveness that work hard for your business.
             </p>
             <div className="flex items-center justify-center gap-2 mb-6 sm:mb-8 px-4">
@@ -75,7 +75,7 @@ export default function WebsiteDesignPage() {
               <button
                 onClick={() => setIsModalOpen(true)}
                 className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-gradient-to-r from-[#7BB9E8] to-[#4A90E2] text-white text-base sm:text-lg font-bold shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 w-full sm:w-auto"
-                style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}
+                style={{ fontFamily: 'DM Sans, sans-serif' }}
               >
                 Start Your Website Project
                 <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -101,10 +101,10 @@ export default function WebsiteDesignPage() {
             <div className="inline-block px-4 py-2 bg-[#7BB9E8]/10 border border-[#7BB9E8]/20 rounded-full mb-6 mt-8 md:mt-12">
               <span className="text-[#7BB9E8] text-sm font-semibold uppercase tracking-wider">Our Mission</span>
             </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6" style={{ fontFamily: 'DM Sans, sans-serif' }}>
               Our <span className="bg-gradient-to-r from-[#7BB9E8] to-[#4A90E2] bg-clip-text text-transparent">Goal?</span>
             </h2>
-            <p className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+            <p className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>
               Turn casual visitors into loyal customers through smooth navigation, strategic content, and conversion-focused design.
             </p>
           </div>
@@ -118,7 +118,7 @@ export default function WebsiteDesignPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-[#7BB9E8] transition-colors duration-300" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+                <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-[#7BB9E8] transition-colors duration-300" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                   Impress & Engage
                 </h3>
                 <p className="text-white/70 leading-relaxed text-base">
@@ -135,7 +135,7 @@ export default function WebsiteDesignPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-[#7BB9E8] transition-colors duration-300" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+                <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-[#7BB9E8] transition-colors duration-300" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                   Rank & Convert
                 </h3>
                 <p className="text-white/70 leading-relaxed text-base">
@@ -152,7 +152,7 @@ export default function WebsiteDesignPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-[#7BB9E8] transition-colors duration-300" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+                <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-[#7BB9E8] transition-colors duration-300" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                   For Every Business
                 </h3>
                 <p className="text-white/70 leading-relaxed text-base">
@@ -173,17 +173,17 @@ export default function WebsiteDesignPage() {
           <div className="inline-block px-4 py-2 bg-[#7BB9E8]/10 border border-[#7BB9E8]/20 rounded-full mb-6 mt-8 md:mt-12">
             <span className="text-[#7BB9E8] text-sm font-semibold uppercase tracking-wider">Get Started</span>
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight" style={{ fontFamily: 'DM Sans, sans-serif' }}>
             So What Are You <span className="bg-gradient-to-r from-[#7BB9E8] to-[#4A90E2] bg-clip-text text-transparent">Waiting For?</span>
           </h2>
-          <p className="text-xl md:text-2xl text-white/80 mb-10 max-w-3xl mx-auto leading-relaxed" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+          <p className="text-xl md:text-2xl text-white/80 mb-10 max-w-3xl mx-auto leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>
             Join 100+ businesses growing with no money out of pocket. Sign up and if you qualify, we&apos;ll help transform your business growth.
           </p>
           <div className="mb-10">
             <button
               onClick={() => setIsModalOpen(true)}
               className="inline-flex items-center justify-center gap-3 px-10 py-5 rounded-full bg-gradient-to-r from-[#7BB9E8] to-[#4A90E2] text-white text-lg font-bold shadow-2xl hover:shadow-[0_0_40px_rgba(123,185,232,0.5)] hover:scale-105 transition-all duration-300 group"
-              style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}
+              style={{ fontFamily: 'DM Sans, sans-serif' }}
             >
               Get Your Free Revenue Assessment
               <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -195,7 +195,7 @@ export default function WebsiteDesignPage() {
             No obligation • Quick survey • Custom growth plan
           </p>
           <div className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl rounded-3xl p-8 lg:p-10 border border-white/10 text-left max-w-3xl mx-auto shadow-2xl">
-            <h3 className="text-2xl font-bold mb-6 text-white" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+            <h3 className="text-2xl font-bold mb-6 text-white" style={{ fontFamily: 'DM Sans, sans-serif' }}>
               When you qualify for our business growth study:
             </h3>
             <ul className="space-y-4">
@@ -242,3 +242,4 @@ export default function WebsiteDesignPage() {
     </div>
   )
 }
+

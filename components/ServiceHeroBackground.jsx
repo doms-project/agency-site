@@ -295,3 +295,4 @@ function ServiceHeroBackground({ color = { r: 123, g: 185, b: 232 } }) {
 // Memoize component to prevent unnecessary re-renders
 export default memo(ServiceHeroBackground)
 
+

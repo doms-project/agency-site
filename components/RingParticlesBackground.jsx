@@ -12,23 +12,23 @@ export default function RingParticlesBackground({
   const canvasRef = useRef(null)
   const animationFrameRef = useRef(null)
   const particlesRef = useRef([])
-  const mouseRef = useRef({ x: 0, y: 0 })
+  const mouseRef = useRef({ x: 0, y: 0, active: false })
   const [isMobile, setIsMobile] = useState(false)
+  const isVisibleRef = useRef(true)
 
   // Memoize color palette to prevent unnecessary re-renders
   const colorPalette = useMemo(() => {
     const isMultiColor = colorScheme === 'multiColor'
     if (isMultiColor) {
       return [...multiColorPalette, 
-        // Add white color variants for contrast
-        { r: 255, g: 255, b: 255 },      // Pure white
-        { r: 240, g: 240, b: 255 },      // Slight blue-white tint
-        { r: 255, g: 250, b: 240 },     // Slight warm white
+        { r: 255, g: 255, b: 255 },
+        { r: 240, g: 240, b: 255 },
+        { r: 255, g: 250, b: 240 },
       ]
     } else {
       const scheme = colorSchemes[colorScheme] || colorSchemes.websiteDesign
       return [scheme.primary, scheme.secondary, scheme.accent, 
-              { r: 255, g: 255, b: 255 }, { r: 240, g: 240, b: 255 }] // Add white variants
+              { r: 255, g: 255, b: 255 }, { r: 240, g: 240, b: 255 }]
     }
   }, [colorScheme])
 
@@ -49,10 +49,11 @@ export default function RingParticlesBackground({
     const container = canvas.parentElement
     if (!container) return
 
-    // High DPI support
-    const dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1.5 : 2)
+    // OPTIMIZATION 1: Lower DPR - cap at 1.5 for performance
+    const dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1 : 1.5)
     let lastTime = 0
-    const targetFPS = mobile ? 30 : 60
+    // OPTIMIZATION 2: Lower FPS - 24fps is smooth enough for background effects
+    const targetFPS = mobile ? 20 : 24
     const frameInterval = 1000 / targetFPS
 
     const resizeCanvas = () => {
@@ -66,9 +67,10 @@ export default function RingParticlesBackground({
 
     resizeCanvas()
 
-    // Particle configuration
-    const count = particleCount || (mobile ? 80 : 150)
-    const maxDistance = connectionDistance || (mobile ? 140 : 180)
+    // OPTIMIZATION 3: Balanced particle count for visual appeal + performance
+    const count = particleCount || (mobile ? 45 : 85)
+    // OPTIMIZATION 4: Connection distance for visual network effect
+    const maxDistance = connectionDistance || (mobile ? 110 : 140)
     const particles = []
 
     class RingParticle {
@@ -80,23 +82,20 @@ export default function RingParticlesBackground({
         const rect = container.getBoundingClientRect()
         this.x = Math.random() * rect.width
         this.y = Math.random() * rect.height
-        this.baseRadius = Math.random() * 3 + 2 // Ring radius: 2-5px
-        this.ringWidth = Math.random() * 1.5 + 0.5 // Ring stroke width: 0.5-2px
-        this.speedX = (Math.random() - 0.5) * (mobile ? 0.2 : 0.4)
-        this.speedY = (Math.random() - 0.5) * (mobile ? 0.2 : 0.4)
-        this.rotationSpeed = (Math.random() - 0.5) * 0.02 // Slow rotation
+        this.baseRadius = Math.random() * 2.5 + 1.5 // Slightly smaller rings
+        this.ringWidth = Math.random() * 1 + 0.5
+        this.speedX = (Math.random() - 0.5) * (mobile ? 0.15 : 0.25)
+        this.speedY = (Math.random() - 0.5) * (mobile ? 0.15 : 0.25)
+        this.rotationSpeed = (Math.random() - 0.5) * 0.015
         this.rotation = Math.random() * Math.PI * 2
-        this.baseOpacity = Math.random() * 0.3 + 0.2
-        this.pulseSpeed = Math.random() * 0.01 + 0.005
+        this.baseOpacity = Math.random() * 0.35 + 0.25 // Increased for more visibility
+        this.pulseSpeed = Math.random() * 0.008 + 0.004
         this.pulseOffset = Math.random() * Math.PI * 2
-        // Randomly select from color palette
         const colorIndex = Math.floor(Math.random() * colorPalette.length)
         this.colorRGB = colorPalette[colorIndex]
-        // Ring segments (for animated ring effect)
-        this.segments = Math.floor(Math.random() * 3) + 6 // 6-8 segments
-        this.segmentGap = Math.random() * 0.3 + 0.1 // Gap between segments
-        // Determine if particle has glow (fixed at creation, not random per frame)
-        this.hasGlow = Math.random() > 0.7
+        this.segments = Math.floor(Math.random() * 2) + 5 // Fewer segments (was 6-8)
+        this.segmentGap = Math.random() * 0.2 + 0.1
+        this.hasGlow = Math.random() > 0.4 // More glowing particles (60% have glow)
       }
 
       update(deltaTime = 1) {
@@ -104,82 +103,72 @@ export default function RingParticlesBackground({
         this.y += this.speedY * deltaTime
         this.rotation += this.rotationSpeed * deltaTime
 
-        // Mouse interaction
-        if (mouseInteraction && !mobile) {
+        // OPTIMIZATION 5: Simplified mouse interaction - only when active
+        if (mouseInteraction && !mobile && mouseRef.current.active) {
           const dx = mouseRef.current.x - this.x
           const dy = mouseRef.current.y - this.y
-          const distance = Math.sqrt(dx * dx + dy * dy)
+          const distSq = dx * dx + dy * dy // Avoid sqrt when possible
           
-          if (distance < 200 && distance > 0) {
+          if (distSq < 40000 && distSq > 0) { // 200^2 = 40000
+            const distance = Math.sqrt(distSq)
             const force = (200 - distance) / 200
-            this.x -= (dx / distance) * force * 0.3 * deltaTime
-            this.y -= (dy / distance) * force * 0.3 * deltaTime
+            this.x -= (dx / distance) * force * 0.2 * deltaTime
+            this.y -= (dy / distance) * force * 0.2 * deltaTime
           }
         }
 
-        // Wrap around edges
         const rect = container.getBoundingClientRect()
-        if (this.x < -50) this.x = rect.width + 50
-        if (this.x > rect.width + 50) this.x = -50
-        if (this.y < -50) this.y = rect.height + 50
-        if (this.y > rect.height + 50) this.y = -50
+        if (this.x < -30) this.x = rect.width + 30
+        if (this.x > rect.width + 30) this.x = -30
+        if (this.y < -30) this.y = rect.height + 30
+        if (this.y > rect.height + 30) this.y = -30
       }
 
       draw(time) {
-        const pulse = Math.sin(time * this.pulseSpeed + this.pulseOffset) * 0.2 + 0.8
+        const pulse = Math.sin(time * this.pulseSpeed + this.pulseOffset) * 0.15 + 0.85
         const opacity = this.baseOpacity * pulse
-        const radius = this.baseRadius * (0.9 + pulse * 0.1)
+        const radius = this.baseRadius * (0.95 + pulse * 0.05)
 
         ctx.save()
         ctx.translate(this.x, this.y)
         ctx.rotate(this.rotation)
 
-        // Draw outer glow halo (for all particles)
-        const outerGlow = ctx.createRadialGradient(0, 0, 0, 0, 0, radius * 4)
-        outerGlow.addColorStop(0, `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, ${opacity * 0.4})`)
-        outerGlow.addColorStop(0.3, `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, ${opacity * 0.2})`)
-        outerGlow.addColorStop(1, `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, 0)`)
-        
-        ctx.beginPath()
-        ctx.arc(0, 0, radius * 4, 0, Math.PI * 2)
-        ctx.fillStyle = outerGlow
-        ctx.fill()
+        // Enhanced glow effect - more visible and vibrant
+        if (this.hasGlow) {
+          const outerGlow = ctx.createRadialGradient(0, 0, 0, 0, 0, radius * 5)
+          outerGlow.addColorStop(0, `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, ${opacity * 0.5})`)
+          outerGlow.addColorStop(0.4, `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, ${opacity * 0.2})`)
+          outerGlow.addColorStop(1, `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, 0)`)
+          
+          ctx.beginPath()
+          ctx.arc(0, 0, radius * 5, 0, Math.PI * 2)
+          ctx.fillStyle = outerGlow
+          ctx.fill()
+        }
 
-        // Draw ring with segments (Google Antigravity style) - with enhanced glow
+        // OPTIMIZATION 7: Reduced shadow blur - major performance gain
         const segmentAngle = (Math.PI * 2) / this.segments
         const gapAngle = this.segmentGap
+
+        // Enhanced shadow glow on desktop
+        if (!mobile && this.hasGlow) {
+          ctx.shadowBlur = 15 // Increased for more glow
+          ctx.shadowColor = `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, ${opacity * 1.0})`
+        }
 
         for (let i = 0; i < this.segments; i++) {
           const startAngle = i * segmentAngle + gapAngle / 2
           const endAngle = (i + 1) * segmentAngle - gapAngle / 2
 
-          // Enhanced shadow/glow
-          ctx.shadowBlur = mobile ? 12 : 20
-          ctx.shadowColor = `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, ${opacity * 1.2})`
-
           ctx.beginPath()
           ctx.arc(0, 0, radius, startAngle, endAngle)
-          ctx.strokeStyle = `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, ${opacity * 1.3})`
-          ctx.lineWidth = this.ringWidth * 1.2
+          ctx.strokeStyle = `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, ${opacity})`
+          ctx.lineWidth = this.ringWidth
           ctx.lineCap = 'round'
           ctx.stroke()
         }
         
         ctx.shadowBlur = 0
-
-        // Draw bright center glow (for particles with glow)
-        if (this.hasGlow) {
-          const centerGlow = ctx.createRadialGradient(0, 0, 0, 0, 0, radius * 2.5)
-          centerGlow.addColorStop(0, `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, ${opacity * 0.6})`)
-          centerGlow.addColorStop(0.4, `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, ${opacity * 0.3})`)
-          centerGlow.addColorStop(1, `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, 0)`)
-          
-          ctx.beginPath()
-          ctx.arc(0, 0, radius * 2.5, 0, Math.PI * 2)
-          ctx.fillStyle = centerGlow
-          ctx.fill()
-        }
-
         ctx.restore()
       }
     }
@@ -190,16 +179,22 @@ export default function RingParticlesBackground({
     }
     particlesRef.current = particles
 
-    // Mouse tracking
+    // Mouse tracking with activity detection
     const rect = container.getBoundingClientRect()
-    mouseRef.current.x = rect.width / 2
-    mouseRef.current.y = rect.height / 2
+    mouseRef.current = { x: rect.width / 2, y: rect.height / 2, active: false }
     
+    let mouseTimeout
     const handleMouseMove = (e) => {
       if (!mobile && mouseInteraction) {
         const rect = container.getBoundingClientRect()
         mouseRef.current.x = e.clientX - rect.left
         mouseRef.current.y = e.clientY - rect.top
+        mouseRef.current.active = true
+        
+        clearTimeout(mouseTimeout)
+        mouseTimeout = setTimeout(() => {
+          mouseRef.current.active = false
+        }, 100)
       }
     }
 
@@ -209,8 +204,15 @@ export default function RingParticlesBackground({
 
     let time = 0
     let isAnimating = true
+    
     const animate = (currentTime) => {
       if (!isAnimating) return
+      
+      // OPTIMIZATION 8: Skip rendering when not visible
+      if (!isVisibleRef.current) {
+        animationFrameRef.current = requestAnimationFrame(animate)
+        return
+      }
       
       if (lastTime === 0) lastTime = currentTime
       const elapsed = currentTime - lastTime
@@ -218,56 +220,37 @@ export default function RingParticlesBackground({
       if (elapsed >= frameInterval) {
         const deltaTime = elapsed / (1000 / 60)
         const rect = container.getBoundingClientRect()
-        // Clear with full alpha to prevent ghosting
         ctx.clearRect(0, 0, rect.width, rect.height)
         
         time += elapsed * 0.001
 
-        // Draw connections between nearby particles
-        const maxConnections = mobile ? 50 : 100
+        // OPTIMIZATION 9: Drastically reduce max connections (was 100/50, now 30/15)
+        const maxConnections = mobile ? 15 : 30
         let connectionCount = 0
         
+        // OPTIMIZATION 10: Quick rejection before expensive sqrt
         for (let i = 0; i < particles.length && connectionCount < maxConnections; i++) {
           for (let j = i + 1; j < particles.length && connectionCount < maxConnections; j++) {
             const dx = particles[i].x - particles[j].x
             const dy = particles[i].y - particles[j].y
-            const distance = Math.sqrt(dx * dx + dy * dy)
-
-            if (distance < maxDistance) {
-              const opacity = 0.35 * (1 - distance / maxDistance)
-              
-              // Gradient line connecting two particles with glow
-              const gradient = ctx.createLinearGradient(
-                particles[i].x, particles[i].y,
-                particles[j].x, particles[j].y
-              )
-              gradient.addColorStop(0, `rgba(${particles[i].colorRGB.r}, ${particles[i].colorRGB.g}, ${particles[i].colorRGB.b}, ${opacity})`)
-              gradient.addColorStop(0.5, `rgba(
-                ${Math.floor((particles[i].colorRGB.r + particles[j].colorRGB.r) / 2)},
-                ${Math.floor((particles[i].colorRGB.g + particles[j].colorRGB.g) / 2)},
-                ${Math.floor((particles[i].colorRGB.b + particles[j].colorRGB.b) / 2)},
-                ${opacity * 1.2}
-              )`)
-              gradient.addColorStop(1, `rgba(${particles[j].colorRGB.r}, ${particles[j].colorRGB.g}, ${particles[j].colorRGB.b}, ${opacity})`)
-              
-              // Enhanced shadow glow for connections
-              ctx.shadowBlur = mobile ? 10 : 15
-              ctx.shadowColor = `rgba(
-                ${Math.floor((particles[i].colorRGB.r + particles[j].colorRGB.r) / 2)},
-                ${Math.floor((particles[i].colorRGB.g + particles[j].colorRGB.g) / 2)},
-                ${Math.floor((particles[i].colorRGB.b + particles[j].colorRGB.b) / 2)},
-                ${opacity * 0.8}
-              )`
-              
-              ctx.beginPath()
-              ctx.strokeStyle = gradient
-              ctx.lineWidth = mobile ? 1 : 1.5
-              ctx.moveTo(particles[i].x, particles[i].y)
-              ctx.lineTo(particles[j].x, particles[j].y)
-              ctx.stroke()
-              ctx.shadowBlur = 0
-              connectionCount++
-            }
+            
+            // Quick reject - skip if obviously too far
+            if (Math.abs(dx) > maxDistance || Math.abs(dy) > maxDistance) continue
+            
+            const distSq = dx * dx + dy * dy
+            if (distSq > maxDistance * maxDistance) continue
+            
+            const distance = Math.sqrt(distSq)
+            const opacity = 0.25 * (1 - distance / maxDistance)
+            
+            // OPTIMIZATION 11: Simple line instead of gradient for connections
+            ctx.beginPath()
+            ctx.strokeStyle = `rgba(${particles[i].colorRGB.r}, ${particles[i].colorRGB.g}, ${particles[i].colorRGB.b}, ${opacity})`
+            ctx.lineWidth = mobile ? 0.5 : 1
+            ctx.moveTo(particles[i].x, particles[i].y)
+            ctx.lineTo(particles[j].x, particles[j].y)
+            ctx.stroke()
+            connectionCount++
           }
         }
 
@@ -285,20 +268,32 @@ export default function RingParticlesBackground({
 
     animationFrameRef.current = requestAnimationFrame(animate)
 
-    // Resize handler
+    // OPTIMIZATION 12: Pause when not visible using IntersectionObserver
+    const visibilityObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isVisibleRef.current = entry.isIntersecting
+        })
+      },
+      { threshold: 0 }
+    )
+    visibilityObserver.observe(container)
+
+    // Resize handler with debounce
     let resizeTimeout
     const handleResize = () => {
       clearTimeout(resizeTimeout)
       resizeTimeout = setTimeout(() => {
         resizeCanvas()
         checkMobile()
-      }, 150)
+      }, 200)
     }
     
     window.addEventListener('resize', handleResize, { passive: true })
 
     return () => {
       isAnimating = false
+      visibilityObserver.disconnect()
       window.removeEventListener('resize', handleResize)
       if (!mobile && mouseInteraction) {
         canvas.removeEventListener('mousemove', handleMouseMove)
@@ -308,6 +303,7 @@ export default function RingParticlesBackground({
         animationFrameRef.current = null
       }
       clearTimeout(resizeTimeout)
+      clearTimeout(mouseTimeout)
     }
   }, [colorPalette, particleCount, connectionDistance, mouseInteraction])
 
@@ -349,3 +345,4 @@ export default function RingParticlesBackground({
     </div>
   )
 }
+

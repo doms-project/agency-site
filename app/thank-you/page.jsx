@@ -28,7 +28,7 @@ export default function ThankYouPage() {
             </div>
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4" style={{ fontFamily: 'DM Sans, sans-serif' }}>
             Thank You!
           </h1>
           
@@ -57,3 +57,4 @@ export default function ThankYouPage() {
     </div>
   )
 }
+

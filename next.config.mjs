@@ -42,8 +42,6 @@ const nextConfig = {
     // Removed 'three' from optimizePackageImports to avoid conflicts
     // 'three' works fine without optimization
     optimizePackageImports: ['gsap', 'framer-motion'],
-    // Optimize font loading
-    optimizeFonts: true,
   },
   // Reduce JavaScript bundle size
   onDemandEntries: {

@@ -314,7 +314,7 @@ function WebsiteSurveyModal({ isOpen, onClose }) {
         {/* Header */}
         <div className="sticky top-0 bg-[#0a0a0a]/95 backdrop-blur-sm border-b border-white/10 px-6 py-4 flex items-center justify-between z-10">
           <div>
-            <h2 className="text-2xl font-bold text-white" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+            <h2 className="text-2xl font-bold text-white" style={{ fontFamily: 'DM Sans, sans-serif' }}>
               Website Assessment Form
             </h2>
             <p className="text-sm text-white/60 mt-1">
@@ -347,7 +347,7 @@ function WebsiteSurveyModal({ isOpen, onClose }) {
             {currentStep === 1 && (
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-4" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+                  <h3 className="text-xl font-semibold text-white mb-4" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                     Website Goals
                   </h3>
                   <p className="text-white/70 mb-6">What do you want your website to achieve? (Select all that apply)</p>
@@ -372,7 +372,7 @@ function WebsiteSurveyModal({ isOpen, onClose }) {
             {currentStep === 2 && (
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-4" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+                  <h3 className="text-xl font-semibold text-white mb-4" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                     Functionality Needs
                   </h3>
                   <p className="text-white/70 mb-6">What features does your website need? (Select all that apply)</p>
@@ -409,7 +409,7 @@ function WebsiteSurveyModal({ isOpen, onClose }) {
             {currentStep === 3 && (
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-4" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+                  <h3 className="text-xl font-semibold text-white mb-4" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                     Design & Branding
                   </h3>
                   <div className="space-y-6">
@@ -638,7 +638,7 @@ function WebsiteSurveyModal({ isOpen, onClose }) {
             {currentStep === 4 && (
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-4" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+                  <h3 className="text-xl font-semibold text-white mb-4" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                     Social Media Links
                   </h3>
                   <div className="space-y-6">
@@ -727,7 +727,7 @@ function WebsiteSurveyModal({ isOpen, onClose }) {
             {currentStep === 5 && (
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-4" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+                  <h3 className="text-xl font-semibold text-white mb-4" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                     Content & Services
                   </h3>
                   <div className="space-y-6">
@@ -917,7 +917,7 @@ function WebsiteSurveyModal({ isOpen, onClose }) {
             {currentStep === 6 && (
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-4" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+                  <h3 className="text-xl font-semibold text-white mb-4" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                     Domain & Hosting
                   </h3>
                   <div className="space-y-6">
@@ -1017,7 +1017,7 @@ function WebsiteSurveyModal({ isOpen, onClose }) {
             {currentStep === 7 && (
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-4" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+                  <h3 className="text-xl font-semibold text-white mb-4" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                     Business Basics
                   </h3>
                   <div className="space-y-4">
@@ -1093,7 +1093,7 @@ function WebsiteSurveyModal({ isOpen, onClose }) {
             {currentStep === 8 && (
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-4" style={{ fontFamily: 'Inter, Satoshi, sans-serif' }}>
+                  <h3 className="text-xl font-semibold text-white mb-4" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                     Legal / Copyright
                   </h3>
                   <div className="space-y-6">
@@ -1243,4 +1243,5 @@ function WebsiteSurveyModal({ isOpen, onClose }) {
 
 // Memoize component to prevent unnecessary re-renders
 export default memo(WebsiteSurveyModal)
+
 
