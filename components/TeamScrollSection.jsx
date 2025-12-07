@@ -86,6 +86,7 @@ export default function TeamScrollSection() {
   const triggerRef = useRef(null)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [direction, setDirection] = useState(1)
+  const [activeBioMember, setActiveBioMember] = useState(null)
   const lastIndexRef = useRef(0)
 
   useEffect(() => {
@@ -333,6 +334,20 @@ export default function TeamScrollSection() {
                     >
                       {currentMember.bio[0]}
                     </p>
+                    {currentMember.bio.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={() => setActiveBioMember(currentMember)}
+                        className="mt-2 inline-flex items-center gap-1 text-[#7BB9E8] text-xs sm:text-sm font-semibold hover:text-white transition-colors duration-200"
+                        aria-label={`Read more about ${currentMember.name}`}
+                      >
+                        Read more
+                        <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M5 12h14" strokeLinecap="round" />
+                          <path d="M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -415,6 +430,47 @@ export default function TeamScrollSection() {
             }
           }
         `}</style>
+        {activeBioMember && (
+          <div className="fixed inset-0 z-[11000] flex items-center justify-center px-4">
+            <div
+              className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+              onClick={() => setActiveBioMember(null)}
+              aria-label="Close bio overlay"
+            />
+            <div className="relative w-full max-w-lg bg-[#0f1319] border border-white/10 rounded-2xl shadow-2xl overflow-hidden">
+              <div className="flex items-start justify-between px-5 py-4 border-b border-white/10 bg-white/5">
+                <div>
+                  <p className="text-[#7BB9E8] text-xs font-semibold">{activeBioMember.role}</p>
+                  <h3 className="text-lg font-bold text-white" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    {activeBioMember.greeting}
+                  </h3>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setActiveBioMember(null)}
+                  className="p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                  aria-label="Close"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" stroke="currentColor" fill="none" strokeWidth="2">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </button>
+              </div>
+              <div className="px-5 py-4 space-y-3 max-h-[60vh] overflow-y-auto">
+                {activeBioMember.bio.map((paragraph, idx) => (
+                  <p
+                    key={idx}
+                    className="text-white/80 leading-relaxed text-sm"
+                    style={{ fontFamily: "'DM Sans', sans-serif" }}
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
       </section>
     </div>
   )

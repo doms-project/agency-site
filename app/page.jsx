@@ -163,6 +163,7 @@ const connectLinks = [
 export default function Page() {
   const [navSolid, setNavSolid] = useState(false)
   const [hideDesktopNav, setHideDesktopNav] = useState(false)
+  const [hideMobileNav, setHideMobileNav] = useState(false)
   const [isMobileNavOpen, setMobileNavOpen] = useState(false)
   const [isSurveyModalOpen, setIsSurveyModalOpen] = useState(false)
   const [isWebsiteRevisionModalOpen, setIsWebsiteRevisionModalOpen] = useState(false)
@@ -346,14 +347,18 @@ export default function Page() {
         window.requestAnimationFrame(() => {
           setNavSolid(window.scrollY > 40)
           
-          // Hide desktop navbar when past testimonials section (desktop only)
-          if (window.innerWidth >= 1024) {
-            const testimonialsSection = document.getElementById('testimonials')
-            if (testimonialsSection) {
-              const testimonialsTop = testimonialsSection.getBoundingClientRect().top
-              // Hide navbar when testimonials section reaches near top of viewport
-              // Account for scroll-margin-top (120px) + navbar height (~80px)
-              setHideDesktopNav(testimonialsTop <= 150)
+          // Hide navbar when past testimonials section
+          const testimonialsSection = document.getElementById('testimonials')
+          if (testimonialsSection) {
+            const testimonialsTop = testimonialsSection.getBoundingClientRect().top
+            const threshold = window.innerWidth >= 1024 ? 150 : 120
+            const hideNow = testimonialsTop <= threshold
+            
+            // Desktop
+            if (window.innerWidth >= 1024) {
+              setHideDesktopNav(hideNow)
+            } else {
+              setHideMobileNav(hideNow)
             }
           }
           
@@ -742,8 +747,10 @@ export default function Page() {
           right: 0,
           width: '100%',
           zIndex: 10000,
-          transform: 'none',
-          WebkitTransform: 'none',
+          transform: hideMobileNav ? 'translateY(-105%)' : 'translateY(0)',
+          opacity: hideMobileNav ? 0 : 1,
+          pointerEvents: hideMobileNav ? 'none' : 'auto',
+          WebkitTransform: hideMobileNav ? 'translateY(-105%)' : 'translateY(0)',
           // Very transparent glassy effect - shows particles through
           background: 'linear-gradient(to bottom, rgba(255,255,255,0.03), rgba(255,255,255,0.01))',
           WebkitBackdropFilter: 'blur(16px) saturate(180%)',
