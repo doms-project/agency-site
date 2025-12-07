@@ -155,7 +155,7 @@ export default function TeamScrollSection() {
         </div>
 
         {/* Main container */}
-        <div className="relative z-10 min-h-screen flex flex-col justify-start px-4 md:px-8 lg:px-16 pt-16 pb-8 md:pt-20 md:pb-12 lg:justify-center lg:py-12">
+        <div className="relative z-10 min-h-screen flex flex-col justify-start px-4 md:px-8 lg:px-16 pt-16 pb-12 md:pt-20 md:pb-16 lg:justify-center lg:py-16">
           {/* Header */}
           <div className="text-center mb-3 md:mb-8 lg:mb-12">
             <h2 
@@ -199,7 +199,7 @@ export default function TeamScrollSection() {
                 }}
               >
                 <div className="absolute -inset-4 bg-gradient-to-r from-[#7BB9E8]/20 to-[#5fa6db]/20 rounded-2xl blur-xl opacity-60" />
-                <div className="relative aspect-[3/4] max-w-[300px] mx-auto rounded-2xl overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent">
+                <div className="relative aspect-[3/4] max-w-[260px] mx-auto rounded-2xl overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent">
                   <img
                     src={currentMember.image}
                     alt={`${currentMember.name} - ${currentMember.role}`}
@@ -277,7 +277,7 @@ export default function TeamScrollSection() {
                   }}
                 >
                   <div className="absolute -inset-2 bg-gradient-to-r from-[#7BB9E8]/20 to-[#5fa6db]/20 rounded-xl blur-lg opacity-50" />
-                  <div className="relative w-[140px] sm:w-[160px] md:w-[180px] max-w-[48vw] aspect-[3/4] rounded-lg overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent">
+                  <div className="relative w-[120px] sm:w-[140px] md:w-[160px] max-w-[44vw] aspect-[3/4] rounded-lg overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent">
                     <img
                       src={currentMember.image}
                       alt={`${currentMember.name} - ${currentMember.role}`}
@@ -354,8 +354,8 @@ export default function TeamScrollSection() {
             </div>
           </div>
 
-          {/* Progress dots */}
-          <div className="flex items-center justify-center gap-1.5 md:gap-2 mt-4 md:mt-8">
+          {/* Progress dots - show only on mobile/tablet */}
+          <div className="flex items-center justify-center gap-1.5 md:gap-2 mt-4 md:mt-8 lg:hidden">
             {teamMembers.map((_, idx) => (
               <div
                 key={idx}
@@ -370,17 +370,9 @@ export default function TeamScrollSection() {
             ))}
           </div>
 
-          {/* Scroll hint - hidden on mobile */}
-          <div className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-white/40">
-            <span className="text-xs uppercase tracking-widest">Scroll</span>
-            <svg 
-              className="w-5 h-5 animate-bounce" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
+          {/* Scroll hint - hidden on mobile; text only, no arrow */}
+          <div className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 text-white/50 text-xs uppercase tracking-widest">
+            Scroll through the team
           </div>
         </div>
 
