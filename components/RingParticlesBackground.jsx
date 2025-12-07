@@ -7,7 +7,7 @@ export default function RingParticlesBackground({
   colorScheme = 'multiColor',
   particleCount,
   connectionDistance,
-  mouseInteraction = true,
+  mouseInteraction = false, // Disabled for better performance
 }) {
   const canvasRef = useRef(null)
   const animationFrameRef = useRef(null)
@@ -67,8 +67,8 @@ export default function RingParticlesBackground({
 
     resizeCanvas()
 
-    // OPTIMIZATION 3: Balanced particle count for visual appeal + performance
-    const count = particleCount || (mobile ? 45 : 85)
+    // OPTIMIZATION 3: Balanced particle count for visual appeal + performance (+10%)
+    const count = particleCount || (mobile ? 50 : 94)
     // OPTIMIZATION 4: Connection distance for visual network effect
     const maxDistance = connectionDistance || (mobile ? 110 : 140)
     const particles = []
@@ -95,7 +95,7 @@ export default function RingParticlesBackground({
         this.colorRGB = colorPalette[colorIndex]
         this.segments = Math.floor(Math.random() * 2) + 5 // Fewer segments (was 6-8)
         this.segmentGap = Math.random() * 0.2 + 0.1
-        this.hasGlow = Math.random() > 0.4 // More glowing particles (60% have glow)
+        this.hasGlow = Math.random() > 0.33 // More glowing particles (67% have glow, +10%)
       }
 
       update(deltaTime = 1) {
@@ -205,13 +205,25 @@ export default function RingParticlesBackground({
     let time = 0
     let isAnimating = true
     
+    // Function to start the animation loop
+    const startAnimation = () => {
+      if (animationFrameRef.current) return // Already running
+      lastTime = 0 // Reset lastTime to avoid big jumps
+      animationFrameRef.current = requestAnimationFrame(animate)
+    }
+    
+    // Function to stop the animation loop
+    const stopAnimation = () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current)
+        animationFrameRef.current = null
+      }
+    }
+    
     const animate = (currentTime) => {
-      if (!isAnimating) return
-      
-      // OPTIMIZATION 8: Skip rendering when not visible
-      if (!isVisibleRef.current) {
-        animationFrameRef.current = requestAnimationFrame(animate)
-        return
+      if (!isAnimating || !isVisibleRef.current) {
+        animationFrameRef.current = null
+        return // Completely stop when not visible
       }
       
       if (lastTime === 0) lastTime = currentTime
@@ -266,16 +278,24 @@ export default function RingParticlesBackground({
       animationFrameRef.current = requestAnimationFrame(animate)
     }
 
-    animationFrameRef.current = requestAnimationFrame(animate)
+    // Start animation initially
+    startAnimation()
 
-    // OPTIMIZATION 12: Pause when not visible using IntersectionObserver
+    // OPTIMIZATION 12: Completely pause/resume animation based on visibility
     const visibilityObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           isVisibleRef.current = entry.isIntersecting
+          if (entry.isIntersecting) {
+            // Resume animation when hero section becomes visible
+            startAnimation()
+          } else {
+            // Completely stop animation when scrolled past
+            stopAnimation()
+          }
         })
       },
-      { threshold: 0 }
+      { threshold: 0.01 } // Trigger when even 1% is visible
     )
     visibilityObserver.observe(container)
 
@@ -298,10 +318,7 @@ export default function RingParticlesBackground({
       if (!mobile && mouseInteraction) {
         canvas.removeEventListener('mousemove', handleMouseMove)
       }
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current)
-        animationFrameRef.current = null
-      }
+      stopAnimation() // Use the stop function for cleanup
       clearTimeout(resizeTimeout)
       clearTimeout(mouseTimeout)
     }

@@ -1207,12 +1207,12 @@ function WebsiteSurveyModal({ isOpen, onClose }) {
         </div>
 
         {/* Footer with Navigation */}
-        <div className="sticky bottom-0 bg-[#0a0a0a]/95 backdrop-blur-sm border-t border-white/10 px-6 py-4 flex items-center justify-between">
+        <div className="sticky bottom-0 bg-[#0a0a0a]/95 backdrop-blur-sm border-t border-white/10 px-4 py-2 md:px-6 md:py-3 flex items-center justify-between">
           <button
             type="button"
             onClick={prevStep}
             disabled={currentStep === 1}
-            className="px-6 py-2 bg-white/5 border border-white/10 rounded-lg text-white hover:bg-white/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-4 py-1.5 text-xs md:text-sm bg-white/5 border border-white/10 rounded-lg text-white hover:bg-white/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Previous
           </button>
@@ -1221,7 +1221,7 @@ function WebsiteSurveyModal({ isOpen, onClose }) {
             <button
               type="button"
               onClick={nextStep}
-              className="px-6 py-2 bg-[#7BB9E8] hover:bg-[#6AA8D7] text-white font-semibold rounded-lg transition-colors"
+              className="px-4 py-1.5 text-xs md:text-sm bg-[#7BB9E8] hover:bg-[#6AA8D7] text-white font-semibold rounded-lg transition-colors"
             >
               Next
             </button>
@@ -1230,7 +1230,7 @@ function WebsiteSurveyModal({ isOpen, onClose }) {
               type="submit"
               form="survey-form"
               disabled={isSubmitting}
-              className="px-6 py-2 bg-[#7BB9E8] hover:bg-[#6AA8D7] text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-4 py-1.5 text-xs md:text-sm bg-[#7BB9E8] hover:bg-[#6AA8D7] text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting ? 'Submitting...' : 'Submit'}
             </button>

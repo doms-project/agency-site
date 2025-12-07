@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useState, useRef, useCallback, Suspense, lazy } from 'react'
+import Image from 'next/image'
 import { clientSectionHtml } from '@/sections/clientSectionHtml'
 import { cpgSectionHtml } from '@/sections/cpgSectionHtml'
 import { partnerSectionHtml } from '@/sections/partnerSectionHtml'
@@ -718,7 +719,7 @@ export default function Page() {
       <DesktopNav navSolid={navSolid} />
       {/* Mobile Header - Fixed at page level for proper sticky behavior */}
       <header 
-        className={`lg:hidden w-full border-b border-white/10 shadow-lg transition-all duration-300`} 
+        className={`lg:hidden w-full border-b border-white/10 shadow-lg transition-all duration-300 ${(isSurveyModalOpen || isWebsiteRevisionModalOpen || isGetStartedModalOpen) ? 'hidden' : ''}`} 
         style={{ 
           position: 'fixed',
           top: 0,
@@ -735,18 +736,16 @@ export default function Page() {
           boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255,255,255,0.08), inset 0 -1px 0 rgba(255,255,255,0.02)'
         }}
       >
-        <div className="max-w-7xl mx-auto flex justify-between items-center px-5 py-3">
-          <a aria-label="Yo Marketing Home" href="#hero" className="group relative">
+        <div className="max-w-7xl mx-auto flex justify-between items-center px-5 py-4">
+          <a aria-label="Yo Marketing Home" href="#hero" className="group relative flex items-center">
             <div className="absolute -inset-2 bg-gradient-to-r from-[#7BB9E8]/20 via-[#7BB9E8]/10 to-transparent rounded-xl blur-lg opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-300 -z-10" />
-            <img 
+            <Image 
               src="/images/logo-hq.png" 
               alt="Yo Marketing" 
               width={64}
               height={64}
-              className="logo h-14 w-auto transition-all duration-300 cursor-pointer group-hover:scale-105 group-active:scale-95 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]" 
-              loading="eager"
-              decoding="sync"
-              fetchPriority="high"
+              className="logo h-12 w-auto transition-all duration-300 cursor-pointer group-hover:scale-105 group-active:scale-95 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]" 
+              priority
             />
           </a>
           <button 
@@ -903,15 +902,13 @@ function DesktopNav({ navSolid }) {
             href="#hero"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-[#7BB9E8]/20 to-transparent rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
-            <img 
+            <Image 
               src="/images/logo-hq.png" 
               alt="Yo Marketing" 
               width={64}
               height={64}
               className="logo tilt-logo h-16 w-auto group-hover:scale-105 transition-all duration-300 drop-shadow-lg" 
-              loading="eager"
-              decoding="sync"
-              fetchPriority="high"
+              priority
             />
           </a>
 
@@ -1082,15 +1079,13 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
         <div className="max-w-5xl mx-auto w-full px-4 sm:px-6 md:px-8 flex flex-col items-center justify-center text-center">
           <div className="flex items-center justify-center mb-4 md:mb-5 mt-4">
             <div className="flex items-center gap-1 md:gap-2 bg-white/10 px-2 py-0.5 md:px-3 md:py-1 rounded-full border-2 border-white/30 shadow-md shadow-white/5 backdrop-blur-sm ring-1 ring-white/10 scale-90 md:scale-100">
-              <img
+              <Image
                 src="/images/orig.png"
                 alt="GoHighLevel"
                 width={44}
                 height={44}
                 className="h-8 sm:h-9 md:h-11 w-auto object-contain -mt-2.5 md:-mt-3 -mb-1 drop-shadow-[0_4px_6px_rgba(0,0,0,0.4)] hover:drop-shadow-[0_6px_10px_rgba(0,0,0,0.5)] hover:-translate-y-0.5 transition-all duration-300"
-                loading="eager"
-                decoding="sync"
-                fetchPriority="high"
+                priority
               />
               <div className="h-3 md:h-5 w-[1px] bg-gradient-to-b from-transparent via-white/40 to-transparent" />
               <span className="text-[#7BB9E8] font-medium text-[9px] md:text-xs tracking-widest uppercase" style={{ textShadow: '0 0 4px rgba(123, 185, 232, 0.2)' }}>
@@ -1180,16 +1175,14 @@ function MobileDrawer({ onClose }) {
         {/* Header - Transparent with better contrast */}
         <div className="relative flex items-center justify-between px-6 py-5 border-b border-white/10 bg-white/5 backdrop-blur-sm">
           <a aria-label="Yo Marketing Home" href="#hero" onClick={onClose} className="group">
-            <img 
+            <Image 
               src="/images/logo-hq.png" 
               alt="Yo Marketing" 
               width={80}
               height={80}
               className="logo tilt-logo h-20 w-auto transition-transform duration-300 group-hover:scale-105 drop-shadow-lg" 
-              loading="eager"
-              decoding="sync"
-              fetchPriority="high"
               style={{ willChange: 'transform', height: '80px', width: 'auto', minHeight: '80px', minWidth: '80px' }}
+              priority
             />
           </a>
           <button 

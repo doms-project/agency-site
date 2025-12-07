@@ -205,17 +205,17 @@ function GetStartedModal({ isOpen, onClose }) {
         </div>
 
         {/* Footer */}
-        <div className="sticky bottom-0 bg-[#0a0a0a]/95 backdrop-blur-sm border-t border-white/10 px-6 py-4 flex items-center justify-between">
+        <div className="sticky bottom-0 bg-[#0a0a0a]/95 backdrop-blur-sm border-t border-white/10 px-4 py-2 md:px-6 md:py-3 flex items-center justify-between">
           <div className="flex gap-2 text-xs text-white/50">
             <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="hover:text-white/70 transition-colors">Privacy Policy</a>
             <span>|</span>
             <a href="/terms-of-service" target="_blank" rel="noopener noreferrer" className="hover:text-white/70 transition-colors">Terms of Service</a>
           </div>
-          <div className="flex gap-3">
+          <div className="flex gap-2">
             <button
               type="button"
               onClick={onClose}
-              className="px-6 py-2 text-white/70 hover:text-white transition-colors"
+              className="px-4 py-1.5 text-xs md:text-sm text-white/70 hover:text-white transition-colors"
             >
               Cancel
             </button>
@@ -223,7 +223,7 @@ function GetStartedModal({ isOpen, onClose }) {
               type="submit"
               form="get-started-form"
               disabled={isSubmitting}
-              className="px-6 py-2 bg-[#7BB9E8] hover:bg-[#5fa6d6] text-black font-bold rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-4 py-1.5 text-xs md:text-sm bg-[#7BB9E8] hover:bg-[#5fa6d6] text-black font-bold rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               style={{ fontFamily: 'DM Sans, sans-serif' }}
             >
               {isSubmitting ? 'Submitting...' : 'Submit'}

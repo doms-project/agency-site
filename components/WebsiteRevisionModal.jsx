@@ -460,15 +460,15 @@ function WebsiteRevisionModal({ isOpen, onClose }) {
         </div>
 
         {/* Footer */}
-        <div className="sticky bottom-0 bg-[#0a0a0a]/95 backdrop-blur-sm border-t border-white/10 px-6 py-4 flex items-center justify-between">
+        <div className="sticky bottom-0 bg-[#0a0a0a]/95 backdrop-blur-sm border-t border-white/10 px-4 py-2 md:px-6 md:py-3 flex items-center justify-between">
           <p className="text-xs text-white/50">
             We&apos;ll review your request and respond within 24–48 hours.
           </p>
-          <div className="flex gap-3">
+          <div className="flex gap-2">
             <button
               type="button"
               onClick={onClose}
-              className="px-6 py-2 text-white/70 hover:text-white transition-colors"
+              className="px-4 py-1.5 text-xs md:text-sm text-white/70 hover:text-white transition-colors"
             >
               Cancel
             </button>
@@ -476,10 +476,10 @@ function WebsiteRevisionModal({ isOpen, onClose }) {
               type="submit"
               form="website-revision-form"
               disabled={isSubmitting}
-              className="px-6 py-2 bg-[#7BB9E8] hover:bg-[#5fa6d6] text-black font-bold rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-4 py-1.5 text-xs md:text-sm bg-[#7BB9E8] hover:bg-[#5fa6d6] text-black font-bold rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               style={{ fontFamily: 'DM Sans, sans-serif' }}
             >
-              {isSubmitting ? 'Submitting...' : 'Submit Revision Request'}
+              {isSubmitting ? 'Submitting...' : 'Submit Request'}
             </button>
           </div>
         </div>
