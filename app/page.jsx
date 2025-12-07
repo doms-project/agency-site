@@ -1081,24 +1081,24 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
       <section className="hero relative z-10 w-full flex flex-col justify-center items-center pb-16 mb-0 overflow-hidden lg:pt-8">
         <div className="max-w-5xl mx-auto w-full px-4 sm:px-6 md:px-8 flex flex-col items-center justify-center text-center">
           <div className="flex items-center justify-center mb-4 md:mb-5 mt-4">
-            <div className="flex items-center gap-2 md:gap-2.5 bg-white/10 px-3 py-1.5 md:px-2.5 md:py-1.5 rounded-full border-2 border-white/30 shadow-md shadow-white/5 backdrop-blur-sm ring-1 ring-white/10">
+            <div className="flex items-center gap-1 md:gap-2 bg-white/10 px-2 py-0.5 md:px-3 md:py-1 rounded-full border-2 border-white/30 shadow-md shadow-white/5 backdrop-blur-sm ring-1 ring-white/10 scale-90 md:scale-100">
               <img
                 src="/images/orig.png"
                 alt="GoHighLevel"
-                width={32}
-                height={32}
-                className="h-7 sm:h-7 md:h-8 w-auto object-contain scale-105"
+                width={44}
+                height={44}
+                className="h-8 sm:h-9 md:h-11 w-auto object-contain -mt-2.5 md:-mt-3 -mb-1 drop-shadow-[0_4px_6px_rgba(0,0,0,0.4)] hover:drop-shadow-[0_6px_10px_rgba(0,0,0,0.5)] hover:-translate-y-0.5 transition-all duration-300"
                 loading="eager"
                 decoding="sync"
                 fetchPriority="high"
               />
-              <div className="h-4 md:h-5 w-[1px] bg-gradient-to-b from-transparent via-white/40 to-transparent" />
-              <span className="text-[#7BB9E8] font-medium text-[10px] md:text-xs tracking-widest uppercase" style={{ textShadow: '0 0 4px rgba(123, 185, 232, 0.2)' }}>
+              <div className="h-3 md:h-5 w-[1px] bg-gradient-to-b from-transparent via-white/40 to-transparent" />
+              <span className="text-[#7BB9E8] font-medium text-[9px] md:text-xs tracking-widest uppercase" style={{ textShadow: '0 0 4px rgba(123, 185, 232, 0.2)' }}>
                 GoHighLevel Plus Partner
               </span>
             </div>
           </div>
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-extrabold text-white leading-[1.1] tracking-tight mb-4 md:mb-6 relative text-center break-words overflow-hidden" style={{ textShadow: '0 4px 20px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(0, 0, 0, 0.3)', fontFamily: 'DM Sans, sans-serif' }}>
+          <h1 className="text-6xl sm:text-7xl md:text-7xl lg:text-8xl xl:text-9xl font-extrabold text-white leading-[1.1] tracking-tight mb-4 md:mb-6 relative text-center break-words overflow-hidden" style={{ textShadow: '0 4px 20px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(0, 0, 0, 0.3)', fontFamily: 'DM Sans, sans-serif' }}>
             <span className="block break-words">We Make</span>
             <span className="block text-white break-words">Websites</span>
           </h1>
