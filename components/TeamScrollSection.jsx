@@ -59,9 +59,9 @@ const teamMembers = [
   },
   {
     id: 5,
-    name: 'Muzaib',
+    name: 'Muzaid',
     role: 'Front End Developer',
-    greeting: "Hey, I'm Muzaib.",
+    greeting: "Hey, I'm Muzaid.",
     image: '/images/Muzaib.jpeg',
     bio: [
       "I craft pixel-perfect, responsive interfaces that users love. With expertise in modern frameworks and a passion for clean code, I bring designs to life with smooth animations and intuitive interactions.",
