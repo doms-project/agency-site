@@ -102,29 +102,30 @@ export default function TeamScrollSection() {
     })
 
     const totalMembers = teamMembers.length
-    const tl = gsap.timeline({
-      defaults: { ease: 'none' },
-      scrollTrigger: {
-        trigger,
-        start: 'top top',
-        end: () => `+=${window.innerHeight * (totalMembers * 0.7 + 1)}`, // tighter distance with a small buffer
-        pin: section,
-        pinSpacing: true,
-        scrub: 0.5, // smoother
-        anticipatePin: 0,
-        invalidateOnRefresh: true,
-      },
-    })
 
-    // Build evenly spaced steps for each member (shorter segments)
-    for (let i = 0; i < totalMembers; i++) {
-      tl.call(() => {
-        setDirection(i > lastIndexRef.current ? 1 : -1)
-        lastIndexRef.current = i
-        setCurrentIndex(i)
-      })
-      tl.to({}, { duration: 0.8 }) // shorter per-member scroll
-    }
+    const st = ScrollTrigger.create({
+      trigger,
+      start: 'top top',
+      end: () => `+=${window.innerHeight * totalMembers}`, // one viewport per member
+      pin: section,
+      pinSpacing: true,
+      scrub: 0.6,
+      anticipatePin: 0,
+      snap: totalMembers > 1 ? 1 / (totalMembers - 1) : 1,
+      invalidateOnRefresh: true,
+      onUpdate: (self) => {
+        const clamped = Math.min(Math.max(self.progress, 0), 0.999)
+        const newIndex = Math.min(
+          Math.round(clamped * (totalMembers - 1)),
+          totalMembers - 1
+        )
+        if (newIndex !== lastIndexRef.current) {
+          setDirection(newIndex > lastIndexRef.current ? 1 : -1)
+          lastIndexRef.current = newIndex
+          setCurrentIndex(newIndex)
+        }
+      }
+    })
 
     // Refresh after a small delay
     const timeout = setTimeout(() => {
@@ -133,8 +134,7 @@ export default function TeamScrollSection() {
 
     return () => {
       clearTimeout(timeout)
-      tl.scrollTrigger && tl.scrollTrigger.kill()
-      tl.kill()
+      st.kill()
     }
   }, []) // Empty dependency array - only run once!
 
