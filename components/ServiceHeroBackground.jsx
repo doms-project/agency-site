@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, memo } from 'react'
 
-function ServiceHeroBackground({ color = { r: 123, g: 185, b: 232 } }) {
+function ServiceHeroBackground({ color = { r: 123, g: 185, b: 232 }, colorPalette }) {
   const canvasRef = useRef(null)
   const animationFrameRef = useRef(null)
   const particlesRef = useRef([])
@@ -78,7 +78,7 @@ function ServiceHeroBackground({ color = { r: 123, g: 185, b: 232 } }) {
     window.addEventListener('resize', handleResize, { passive: true })
 
     // Particle system - reduce count on mobile for better performance
-    const particleCount = mobile ? 40 : 80
+    const particleCount = mobile ? 36 : 68
     const particles = []
 
     class Particle {
@@ -91,11 +91,15 @@ function ServiceHeroBackground({ color = { r: 123, g: 185, b: 232 } }) {
         this.x = Math.random() * rect.width
         this.y = Math.random() * rect.height
         this.size = Math.random() * 2 + 1
-        this.speedX = (Math.random() - 0.5) * 0.5
-        this.speedY = (Math.random() - 0.5) * 0.5
+        this.speedX = (Math.random() - 0.5) * 0.55
+        this.speedY = (Math.random() - 0.5) * 0.55
         this.opacity = Math.random() * 0.5 + 0.2
-        this.color = `rgba(${color.r}, ${color.g}, ${color.b}, ${this.opacity})`
-        this.pulseSpeed = Math.random() * 0.02 + 0.01
+        const chosen = Array.isArray(colorPalette) && colorPalette.length
+          ? colorPalette[Math.floor(Math.random() * colorPalette.length)]
+          : color
+        this.colorRGB = chosen
+        this.color = `rgba(${chosen.r}, ${chosen.g}, ${chosen.b}, ${this.opacity})`
+        this.pulseSpeed = Math.random() * 0.02 + 0.012
         this.pulseOffset = Math.random() * Math.PI * 2
       }
 
@@ -138,8 +142,8 @@ function ServiceHeroBackground({ color = { r: 123, g: 185, b: 232 } }) {
       draw(time) {
         // Pulsing glow effect
         const pulse = Math.sin(time * this.pulseSpeed + this.pulseOffset) * 0.3 + 0.7
-        const glowSize = this.size * (mobile ? 1.5 : 2 + pulse)
-        const glowOpacity = this.opacity * pulse
+        const glowSize = this.size * (mobile ? 1.4 : 1.8 + pulse * 0.6)
+        const glowOpacity = this.opacity * (mobile ? 0.8 * pulse : 0.65 * pulse)
 
         // Outer glow - simplified on mobile
         if (!mobile) {
@@ -147,9 +151,9 @@ function ServiceHeroBackground({ color = { r: 123, g: 185, b: 232 } }) {
             this.x, this.y, 0,
             this.x, this.y, glowSize * 3
           )
-          gradient.addColorStop(0, `rgba(${color.r}, ${color.g}, ${color.b}, ${glowOpacity})`)
-          gradient.addColorStop(0.5, `rgba(${color.r}, ${color.g}, ${color.b}, ${glowOpacity * 0.5})`)
-          gradient.addColorStop(1, `rgba(${color.r}, ${color.g}, ${color.b}, 0)`)
+          gradient.addColorStop(0, `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, ${glowOpacity})`)
+          gradient.addColorStop(0.5, `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, ${glowOpacity * 0.45})`)
+          gradient.addColorStop(1, `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, 0)`)
 
           // Draw glow
           ctx.beginPath()
@@ -160,8 +164,8 @@ function ServiceHeroBackground({ color = { r: 123, g: 185, b: 232 } }) {
 
         // Core particle with shadow - reduced on mobile
         if (!mobile) {
-          ctx.shadowBlur = 15
-          ctx.shadowColor = `rgba(${color.r}, ${color.g}, ${color.b}, 0.8)`
+          ctx.shadowBlur = 10
+          ctx.shadowColor = `rgba(${this.colorRGB.r}, ${this.colorRGB.g}, ${this.colorRGB.b}, 0.6)`
         }
         ctx.beginPath()
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
@@ -280,15 +284,30 @@ function ServiceHeroBackground({ color = { r: 123, g: 185, b: 232 } }) {
       }
       clearTimeout(resizeTimeout)
     }
-  }, [color])
+  }, [color, colorPalette])
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none"
-      style={{ zIndex: 0 }}
-      aria-hidden="true"
-    />
+    <div className="absolute inset-0 w-full h-full overflow-hidden" style={{ zIndex: 0 }}>
+      {/* Base gradient aligned with site colors */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-[#10151a] to-[#0a0a0a]" />
+      {/* Subtle multicolor + white accents */}
+      <div
+        className="absolute inset-0 opacity-18"
+        style={{
+          background: `
+            radial-gradient(ellipse 780px 580px at 20% 30%, rgba(123, 185, 232, 0.14) 0%, transparent 50%),
+            radial-gradient(ellipse 620px 740px at 80% 70%, rgba(74, 144, 226, 0.12) 0%, transparent 50%),
+            radial-gradient(ellipse 680px 680px at 50% 50%, rgba(255, 255, 255, 0.06) 0%, transparent 50%)
+          `,
+        }}
+      />
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        style={{ zIndex: 0 }}
+        aria-hidden="true"
+      />
+    </div>
   )
 }
 

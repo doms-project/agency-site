@@ -23,6 +23,7 @@ const PyramidHeroBackground = lazy(() => import('@/components/PyramidHeroBackgro
 const ParticleNetworkBackground = lazy(() => import('@/components/ParticleNetworkBackground'))
 const RingParticlesBackground = lazy(() => import('@/components/RingParticlesBackground'))
 const CSSGlowBackground = lazy(() => import('@/components/CSSGlowBackground'))
+const ServiceHeroBackground = lazy(() => import('@/components/ServiceHeroBackground'))
 // Lazy load modals - only load when needed
 const WebsiteSurveyModal = lazy(() => import('@/components/WebsiteSurveyModal'))
 const WebsiteRevisionModal = lazy(() => import('@/components/WebsiteRevisionModal'))
@@ -1061,18 +1062,38 @@ function NavTextLink({ href, label }) {
 
 function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
   const [isMobile, setIsMobile] = useState(false)
-  // Animation options: 'blackhole', 'pyramid', 'gradient', 'particles', 'ringParticles', 'cssGlow'
-  // 'ringParticles' - enhanced glowing particles (current)
-  // 'pyramid' - 3D rotating pyramid like dumodigital.com
-  const [heroAnimation, setHeroAnimation] = useState('ringParticles')
-  // Color options: 'multiColor' (all 4 colors), 'websiteDesign', 'leadGeneration', 'googleBusiness', 'seoServices'
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+  // Animation options now include 'serviceHero' (lighter, like Website Design page)
+  // Other options: 'blackhole', 'pyramid', 'gradient', 'particles', 'ringParticles', 'cssGlow'
+  const [heroAnimation, setHeroAnimation] = useState('serviceHero')
+  // Color options for particles
   const [particleColor, setParticleColor] = useState('multiColor')
+  // Multicolor + white palette for ServiceHeroBackground
+  const heroColorPalette = useMemo(() => ([
+    { r: 123, g: 185, b: 232 },
+    { r: 74, g: 144, b: 226 },
+    { r: 168, g: 85, b: 247 },
+    { r: 16, g: 185, b: 129 },
+    { r: 255, g: 255, b: 255 },
+    { r: 240, g: 240, b: 255 },
+  ]), [])
   
   useEffect(() => {
-    const checkMobile = window.innerWidth < 768
-    setIsMobile(checkMobile)
-    // Default to ring particles (Google Antigravity style)
-    setHeroAnimation('ringParticles')
+    const checkMobile = () => window.innerWidth < 768
+    const mobile = checkMobile()
+    setIsMobile(mobile)
+
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const updatePRM = () => setPrefersReducedMotion(media.matches)
+    updatePRM()
+    media.addEventListener('change', updatePRM)
+
+    // Default animation: use lighter ServiceHero on all; for PRM keep it simple
+    setHeroAnimation((mobile && media.matches) ? 'cssGlow' : 'serviceHero')
+
+    return () => {
+      media.removeEventListener('change', updatePRM)
+    }
   }, [])
 
   return (
@@ -1097,7 +1118,8 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
         {heroAnimation === 'gradient' && <LightweightHeroBackground />}
         {heroAnimation === 'particles' && <ParticleNetworkBackground colorScheme={particleColor} />}
         {heroAnimation === 'ringParticles' && <RingParticlesBackground colorScheme={particleColor} />}
-        {heroAnimation === 'cssGlow' && <CSSGlowBackground variant="default" animated={true} />}
+        {heroAnimation === 'serviceHero' && <ServiceHeroBackground colorPalette={heroColorPalette} />}
+        {heroAnimation === 'cssGlow' && <CSSGlowBackground variant="default" animated={!(prefersReducedMotion || isMobile)} />}
       </Suspense>
       {/* Mobile header now at page level - spacer for fixed navbar */}
       <div className="lg:hidden h-24" aria-hidden="true" />

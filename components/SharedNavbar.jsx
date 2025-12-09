@@ -238,7 +238,7 @@ export default function SharedNavbar() {
 
       {/* Mobile Navbar */}
       <nav className="lg:hidden w-full z-[9999] sticky top-0 nav-transparent" style={{ position: 'sticky', top: '0px', zIndex: 9999 }}>
-        <div className="flex items-center justify-between px-4 py-2 h-16">
+        <div className="flex items-center justify-between px-5 py-3 h-20">
           <a aria-label="Yo Marketing Home" href="/" className="flex items-center group">
             <img 
               src="/images/logo-hq.png" 

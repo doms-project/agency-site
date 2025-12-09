@@ -103,11 +103,11 @@ export default function TeamScrollSection() {
 
     const totalMembers = teamMembers.length
 
-    // Create the ScrollTrigger - SLOWER scroll (2x viewport height per member)
+    // Create the ScrollTrigger - further reduce scroll distance per member (~0.6x viewport height)
     const scrollTrigger = ScrollTrigger.create({
       trigger: trigger,
       start: 'top top',
-      end: () => `+=${window.innerHeight * totalMembers * 2}`,  // 2x slower
+      end: () => `+=${window.innerHeight * totalMembers * 0.6}`,  // tighter scroll distance
       pin: section,
       pinSpacing: true,
       scrub: 1,  // Smoother scrub

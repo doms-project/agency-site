@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-css-tags */
 import { DM_Sans } from 'next/font/google'
 import Script from 'next/script'
-import { Analytics } from '@vercel/analytics/next'
+import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 import WebVitals from './components/WebVitals'
 

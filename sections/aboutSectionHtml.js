@@ -45,13 +45,13 @@ export const aboutSectionHtml = String.raw`
     }
   }
 </style>
-<section class="w-full pt-12 pb-8 md:pb-20 bg-gradient-to-b from-[#181c22] via-[#10151a] to-[#181c22] relative overflow-hidden" id="about" style="scroll-margin-top:120px">
+<section class="w-full pt-6 pb-4 sm:pb-6 md:pb-8 bg-gradient-to-b from-[#181c22] via-[#10151a] to-[#181c22] relative overflow-hidden" id="about" style="scroll-margin-top:120px">
  <div class="absolute inset-0 opacity-5">
   <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(123,185,232,0.1),transparent_50%)]">
   </div>
  </div>
  <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 relative z-10 overflow-visible">
-  <div class="text-center mb-16 pt-12">
+  <div class="text-center mb-8 pt-4 sm:pt-6 md:pt-7">
    <h2 class="text-5xl md:text-6xl font-bold text-white mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent" style="font-family:'DM Sans', sans-serif">
     Meet the Team
    </h2>

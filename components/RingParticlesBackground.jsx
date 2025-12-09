@@ -49,11 +49,11 @@ export default function RingParticlesBackground({
     const container = canvas.parentElement
     if (!container) return
 
-    // OPTIMIZATION 1: Lower DPR - cap at 1.5 for performance
-    const dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1 : 1.5)
+    // OPTIMIZATION 1: Lower DPR - cap at 1.25 for performance (1.0 on mobile)
+    const dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1 : 1.25)
     let lastTime = 0
-    // OPTIMIZATION 2: Lower FPS - 24fps is smooth enough for background effects
-    const targetFPS = mobile ? 20 : 24
+    // OPTIMIZATION 2: Lower FPS - lighter loop
+    const targetFPS = mobile ? 16 : 20
     const frameInterval = 1000 / targetFPS
 
     const resizeCanvas = () => {
@@ -67,10 +67,10 @@ export default function RingParticlesBackground({
 
     resizeCanvas()
 
-    // OPTIMIZATION 3: Balanced particle count for visual appeal + performance (+10%)
-    const count = particleCount || (mobile ? 50 : 94)
-    // OPTIMIZATION 4: Connection distance for visual network effect
-    const maxDistance = connectionDistance || (mobile ? 110 : 140)
+    // OPTIMIZATION 3: Fewer particles
+    const count = particleCount || (mobile ? 30 : 60)
+    // OPTIMIZATION 4: Shorter connection distance
+    const maxDistance = connectionDistance || (mobile ? 90 : 120)
     const particles = []
 
     class RingParticle {
@@ -84,12 +84,13 @@ export default function RingParticlesBackground({
         this.y = Math.random() * rect.height
         this.baseRadius = Math.random() * 2.5 + 1.5 // Slightly smaller rings
         this.ringWidth = Math.random() * 1 + 0.5
-        this.speedX = (Math.random() - 0.5) * (mobile ? 0.15 : 0.25)
-        this.speedY = (Math.random() - 0.5) * (mobile ? 0.15 : 0.25)
+        // Slightly faster drift for a livelier feel (keeps counts/fps low)
+        this.speedX = (Math.random() - 0.5) * (mobile ? 0.22 : 0.35)
+        this.speedY = (Math.random() - 0.5) * (mobile ? 0.22 : 0.35)
         this.rotationSpeed = (Math.random() - 0.5) * 0.015
         this.rotation = Math.random() * Math.PI * 2
         this.baseOpacity = Math.random() * 0.35 + 0.25 // Increased for more visibility
-        this.pulseSpeed = Math.random() * 0.008 + 0.004
+        this.pulseSpeed = Math.random() * 0.008 + 0.006 // Slightly quicker pulse
         this.pulseOffset = Math.random() * Math.PI * 2
         const colorIndex = Math.floor(Math.random() * colorPalette.length)
         this.colorRGB = colorPalette[colorIndex]
@@ -236,8 +237,8 @@ export default function RingParticlesBackground({
         
         time += elapsed * 0.001
 
-        // OPTIMIZATION 9: Drastically reduce max connections (was 100/50, now 30/15)
-        const maxConnections = mobile ? 15 : 30
+        // OPTIMIZATION 9: Drastically reduce max connections
+        const maxConnections = mobile ? 12 : 24
         let connectionCount = 0
         
         // OPTIMIZATION 10: Quick rejection before expensive sqrt
