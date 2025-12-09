@@ -17,13 +17,13 @@ import ErrorBoundary from '@/components/ErrorBoundary'
 const SuccessStoriesCarousel = lazy(() => import('@/components/SuccessStoriesCarousel'))
 const TestimonialsCarousel = lazy(() => import('@/components/TestimonialsCarousel'))
 // Hero backgrounds - Multiple options
-const BlackHoleBackground = lazy(() => import('@/components/BlackHoleBackground'))
-const LightweightHeroBackground = lazy(() => import('@/components/LightweightHeroBackground'))
-const PyramidHeroBackground = lazy(() => import('@/components/PyramidHeroBackground'))
-const ParticleNetworkBackground = lazy(() => import('@/components/ParticleNetworkBackground'))
-const RingParticlesBackground = lazy(() => import('@/components/RingParticlesBackground'))
-const CSSGlowBackground = lazy(() => import('@/components/CSSGlowBackground'))
-const ServiceHeroBackground = lazy(() => import('@/components/ServiceHeroBackground'))
+import BlackHoleBackground from '@/components/BlackHoleBackground'
+import LightweightHeroBackground from '@/components/LightweightHeroBackground'
+import PyramidHeroBackground from '@/components/PyramidHeroBackground'
+import ParticleNetworkBackground from '@/components/ParticleNetworkBackground'
+import RingParticlesBackground from '@/components/RingParticlesBackground'
+import CSSGlowBackground from '@/components/CSSGlowBackground'
+import ServiceHeroBackground from '@/components/ServiceHeroBackground'
 // Lazy load modals - only load when needed
 const WebsiteSurveyModal = lazy(() => import('@/components/WebsiteSurveyModal'))
 const WebsiteRevisionModal = lazy(() => import('@/components/WebsiteRevisionModal'))

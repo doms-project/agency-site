@@ -209,13 +209,18 @@ export default function SuccessStoriesCarousel() {
       carousel.style.transform = 'translateX(0)'
 
     // Create infinite scrolling animation (right to left)
-    // Use CSS animation for both mobile and desktop for best performance
+    // Use CSS animation for desktop only; disable auto-scroll on mobile to prevent flicker
     carousel.style.setProperty('--scroll-distance', `-${halfWidth}px`)
-    // Much slower animation for better viewing experience - especially mobile
-    const animationDuration = isMobileDevice ? 70 : 100 // Faster on mobile for better experience
-    carousel.style.animation = `portfolio-scroll-mobile ${animationDuration}s linear infinite`
-    carousel.style.animationDuration = `${animationDuration}s`
+    const animationDuration = isMobileDevice ? 70 : 100
+    if (!isMobileDevice) {
+      carousel.style.animation = `portfolio-scroll-mobile ${animationDuration}s linear infinite`
+      carousel.style.animationDuration = `${animationDuration}s`
       carousel.style.willChange = 'transform'
+    } else {
+      carousel.style.animation = 'none'
+      carousel.style.animationDuration = ''
+      carousel.style.willChange = 'auto'
+    }
 
       // Force slow animation on mobile with inline style
       if (isMobileDevice) {
@@ -315,26 +320,32 @@ export default function SuccessStoriesCarousel() {
             currentTranslateX = matrix.m41
           }
           
-          // Apply momentum with smooth animation using translate3d for GPU acceleration
+          // Apply momentum with smooth animation; disable auto-resume on mobile to prevent flicker
           const newTranslateX = currentTranslateX + momentum
-          carousel.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-          carousel.style.transform = `translate3d(${newTranslateX}px, 0, 0)`
-          
-          // Resume auto-scroll after momentum animation
-          setTimeout(() => {
+          if (isMobileDevice) {
             carousel.style.transition = ''
+            carousel.style.transform = `translate3d(${newTranslateX}px, 0, 0)`
             carousel.style.willChange = 'auto'
-            const animationDuration = isMobileDevice ? 70 : 100
-            carousel.style.animation = `portfolio-scroll-mobile ${animationDuration}s linear infinite`
-            carousel.style.animationPlayState = 'running'
+          } else {
+            carousel.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+            carousel.style.transform = `translate3d(${newTranslateX}px, 0, 0)`
             
-            // Calculate current position as percentage for seamless resume
-            const progress = Math.abs(newTranslateX) / (halfWidth || 1)
-            carousel.style.animationDelay = `-${progress * animationDuration}s`
-          }, 400)
+            // Resume auto-scroll after momentum animation
+            setTimeout(() => {
+              carousel.style.transition = ''
+              carousel.style.willChange = 'auto'
+              const animationDuration = isMobileDevice ? 70 : 100
+              carousel.style.animation = `portfolio-scroll-mobile ${animationDuration}s linear infinite`
+              carousel.style.animationPlayState = 'running'
+              
+              // Calculate current position as percentage for seamless resume
+              const progress = Math.abs(newTranslateX) / (halfWidth || 1)
+              carousel.style.animationDelay = `-${progress * animationDuration}s`
+            }, 400)
+          }
         } else {
           // If not swiping, just resume animation immediately
-          if (swipeState.animationPaused) {
+          if (!isMobileDevice && swipeState.animationPaused) {
             carousel.style.animationPlayState = 'running'
             swipeState.animationPaused = false
             carousel.style.willChange = 'auto'

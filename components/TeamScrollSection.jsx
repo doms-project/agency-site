@@ -107,24 +107,23 @@ export default function TeamScrollSection() {
       scrollTrigger: {
         trigger,
         start: 'top top',
-        end: () => `+=${window.innerHeight * (totalMembers + 2)}`, // generous buffer, even pacing
+        end: () => `+=${window.innerHeight * (totalMembers * 0.7 + 1)}`, // tighter distance with a small buffer
         pin: section,
         pinSpacing: true,
-        scrub: 0.6,
+        scrub: 0.5, // smoother
         anticipatePin: 0,
         invalidateOnRefresh: true,
       },
     })
 
-    // Build evenly spaced steps for each member
+    // Build evenly spaced steps for each member (shorter segments)
     for (let i = 0; i < totalMembers; i++) {
       tl.call(() => {
         setDirection(i > lastIndexRef.current ? 1 : -1)
         lastIndexRef.current = i
         setCurrentIndex(i)
       })
-      // spacer tween to create scroll distance; last step still gets duration to ease unpin
-      tl.to({}, { duration: 1 })
+      tl.to({}, { duration: 0.8 }) // shorter per-member scroll
     }
 
     // Refresh after a small delay
