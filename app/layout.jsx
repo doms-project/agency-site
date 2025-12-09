@@ -66,7 +66,6 @@ export default function RootLayout({ children }) {
         {/* Three.js is loaded via esm.sh CDN which handles module resolution */}
         {/* Preload ONLY critical resources - Logo and GoHighLevel badge only */}
         <link rel="preload" href="/images/logo-hq.png" as="image" type="image/png" fetchPriority="high" />
-        <link rel="preload" href="/images/orig.png" as="image" type="image/png" fetchPriority="high" />
         {/* Other images lazy loaded on demand for faster initial load */}
         {/* Note: CSS is automatically bundled by Next.js when imported in layout.jsx */}
         {/* Font preloading is handled automatically by Next.js font optimization */}

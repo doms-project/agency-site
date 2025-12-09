@@ -209,18 +209,12 @@ export default function SuccessStoriesCarousel() {
       carousel.style.transform = 'translateX(0)'
 
     // Create infinite scrolling animation (right to left)
-    // Use CSS animation for desktop only; disable auto-scroll on mobile to prevent flicker
+    // Enable CSS animation on both desktop and mobile; slower on mobile
     carousel.style.setProperty('--scroll-distance', `-${halfWidth}px`)
-    const animationDuration = isMobileDevice ? 70 : 100
-    if (!isMobileDevice) {
-      carousel.style.animation = `portfolio-scroll-mobile ${animationDuration}s linear infinite`
-      carousel.style.animationDuration = `${animationDuration}s`
-      carousel.style.willChange = 'transform'
-    } else {
-      carousel.style.animation = 'none'
-      carousel.style.animationDuration = ''
-      carousel.style.willChange = 'auto'
-    }
+    const animationDuration = isMobileDevice ? 80 : 100
+    carousel.style.animation = `portfolio-scroll-mobile ${animationDuration}s linear infinite`
+    carousel.style.animationDuration = `${animationDuration}s`
+    carousel.style.willChange = 'transform'
 
       // Force slow animation on mobile with inline style
       if (isMobileDevice) {
@@ -238,6 +232,12 @@ export default function SuccessStoriesCarousel() {
         swipeState.currentX = e.touches[0].clientX
         swipeState.startTime = Date.now()
         swipeState.isSwipe = false // Reset swipe flag
+        // Pause auto animation immediately for swipe and remember it
+        swipeState.prevAnimation = carousel.style.animation
+        carousel.style.animationPlayState = 'paused'
+        swipeState.animationPaused = true
+        carousel.style.transition = ''
+        carousel.style.willChange = 'transform'
         
         // Get current transform position
         const transform = window.getComputedStyle(carousel).transform
@@ -259,12 +259,13 @@ export default function SuccessStoriesCarousel() {
         
         // Determine if this is a swipe gesture (more horizontal than vertical movement)
         // and if movement exceeds threshold (10px)
-        if (!swipeState.isSwipe && (deltaX > 10 || deltaY > 10)) {
+        if (!swipeState.isSwipe && (deltaX > 8 || deltaY > 8)) {
           swipeState.isSwipe = deltaX > deltaY // Horizontal movement = swipe
           
           if (swipeState.isSwipe) {
             // Pause auto-scroll animation only when confirmed swipe
             carousel.style.animationPlayState = 'paused'
+            carousel.style.animation = 'none'
             swipeState.animationPaused = true
             carousel.style.willChange = 'transform'
           }
@@ -278,7 +279,6 @@ export default function SuccessStoriesCarousel() {
           // Use requestAnimationFrame for smooth updates
           if (!swipeState.rafId) {
             swipeState.rafId = requestAnimationFrame(() => {
-              carousel.style.animation = 'none'
               carousel.style.transform = `translate3d(${newTranslateX}px, 0, 0)`
               swipeState.rafId = null
             })
@@ -303,51 +303,37 @@ export default function SuccessStoriesCarousel() {
         swipeState.isDragging = false
         swipeState.isSwipe = false
         
-        // Only apply momentum if this was a swipe gesture
-        if (wasSwiping) {
-          const deltaX = swipeState.currentX - swipeState.startX
-          const deltaTime = Date.now() - swipeState.startTime
-          const velocity = deltaX / deltaTime // pixels per ms
-          
-          // Calculate momentum
-          const momentum = velocity * 150 // Reduced for smoother feel
-          
-          // Get current position
+        const resumeAnimation = () => {
+          const animationDuration = isMobileDevice ? 80 : 100
           const currentTransform = window.getComputedStyle(carousel).transform
           let currentTranslateX = 0
           if (currentTransform !== 'none') {
             const matrix = new DOMMatrix(currentTransform)
             currentTranslateX = matrix.m41
           }
-          
-          // Apply momentum with smooth animation; disable auto-resume on mobile to prevent flicker
-          const newTranslateX = currentTranslateX + momentum
-          if (isMobileDevice) {
-            carousel.style.transition = ''
-            carousel.style.transform = `translate3d(${newTranslateX}px, 0, 0)`
-            carousel.style.willChange = 'auto'
-          } else {
-            carousel.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-            carousel.style.transform = `translate3d(${newTranslateX}px, 0, 0)`
-            
-            // Resume auto-scroll after momentum animation
-            setTimeout(() => {
-              carousel.style.transition = ''
-              carousel.style.willChange = 'auto'
-              const animationDuration = isMobileDevice ? 70 : 100
-              carousel.style.animation = `portfolio-scroll-mobile ${animationDuration}s linear infinite`
-              carousel.style.animationPlayState = 'running'
-              
-              // Calculate current position as percentage for seamless resume
-              const progress = Math.abs(newTranslateX) / (halfWidth || 1)
-              carousel.style.animationDelay = `-${progress * animationDuration}s`
-            }, 400)
-          }
+          const effectiveWidth = halfWidth || 1
+          // Normalize progress within a single loop to avoid huge delays
+          const progress = (Math.abs(currentTranslateX) % effectiveWidth) / effectiveWidth
+          // Clear inline transform so animation takes over
+          carousel.style.transition = ''
+          carousel.style.transform = ''
+          carousel.style.animation = `portfolio-scroll-mobile ${animationDuration}s linear infinite`
+          carousel.style.animationDuration = `${animationDuration}s`
+          carousel.style.animationDelay = `-${progress * animationDuration}s`
+          carousel.style.animationPlayState = 'running'
+          swipeState.animationPaused = false
+        }
+
+        // Only apply momentum if this was a swipe gesture
+        if (wasSwiping) {
+          // Stop any transition and resume animation from current position (no momentum to reduce jitter)
+          carousel.style.transition = ''
+          carousel.style.willChange = 'auto'
+          resumeAnimation()
         } else {
           // If not swiping, just resume animation immediately
-          if (!isMobileDevice && swipeState.animationPaused) {
-            carousel.style.animationPlayState = 'running'
-            swipeState.animationPaused = false
+          if (swipeState.animationPaused) {
+            resumeAnimation()
             carousel.style.willChange = 'auto'
           }
         }
