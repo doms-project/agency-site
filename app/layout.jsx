@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-css-tags */
 import { DM_Sans } from 'next/font/google'
 import Script from 'next/script'
+import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import WebVitals from './components/WebVitals'
 
@@ -100,6 +101,7 @@ export default function RootLayout({ children }) {
         {/* Logo tilt is handled in page.jsx - removed duplicate handler to prevent conflicts */}
         <WebVitals />
         {children}
+        <Analytics />
       </body>
     </html>
   )
