@@ -1088,8 +1088,8 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
     updatePRM()
     media.addEventListener('change', updatePRM)
 
-    // Default animation: use lighter ServiceHero on all; for PRM keep it simple
-    setHeroAnimation((mobile && media.matches) ? 'cssGlow' : 'serviceHero')
+    // Default animation: use ServiceHero everywhere; fallback to CSS glow only for reduced-motion
+    setHeroAnimation(media.matches ? 'cssGlow' : 'serviceHero')
 
     return () => {
       media.removeEventListener('change', updatePRM)

@@ -362,6 +362,7 @@ export default function SuccessStoriesCarousel() {
     const perspectiveThrottle = isMobileDevice ? 100 : 50 // Update less frequently on mobile
     
     const update3DPerspective = (forceUpdate = false) => {
+      if (isMobileDevice) return // skip 3D updates on mobile to avoid flicker
       const now = Date.now()
       if (!forceUpdate && now - perspectiveLastUpdate < perspectiveThrottle) return
       perspectiveLastUpdate = now
@@ -414,7 +415,9 @@ export default function SuccessStoriesCarousel() {
       updateLoop()
     }
     
-    startPerspectiveUpdates()
+    if (!isMobileDevice) {
+      startPerspectiveUpdates()
+    }
     
     // Removed touch tilt - only using automatic carousel 3D perspective
 
@@ -611,12 +614,12 @@ export default function SuccessStoriesCarousel() {
                       transformStyle: 'preserve-3d',
                       backfaceVisibility: 'hidden',
                       WebkitBackfaceVisibility: 'hidden',
-                      boxShadow: isMobile ? '0 8px 16px rgba(0, 0, 0, 0.4)' : '0 10px 20px 5px rgba(0, 0, 0, 0.4)',
+                      boxShadow: isMobile ? '0 6px 12px rgba(0, 0, 0, 0.35)' : '0 10px 20px 5px rgba(0, 0, 0, 0.4)',
                       maxHeight: isMobile ? '360px' : 'none',
                       touchAction: 'pan-x pan-y',
-                      transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0) translateZ(0) scale(1)',
-                      WebkitTransform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0) translateZ(0) scale(1)',
-                      transition: 'transform 0.15s ease-out, opacity 0.15s ease-out', // OPTIMIZED: Smoother CSS transition
+                      transform: isMobile ? 'none' : 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0) translateZ(0) scale(1)',
+                      WebkitTransform: isMobile ? 'none' : 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0) translateZ(0) scale(1)',
+                      transition: isMobile ? 'transform 0.08s ease-out' : 'transform 0.15s ease-out, opacity 0.15s ease-out',
                     }}
                   >
                     {/* Background Layer - Image or Solid Color */}

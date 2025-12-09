@@ -102,33 +102,30 @@ export default function TeamScrollSection() {
     })
 
     const totalMembers = teamMembers.length
-
-    // Create the ScrollTrigger - further reduce scroll distance per member (~0.6x viewport height)
-    const scrollTrigger = ScrollTrigger.create({
-      trigger: trigger,
-      start: 'top top',
-      end: () => `+=${window.innerHeight * totalMembers * 0.6}`,  // tighter scroll distance
-      pin: section,
-      pinSpacing: true,
-      scrub: 1,  // Smoother scrub
-      anticipatePin: 1,
-      invalidateOnRefresh: true,
-      onUpdate: (self) => {
-        // Calculate which member to show based on progress
-        const progress = self.progress
-        const newIndex = Math.min(
-          Math.floor(progress * totalMembers),
-          totalMembers - 1
-        )
-        
-        // Only update if changed
-        if (newIndex !== lastIndexRef.current) {
-          setDirection(newIndex > lastIndexRef.current ? 1 : -1)
-          lastIndexRef.current = newIndex
-          setCurrentIndex(newIndex)
-        }
-      }
+    const tl = gsap.timeline({
+      defaults: { ease: 'none' },
+      scrollTrigger: {
+        trigger,
+        start: 'top top',
+        end: () => `+=${window.innerHeight * (totalMembers + 2)}`, // generous buffer, even pacing
+        pin: section,
+        pinSpacing: true,
+        scrub: 0.6,
+        anticipatePin: 0,
+        invalidateOnRefresh: true,
+      },
     })
+
+    // Build evenly spaced steps for each member
+    for (let i = 0; i < totalMembers; i++) {
+      tl.call(() => {
+        setDirection(i > lastIndexRef.current ? 1 : -1)
+        lastIndexRef.current = i
+        setCurrentIndex(i)
+      })
+      // spacer tween to create scroll distance; last step still gets duration to ease unpin
+      tl.to({}, { duration: 1 })
+    }
 
     // Refresh after a small delay
     const timeout = setTimeout(() => {
@@ -137,7 +134,8 @@ export default function TeamScrollSection() {
 
     return () => {
       clearTimeout(timeout)
-      scrollTrigger.kill()
+      tl.scrollTrigger && tl.scrollTrigger.kill()
+      tl.kill()
     }
   }, []) // Empty dependency array - only run once!
 
