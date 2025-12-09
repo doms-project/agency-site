@@ -312,11 +312,9 @@ export default function SuccessStoriesCarousel() {
             currentTranslateX = matrix.m41
           }
           const effectiveWidth = halfWidth || 1
-          // Normalize progress within a single loop to avoid huge delays
           const progress = (Math.abs(currentTranslateX) % effectiveWidth) / effectiveWidth
-          // Clear inline transform so animation takes over
           carousel.style.transition = ''
-          carousel.style.transform = ''
+          // Keep current transform; just set animation with proper offset
           carousel.style.animation = `portfolio-scroll-mobile ${animationDuration}s linear infinite`
           carousel.style.animationDuration = `${animationDuration}s`
           carousel.style.animationDelay = `-${progress * animationDuration}s`
@@ -607,15 +605,15 @@ export default function SuccessStoriesCarousel() {
                     }}
                     className="card-content relative rounded-3xl overflow-hidden cursor-pointer group"
                     style={{ 
-                      willChange: isMobile ? 'auto' : 'transform', 
-                      transformStyle: 'preserve-3d',
+                      willChange: 'transform',
+                      transformStyle: isMobile ? 'flat' : 'preserve-3d',
                       backfaceVisibility: 'hidden',
                       WebkitBackfaceVisibility: 'hidden',
                       boxShadow: isMobile ? '0 6px 12px rgba(0, 0, 0, 0.35)' : '0 10px 20px 5px rgba(0, 0, 0, 0.4)',
                       maxHeight: isMobile ? '360px' : 'none',
                       touchAction: 'pan-x pan-y',
-                      transform: isMobile ? 'none' : 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0) translateZ(0) scale(1)',
-                      WebkitTransform: isMobile ? 'none' : 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0) translateZ(0) scale(1)',
+                      transform: 'translate3d(0,0,0)',
+                      WebkitTransform: 'translate3d(0,0,0)',
                       transition: isMobile ? 'transform 0.08s ease-out' : 'transform 0.15s ease-out, opacity 0.15s ease-out',
                     }}
                   >
