@@ -23,7 +23,7 @@ export const contactSectionHtml = String.raw`<section class="w-full pb-16 md:pb-
      </p>
      <div class="space-y-4">
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-       <a href="tel:3302995179" class="flex items-center justify-center gap-2 bg-[#7BB9E8] hover:bg-[#5fa6d6] text-black font-bold text-base md:text-lg py-3 md:py-4 px-6 rounded-xl transition-all duration-300 text-center hover:scale-105 shadow-lg" style="font-family:'DM Sans', sans-serif">
+       <a href="tel:+13305579354" class="flex items-center justify-center gap-2 bg-[#7BB9E8] hover:bg-[#5fa6d6] text-black font-bold text-base md:text-lg py-3 md:py-4 px-6 rounded-xl transition-all duration-300 text-center hover:scale-105 shadow-lg" style="font-family:'DM Sans', sans-serif">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
         </svg>
@@ -59,8 +59,8 @@ export const contactSectionHtml = String.raw`<section class="w-full pb-16 md:pb-
        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z">
        </path>
       </svg>
-      <a class="hover:underline" href="tel:3302995179" style="font-family:'DM Sans', sans-serif">
-       (330) 299-5179
+      <a class="hover:underline" href="tel:+13305579354" style="font-family:'DM Sans', sans-serif">
+       +1 (330) 557-9354
       </a>
      </div>
      <div class="flex items-center space-x-3 text-white/70">

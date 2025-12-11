@@ -112,7 +112,7 @@ const mobileNavLinks = [
 const supportOptions = [
   {
     label: '24/7 Shopify Support',
-    href: 'tel:3302995179',
+    href: 'tel:+13305579354',
     icon: (
       <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
         <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
@@ -1123,9 +1123,11 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
       </Suspense>
       {/* Mobile header now at page level - spacer for fixed navbar */}
       <div className="lg:hidden h-24" aria-hidden="true" />
-      <section className="hero relative z-10 w-full flex flex-col justify-center items-center pb-16 mb-0 overflow-hidden lg:pt-8">
-        <div className="max-w-5xl mx-auto w-full px-4 sm:px-6 md:px-8 flex flex-col items-center justify-center text-center">
-          <div className="flex items-center justify-center mb-4 md:mb-5 mt-4">
+      <section className="hero relative z-10 w-full flex flex-col justify-center items-center pb-16 mb-0 overflow-visible lg:pt-8">
+        <div className="max-w-5xl mx-auto w-full px-1 sm:px-2 md:px-3 flex flex-col items-center justify-center text-center">
+          <div
+            className="flex items-center justify-start w-full mb-6 md:mb-7 mt-2 sm:mt-1 md:mt-0 lg:-mt-2 ml-0 translate-x-0 sm:ml-0 sm:translate-x-0 lg:ml-[-180px] lg:-translate-x-10"
+          >
             <div className="flex items-center gap-1 md:gap-2 bg-white/10 px-2 py-0.5 md:px-3 md:py-1 rounded-full border-2 border-white/30 shadow-md shadow-white/5 backdrop-blur-sm ring-1 ring-white/10 scale-90 md:scale-100">
               <Image
                 src="/images/orig.png"
@@ -1141,12 +1143,32 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
               </span>
             </div>
           </div>
-          <h1 className="text-6xl sm:text-7xl md:text-7xl lg:text-8xl xl:text-9xl font-extrabold text-white leading-[1.1] tracking-tight mb-4 md:mb-6 relative text-center break-words overflow-hidden" style={{ textShadow: '0 4px 20px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(0, 0, 0, 0.3)', fontFamily: 'DM Sans, sans-serif' }}>
-            <span className="block break-words">We Make</span>
-            <span className="block text-white break-words">Websites</span>
+          <h1 className="w-full max-w-6xl text-[55px] sm:text-[55px] md:text-[120px] lg:text-[150px] xl:text-[150px] font-extrabold text-white leading-[0.9] tracking-tight mb-5 md:mb-7 lg:-mt-2 xl:-mt-4 relative text-left break-words overflow-visible" style={{ textShadow: '0 4px 20px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(0, 0, 0, 0.3)', fontFamily: 'DM Sans, sans-serif' }}>
+            <span
+              className="absolute -z-10 left-1/2 -translate-x-1/2 top-1/5 h-72 w-72 sm:h-96 sm:w-96 bg-[#7BB9E8]/35 blur-[90px] rounded-full"
+              aria-hidden="true"
+            />
+            <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2 sm:gap-y-0.5">
+              <span className="block uppercase ml-6 sm:-ml-8 lg:-ml-[90px] xl:-ml-[130px]">We Build</span>
+              <span className="block uppercase text-white ml-auto pr-1 sm:pr-2 text-right lg:ml-[452px] lg:pr-0">Brands</span>
+            </div>
+            <div className="flex flex-col gap-1.5 sm:gap-0.5 mt-1.5 sm:mt-1">
+              <span
+                className="block uppercase"
+                style={{ marginLeft: 'clamp(32px, 12vw, 170px)' }}
+              >
+                Of
+              </span>
+              <span
+                className="block uppercase text-white whitespace-nowrap"
+                style={{ marginLeft: 'clamp(8px, 4vw, 32px)' }}
+              >
+                Influence.
+              </span>
+            </div>
           </h1>
           <div className="mb-6 md:mb-8 h-[5rem] md:h-[4rem] flex items-center justify-center">
-            <span className="text-lg md:text-xl lg:text-2xl text-white/90 font-light max-w-4xl leading-relaxed break-words line-clamp-4 sm:line-clamp-none" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+            <span className="text-lg md:text-xl lg:text-2xl text-white/90 font-light max-w-4xl leading-relaxed break-words line-clamp-4 sm:line-clamp-none capitalize" style={{ fontFamily: 'DM Sans, sans-serif' }}>
               {typedText}
               <span className="typewriter-cursor text-[#7BB9E8] animate-pulse">|</span>
             </span>

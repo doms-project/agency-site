@@ -187,7 +187,7 @@ export default function PrivacyPolicyPage() {
                   <strong>Email:</strong> <a href="mailto:youngstownmarketingco@gmail.com" className="text-[#7BB9E8] hover:underline">youngstownmarketingco@gmail.com</a>
                 </p>
                 <p className="text-white/80 mb-2">
-                  <strong>Phone:</strong> <a href="tel:3302995179" className="text-[#7BB9E8] hover:underline">(330) 299-5179</a>
+                  <strong>Phone:</strong> <a href="tel:+13305579354" className="text-[#7BB9E8] hover:underline">+1 (330) 557-9354</a>
                 </p>
                 <p className="text-white/80">
                   <strong>Location:</strong> United States
