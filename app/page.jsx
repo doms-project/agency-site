@@ -594,24 +594,31 @@ export default function Page() {
       ]
 
       if (validSections.includes(hash)) {
-        // Wait for page to load, then scroll to section
+        // Single, optimized scroll with proper timing
         const scrollToSection = () => {
           const element = document.getElementById(hash)
           if (element) {
-            const offset = 80 // Account for sticky navbar height
+            // Cancel any ongoing scroll animations
+            if ('scrollBehavior' in document.documentElement.style) {
+              window.scrollTo({ top: window.pageYOffset, behavior: 'auto' })
+            }
+
+            const offset = 100 // Navbar + padding offset
             const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
-            const offsetPosition = elementPosition - offset
-            window.scrollTo({
-              top: offsetPosition,
-              behavior: 'smooth'
+            const offsetPosition = Math.max(0, elementPosition - offset)
+
+            // Use requestAnimationFrame for smooth, lag-free scrolling
+            requestAnimationFrame(() => {
+              window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+              })
             })
           }
         }
 
-        // Try immediately, then retry after a short delay in case content is still loading
-        scrollToSection()
-        setTimeout(scrollToSection, 500)
-        setTimeout(scrollToSection, 1000)
+        // Single scroll attempt with optimal timing
+        setTimeout(scrollToSection, 150)
       }
     }
   }, [])
@@ -1185,12 +1192,9 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
               </span>
             </div>
           </div>
-          <h1 className="w-full max-w-6xl text-[55px] sm:text-[55px] md:text-[120px] lg:text-[150px] xl:text-[150px] font-extrabold text-white leading-[0.9] tracking-tight mb-5 md:mb-7 lg:-mt-2 xl:-mt-4 relative text-left break-words overflow-visible" style={{
+          <h1 className="w-full max-w-6xl text-[55px] sm:text-[55px] md:text-[120px] lg:text-[150px] xl:text-[150px] font-extrabold text-white leading-[0.9] tracking-tight mb-5 md:mb-7 lg:-mt-2 xl:-mt-4 relative text-left break-words overflow-visible hero-text-414" style={{
             textShadow: '0 4px 20px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(0, 0, 0, 0.3)',
-            fontFamily: 'DM Sans, sans-serif',
-            '@media (min-width: 414px) and (max-width: 639px)': {
-              fontSize: '60px'
-            }
+            fontFamily: 'DM Sans, sans-serif'
           }}>
             <span
               className="absolute -z-10 left-1/2 -translate-x-1/2 top-1/5 h-72 w-72 sm:h-96 sm:w-96 bg-[#7BB9E8]/35 blur-[90px] rounded-full"
@@ -1202,7 +1206,7 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
             </div>
             <div className="flex flex-col gap-1.5 sm:gap-0.5 mt-1.5 sm:mt-1">
               <span
-                className="block uppercase of-414-adjust"
+                className="block uppercase of-414-adjust of-375-adjust"
                 style={{
                   marginLeft: 'clamp(27px, calc(12vw + 43px), 165px)'
                 }}
@@ -1210,7 +1214,7 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
                 Of
               </span>
               <span
-                className="block uppercase text-white whitespace-nowrap"
+                className="block uppercase text-white whitespace-nowrap influence-375-adjust"
                 style={{
                   marginLeft: 'clamp(8px, calc(4vw + 32px), 32px)'
                 }}
