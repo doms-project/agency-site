@@ -1795,3 +1795,26 @@ section#cpg-brands .service-card,
 .animate-glow-float {
   animation: glow-float 10s ease-in-out infinite;
 }
+
+/* 375px specific adjustments */
+@media (min-width: 375px) and (max-width: 413px) {
+  .we-build-375-adjust {
+    margin-left: 8px !important;
+  }
+  .brands-375-adjust {
+    margin-right: -3px !important;
+  }
+}
+
+/* 414px specific adjustments */
+@media (min-width: 414px) and (max-width: 639px) {
+  .we-build-414-adjust {
+    margin-left: 30px !important;
+  }
+  .of-414-adjust {
+    margin-left: 55px !important;
+  }
+  .gohighlevel-414-adjust {
+    margin-left: 15px !important;
+  }
+}

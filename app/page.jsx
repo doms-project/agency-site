@@ -1170,7 +1170,7 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
           <div
             className="flex items-center justify-start w-full mb-6 md:mb-7 mt-2 sm:mt-1 md:mt-0 lg:-mt-2 ml-0 translate-x-0 sm:ml-0 sm:translate-x-0 lg:ml-[-180px] lg:-translate-x-10"
           >
-            <div className="flex items-center gap-1 md:gap-2 bg-white/10 px-2 py-0.5 md:px-3 md:py-1 rounded-full border-2 border-white/30 shadow-md shadow-white/5 backdrop-blur-sm ring-1 ring-white/10 scale-90 md:scale-100">
+            <div className="flex items-center gap-1 md:gap-2 bg-white/10 px-2 py-0.5 md:px-3 md:py-1 rounded-full border-2 border-white/30 shadow-md shadow-white/5 backdrop-blur-sm ring-1 ring-white/10 scale-90 md:scale-100 gohighlevel-414-adjust">
               <Image
                 src="/images/orig.png"
                 alt="GoHighLevel"
@@ -1185,25 +1185,35 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
               </span>
             </div>
           </div>
-          <h1 className="w-full max-w-6xl text-[55px] sm:text-[55px] md:text-[120px] lg:text-[150px] xl:text-[150px] font-extrabold text-white leading-[0.9] tracking-tight mb-5 md:mb-7 lg:-mt-2 xl:-mt-4 relative text-left break-words overflow-visible" style={{ textShadow: '0 4px 20px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(0, 0, 0, 0.3)', fontFamily: 'DM Sans, sans-serif' }}>
+          <h1 className="w-full max-w-6xl text-[55px] sm:text-[55px] md:text-[120px] lg:text-[150px] xl:text-[150px] font-extrabold text-white leading-[0.9] tracking-tight mb-5 md:mb-7 lg:-mt-2 xl:-mt-4 relative text-left break-words overflow-visible" style={{
+            textShadow: '0 4px 20px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(0, 0, 0, 0.3)',
+            fontFamily: 'DM Sans, sans-serif',
+            '@media (min-width: 414px) and (max-width: 639px)': {
+              fontSize: '60px'
+            }
+          }}>
             <span
               className="absolute -z-10 left-1/2 -translate-x-1/2 top-1/5 h-72 w-72 sm:h-96 sm:w-96 bg-[#7BB9E8]/35 blur-[90px] rounded-full"
               aria-hidden="true"
             />
             <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2 sm:gap-y-0.5">
-              <span className="block uppercase ml-6 sm:-ml-8 lg:-ml-[90px] xl:-ml-[130px]">We Build</span>
-              <span className="block uppercase text-white ml-auto pr-1 sm:pr-2 text-right lg:ml-[452px] lg:pr-0">Brands</span>
+              <span className="block uppercase ml-6 sm:-ml-8 md:ml-8 lg:-ml-[90px] xl:-ml-[130px] we-build-414-adjust we-build-375-adjust">We Build</span>
+              <span className="block uppercase text-white ml-auto pr-1 sm:pr-2 text-right md:mr-8 lg:ml-[452px] lg:pr-0 brands-375-adjust" style={{ marginRight: '15px' }}>Brands</span>
             </div>
             <div className="flex flex-col gap-1.5 sm:gap-0.5 mt-1.5 sm:mt-1">
               <span
-                className="block uppercase"
-                style={{ marginLeft: 'clamp(32px, 12vw, 170px)' }}
+                className="block uppercase of-414-adjust"
+                style={{
+                  marginLeft: 'clamp(27px, calc(12vw + 43px), 165px)'
+                }}
               >
                 Of
               </span>
               <span
                 className="block uppercase text-white whitespace-nowrap"
-                style={{ marginLeft: 'clamp(8px, 4vw, 32px)' }}
+                style={{
+                  marginLeft: 'clamp(8px, calc(4vw + 32px), 32px)'
+                }}
               >
                 Influence.
               </span>
