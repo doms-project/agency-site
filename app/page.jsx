@@ -574,6 +574,48 @@ export default function Page() {
     }
   }, [])
 
+  // Handle direct section navigation from URL
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    // Check if there's a hash in the URL
+    const hash = window.location.hash.replace('#', '')
+    if (hash) {
+      // Valid sections
+      const validSections = [
+        'hero',
+        'services',
+        'about',
+        'testimonials',
+        'contact',
+        'pricing',
+        'approach',
+        'team'
+      ]
+
+      if (validSections.includes(hash)) {
+        // Wait for page to load, then scroll to section
+        const scrollToSection = () => {
+          const element = document.getElementById(hash)
+          if (element) {
+            const offset = 80 // Account for sticky navbar height
+            const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+            const offsetPosition = elementPosition - offset
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            })
+          }
+        }
+
+        // Try immediately, then retry after a short delay in case content is still loading
+        scrollToSection()
+        setTimeout(scrollToSection, 500)
+        setTimeout(scrollToSection, 1000)
+      }
+    }
+  }, [])
+
   // Scroll reveal for Services section - optimized for mobile
   // Completely isolated from all carousel/marquee sections
   useEffect(() => {
