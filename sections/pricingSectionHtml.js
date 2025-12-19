@@ -15,7 +15,7 @@ export const pricingSectionHtml = String.raw`<section id="pricing" class="w-full
     </p>
    </div>
    <!-- Navigation Arrows -->
-   <div class="flex items-center gap-3">
+   <div class="pricing-nav-arrows flex items-center gap-3">
     <button onclick="document.getElementById('pricing-carousel').scrollBy({left: -400, behavior: 'smooth'})" class="w-12 h-12 rounded-full border border-white/20 hover:border-[#7BB9E8]/50 hover:bg-[#7BB9E8]/10 flex items-center justify-center transition-all duration-300 group" aria-label="Previous">
      <svg class="w-5 h-5 text-white/60 group-hover:text-[#7BB9E8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>

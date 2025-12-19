@@ -1796,6 +1796,37 @@ section#cpg-brands .service-card,
   animation: glow-float 10s ease-in-out infinite;
 }
 
+/* Pricing section viewport limits */
+@media (min-width: 1761px) {
+  /* Hide navigation arrows when all cards are visible */
+  .pricing-nav-arrows {
+    display: none !important;
+  }
+
+  /* Center the pricing cards with carefully reduced margins */
+  #pricing-carousel {
+    justify-content: center !important;
+    overflow-x: visible !important;
+    flex-wrap: nowrap !important; /* Keep single row */
+    gap: 20px !important; /* Slightly smaller gaps */
+    padding-bottom: 0 !important;
+    margin: 0 8px !important; /* Carefully reduced margins for wider cards */
+  }
+
+  /* Increase card size for better visual balance */
+  .pricing-carousel-card {
+    width: 340px !important; /* Increased from 335px for better proportions */
+    flex-shrink: 0 !important;
+    scroll-snap-align: none !important;
+  }
+
+  /* Remove carousel behavior */
+  #pricing-carousel {
+    scroll-snap-type: none !important;
+    -webkit-overflow-scrolling: auto !important;
+  }
+}
+
 /* 375px specific adjustments */
 @media (min-width: 375px) and (max-width: 413px) {
   .we-build-375-adjust {
