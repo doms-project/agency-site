@@ -9,7 +9,7 @@ const legacyCssFiles = [
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false, // Temporarily disabled to debug rendering issues
   images: {
     remotePatterns: [
       {
