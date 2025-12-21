@@ -36,6 +36,7 @@ function GetStartedModal({ isOpen, onClose }) {
   const [availableSlots, setAvailableSlots] = useState([])
   const [hasSelectedDate, setHasSelectedDate] = useState(false)
   const [isLoadingTimes, setIsLoadingTimes] = useState(false)
+  const [dateError, setDateError] = useState('')
 
 
   // Helper function to convert Eastern Time to user's timezone
@@ -291,12 +292,15 @@ function GetStartedModal({ isOpen, onClose }) {
   }, [])
 
   const handleDateSelection = async (date) => {
+    // Clear any previous errors
+    setDateError('')
+
     // Validate that the selected date is not in the past
     const tomorrow = new Date(Date.now() + 24 * 60 * 60 * 1000)
     tomorrow.setHours(0, 0, 0, 0) // Set to start of day for comparison
 
     if (date && date < tomorrow) {
-      alert('Please select a date from tomorrow onwards.')
+      setDateError('Please select a date from tomorrow onwards.')
       return
     }
 
@@ -563,6 +567,14 @@ function GetStartedModal({ isOpen, onClose }) {
                           <span className="text-white/90 text-xs font-medium">📅 Date</span>
                           <span className="text-red-400 text-xs">*</span>
                         </div>
+                        {dateError && (
+                          <div className="mt-1 px-3 py-2 bg-red-900/20 border border-red-500/30 rounded-lg animate-fadeIn">
+                            <div className="flex items-center gap-2">
+                              <span className="text-red-400 text-xs">⚠️</span>
+                              <span className="text-red-300 text-xs font-medium">{dateError}</span>
+                            </div>
+                          </div>
+                        )}
                         <div className="relative" id="datepicker-portal">
                           <DatePicker
                             selected={formData.preferredDate}
