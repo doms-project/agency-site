@@ -178,17 +178,14 @@ export const cpgSectionHtml = String.raw`<section id="local-business-growth" cla
    </style>
   </div>
   <div class="flex flex-col items-center justify-center mt-8">
-   <button type="button" class="flex md:hidden btn premium-btn w-full max-w-xs mx-auto mb-4 justify-center items-center text-white text-lg font-bold shadow-md hover:bg-[#5fa6db] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#7BB9E8] focus:ring-offset-2 animate-fadein" style="font-family:'DM Sans', sans-serif">
-    Grow Your Business Today
-   </button>
-   <div class="hidden md:flex flex-row gap-4 w-full justify-center flex-wrap">
-    <a class="flex items-center gap-3 px-4 py-2 rounded-full bg-[#181c22] text-white font-bold text-base border-2 border-[#7BB9E8] hover:bg-[#222c38] transition min-w-[140px] justify-center whitespace-nowrap" href="/services/website-design" style="font-family:'DM Sans', sans-serif">
+   <div class="flex flex-col gap-2 md:flex-row md:gap-4 w-full justify-center flex-wrap">
+    <a class="flex items-center gap-3 px-4 py-2 rounded-full bg-[#181c22] text-white font-bold text-base border-2 border-[#7BB9E8] hover:bg-[#222c38] transition w-full max-w-[280px] md:min-w-[140px] justify-center whitespace-nowrap mx-auto" href="/services/website-design" style="font-family:'DM Sans', sans-serif">
      <svg class="h-6 w-6 text-[#7BB9E8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
      </svg>
      Website Design
     </a>
-    <a class="flex items-center gap-3 px-4 py-2 rounded-full bg-[#181c22] text-white font-bold text-base border-2 border-[#7BB9E8] hover:bg-[#222c38] transition min-w-[140px] justify-center whitespace-nowrap" href="/services/google-business-profile" style="font-family:'DM Sans', sans-serif">
+    <a class="flex items-center gap-3 px-4 py-2 rounded-full bg-[#181c22] text-white font-bold text-base border-2 border-[#7BB9E8] hover:bg-[#222c38] transition w-full max-w-[280px] md:min-w-[140px] justify-center whitespace-nowrap mx-auto" href="/services/google-business-profile" style="font-family:'DM Sans', sans-serif">
      <svg class="h-6 w-6 text-[#7BB9E8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />

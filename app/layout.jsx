@@ -2,6 +2,7 @@
 import { DM_Sans } from 'next/font/google'
 import Script from 'next/script'
 import { Analytics } from '@vercel/analytics/react'
+import { Toaster } from 'sonner'
 import './globals.css'
 import WebVitals from './components/WebVitals'
 
@@ -101,6 +102,19 @@ export default function RootLayout({ children }) {
         <WebVitals />
         {children}
         <Analytics />
+        <Toaster
+          position="top-right"
+          richColors
+          closeButton
+          theme="light"
+          toastOptions={{
+            style: {
+              background: '#ffffff',
+              border: '1px solid #e5e7eb',
+              color: '#374151',
+            },
+          }}
+        />
       </body>
     </html>
   )

@@ -2347,6 +2347,21 @@ input[type="date"] {
   cursor: pointer;
 }
 
+/* Blocked date styling for DatePicker */
+.blocked-date {
+  background-color: #374151 !important; /* gray-700 */
+  color: #9ca3af !important; /* gray-400 */
+  cursor: not-allowed !important;
+  opacity: 0.6 !important;
+  text-decoration: line-through !important;
+}
+
+.blocked-date:hover {
+  background-color: #374151 !important;
+  color: #9ca3af !important;
+  opacity: 0.6 !important;
+}
+
 /* Ensure calendar popup has dark theme */
 ::-webkit-calendar-picker-indicator:focus {
   outline: 2px solid #3b82f6;

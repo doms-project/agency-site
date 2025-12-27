@@ -28,7 +28,8 @@ function GetStartedModal({ isOpen, onClose }) {
     phone: '',
     message: '',
     preferredDate: null, // Now using Date object for react-datepicker
-    preferredTime: '',
+    preferredTime: '', // Display time for UI
+    preferredTimeEastern: '', // Eastern time for API (always valid)
     timezone: getUserTimezone(), // User's actual timezone with fallback
     agreeToTerms: false
   })
@@ -37,6 +38,103 @@ function GetStartedModal({ isOpen, onClose }) {
   const [hasSelectedDate, setHasSelectedDate] = useState(false)
   const [isLoadingTimes, setIsLoadingTimes] = useState(false)
   const [dateError, setDateError] = useState('')
+  const [blockedDates, setBlockedDates] = useState([]) // Dates disabled in calendar
+  const [isLoadingBlockedDates, setIsLoadingBlockedDates] = useState(true)
+  const [showConfirmation, setShowConfirmation] = useState(false)
+
+  // Client-side blocked dates cache for instant updates
+  const updateBlockedDatesCache = (newBlockedDates) => {
+    // Ensure all dates are valid strings
+    const validDates = newBlockedDates.filter(date =>
+      typeof date === 'string' && date.match(/^\d{4}-\d{2}-\d{2}$/)
+    )
+
+    const cacheData = {
+      dates: validDates,
+      timestamp: Date.now()
+    }
+    localStorage.setItem('blockedDatesCache', JSON.stringify(cacheData))
+
+    // Convert to Date objects for React state
+    const dateObjects = validDates.map(dateStr => new Date(dateStr))
+    setBlockedDates(dateObjects)
+  }
+
+  // Calculate blocked dates for a booking (3-day rule)
+  const calculateBlockedDatesForBooking = (bookingDate) => {
+    const blocked = []
+    const baseDate = new Date(bookingDate)
+
+    // Add consultation day and 2 buffer days
+    for (let i = 0; i < 3; i++) {
+      const blockedDate = new Date(baseDate)
+      blockedDate.setDate(baseDate.getDate() + i)
+      blocked.push(blockedDate.toISOString().split('T')[0])
+    }
+
+    return blocked
+  }
+
+  // Add booking to client cache immediately
+  const addBookingToCache = (bookingDate) => {
+    const newBlockedDates = calculateBlockedDatesForBooking(bookingDate)
+    const currentCache = JSON.parse(localStorage.getItem('blockedDatesCache') || '{"dates":[]}')
+    const updatedDates = [...new Set([...currentCache.dates, ...newBlockedDates])]
+    updateBlockedDatesCache(updatedDates)
+  }
+
+  // Handle confirmed booking submission
+  const handleConfirmedSubmit = async () => {
+    setShowConfirmation(false)
+    setIsSubmitting(true)
+
+    try {
+      // Format the date properly to avoid timezone issues
+      const formatLocalDate = (date) => {
+        if (!date) return null
+        const year = date.getFullYear()
+        const month = String(date.getMonth() + 1).padStart(2, '0')
+        const day = String(date.getDate()).padStart(2, '0')
+        return `${year}-${month}-${day}`
+      }
+
+      const formattedData = {
+        ...formData,
+        preferredDate: formatLocalDate(formData.preferredDate),
+        preferredTime: formData.preferredTimeEastern // Send Eastern time to API
+      }
+
+      const response = await fetch('/api/get-started', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formattedData),
+      })
+
+      const result = await response.json()
+
+      if (response.ok) {
+        // Immediately add new booking's blocked dates to cache for instant UI update
+        addBookingToCache(formattedData.preferredDate)
+
+        // Sync with server in background (don't wait for it)
+        fetchBlockedDates()
+
+        router.push('/thank-you')
+        onClose()
+      } else {
+        console.error('❌ Submission failed:', result.error)
+        setFormError(result.error || 'Something went wrong. Please try again.')
+        setIsSubmitting(false)
+      }
+    } catch (error) {
+      console.error('❌ Submission error:', error)
+      setFormError('Network error. Please check your connection and try again.')
+      setIsSubmitting(false)
+    }
+  }
+  const [formError, setFormError] = useState('') // General form errors
 
 
   // Helper function to convert Eastern Time to user's timezone
@@ -73,44 +171,23 @@ function GetStartedModal({ isOpen, onClose }) {
     }
   }
 
-  // Helper function to convert 24-hour UTC time to AM/PM format in user's timezone
-  const formatTimeToAMPM = (time24, timezone = formData.timezone) => {
+  // Helper function to format 24-hour time for display (already in user timezone)
+  const formatTimeToAMPM = (time24) => {
     try {
-      // Create a date in UTC with the given time
-      const utcDate = new Date(`2024-01-01T${time24}:00Z`)
-
-      // Convert to user's timezone and format as AM/PM
-      const result = utcDate.toLocaleString('en-US', {
-        timeZone: timezone,
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true
-      })
-
-      // Check for invalid result
-      if (result === 'Invalid Date') {
-        throw new Error('Invalid timezone conversion')
-      }
-
-      return result
+      const [hours, minutes] = time24.split(':').map(Number)
+      const period = hours >= 12 ? 'PM' : 'AM'
+      const hours12 = hours % 12 || 12
+      return `${hours12}:${minutes.toString().padStart(2, '0')} ${period}`
     } catch (error) {
-      console.warn('Timezone formatting failed, using simple conversion:', error.message)
-      // Fallback to simple conversion if timezone conversion fails
-      try {
-        const [hours, minutes] = time24.split(':').map(Number)
-        const period = hours >= 12 ? 'PM' : 'AM'
-        const hours12 = hours % 12 || 12
-        return `${hours12}:${minutes.toString().padStart(2, '0')} ${period}`
-      } catch (fallbackError) {
-        console.error('Fallback conversion also failed:', fallbackError)
-        return time24 // Ultimate fallback
-      }
+      // Fallback - return as-is
+      return time24
     }
   }
 
   // Clean up datepicker to show clean display
   useEffect(() => {
     const cleanupDatePicker = () => {
+
       // Clean day names to show only abbreviations
       const dayNameElements = document.querySelectorAll('.react-datepicker-custom .react-datepicker__day-name')
       dayNameElements.forEach((element, index) => {
@@ -284,6 +361,15 @@ function GetStartedModal({ isOpen, onClose }) {
     }))
   }, [])
 
+  const handleTimeSelection = useCallback((displayTime, easternTime) => {
+    console.log('Time selected:', { displayTime, easternTime, timezone: formData.timezone })
+    setFormData(prev => ({
+      ...prev,
+      preferredTime: displayTime, // For UI display
+      preferredTimeEastern: easternTime // For API (always Eastern time)
+    }))
+  }, [formData.timezone])
+
   const handleCheckboxChange = useCallback((checked) => {
     setFormData(prev => ({
       ...prev,
@@ -301,6 +387,18 @@ function GetStartedModal({ isOpen, onClose }) {
 
     if (date && date < tomorrow) {
       setDateError('Please select a date from tomorrow onwards.')
+      return
+    }
+
+    // Check if the selected date is blocked by existing bookings
+    const isBlocked = blockedDates.some(blockedDate =>
+      date.getFullYear() === blockedDate.getFullYear() &&
+      date.getMonth() === blockedDate.getMonth() &&
+      date.getDate() === blockedDate.getDate()
+    )
+
+    if (isBlocked) {
+      setDateError('This date is not available due to existing booking buffer period. Please select a different date.')
       return
     }
 
@@ -339,6 +437,105 @@ function GetStartedModal({ isOpen, onClose }) {
     }
   }, [formData.preferredDate])
 
+  // Retry utility for failed API calls
+  const fetchWithRetry = async (fetchFn, maxRetries = 3, delay = 1000) => {
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        return await fetchFn()
+      } catch (error) {
+        if (attempt === maxRetries) throw error
+        console.warn(`API call failed (attempt ${attempt}/${maxRetries}), retrying...`, error.message)
+        await new Promise(resolve => setTimeout(resolve, delay * attempt))
+      }
+    }
+  }
+
+  // Fetch all dates blocked by existing bookings (with client cache)
+  const fetchBlockedDates = async () => {
+    try {
+      setIsLoadingBlockedDates(true)
+
+      // AGGRESSIVE CACHE-BUSTING: Multiple unique parameters to force fresh server data
+      const cacheBuster1 = Date.now()
+      const cacheBuster2 = Math.random().toString(36).substring(2, 15)
+      const response = await fetchWithRetry(async () => {
+        const res = await fetch(`/api/get-blocked-dates?t=${cacheBuster1}&r=${cacheBuster2}`)
+        if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`)
+        return res
+      })
+      const data = await response.json()
+
+      if (response.ok && data.blockedDates) {
+        // Update cache with server data (store as strings, convert to Date objects for state)
+        const validDates = data.blockedDates.filter(dateStr =>
+          dateStr && typeof dateStr === 'string' && !isNaN(new Date(dateStr).getTime())
+        )
+        const blockedDateObjects = validDates.map(dateStr => new Date(dateStr))
+        updateBlockedDatesCache(validDates)
+        setBlockedDates(blockedDateObjects)
+        console.log(`Loaded ${blockedDateObjects.length} blocked dates from server`)
+      } else {
+        // Fallback to cache if server fails
+        console.error('Failed to load blocked dates from server, trying cache:', data.error)
+        const cached = JSON.parse(localStorage.getItem('blockedDatesCache') || '{"dates":[]}')
+        if (cached.dates && cached.dates.length > 0) {
+          try {
+            const blockedDateObjects = cached.dates
+              .filter(dateStr => dateStr && typeof dateStr === 'string')
+              .map(dateStr => new Date(dateStr))
+              .filter(date => !isNaN(date.getTime())) // Only valid dates
+            setBlockedDates(blockedDateObjects)
+            console.log(`Loaded ${blockedDateObjects.length} blocked dates from cache`)
+          } catch (error) {
+            console.error('Error parsing cached dates:', error)
+            setBlockedDates([])
+          }
+        } else {
+          setBlockedDates([])
+        }
+      }
+    } catch (error) {
+      console.error('Error loading blocked dates:', error)
+      // Try cache as last resort
+      try {
+        const cached = JSON.parse(localStorage.getItem('blockedDatesCache') || '{"dates":[]}')
+        if (cached.dates && cached.dates.length > 0) {
+          const blockedDateObjects = cached.dates
+            .filter(dateStr => dateStr && typeof dateStr === 'string')
+            .map(dateStr => new Date(dateStr))
+            .filter(date => !isNaN(date.getTime()))
+          setBlockedDates(blockedDateObjects)
+        } else {
+          setBlockedDates([])
+        }
+      } catch (cacheError) {
+        console.error('Cache also failed:', cacheError)
+        setBlockedDates([])
+      }
+    } finally {
+      setIsLoadingBlockedDates(false)
+    }
+  }
+
+  // Load blocked dates on component mount
+  useEffect(() => {
+    fetchBlockedDates()
+  }, [])
+
+  // Refresh blocked dates whenever modal opens (NUCLEAR FRESH FETCH)
+  useEffect(() => {
+    if (isOpen) {
+      // COMPLETE CACHE PURGE on modal open
+      localStorage.removeItem('blockedDatesCache')
+      setBlockedDates([]) // Clear state immediately
+
+      // Small delay to ensure clean slate, then fetch fresh data
+      setTimeout(() => {
+        fetchBlockedDates()
+      }, 50)
+    }
+  }, [isOpen])
+
   const checkAvailability = async (date) => {
     try {
       const response = await fetch('/api/check-availability', {
@@ -353,8 +550,23 @@ function GetStartedModal({ isOpen, onClose }) {
 
       const data = await response.json()
       console.log('Received availability data:', data)
+
+      if (data.blockedReason) {
+        // Date is blocked due to buffer period
+        console.log(`Date ${date} is blocked: ${data.blockedReason}`)
+        setAvailableSlots([])
+        setDateError(`This date is not available due to existing booking buffer period. Next available: ${data.nextAvailableDate || 'Check later dates'}`)
+        return
+      }
+
       console.log(`Setting ${data.availableTimes?.length || 0} available slots`)
       setAvailableSlots(data.availableTimes || [])
+      setDateError(null) // Clear any previous error
+
+      // Show buffer information if available
+      if (data.bufferInfo) {
+        console.log('Buffer info:', data.bufferInfo)
+      }
     } catch (error) {
       console.error('Availability check failed:', error)
       // Set default available slots if API fails - use all business hours
@@ -367,39 +579,61 @@ function GetStartedModal({ isOpen, onClose }) {
         available: true
       }))
       setAvailableSlots(fallbackSlots)
+      setDateError(null)
     }
   }
 
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    
+
+    // Clear any previous errors
+    setFormError('')
+    setDateError('')
+
     // Validate required fields
     if (!formData.firstName || !formData.phone || !formData.email) {
-      alert('Please fill in all required fields: First Name, Phone, and Email')
+      setFormError('Please fill in all required fields: First Name, Phone, and Email')
       return
     }
 
     // Validate time selection
-    if (!formData.preferredDate || !formData.preferredTime) {
-      alert('Please select your preferred date and time for the strategy call')
+    if (!formData.preferredDate || !formData.preferredTime || !formData.preferredTimeEastern) {
+      setFormError('Please select your preferred date and time for the strategy call')
       return
     }
 
     if (!formData.agreeToTerms) {
-      alert('Please agree to the terms and conditions to continue')
+      setFormError('Please agree to the terms and conditions to continue')
       return
     }
 
-    setIsSubmitting(true)
+    // Show confirmation dialog instead of immediately submitting
+    setShowConfirmation(true)
 
     try {
+      // Format the date properly to avoid timezone issues
+      // Use local date components instead of UTC conversion
+      const formatLocalDate = (date) => {
+        if (!date) return null
+        const year = date.getFullYear()
+        const month = String(date.getMonth() + 1).padStart(2, '0')
+        const day = String(date.getDate()).padStart(2, '0')
+        return `${year}-${month}-${day}`
+      }
+
+      const formattedData = {
+        ...formData,
+        preferredDate: formatLocalDate(formData.preferredDate),
+        preferredTime: formData.preferredTimeEastern // Send Eastern time to API
+      }
+
       const response = await fetch('/api/get-started', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formattedData),
       })
 
       const result = await response.json()
@@ -409,11 +643,21 @@ function GetStartedModal({ isOpen, onClose }) {
         console.log('✅ Get Started form submitted successfully!')
         console.log('Contact ID:', result.contactId)
         }
+        // NUKE ALL CACHES and force complete fresh fetch on next modal open
+        localStorage.removeItem('blockedDatesCache')
+        setBlockedDates([]) // Clear current state
+
+        // Add new booking to cache for instant UI update
+        addBookingToCache(formattedData.preferredDate)
+
+        // Force fresh server sync (don't wait)
+        setTimeout(() => fetchBlockedDates(), 100)
+
         router.push('/thank-you')
         onClose()
       } else {
         console.error('❌ Submission failed:', result.error)
-        alert(result.error || 'Something went wrong. Please try again.')
+        setFormError(result.error || 'Something went wrong. Please try again.')
         setIsSubmitting(false)
       }
     } catch (error) {
@@ -465,6 +709,29 @@ function GetStartedModal({ isOpen, onClose }) {
           </button>
         </div>
 
+        {/* Form Error Display */}
+        {formError && (
+          <div className="mx-6 mt-4">
+            <div className="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+              <div className="flex items-start gap-3">
+                <div className="flex-shrink-0">
+                  <svg className="w-5 h-5 text-red-400 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-red-300 font-medium text-sm mb-1">
+                    Booking Not Available
+                  </h3>
+                  <p className="text-red-200 text-sm leading-relaxed">
+                    {formError}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Form Content */}
         <div className="overflow-y-auto max-h-[calc(90vh-140px)] px-6 py-6">
           <form onSubmit={handleSubmit} id="get-started-form">
@@ -472,10 +739,11 @@ function GetStartedModal({ isOpen, onClose }) {
               {/* Name Fields */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-white/90 mb-2 text-sm font-medium">
+                  <label htmlFor="first-name" className="block text-white/90 mb-2 text-sm font-medium">
                     First Name <span className="text-red-400">*</span>
                   </label>
                   <input
+                    id="first-name"
                     type="text"
                     required
                     autoComplete="given-name"
@@ -483,7 +751,9 @@ function GetStartedModal({ isOpen, onClose }) {
                     onChange={(e) => handleInputChange('firstName', e.target.value)}
                     className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-[#7BB9E8]/50 text-sm"
                     placeholder="John"
+                    aria-describedby="first-name-help"
                   />
+                  <div id="first-name-help" className="sr-only">Enter your first name for the booking</div>
                 </div>
                 <div>
                   <label className="block text-white/90 mb-2 text-sm font-medium">
@@ -544,7 +814,7 @@ function GetStartedModal({ isOpen, onClose }) {
                 </div>
 
                 {/* Progressive Date & Time Selection */}
-                <div className="max-w-2xl mx-auto">
+                <div className="max-w-2xl md:max-w-4xl mx-auto">
                   <div className="bg-white/5 border border-white/10 rounded-lg pt-3 px-3 pb-1">
                     <div className="text-center mb-1">
                       <h3 className="text-white font-bold text-base mb-1" style={{ fontFamily: 'DM Sans, sans-serif' }}>
@@ -553,15 +823,26 @@ function GetStartedModal({ isOpen, onClose }) {
                       <p className="text-white/60 text-xs leading-tight">
                         {hasSelectedDate ? 'Choose your preferred time' : 'Select a date to see available times'}
                       </p>
+                      {hasSelectedDate && (
+                        <div className="mt-2 px-3 py-2 bg-blue-900/20 border border-blue-500/30 rounded-lg">
+                          <div className="flex items-start gap-2">
+                            <span className="text-blue-400 text-xs">ℹ️</span>
+                            <div className="text-blue-300 text-xs leading-tight">
+                              <div className="font-medium mb-1">3-Day Commitment</div>
+                              <div>Your consultation includes 2 dedicated follow-up days for comprehensive strategy work.</div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
 
                     {/* Progressive Layout */}
                     <div className={`flex-1 transition-all duration-500 ease-out ${
-                      hasSelectedDate ? 'flex gap-3 items-start' : 'block'
+                      hasSelectedDate ? 'flex-col md:flex-row gap-3 md:gap-8 md:items-start' : 'block'
                     }`}>
                       {/* Date Section - Always visible, shrinks when time appears */}
                       <div className={`transition-all duration-500 ease-out ${
-                        hasSelectedDate ? 'w-44 flex-shrink-0' : 'w-full mb-2'
+                        hasSelectedDate ? 'w-full md:w-44 flex-shrink-0' : 'w-full mb-2'
                       }`}>
                         <div className="flex items-center gap-2 mb-1">
                           <span className="text-white/90 text-xs font-medium">📅 Date</span>
@@ -576,11 +857,40 @@ function GetStartedModal({ isOpen, onClose }) {
                           </div>
                         )}
                         <div className="relative" id="datepicker-portal">
+                          {console.log('DatePicker blockedDates:', blockedDates)}
                           <DatePicker
+                            id="preferred-date"
+                            aria-label="Select your preferred date for the strategy call"
                             selected={formData.preferredDate}
                             onChange={(date) => handleDateSelection(date)}
+                            excludeDates={blockedDates.filter(date => date instanceof Date && !isNaN(date.getTime()))}
+                            filterDate={(date) => {
+                              // Return false for blocked dates to disable them in the picker
+                              return !blockedDates.some(blockedDate => {
+                                // Ensure blockedDate is a valid Date object
+                                if (!(blockedDate instanceof Date) || isNaN(blockedDate.getTime())) {
+                                  return false
+                                }
+                                return date.getFullYear() === blockedDate.getFullYear() &&
+                                       date.getMonth() === blockedDate.getMonth() &&
+                                       date.getDate() === blockedDate.getDate()
+                              })
+                            }}
+                            dayClassName={(date) => {
+                              // Add CSS class to visually distinguish blocked dates
+                              const isBlocked = blockedDates.some(blockedDate => {
+                                // Ensure blockedDate is a valid Date object
+                                if (!(blockedDate instanceof Date) || isNaN(blockedDate.getTime())) {
+                                  return false
+                                }
+                                return date.getFullYear() === blockedDate.getFullYear() &&
+                                       date.getMonth() === blockedDate.getMonth() &&
+                                       date.getDate() === blockedDate.getDate()
+                              })
+                              return isBlocked ? 'blocked-date' : ''
+                            }}
                             // Allow full navigation but restrict selection in onChange
-                            placeholderText="Select date"
+                            placeholderText={isLoadingBlockedDates ? "Loading available dates..." : "Select date"}
                             className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-[#7BB9E8]/50 text-sm"
                             wrapperClassName="w-full"
                             popperClassName="react-datepicker-popper"
@@ -589,9 +899,10 @@ function GetStartedModal({ isOpen, onClose }) {
                             showPopperArrow={false}
                             popperPlacement="bottom-end"
                             required
+                            disabled={isLoadingBlockedDates}
                           />
-                          <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/60 pointer-events-none">
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <div className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white/70 pointer-events-none">
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
                           </div>
@@ -600,29 +911,55 @@ function GetStartedModal({ isOpen, onClose }) {
 
                       {/* Time Section - Only renders after date selection */}
                       {hasSelectedDate && (
-                        <div className="flex-1 transition-all duration-500 ease-out opacity-100 translate-x-0">
+                        <div className="flex-1 md:max-w-lg mt-6 transition-all duration-500 ease-out opacity-100 translate-x-0">
                         <label className="block text-white/90 text-xs font-medium mb-1">
                           🕐 Time <span className="text-red-400">*</span>
                         </label>
 
-                        {/* Loading state */}
+                        {/* Loading state with skeleton */}
                         {isLoadingTimes ? (
-                          <div className="flex items-center justify-center py-4">
-                            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white/60 mr-2"></div>
-                            <span className="text-white/60 text-xs">Finding available times...</span>
+                          <div className="py-2">
+                            <div className="text-center mb-3">
+                              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white/60 mx-auto mb-1"></div>
+                              <span className="text-white/60 text-xs">Finding available times...</span>
+                            </div>
+                            {/* Skeleton loading for time slots */}
+                            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
+                              {Array.from({ length: 12 }).map((_, index) => (
+                                <div
+                                  key={index}
+                                  className="animate-pulse bg-white/10 rounded border border-white/20 p-2"
+                                  style={{ animationDelay: `${index * 50}ms` }}
+                                >
+                                  <div className="h-3 bg-white/20 rounded mb-1"></div>
+                                </div>
+                              ))}
+                            </div>
                           </div>
                         ) : (
                           /* Compact time grid */
-                          <div className="grid grid-cols-4 gap-1">
+                          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 md:justify-center gap-2 overflow-hidden">
                             {availableSlots.length > 0 ? (
-                              availableSlots.map((slot, index) => (
-                                slot.available ? (
+                              availableSlots.map((slot, index) => {
+                                console.log(`Available slot ${index}: time=${slot.time}, displayTime=${slot.displayTime}`)
+                                return slot.available ? (
                                   // Available slot - clickable button
                                   <button
                                     key={slot.time}
-                                    onClick={() => handleInputChange('preferredTime', slot.time)}
-                                    className={`p-1.5 rounded border text-center transition-all duration-200 hover:scale-105 text-xs ${
-                                      formData.preferredTime === slot.time
+                                    onClick={() => handleTimeSelection(slot.displayTime || slot.time, slot.time)}
+                                    onTouchStart={() => {}} // Improve touch responsiveness
+                                    onKeyDown={(e) => {
+                                      if (e.key === 'Enter' || e.key === ' ') {
+                                        e.preventDefault()
+                                        handleTimeSelection(slot.displayTime || slot.time, slot.time)
+                                      }
+                                    }}
+                                    aria-label={`Select time slot ${slot.displayTime || slot.time}`}
+                                    aria-pressed={formData.preferredTime === slot.displayTime}
+                                    role="button"
+                                    tabIndex={0}
+                                    className={`p-1.5 sm:p-1 md:p-2 rounded border text-center transition-all duration-200 hover:scale-105 active:scale-95 touch-manipulation focus:outline-none focus:ring-2 focus:ring-[#7BB9E8]/50 ${
+                                      formData.preferredTime === slot.displayTime
                                         ? 'bg-blue-600 border-blue-500 text-white shadow-md'
                                         : 'bg-white/5 border-white/20 text-white hover:bg-white/10 hover:border-white/30'
                                     }`}
@@ -632,24 +969,24 @@ function GetStartedModal({ isOpen, onClose }) {
                                       opacity: 0
                                     }}
                                   >
-                                    <div className="font-medium text-sm">{formatTimeToAMPM(slot.displayTime || slot.time)}</div>
+                                    <div className="font-medium text-base sm:text-sm md:text-xs truncate">{formatTimeToAMPM(slot.displayTime || slot.time)}</div>
                                   </button>
                                 ) : (
                                   // Booked slot - compact styling with "Booked" + time
                                   <div
                                     key={slot.time}
-                                    className="p-1 rounded border text-center bg-red-900/20 border-red-500/30 text-red-400 text-xs cursor-not-allowed leading-none"
+                                    className="p-2 sm:p-1.5 md:p-1 rounded border text-center bg-red-900/20 border-red-500/30 text-red-400 cursor-not-allowed leading-none"
                                     style={{
                                       animationDelay: `${index * 100}ms`,
                                       animation: 'fadeInScale 0.4s ease-out forwards',
                                       opacity: 0
                                     }}
                                   >
-                                    <div className="font-medium text-xs leading-none">Booked</div>
-                                    <div className="text-xs opacity-75 leading-none">{formatTimeToAMPM(slot.displayTime || slot.time)}</div>
+                                    <div className="font-medium text-xs leading-none truncate">Booked</div>
+                                    <div className="text-xs opacity-75 leading-none truncate">{formatTimeToAMPM(slot.displayTime || slot.time)}</div>
                                   </div>
                                 )
-                              ))
+                              })
                             ) : (
                               // Default time slots (Eastern Time business hours 8 AM - 11 PM)
                               [
@@ -658,11 +995,23 @@ function GetStartedModal({ isOpen, onClose }) {
                               ].map((easternTime, index) => {
                                 const userTime = easternTimeToUserTimezone(easternTime)
                                 const displayTime = formatTimeToAMPM(userTime)
+                                console.log(`Time slot ${index}: Eastern=${easternTime}, User=${userTime}, Display=${displayTime}`)
                                 return (
                                   <button
                                     key={userTime}
-                                    onClick={() => handleInputChange('preferredTime', userTime)}
-                                    className={`p-3 rounded-lg border text-center transition-all duration-200 hover:scale-105 ${
+                                    onClick={() => handleTimeSelection(userTime, easternTime)}
+                                    onTouchStart={() => {}} // Improve touch responsiveness
+                                    onKeyDown={(e) => {
+                                      if (e.key === 'Enter' || e.key === ' ') {
+                                        e.preventDefault()
+                                        handleTimeSelection(userTime, easternTime)
+                                      }
+                                    }}
+                                    aria-label={`Select time slot ${userTime}`}
+                                    aria-pressed={formData.preferredTime === userTime}
+                                    role="button"
+                                    tabIndex={0}
+                                    className={`p-1.5 sm:p-1 md:p-2 rounded border text-center transition-all duration-200 hover:scale-105 active:scale-95 touch-manipulation focus:outline-none focus:ring-2 focus:ring-[#7BB9E8]/50 ${
                                       formData.preferredTime === userTime
                                         ? 'bg-green-600 border-green-500 text-white shadow-lg'
                                         : 'bg-white/5 border-white/20 text-white hover:bg-white/10 hover:border-white/30'
@@ -673,7 +1022,7 @@ function GetStartedModal({ isOpen, onClose }) {
                                       opacity: 0
                                     }}
                                   >
-                                    <div className="font-medium text-xs">{displayTime}</div>
+                                    <div className="font-medium text-base sm:text-sm md:text-xs truncate">{displayTime}</div>
                                   </button>
                                 )
                               })
@@ -754,6 +1103,66 @@ function GetStartedModal({ isOpen, onClose }) {
             </button>
           </div>
         </div>
+
+        {/* Booking Confirmation Dialog */}
+        {showConfirmation && (
+          <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+            <div className="relative w-full max-w-md bg-gradient-to-br from-[#0a0a0a] via-[#10151a] to-[#181c22] rounded-2xl border border-white/10 shadow-2xl p-6">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-[#7BB9E8]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-[#7BB9E8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+
+                <h3 className="text-xl font-bold text-white mb-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                  Confirm Your Booking
+                </h3>
+
+                <div className="bg-white/5 rounded-lg p-4 mb-6 text-left">
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-white/70">Date:</span>
+                      <span className="text-white">{formData.preferredDate ? formData.preferredDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : 'Not selected'}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-white/70">Time:</span>
+                      <span className="text-white">{formData.preferredTime || 'Not selected'}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-white/70">Timezone:</span>
+                      <span className="text-white">{formData.timezone || 'Auto-detected'}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-white/70">Duration:</span>
+                      <span className="text-white">30 minutes</span>
+                    </div>
+                  </div>
+                </div>
+
+                <p className="text-white/70 text-sm mb-6">
+                  This booking includes 2 follow-up days that will be blocked for comprehensive strategy work.
+                </p>
+
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => setShowConfirmation(false)}
+                    className="flex-1 px-4 py-2 text-white/70 hover:text-white border border-white/20 rounded-lg transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleConfirmedSubmit}
+                    className="flex-1 px-4 py-2 bg-[#7BB9E8] hover:bg-[#5fa6d6] text-black font-bold rounded-lg transition-colors"
+                    style={{ fontFamily: 'DM Sans, sans-serif' }}
+                  >
+                    Confirm Booking
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
     </>

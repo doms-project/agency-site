@@ -169,6 +169,7 @@ export default function Page() {
   const [isSurveyModalOpen, setIsSurveyModalOpen] = useState(false)
   const [isWebsiteRevisionModalOpen, setIsWebsiteRevisionModalOpen] = useState(false)
   const [isGetStartedModalOpen, setIsGetStartedModalOpen] = useState(false)
+  const [getStartedModalKey, setGetStartedModalKey] = useState(0)
   const [phraseIndex, setPhraseIndex] = useState(0)
   const [typedText, setTypedText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
@@ -548,6 +549,7 @@ export default function Page() {
   useEffect(() => {
     const handleOpenGetStartedModal = () => {
       setIsGetStartedModalOpen(true)
+      setGetStartedModalKey(prev => prev + 1) // Force remount for fresh data
     }
 
     // Find the button by ID and attach event listener
@@ -928,7 +930,11 @@ export default function Page() {
       )}
       {isGetStartedModalOpen && (
         <Suspense fallback={null}>
-          <GetStartedModal isOpen={isGetStartedModalOpen} onClose={() => setIsGetStartedModalOpen(false)} />
+          <GetStartedModal
+            key={getStartedModalKey} // Force remount on each open to ensure fresh data
+            isOpen={isGetStartedModalOpen}
+            onClose={() => setIsGetStartedModalOpen(false)}
+          />
         </Suspense>
       )}
     </div>

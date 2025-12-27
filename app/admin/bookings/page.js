@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { supabase, supabaseAdmin } from '@/lib/supabase'
+import { toast } from 'sonner'
 
 export default function AdminBookings() {
   const [bookings, setBookings] = useState([])
@@ -16,6 +17,8 @@ export default function AdminBookings() {
   const [password, setPassword] = useState('')
   const [loginError, setLoginError] = useState('')
   const [updatingBookingId, setUpdatingBookingId] = useState(null) // Track which booking is being updated
+  const [editingBookingId, setEditingBookingId] = useState(null) // Track which booking is being edited
+  const [editFormData, setEditFormData] = useState({ date: '', time: '' }) // Edit form data
   const [loginLoading, setLoginLoading] = useState(false) // Track login submission
   const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || 'admin123' // Change this!
 
@@ -127,6 +130,93 @@ export default function AdminBookings() {
     setLoading(false)
   }
 
+  const startEditingBooking = (booking) => {
+    setEditingBookingId(booking.id)
+    setEditFormData({
+      date: booking.preferred_date,
+      time: booking.preferred_time
+    })
+  }
+
+  const updateBookingSchedule = async (bookingId) => {
+    // Basic validation
+    if (!editFormData.date || !editFormData.time) {
+      toast.error('Please fill in both date and time')
+      return
+    }
+
+    // Check if the new date/time is not in the past (for same-day bookings)
+    const now = new Date()
+    const bookingDateTime = new Date(`${editFormData.date}T${editFormData.time}`)
+    const today = now.toISOString().split('T')[0]
+
+    if (editFormData.date === today && bookingDateTime < now) {
+      toast.error('Cannot schedule consultations in the past')
+      return
+    }
+
+    setUpdatingBookingId(bookingId)
+    try {
+      console.log('=== SCHEDULE UPDATE DEBUG ===')
+      console.log('Updating booking schedule via API:', bookingId, editFormData)
+      setUpdatingBookingId(bookingId) // Set loading state
+
+      // NEW: Use API route for schedule updates (like status updates)
+      console.log('🔄 Calling schedule update API...')
+      const response = await fetch('/api/update-booking-schedule', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          bookingId: bookingId,
+          newDate: editFormData.date,
+          newTime: editFormData.time
+        })
+      })
+
+      const result = await response.json()
+      console.log('📋 Schedule update API result:', result)
+
+      if (response.ok && result.success) {
+        console.log('✅ Schedule update completed:', result.message)
+        if (result.supabaseUpdated) {
+          console.log('✅ Database updated successfully')
+        }
+        if (result.ghlSynced) {
+          console.log('✅ GHL opportunity schedule synced successfully')
+        } else {
+          console.log('⚠️ GHL sync was skipped or failed:', result.message)
+        }
+
+        // Success message
+        if (result.ghlSynced) {
+          toast.success('Booking schedule updated successfully! GHL has been updated automatically.')
+        } else {
+          toast.warning('Booking schedule updated successfully, but GHL sync failed. Manual update may be needed.')
+        }
+
+        setEditingBookingId(null)
+        await fetchBookings() // Refresh the list
+      } else {
+        console.error('❌ Schedule update API failed:', result.error)
+
+        // Handle specific error types
+        if (response.status === 409) {
+          // Conflict - time slot already booked
+          toast.error('Time slot conflict: The requested time is already booked by another client. Please choose a different time.')
+        } else {
+          toast.error('Failed to update booking schedule: ' + (result.error || 'Unknown error'))
+        }
+      }
+    } catch (error) {
+      console.error('Error updating booking schedule:', error)
+      toast.error('Failed to update booking schedule')
+    } finally {
+      setUpdatingBookingId(null)
+    }
+  }
+
   const updateBookingStatus = async (bookingId, newStatus) => {
     console.log('=== UPDATE DEBUG ===')
     console.log('Updating booking', bookingId, 'to status:', newStatus)
@@ -154,9 +244,9 @@ export default function AdminBookings() {
       if (error) {
         console.error('Error updating status:', error)
         if (error.message === 'Supabase not configured') {
-          alert('Supabase not configured. Please set up environment variables first.')
+          toast.error('Supabase not configured. Please set up environment variables first.')
         } else {
-          alert('Failed to update status: ' + error.message)
+          toast.error('Failed to update status: ' + error.message)
         }
       } else {
         console.log('Status updated successfully in Supabase')
@@ -179,17 +269,20 @@ export default function AdminBookings() {
 
           if (response.ok && result.success) {
             console.log('✅ Status sync completed:', result.message)
+            // Show comprehensive success message with GHL sync status
             if (result.ghlSynced) {
-              console.log('✅ GHL opportunity updated successfully')
+              toast.success(`Booking status updated to "${newStatus}" and synced to GHL successfully!`)
             } else {
-              console.log('⚠️ GHL sync was skipped or failed:', result.message)
+              toast.success(`Booking status updated to "${newStatus}" successfully! (GHL sync skipped)`)
             }
           } else {
             console.error('⚠️ GHL sync API call failed:', result.error)
+            toast.success(`Booking status updated to "${newStatus}" successfully! (GHL sync failed)`)
           }
         } catch (apiError) {
           console.error('⚠️ Failed to call GHL sync API:', apiError)
           // Don't fail the entire operation if GHL sync fails
+          toast.success(`Booking status updated to "${newStatus}" successfully! (GHL sync failed)`)
         }
 
         // Refresh the full dataset
@@ -198,9 +291,9 @@ export default function AdminBookings() {
     } catch (error) {
       console.error('Error connecting to database:', error)
       if (error.message === 'Supabase not configured') {
-        alert('Supabase not configured. Please set up environment variables first.')
+        toast.error('Supabase not configured. Please set up environment variables first.')
       } else {
-        alert('Database connection failed')
+        toast.error('Database connection failed')
       }
     } finally {
       setUpdatingBookingId(null) // Clear loading state
@@ -242,6 +335,26 @@ export default function AdminBookings() {
 
   const getStatusCount = (status) => {
     return allBookings.filter(booking => booking.status === status).length
+  }
+
+  // Helper function to calculate buffer dates for a booking
+  const getBufferDates = (consultationDate) => {
+    const consultationDateObj = new Date(consultationDate)
+    const bufferDay1 = new Date(consultationDateObj)
+    bufferDay1.setDate(bufferDay1.getDate() + 1)
+
+    const bufferDay2 = new Date(consultationDateObj)
+    bufferDay2.setDate(bufferDay2.getDate() + 2)
+
+    const nextAvailable = new Date(consultationDateObj)
+    nextAvailable.setDate(nextAvailable.getDate() + 3)
+
+    return {
+      consultationDay: consultationDateObj.toISOString().split('T')[0],
+      bufferDay1: bufferDay1.toISOString().split('T')[0],
+      bufferDay2: bufferDay2.toISOString().split('T')[0],
+      nextAvailable: nextAvailable.toISOString().split('T')[0]
+    }
   }
 
   // Show configuration error if Supabase is not set up (both authenticated and non-authenticated)
@@ -481,11 +594,82 @@ export default function AdminBookings() {
                   </div>
 
                   <div className="lg:text-right">
-                    <div className="text-lg font-bold text-blue-400 mb-2">
-                      📅 {booking.preferred_date}
-                    </div>
-                    <div className="text-lg font-bold text-blue-400 mb-2">
-                      🕐 {booking.preferred_time} {booking.timezone}
+                    {editingBookingId === booking.id ? (
+                      // Edit Mode
+                      <div className="space-y-3">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-300 mb-1">📅 Date</label>
+                          <input
+                            type="date"
+                            value={editFormData.date}
+                            onChange={(e) => setEditFormData(prev => ({ ...prev, date: e.target.value }))}
+                            className="px-3 py-2 bg-gray-700 text-white rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            min={new Date().toISOString().split('T')[0]} // Prevent past dates
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-300 mb-1">🕐 Time</label>
+                          <input
+                            type="time"
+                            value={editFormData.time}
+                            onChange={(e) => setEditFormData(prev => ({ ...prev, time: e.target.value }))}
+                            className="px-3 py-2 bg-gray-700 text-white rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          />
+                        </div>
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => updateBookingSchedule(booking.id)}
+                            disabled={updatingBookingId === booking.id}
+                            className="px-3 py-1 bg-green-600 hover:bg-green-700 text-white text-sm rounded transition-colors disabled:opacity-50"
+                          >
+                            {updatingBookingId === booking.id ? 'Updating...' : 'Save'}
+                          </button>
+                          <button
+                            onClick={() => setEditingBookingId(null)}
+                            className="px-3 py-1 bg-gray-600 hover:bg-gray-700 text-white text-sm rounded transition-colors"
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      // View Mode
+                      <>
+                        <div className="text-lg font-bold text-blue-400 mb-2">
+                          📅 {booking.preferred_date}
+                        </div>
+                        <div className="text-lg font-bold text-blue-400 mb-2">
+                          🕐 {booking.preferred_time} {booking.timezone}
+                        </div>
+
+                        {/* Edit Button */}
+                        <button
+                          onClick={() => startEditingBooking(booking)}
+                          className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded transition-colors mb-3"
+                        >
+                          ✏️ Edit Schedule
+                        </button>
+                      </>
+                    )}
+
+                    {/* 3-Day Buffer Information */}
+                    <div className="mt-3 p-3 bg-amber-900/20 border border-amber-500/30 rounded-lg">
+                      <div className="text-amber-300 text-sm font-medium mb-2">
+                        🛡️ 3-Day Commitment
+                      </div>
+                      {(() => {
+                        const bufferDates = getBufferDates(booking.preferred_date)
+                        return (
+                          <div className="text-amber-200 text-xs space-y-1">
+                            <div>📅 Day 1: {bufferDates.consultationDay} (Consultation)</div>
+                            <div>🔒 Day 2: {bufferDates.bufferDay1} (Follow-up blocked)</div>
+                            <div>🔒 Day 3: {bufferDates.bufferDay2} (Implementation blocked)</div>
+                            <div className="mt-2 pt-2 border-t border-amber-500/20 text-green-300">
+                              ✅ Next available: {bufferDates.nextAvailable}
+                            </div>
+                          </div>
+                        )
+                      })()}
                     </div>
 
                     {/* Status Update */}

@@ -43,27 +43,71 @@ export async function POST(request) {
       )
     }
 
-    // Check availability before proceeding
+    // Validate minimum notice period for strategy consultations
     try {
-      const { data: existingBookings, error: availabilityError } = await supabase
-        .from('strategy_calls')
-        .select('id')
-        .eq('preferred_date', preferredDate)
-        .eq('preferred_time', preferredTime)
-        .in('status', ['pending', 'confirmed'])
-        .limit(1)
+      const now = new Date()
+      const bookingDateTime = new Date(`${preferredDate}T${preferredTime}`)
+      const timeDiffHours = (bookingDateTime.getTime() - now.getTime()) / (1000 * 60 * 60)
 
-      if (availabilityError) {
-        console.error('Availability check error:', availabilityError)
-        return NextResponse.json(
-          { error: 'Unable to verify time availability. Please try again.' },
-          { status: 500 }
-        )
+      // Check if this is a same-day booking
+      const today = new Date().toISOString().split('T')[0]
+      const isSameDay = preferredDate === today
+
+      if (isSameDay) {
+        const MINIMUM_NOTICE_HOURS = 6 // Strategy consultations require preparation time
+
+        if (timeDiffHours < MINIMUM_NOTICE_HOURS) {
+          // Calculate next available time (6 hours from now)
+          const nextAvailable = new Date(now.getTime() + (MINIMUM_NOTICE_HOURS * 60 * 60 * 1000))
+          const nextAvailableTime = nextAvailable.toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true
+          })
+
+          // Find next available date (tomorrow)
+          const tomorrow = new Date(now)
+          tomorrow.setDate(tomorrow.getDate() + 1)
+          const tomorrowFormatted = tomorrow.toLocaleDateString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })
+
+          return NextResponse.json(
+            {
+              error: `Strategy consultations require ${MINIMUM_NOTICE_HOURS} hours advance notice for proper preparation. Next available: ${tomorrowFormatted} at 8:00 AM, or today after ${nextAvailableTime}.`
+            },
+            { status: 400 }
+          )
+        }
       }
+    } catch (error) {
+      console.error('Time validation error:', error)
+      // Continue with booking if time validation fails (don't block legitimate bookings)
+    }
 
-      if (existingBookings && existingBookings.length > 0) {
+    // Check availability before proceeding (includes 3-day block check)
+    try {
+      const availabilityResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/check-availability`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          date: preferredDate,
+          time: preferredTime,
+          checkSingleTime: true,
+          timezone: timezone
+        }),
+      })
+
+      const availabilityResult = await availabilityResponse.json()
+
+      if (!availabilityResponse.ok || !availabilityResult.available) {
         return NextResponse.json(
-          { error: 'Sorry, this time slot is no longer available. Please select another time.' },
+          { error: availabilityResult.message || 'Sorry, this time slot is no longer available. Please select another time.' },
           { status: 409 }
         )
       }
@@ -95,8 +139,9 @@ export async function POST(request) {
           preferred_date: preferredDate,
           preferred_time: preferredTime,
           timezone: timezone || 'America/New_York',
-          notes: message || 'Strategy call requested via website form',
-          status: 'pending'
+          notes: message || 'Strategy consultation requested via website form (includes 2-day follow-up buffer)',
+          status: 'pending',
+          duration: 30 // 30-minute consultation
         })
         .select()
         .single()
