@@ -37,7 +37,6 @@ function GetStartedModal({ isOpen, onClose }) {
   const [availableSlots, setAvailableSlots] = useState([])
   const [hasSelectedDate, setHasSelectedDate] = useState(false)
   const [isLoadingTimes, setIsLoadingTimes] = useState(false)
-  const [dateError, setDateError] = useState('')
   const [blockedDates, setBlockedDates] = useState([]) // Dates disabled in calendar
   const [isLoadingBlockedDates, setIsLoadingBlockedDates] = useState(true)
   const [showConfirmation, setShowConfirmation] = useState(false)
@@ -378,29 +377,6 @@ function GetStartedModal({ isOpen, onClose }) {
   }, [])
 
   const handleDateSelection = async (date) => {
-    // Clear any previous errors
-    setDateError('')
-
-    // Validate that the selected date is not in the past
-    const tomorrow = new Date(Date.now() + 24 * 60 * 60 * 1000)
-    tomorrow.setHours(0, 0, 0, 0) // Set to start of day for comparison
-
-    if (date && date < tomorrow) {
-      setDateError('Please select a date from tomorrow onwards.')
-      return
-    }
-
-    // Check if the selected date is blocked by existing bookings
-    const isBlocked = blockedDates.some(blockedDate =>
-      date.getFullYear() === blockedDate.getFullYear() &&
-      date.getMonth() === blockedDate.getMonth() &&
-      date.getDate() === blockedDate.getDate()
-    )
-
-    if (isBlocked) {
-      setDateError('This date is not available due to existing booking buffer period. Please select a different date.')
-      return
-    }
 
     handleInputChange('preferredDate', date)
 
@@ -555,13 +531,11 @@ function GetStartedModal({ isOpen, onClose }) {
         // Date is blocked due to buffer period
         console.log(`Date ${date} is blocked: ${data.blockedReason}`)
         setAvailableSlots([])
-        setDateError(`This date is not available due to existing booking buffer period. Next available: ${data.nextAvailableDate || 'Check later dates'}`)
         return
       }
 
       console.log(`Setting ${data.availableTimes?.length || 0} available slots`)
       setAvailableSlots(data.availableTimes || [])
-      setDateError(null) // Clear any previous error
 
       // Show buffer information if available
       if (data.bufferInfo) {
@@ -579,7 +553,6 @@ function GetStartedModal({ isOpen, onClose }) {
         available: true
       }))
       setAvailableSlots(fallbackSlots)
-      setDateError(null)
     }
   }
 
@@ -589,7 +562,6 @@ function GetStartedModal({ isOpen, onClose }) {
 
     // Clear any previous errors
     setFormError('')
-    setDateError('')
 
     // Validate required fields
     if (!formData.firstName || !formData.phone || !formData.email) {
@@ -848,14 +820,6 @@ function GetStartedModal({ isOpen, onClose }) {
                           <span className="text-white/90 text-xs font-medium">📅 Date</span>
                           <span className="text-red-400 text-xs">*</span>
                         </div>
-                        {dateError && (
-                          <div className="mt-1 px-3 py-2 bg-red-900/20 border border-red-500/30 rounded-lg animate-fadeIn">
-                            <div className="flex items-center gap-2">
-                              <span className="text-red-400 text-xs">⚠️</span>
-                              <span className="text-red-300 text-xs font-medium">{dateError}</span>
-                            </div>
-                          </div>
-                        )}
                         <div className="relative" id="datepicker-portal">
                           {console.log('DatePicker blockedDates:', blockedDates)}
                           <DatePicker
