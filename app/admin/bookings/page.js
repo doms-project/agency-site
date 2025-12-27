@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { supabase, supabaseAdmin } from '@/lib/supabase'
 import { toast } from 'sonner'
 
@@ -80,7 +80,7 @@ export default function AdminBookings() {
     }
   }, [filter, allBookings])
 
-  const fetchBookings = async () => {
+  const fetchBookings = useCallback(async () => {
     console.log('fetchBookings called')
     try {
       // Always fetch all bookings for accurate counts
@@ -128,7 +128,7 @@ export default function AdminBookings() {
       }
     }
     setLoading(false)
-  }
+  }, [filter])
 
   const startEditingBooking = (booking) => {
     setEditingBookingId(booking.id)

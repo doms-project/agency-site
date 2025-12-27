@@ -451,7 +451,7 @@ function GetStartedModal({ isOpen, onClose }) {
   }
 
   // Fetch all dates blocked by existing bookings (with client cache)
-  const fetchBlockedDates = async () => {
+  const fetchBlockedDates = useCallback(async () => {
     try {
       setIsLoadingBlockedDates(true)
 
@@ -515,7 +515,7 @@ function GetStartedModal({ isOpen, onClose }) {
     } finally {
       setIsLoadingBlockedDates(false)
     }
-  }
+  }, [])
 
   // Load blocked dates on component mount
   useEffect(() => {

@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState, useRef, useCallback, Suspense, lazy } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { clientSectionHtml } from '@/sections/clientSectionHtml'
 import { cpgSectionHtml } from '@/sections/cpgSectionHtml'
 import { partnerSectionHtml } from '@/sections/partnerSectionHtml'
@@ -1001,18 +1002,18 @@ function DesktopNav({ navSolid, hideNav }) {
               <NavTextLink href="#services" label="Services" />
               <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-[#0a0a0a]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                 <div className="py-2">
-                  <a href="/services/website-design" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                  <Link href="/services/website-design" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                     Website Design & Build
-                  </a>
-                  <a href="/services/google-business-profile" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                  </Link>
+                  <Link href="/services/google-business-profile" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                     Google Business Profile
-                  </a>
-                  <a href="/services/seo-services" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                  </Link>
+                  <Link href="/services/seo-services" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                     SEO Services
-                  </a>
-                  <a href="/services/lead-generation" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                  </Link>
+                  <Link href="/services/lead-generation" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                     Lead Generation & Ads
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -1379,7 +1380,7 @@ function MobileDrawer({ onClose }) {
             })}
             {/* Service Pages */}
             <div className="mt-2 pl-4 border-l-2 border-white/10 flex flex-col gap-1">
-              <a
+              <Link
                 href="/services/website-design"
                 onClick={onClose}
                 className="group relative px-4 py-2.5 text-white/80 hover:text-white text-sm font-medium transition-all duration-300 rounded-lg"
@@ -1391,8 +1392,8 @@ function MobileDrawer({ onClose }) {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                   </svg>
                 </span>
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/services/google-business-profile"
                 onClick={onClose}
                 className="group relative px-4 py-2.5 text-white/80 hover:text-white text-sm font-medium transition-all duration-300 rounded-lg"
@@ -1404,8 +1405,8 @@ function MobileDrawer({ onClose }) {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                   </svg>
                 </span>
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/services/seo-services"
                 onClick={onClose}
                 className="group relative px-4 py-2.5 text-white/80 hover:text-white text-sm font-medium transition-all duration-300 rounded-lg"
@@ -1417,8 +1418,8 @@ function MobileDrawer({ onClose }) {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                   </svg>
                 </span>
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/services/lead-generation"
                 onClick={onClose}
                 className="group relative px-4 py-2.5 text-white/80 hover:text-white text-sm font-medium transition-all duration-300 rounded-lg"
@@ -1430,7 +1431,7 @@ function MobileDrawer({ onClose }) {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                   </svg>
                 </span>
-              </a>
+              </Link>
             </div>
           </nav>
         </div>

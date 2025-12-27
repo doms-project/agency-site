@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState, useCallback } from 'react'
+import Link from 'next/link'
 
 const mobileNavLinks = [
   { label: 'Home', href: '/' },
@@ -156,9 +157,9 @@ export default function SharedNavbar() {
           {/* Glassmorphism overlay effect */}
           <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] via-transparent to-transparent pointer-events-none" />
           <div className="flex items-center justify-center h-20 relative z-10">
-            <a 
-              aria-label="Yo Marketing Home" 
-              className="absolute left-6 lg:left-8 flex items-center group z-10" 
+            <Link
+              aria-label="Yo Marketing Home"
+              className="absolute left-6 lg:left-8 flex items-center group z-10"
               href="/"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-[#7BB9E8]/20 to-transparent rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
@@ -172,7 +173,7 @@ export default function SharedNavbar() {
               decoding="async"
               fetchPriority="high"
             />
-            </a>
+            </Link>
 
             <div className="flex items-center justify-center space-x-1">
               <NavTextLink href="/" label="Home" />
@@ -180,18 +181,18 @@ export default function SharedNavbar() {
                 <NavTextLink href="/#services" label="Services" />
                 <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-[#0a0a0a]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                   <div className="py-2">
-                    <a href="/services/website-design" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                    <Link href="/services/website-design" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                       Website Design & Build
-                    </a>
-                    <a href="/services/google-business-profile" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                    </Link>
+                    <Link href="/services/google-business-profile" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                       Google Business Profile
-                    </a>
-                    <a href="/services/seo-services" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                    </Link>
+                    <Link href="/services/seo-services" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                       SEO Services
-                    </a>
-                    <a href="/services/lead-generation" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                    </Link>
+                    <Link href="/services/lead-generation" className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                       Lead Generation & Ads
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -239,7 +240,7 @@ export default function SharedNavbar() {
       {/* Mobile Navbar */}
       <nav className="lg:hidden w-full z-[9999] sticky top-0 nav-transparent" style={{ position: 'sticky', top: '0px', zIndex: 9999 }}>
         <div className="flex items-center justify-between px-5 py-3 h-20">
-          <a aria-label="Yo Marketing Home" href="/" className="flex items-center group">
+          <Link aria-label="Yo Marketing Home" href="/" className="flex items-center group">
             <img 
               src="/images/logo-hq.png" 
               alt="Yo Marketing" 
@@ -250,7 +251,7 @@ export default function SharedNavbar() {
               decoding="async"
               fetchPriority="high"
             />
-          </a>
+          </Link>
           <button 
             suppressHydrationWarning 
             onClick={() => setMobileNavOpen(true)} 
@@ -274,7 +275,7 @@ export default function SharedNavbar() {
           <div className="fixed inset-y-0 right-0 z-[999] w-full max-w-sm bg-gradient-to-b from-[rgba(4,5,7,0.85)] via-[rgba(4,5,7,0.75)] to-[rgba(4,5,7,0.85)] backdrop-blur-[20px] border-l border-white/15 shadow-[0_0_60px_rgba(0,0,0,0.6)] flex flex-col lg:hidden animate-slide-in-drawer overflow-y-auto" style={{ WebkitBackdropFilter: 'blur(20px) saturate(180%)' }}>
             <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-transparent pointer-events-none" />
             <div className="relative flex items-center justify-between px-6 py-4 border-b border-white/10 bg-white/5 backdrop-blur-sm">
-              <a aria-label="Yo Marketing Home" href="/" onClick={() => setMobileNavOpen(false)} className="group">
+              <Link aria-label="Yo Marketing Home" href="/" onClick={() => setMobileNavOpen(false)} className="group">
             <img 
               src="/images/logo-hq.png" 
               alt="Yo Marketing" 
@@ -285,7 +286,7 @@ export default function SharedNavbar() {
               decoding="async"
               fetchPriority="high"
             />
-              </a>
+              </Link>
               <button 
                 suppressHydrationWarning 
                 onClick={() => setMobileNavOpen(false)} 
@@ -324,7 +325,7 @@ export default function SharedNavbar() {
                   };
                   
                   return (
-                    <a
+                    <Link
                       key={link.href}
                       href={link.href}
                       onClick={handleClick}
@@ -338,11 +339,11 @@ export default function SharedNavbar() {
                         </svg>
                       </span>
                       <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 bg-gradient-to-b from-[#7BB9E8] to-[#5fa6d6] group-hover:h-8 transition-all duration-300 rounded-r-full" />
-                    </a>
+                    </Link>
                   );
                 })}
                 <div className="mt-2 pl-4 border-l-2 border-white/10 flex flex-col gap-1">
-                  <a
+                  <Link
                     href="/services/website-design"
                     onClick={() => setMobileNavOpen(false)}
                     className="group relative px-4 py-2.5 text-white/80 hover:text-white text-sm font-medium transition-all duration-300 rounded-lg"
@@ -354,8 +355,8 @@ export default function SharedNavbar() {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                       </svg>
                     </span>
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/services/google-business-profile"
                     onClick={() => setMobileNavOpen(false)}
                     className="group relative px-4 py-2.5 text-white/80 hover:text-white text-sm font-medium transition-all duration-300 rounded-lg"
@@ -367,8 +368,8 @@ export default function SharedNavbar() {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                       </svg>
                     </span>
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/services/seo-services"
                     onClick={() => setMobileNavOpen(false)}
                     className="group relative px-4 py-2.5 text-white/80 hover:text-white text-sm font-medium transition-all duration-300 rounded-lg"
@@ -380,8 +381,8 @@ export default function SharedNavbar() {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                       </svg>
                     </span>
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/services/lead-generation"
                     onClick={() => setMobileNavOpen(false)}
                     className="group relative px-4 py-2.5 text-white/80 hover:text-white text-sm font-medium transition-all duration-300 rounded-lg"
@@ -393,7 +394,7 @@ export default function SharedNavbar() {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                       </svg>
                     </span>
-                  </a>
+                  </Link>
                 </div>
               </nav>
             </div>
