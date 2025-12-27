@@ -43,7 +43,7 @@ export async function POST(request) {
       console.log('🔍 Checking availability for new date/time...')
       try {
       const availabilityResponse = await fetch(
-        `${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/api/check-availability`,
+        `/api/check-availability`,
         {
           method: 'POST',
           headers: {

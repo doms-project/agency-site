@@ -90,7 +90,7 @@ export async function POST(request) {
 
     // Check availability before proceeding (includes 3-day block check)
     try {
-      const availabilityResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/check-availability`, {
+      const availabilityResponse = await fetch(`/api/check-availability`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
