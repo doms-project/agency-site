@@ -577,7 +577,7 @@ export default function AdminBookings() {
           ) : (
             bookings.map((booking) => (
               <div key={`${booking.id}-${booking.status}`} className="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-4">
+                <div className="flex flex-col gap-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
                       <h3 className="text-xl font-semibold">{booking.contact_name}</h3>
@@ -593,7 +593,7 @@ export default function AdminBookings() {
                     </div>
                   </div>
 
-                  <div className="lg:text-left">
+                  <div>
                     {editingBookingId === booking.id ? (
                       // Edit Mode
                       <div className="space-y-3">
