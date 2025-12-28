@@ -582,63 +582,6 @@ function GetStartedModal({ isOpen, onClose }) {
 
     // Show confirmation dialog instead of immediately submitting
     setShowConfirmation(true)
-
-    try {
-      // Format the date properly to avoid timezone issues
-      // Use local date components instead of UTC conversion
-      const formatLocalDate = (date) => {
-        if (!date) return null
-        const year = date.getFullYear()
-        const month = String(date.getMonth() + 1).padStart(2, '0')
-        const day = String(date.getDate()).padStart(2, '0')
-        return `${year}-${month}-${day}`
-      }
-
-      const formattedData = {
-        ...formData,
-        preferredDate: formatLocalDate(formData.preferredDate),
-        preferredTime: formData.preferredTimeEastern // Send Eastern time to API
-      }
-
-      const response = await fetch('/api/get-started', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formattedData),
-      })
-
-      const result = await response.json()
-
-      if (response.ok) {
-        if (process.env.NODE_ENV === 'development') {
-        console.log('✅ Get Started form submitted successfully!')
-        console.log('Contact ID:', result.contactId)
-        }
-        // NUKE ALL CACHES and force complete fresh fetch on next modal open
-        localStorage.removeItem('blockedDatesCache')
-        setBlockedDates([]) // Clear current state
-
-        // Add new booking to cache for instant UI update
-        addBookingToCache(formattedData.preferredDate)
-
-        // Force fresh server sync (don't wait)
-        setTimeout(() => fetchBlockedDates(), 100)
-
-        router.push('/thank-you')
-        onClose()
-      } else {
-        console.error('❌ Submission failed:', result.error)
-        setFormError(result.error || 'Something went wrong. Please try again.')
-        setIsSubmitting(false)
-      }
-    } catch (error) {
-      if (process.env.NODE_ENV === 'development') {
-      console.error('❌ Submission error:', error)
-      }
-      alert('An error occurred. Please try again.')
-      setIsSubmitting(false)
-    }
   }
 
   if (!isOpen) return null
@@ -1096,10 +1039,6 @@ function GetStartedModal({ isOpen, onClose }) {
                     <div className="flex justify-between">
                       <span className="text-white/70">Timezone:</span>
                       <span className="text-white">{formData.timezone || 'Auto-detected'}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-white/70">Duration:</span>
-                      <span className="text-white">30 minutes</span>
                     </div>
                   </div>
                 </div>
