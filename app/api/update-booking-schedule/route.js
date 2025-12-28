@@ -1,5 +1,5 @@
 import { updateOpportunitySchedule } from '@/lib/ghlIntegration'
-import { supabase } from '@/lib/supabase'
+import { supabase, supabaseAdmin } from '@/lib/supabase'
 
 export async function POST(request) {
   try {
@@ -19,7 +19,7 @@ export async function POST(request) {
 
     // Get current booking details to compare with new date/time
     console.log('🔍 Getting current booking details...')
-    const { data: currentBooking, error: fetchError } = await supabase
+    const { data: currentBooking, error: fetchError } = await supabaseAdmin
       .from('strategy_calls')
       .select('preferred_date, preferred_time')
       .eq('id', bookingId)
@@ -90,7 +90,7 @@ export async function POST(request) {
 
     // Get full current booking details for GHL sync (we already have basic details)
     console.log('🔍 Getting full current booking details for GHL sync...')
-    const { data: fullCurrentBooking, error: fullFetchError } = await supabase
+    const { data: fullCurrentBooking, error: fullFetchError } = await supabaseAdmin
       .from('strategy_calls')
       .select('ghl_opportunity_id, contact_name, preferred_date, preferred_time')
       .eq('id', bookingId)
@@ -108,7 +108,7 @@ export async function POST(request) {
 
     // Update Supabase schedule
     console.log('📝 Updating Supabase schedule...')
-    const { error: updateError } = await supabase
+    const { error: updateError } = await supabaseAdmin
       .from('strategy_calls')
       .update({
         preferred_date: newDate,

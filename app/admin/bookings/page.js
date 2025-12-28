@@ -593,7 +593,7 @@ export default function AdminBookings() {
                     </div>
                   </div>
 
-                  <div className="lg:text-right">
+                  <div className="lg:text-left">
                     {editingBookingId === booking.id ? (
                       // Edit Mode
                       <div className="space-y-3">

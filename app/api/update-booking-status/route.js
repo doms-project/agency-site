@@ -1,5 +1,5 @@
 import { updateOpportunityCustomFields } from '@/lib/ghlIntegration'
-import { supabase } from '@/lib/supabase'
+import { supabase, supabaseAdmin } from '@/lib/supabase'
 
 export async function POST(request) {
   try {
@@ -18,7 +18,7 @@ export async function POST(request) {
 
     // Update Supabase status first
     console.log('📝 Updating Supabase status...')
-    const { error: updateError } = await supabase
+    const { error: updateError } = await supabaseAdmin
       .from('strategy_calls')
       .update({ status: newStatus })
       .eq('id', bookingId)
@@ -35,7 +35,7 @@ export async function POST(request) {
 
     // Get opportunity ID and contact name for GHL sync
     console.log('🔍 Getting GHL opportunity data...')
-    const { data: booking, error: fetchError } = await supabase
+    const { data: booking, error: fetchError } = await supabaseAdmin
       .from('strategy_calls')
       .select('ghl_opportunity_id, contact_name')
       .eq('id', bookingId)
