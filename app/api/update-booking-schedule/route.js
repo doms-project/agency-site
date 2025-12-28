@@ -39,54 +39,9 @@ export async function POST(request) {
     if (currentBooking.preferred_date === newDate && currentBooking.preferred_time === newTime) {
       console.log('✅ Same date/time - skipping availability check (no conflict with self)')
     } else {
-      // Only check availability if date/time actually changed
-      console.log('🔍 Checking availability for new date/time...')
-      try {
-      const availabilityResponse = await fetch(
-        `/api/check-availability`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            date: newDate,
-            time: newTime,
-            timezone: 'America/New_York',
-            excludeBookingId: bookingId
-          })
-        }
-      )
-
-      if (!availabilityResponse.ok) {
-        console.error('❌ Availability API call failed:', availabilityResponse.status)
-        return Response.json(
-          { success: false, error: 'Unable to verify availability' },
-          { status: 500 }
-        )
-      }
-
-      const availabilityData = await availabilityResponse.json()
-      console.log('📊 Availability data:', availabilityData)
-
-      // Check if the specific time slot is available
-      if (!availabilityData.available) {
-        console.log('❌ Requested time slot is not available:', availabilityData.message)
-        return Response.json(
-          { success: false, error: 'Requested time slot is already booked' },
-          { status: 409 }
-        )
-      }
-
-      console.log('✅ Time slot is available for booking')
-    } catch (availabilityError) {
-      console.error('❌ Error checking availability:', availabilityError)
-      return Response.json(
-        { success: false, error: 'Failed to check availability' },
-        { status: 500 }
-      )
+      // NOTE: Admin rescheduling bypasses availability check to allow overrides
+      console.log('⚠️ Admin rescheduling - bypassing availability check to allow schedule overrides')
     }
-    } // Close the else block
 
     // Get full current booking details for GHL sync (we already have basic details)
     console.log('🔍 Getting full current booking details for GHL sync...')
@@ -127,40 +82,30 @@ export async function POST(request) {
 
     console.log('✅ Supabase schedule updated successfully')
 
-    // Sync new schedule to GHL opportunity
+    // Sync new schedule to GHL opportunity (optional)
+    let ghlSynced = false
     if (fullCurrentBooking?.ghl_opportunity_id) {
       console.log('🔄 Syncing new schedule to GHL opportunity:', fullCurrentBooking.ghl_opportunity_id)
 
       try {
         await updateOpportunitySchedule(fullCurrentBooking.ghl_opportunity_id, newDate, newTime)
         console.log('✅ GHL opportunity schedule synced successfully')
+        ghlSynced = true
       } catch (ghlError) {
-        console.error('❌ GHL schedule sync failed:', ghlError)
-        // Don't fail the entire request if GHL sync fails
-        return Response.json({
-          success: true,
-          message: 'Schedule updated but GHL sync failed',
-          supabaseUpdated: true,
-          ghlSynced: false,
-          ghlError: ghlError.message
-        })
+        console.error('⚠️ GHL schedule sync failed:', ghlError)
+        // Don't fail - GHL sync is optional
+        ghlSynced = false
       }
     } else {
       console.log('⚠️ No GHL opportunity ID found for booking:', bookingId)
-      return Response.json({
-        success: true,
-        message: 'Schedule updated but no GHL opportunity to sync',
-        supabaseUpdated: true,
-        ghlSynced: false
-      })
     }
 
     console.log('🎉 Booking schedule update completed successfully')
     return Response.json({
       success: true,
-      message: 'Schedule updated successfully',
+      message: ghlSynced ? 'Schedule updated successfully' : 'Schedule updated (GHL sync skipped)',
       supabaseUpdated: true,
-      ghlSynced: true,
+      ghlSynced: ghlSynced,
       newDate: newDate,
       newTime: newTime
     })

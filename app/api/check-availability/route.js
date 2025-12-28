@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase'
+import { supabase, supabaseAdmin } from '@/lib/supabase'
 
 // Call duration in minutes (should match your form setting)
 const CALL_DURATION_MINUTES = 30
@@ -142,7 +142,7 @@ async function checkConsultationDayAvailability(consultationDate, excludeBooking
     bufferDay2.setDate(bufferDay2.getDate() + 2)
 
     // FORWARD CHECK: Check for any existing bookings in the 3-day block this booking would create
-    let forwardQuery = supabase
+    let forwardQuery = supabaseAdmin
       .from('strategy_calls')
       .select('preferred_date, preferred_time')
       .in('status', ['pending', 'confirmed'])
@@ -165,7 +165,7 @@ async function checkConsultationDayAvailability(consultationDate, excludeBooking
     const backwardDay2 = new Date(consultationDateObj)
     backwardDay2.setDate(backwardDay2.getDate() - 2)
 
-    let backwardQuery = supabase
+    let backwardQuery = supabaseAdmin
       .from('strategy_calls')
       .select('preferred_date, preferred_time')
       .in('status', ['pending', 'confirmed'])
@@ -212,7 +212,7 @@ async function checkConsultationDayAvailability(consultationDate, excludeBooking
 async function checkSpecificTimeSlot(date, startTime, excludeBookingId = null) {
   try {
     // Get all existing bookings for this specific date (excluding the specified booking if provided)
-    let query = supabase
+    let query = supabaseAdmin
       .from('strategy_calls')
       .select('preferred_time, duration')
       .eq('preferred_date', date)
