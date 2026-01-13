@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { createContact, createOpportunity } from '@/lib/ghlIntegration'
 import { formatPhoneNumber } from '@/lib/utils/phoneFormatter'
 import { supabase } from '@/lib/supabase'
+import { generateReviewToken } from '@/lib/reviewTokens'
 
 export async function POST(request) {
   try {
@@ -283,11 +284,30 @@ export async function POST(request) {
       }
     }
 
+    // Generate review token for future feedback collection
+    let reviewToken = null;
+    try {
+      if (contact && bookingRecord) {
+        reviewToken = await generateReviewToken({
+          name: `${firstName} ${lastName || ''}`.trim(),
+          email: email,
+          phone: formattedPhone,
+          projectId: bookingRecord.id,
+          projectType: 'strategy-call'
+        });
+        console.log('✅ Review token generated for strategy call:', reviewToken.token);
+      }
+    } catch (tokenError) {
+      console.error('⚠️ Failed to generate review token:', tokenError);
+      // Don't fail the main request for this
+    }
+
     return NextResponse.json({
       success: true,
       message: 'Strategy call scheduled successfully!',
       contactId: contact?.id || null,
       bookingId: bookingRecord?.id || null,
+      reviewToken: reviewToken?.token || null,
       scheduledDate: preferredDate,
       scheduledTime: preferredTime,
       timezone: timezone || 'America/New_York'

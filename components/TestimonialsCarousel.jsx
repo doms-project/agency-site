@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback, useMemo, memo } from 'react'
+import ReviewModal from './ReviewModal'
 
 const testimonials = [
   {
@@ -59,6 +60,7 @@ function TestimonialsCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const [showReviewModal, setShowReviewModal] = useState(false)
 
   // Detect mobile for performance optimizations
   useEffect(() => {
@@ -226,6 +228,20 @@ function TestimonialsCarousel() {
           ))}
         </div>
 
+        {/* Review Button - Opens modal */}
+        <div className="text-center mt-12 mb-8">
+          <button
+            onClick={() => setShowReviewModal(true)}
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/40 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white/30"
+            style={{ fontFamily: 'DM Sans, sans-serif' }}
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+            </svg>
+            Share Your Experience
+          </button>
+        </div>
+
         <div className="text-center mt-20 pt-12 border-t border-white/10 pb-8">
           <h3 className="text-2xl md:text-3xl font-bold text-white mb-4" style={{ fontFamily: 'DM Sans, sans-serif' }}>
             Ready to grow your business?
@@ -233,6 +249,7 @@ function TestimonialsCarousel() {
           <p className="text-white/70 text-lg mb-8 max-w-lg mx-auto" style={{ fontFamily: 'DM Sans, sans-serif' }}>
             Join other businesses getting real results with our marketing services
           </p>
+
           <button
             type="button"
             onClick={() => {
@@ -250,6 +267,12 @@ function TestimonialsCarousel() {
             </svg>
           </button>
         </div>
+
+        {/* Review Modal */}
+        <ReviewModal
+          isOpen={showReviewModal}
+          onClose={() => setShowReviewModal(false)}
+        />
       </div>
     </section>
   )

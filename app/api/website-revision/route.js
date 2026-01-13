@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createContact, createOpportunity, uploadFileToGHL } from '@/lib/ghlIntegration'
 import { formatPhoneNumber } from '@/lib/utils/phoneFormatter'
+import { generateReviewToken } from '@/lib/reviewTokens'
 
 export async function POST(request) {
   try {
@@ -169,6 +170,9 @@ export async function POST(request) {
         const opportunity = await createOpportunity(contact.id, opportunityData, fileUrls, null, stageId)
         console.log('✅ Opportunity created successfully!')
         console.log('   Opportunity ID:', opportunity?.id || 'N/A')
+
+        // Store opportunity ID for token generation
+        const opportunityId = opportunity?.id
       } catch (error) {
         console.error('❌ Error creating opportunity in GHL:')
         console.error('   Error Message:', error.message)
@@ -177,10 +181,29 @@ export async function POST(request) {
       }
     }
 
+    // Generate review token for future feedback collection
+    let reviewToken = null;
+    try {
+      if (contact && opportunityId) {
+        reviewToken = await generateReviewToken({
+          name: data.ownerContact || 'Website Revision Client',
+          email: data.email,
+          phone: data.phone,
+          projectId: opportunityId,
+          projectType: 'website-revision'
+        });
+        console.log('✅ Review token generated for website revision:', reviewToken.token);
+      }
+    } catch (tokenError) {
+      console.error('⚠️ Failed to generate review token:', tokenError);
+      // Don't fail the main request for this
+    }
+
     return NextResponse.json({
       success: true,
       message: 'Website revision request submitted successfully',
       contactId: contact?.id || null,
+      reviewToken: reviewToken?.token || null,
       ghlFileUrls: fileUrls.map(f => f.url || f.name).filter(Boolean)
     })
   } catch (error) {
