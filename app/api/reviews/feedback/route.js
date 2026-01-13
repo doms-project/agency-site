@@ -31,11 +31,11 @@ export async function POST(request) {
     }
 
     let tokenData = null;
-    if (token === 'anonymous') {
-      // For anonymous reviews, create a mock token data
+    if (token === 'feedback') {
+      // For general feedback reviews, create a mock token data
       tokenData = {
-        id: `anonymous-${Date.now()}`,
-        project_type: 'anonymous-review',
+        id: `feedback-${Date.now()}`,
+        project_type: 'general-feedback',
         client_name: name.trim(), // Now required
         client_email: email || null,
         client_phone: phone || null
@@ -67,7 +67,7 @@ export async function POST(request) {
       feedback: message,
       contact_id: result.contactId,
       is_negative: true,
-      is_anonymous: token === 'anonymous',
+      is_anonymous: false, // feedback reviews require name, so not anonymous
       ghl_opportunity_id: result.opportunityId,
       client_name: name.trim(), // Now required and trimmed
       client_email: email || null,

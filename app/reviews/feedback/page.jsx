@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 
-export default function AnonymousReviewPage() {
+export default function FeedbackReviewPage() {
   const [rating, setRating] = useState(0);
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
 
@@ -149,7 +149,7 @@ function FeedbackForm({ initialRating }) {
         body: JSON.stringify({
           ...formData,
           rating: initialRating,
-          token: 'anonymous' // Special token for anonymous reviews
+          token: 'feedback' // Token for general feedback reviews
         })
       });
 
