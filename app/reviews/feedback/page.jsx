@@ -78,18 +78,41 @@ function StarRatingSelector({ onSelect }) {
 
         .stars-container {
           display: flex;
-          gap: 1rem;
+          gap: 0.75rem;
         }
 
         .star-button {
           background: none;
           border: none;
-          font-size: 3rem;
+          font-size: 2.5rem;
           color: #6b7280;
           cursor: pointer;
           transition: color 0.2s ease;
           padding: 0.5rem;
           border-radius: 0.25rem;
+          min-width: 44px;
+          min-height: 44px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        @media (max-width: 640px) {
+          .star-button {
+            font-size: 2rem;
+            padding: 0.375rem;
+            min-width: 40px;
+            min-height: 40px;
+          }
+
+          .stars-container {
+            gap: 0.5rem;
+          }
+
+          .rating-labels {
+            width: 160px;
+            font-size: 0.8125rem;
+          }
         }
 
         .star-button:hover,
@@ -100,9 +123,16 @@ function StarRatingSelector({ onSelect }) {
         .rating-labels {
           display: flex;
           justify-content: space-between;
-          width: 200px;
+          width: 180px;
           font-size: 0.875rem;
           color: #9ca3af;
+        }
+
+        @media (max-width: 480px) {
+          .rating-labels {
+            width: 140px;
+            font-size: 0.75rem;
+          }
         }
       `}</style>
     </div>
@@ -179,10 +209,10 @@ function FeedbackForm({ initialRating }) {
             We appreciate you taking the time to help us improve. Your input is valuable to us.
           </p>
           <button
-            onClick={() => window.close()}
+            onClick={() => window.location.href = '/'}
             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
           >
-            Close
+            Return Home
           </button>
         </div>
       </div>
@@ -270,7 +300,7 @@ function FeedbackForm({ initialRating }) {
           <div className="flex gap-3 pt-4">
             <button
               type="button"
-              onClick={() => window.close()}
+              onClick={() => window.location.href = '/'}
               className="flex-1 px-4 py-3 border border-gray-600 text-gray-300 rounded-lg hover:bg-gray-800 transition-colors text-sm"
             >
               Cancel

@@ -46,7 +46,7 @@ export default function ReviewModal({ isOpen, onClose }) {
               </h3>
               <StarRatingSelector onSelect={handleRatingSelect} />
               <p className="text-gray-400 text-sm mt-6" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-                Your feedback is anonymous and helps us improve our services
+                Your feedback helps us improve our services
               </p>
             </div>
           ) : (
@@ -96,18 +96,41 @@ function StarRatingSelector({ onSelect }) {
 
         .stars-container {
           display: flex;
-          gap: 1rem;
+          gap: 0.75rem;
         }
 
         .star-button {
           background: none;
           border: none;
-          font-size: 3rem;
+          font-size: 2.5rem;
           color: #6b7280;
           cursor: pointer;
           transition: color 0.2s ease;
           padding: 0.5rem;
           border-radius: 0.25rem;
+          min-width: 44px;
+          min-height: 44px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        @media (max-width: 640px) {
+          .star-button {
+            font-size: 2rem;
+            padding: 0.375rem;
+            min-width: 40px;
+            min-height: 40px;
+          }
+
+          .stars-container {
+            gap: 0.5rem;
+          }
+
+          .rating-labels {
+            width: 160px;
+            font-size: 0.8125rem;
+          }
         }
 
         .star-button:hover,
@@ -118,9 +141,16 @@ function StarRatingSelector({ onSelect }) {
         .rating-labels {
           display: flex;
           justify-content: space-between;
-          width: 200px;
+          width: 180px;
           font-size: 0.875rem;
           color: #9ca3af;
+        }
+
+        @media (max-width: 480px) {
+          .rating-labels {
+            width: 140px;
+            font-size: 0.75rem;
+          }
         }
       `}</style>
     </div>
@@ -147,7 +177,13 @@ function FeedbackForm({ initialRating, onClose }) {
     setLoading(true);
     setError('');
 
-    // Basic validation - only message is required for negative feedback
+    // Basic validation - name and message are required for negative feedback
+    if (!formData.name.trim()) {
+      setError('Please enter your name');
+      setLoading(false);
+      return;
+    }
+
     if (!formData.message.trim()) {
       setError('Please share your feedback');
       setLoading(false);
@@ -161,7 +197,7 @@ function FeedbackForm({ initialRating, onClose }) {
         body: JSON.stringify({
           ...formData,
           rating: initialRating,
-          token: 'anonymous' // Special token for anonymous reviews
+          token: 'feedback' // Token for general feedback reviews
         })
       });
 
@@ -218,10 +254,11 @@ function FeedbackForm({ initialRating, onClose }) {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-white/90 mb-2 text-sm" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-            Name (optional)
+            Name <span className="text-red-400">*</span>
           </label>
           <input
             type="text"
+            required
             value={formData.name}
             onChange={(e) => handleInputChange('name', e.target.value)}
             className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
