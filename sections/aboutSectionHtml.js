@@ -118,33 +118,9 @@ export const aboutSectionHtml = String.raw`
   <!-- Cristina & Other Team Members Section -->
   <div class="max-w-6xl mx-auto mb-2 md:mb-12 px-4 md:px-0 overflow-visible">
    <div class="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-0 overflow-visible">
-    <!-- Other Team Members Row (Evan + 3) -->
+    <!-- Other Team Members Row (3) -->
      <div class="order-2 md:order-1 flex-1 grid grid-cols-2 md:flex md:flex-row md:flex-nowrap justify-center md:justify-end gap-4 md:gap-6 mt-0 md:mt-24 lg:mt-32 w-full">
-     
-     <!-- Evan - Sales Manager -->
-     <div class="flex flex-col items-center text-center space-y-3">
-      <div class="group relative">
-       <div class="absolute -inset-2 bg-gradient-to-r from-[#7BB9E8]/20 to-[#5fa6db]/20 rounded-2xl blur-lg opacity-40 group-hover:opacity-90 transition-opacity duration-500">
-       </div>
-       <div class="relative w-40 h-44 md:w-44 md:h-48 lg:w-48 lg:h-52 rounded-xl overflow-hidden bg-gradient-to-b from-[#7BB9E8]/10 to-transparent">
-        <img
-         src="/images/Evan new.jpg"
-         alt="Evan - Sales Manager"
-         class="w-full h-full object-cover scale-125 group-hover:scale-130 transition-transform duration-500"
-         style="object-position: center 20%;"
-        />
-       </div>
-      </div>
-      <div>
-       <p class="text-white font-semibold text-base" style="font-family:'DM Sans', sans-serif">
-        Evan
-       </p>
-       <p class="text-white/60 text-sm" style="font-family:'DM Sans', sans-serif">
-        Sales Manager
-       </p>
-      </div>
-     </div>
-     
+
      <!-- Andrianne - Lead Generation -->
      <div class="flex flex-col items-center text-center space-y-3">
       <div class="group relative">

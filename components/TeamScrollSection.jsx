@@ -37,17 +37,6 @@ const teamMembers = [
   },
   {
     id: 3,
-    name: 'Evan',
-    role: 'Sales Manager',
-    greeting: "Hey, I'm Evan.",
-    image: '/images/Evan new.jpg',
-    bio: [
-      "I lead our sales efforts and help businesses discover how Yo Marketing can transform their digital presence. With a consultative approach, I work closely with clients to understand their unique challenges.",
-      "My goal is to build lasting partnerships and ensure every client gets the personalized attention they deserve."
-    ]
-  },
-  {
-    id: 4,
     name: 'Andrianne',
     role: 'Lead Generation',
     greeting: "Hey, I'm Andrianne.",
@@ -58,7 +47,7 @@ const teamMembers = [
     ]
   },
   {
-    id: 5,
+    id: 4,
     name: 'Muzaid',
     role: 'Front End Developer',
     greeting: "Hey, I'm Muzaid.",
