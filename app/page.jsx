@@ -25,6 +25,8 @@ import ParticleNetworkBackground from '@/components/ParticleNetworkBackground'
 import RingParticlesBackground from '@/components/RingParticlesBackground'
 import CSSGlowBackground from '@/components/CSSGlowBackground'
 import ServiceHeroBackground from '@/components/ServiceHeroBackground'
+// Lazy load heavy WebGL background to improve initial load performance
+const PrismHeroBackground = lazy(() => import('@/components/PrismHeroBackground'))
 // Lazy load modals - only load when needed
 const WebsiteSurveyModal = lazy(() => import('@/components/WebsiteSurveyModal'))
 const WebsiteRevisionModal = lazy(() => import('@/components/WebsiteRevisionModal'))
@@ -787,6 +789,7 @@ export default function Page() {
     }
   }, [])
 
+
   return (
     <div className="bg-black text-white min-h-screen" style={{ margin: 0, padding: 0 }}>
       <DesktopNav navSolid={navSolid} hideNav={hideDesktopNav} />
@@ -1120,8 +1123,8 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
   const [isMobile, setIsMobile] = useState(false)
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
   // Animation options now include 'serviceHero' (lighter, like Website Design page)
-  // Other options: 'blackhole', 'pyramid', 'gradient', 'particles', 'ringParticles', 'cssGlow'
-  const [heroAnimation, setHeroAnimation] = useState('serviceHero')
+  // Other options: 'blackhole', 'pyramid', 'gradient', 'particles', 'ringParticles', 'cssGlow', 'prism'
+  const [heroAnimation, setHeroAnimation] = useState('prism') // Force prism for debugging
   // Color options for particles
   const [particleColor, setParticleColor] = useState('multiColor')
   // Multicolor + white palette for ServiceHeroBackground
@@ -1144,8 +1147,8 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
     updatePRM()
     media.addEventListener('change', updatePRM)
 
-    // Default animation: use ServiceHero everywhere; fallback to CSS glow only for reduced-motion
-    setHeroAnimation(media.matches ? 'cssGlow' : 'serviceHero')
+    // Default animation: use Prism everywhere; fallback to CSS glow only for reduced-motion
+    setHeroAnimation(media.matches ? 'cssGlow' : 'prism')
 
     return () => {
       media.removeEventListener('change', updatePRM)
@@ -1175,6 +1178,7 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
         {heroAnimation === 'particles' && <ParticleNetworkBackground colorScheme={particleColor} />}
         {heroAnimation === 'ringParticles' && <RingParticlesBackground colorScheme={particleColor} />}
         {heroAnimation === 'serviceHero' && <ServiceHeroBackground colorPalette={heroColorPalette} />}
+        {heroAnimation === 'prism' && <PrismHeroBackground />}
         {heroAnimation === 'cssGlow' && <CSSGlowBackground variant="default" animated={!(prefersReducedMotion || isMobile)} />}
       </Suspense>
       {/* Mobile header now at page level - spacer for fixed navbar */}
@@ -1182,9 +1186,9 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
       <section className="hero relative z-10 w-full flex flex-col justify-center items-center pb-16 mb-0 overflow-visible lg:pt-8">
         <div className="max-w-5xl mx-auto w-full px-1 sm:px-2 md:px-3 flex flex-col items-center justify-center text-center">
           <div
-            className="flex items-center justify-start w-full mb-6 md:mb-7 mt-2 sm:mt-1 md:mt-0 lg:-mt-2 ml-0 translate-x-0 sm:ml-0 sm:translate-x-0 lg:ml-[-180px] lg:-translate-x-10"
+            className="flex items-center justify-center w-full mb-6 md:mb-7 mt-2 sm:mt-1 md:mt-0 lg:-mt-2"
           >
-            <div className="flex items-center gap-1 md:gap-2 bg-white/10 px-2 py-0.5 md:px-3 md:py-1 rounded-full border-2 border-white/30 shadow-md shadow-white/5 backdrop-blur-sm ring-1 ring-white/10 scale-90 md:scale-100 gohighlevel-414-adjust gohighlevel-lg-adjust">
+            <div className="flex items-center gap-1 md:gap-2 bg-white/10 px-2 py-0.5 md:px-3 md:py-1 rounded-full border-2 border-white/30 shadow-md shadow-white/5 backdrop-blur-sm ring-1 ring-white/10 scale-90 md:scale-100">
               <Image
                 src="/images/orig.png"
                 alt="GoHighLevel"
