@@ -1871,6 +1871,93 @@ section#cpg-brands .service-card,
   .noise-375-adjust {
     margin-left: -60px !important;
   }
+  /* Hero text size adjustment for very small phones */
+  .hero-text-375 {
+    font-size: 50px !important;
+  }
+  .we-engineer-375 {
+    margin-left: 20px !important;
+  }
+  .growth-that-375 {
+    margin-left: 7px !important;
+  }
+  .scales-375 {
+    margin-left: 80px !important;
+  }
+}
+
+/* 640px-767px specific adjustments */
+@media (min-width: 640px) and (max-width: 767px) {
+  .hero-text-640 {
+    font-size: 80px !important;
+  }
+  .we-engineer-640 {
+    margin-left: 55px !important;
+  }
+  .growth-that-640 {
+    margin-left: 33px !important;
+  }
+  .scales-640 {
+    margin-left: 155px !important;
+  }
+}
+
+/* 768px-899px specific adjustments */
+@media (min-width: 768px) and (max-width: 899px) {
+  .we-engineer-768 {
+    margin-left: 50px !important;
+  }
+  .growth-that-768 {
+    margin-left: 24px !important;
+  }
+  .scales-768 {
+    margin-left: 201px !important;
+  }
+}
+
+/* 900px-1023px specific adjustments */
+@media (min-width: 900px) and (max-width: 1023px) {
+  .hero-text-900 {
+    font-size: 130px !important;
+  }
+  .we-engineer-900 {
+    margin-left: 55px !important;
+  }
+  .growth-that-900 {
+    margin-left: 24px !important;
+  }
+  .scales-900 {
+    margin-left: 241px !important;
+  }
+}
+
+/* 1280px+ specific adjustments */
+@media (min-width: 1280px) {
+  .we-engineer-xl {
+    margin-left: -33px !important;
+  }
+  .growth-that-xl {
+    margin-left: -59px !important;
+  }
+}
+
+/* 1024px-1279px specific adjustments */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .hero-text-lg {
+    font-size: 140px !important;
+  }
+  .we-engineer-lg {
+    margin-left: 35px !important;
+  }
+  .growth-that-lg {
+    margin-left: 4px !important;
+  }
+  .scales-lg {
+    margin-left: 224px !important;
+  }
+  .gohighlevel-lg-adjust {
+    margin-left: 140px !important;
+  }
 }
 
 /* 414px specific adjustments */
@@ -1889,7 +1976,16 @@ section#cpg-brands .service-card,
   }
   /* Hero text size adjustment */
   .hero-text-414 {
-    font-size: 60px !important;
+    font-size: 53px !important;
+  }
+  .we-engineer-414 {
+    margin-left: 30px !important;
+  }
+  .growth-that-414 {
+    margin-left: 15px !important;
+  }
+  .scales-414 {
+    margin-left: 100px !important;
   }
 }
 

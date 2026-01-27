@@ -1184,7 +1184,7 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
           <div
             className="flex items-center justify-start w-full mb-6 md:mb-7 mt-2 sm:mt-1 md:mt-0 lg:-mt-2 ml-0 translate-x-0 sm:ml-0 sm:translate-x-0 lg:ml-[-180px] lg:-translate-x-10"
           >
-            <div className="flex items-center gap-1 md:gap-2 bg-white/10 px-2 py-0.5 md:px-3 md:py-1 rounded-full border-2 border-white/30 shadow-md shadow-white/5 backdrop-blur-sm ring-1 ring-white/10 scale-90 md:scale-100 gohighlevel-414-adjust">
+            <div className="flex items-center gap-1 md:gap-2 bg-white/10 px-2 py-0.5 md:px-3 md:py-1 rounded-full border-2 border-white/30 shadow-md shadow-white/5 backdrop-blur-sm ring-1 ring-white/10 scale-90 md:scale-100 gohighlevel-414-adjust gohighlevel-lg-adjust">
               <Image
                 src="/images/orig.png"
                 alt="GoHighLevel"
@@ -1199,7 +1199,7 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
               </span>
             </div>
           </div>
-          <h1 className="w-full max-w-6xl lg:max-w-7xl xl:max-w-screen-xl text-[55px] sm:text-[55px] md:text-[120px] lg:text-[150px] xl:text-[160px] font-extrabold text-white leading-[0.9] tracking-tight mb-5 md:mb-7 lg:-mt-2 xl:-mt-4 relative text-left overflow-visible hero-text-414" style={{
+          <h1 className="w-full max-w-6xl lg:max-w-7xl xl:max-w-screen-xl text-[55px] sm:text-[55px] md:text-[100px] lg:text-[150px] xl:text-[160px] font-extrabold text-white leading-[0.9] tracking-tight mb-5 md:mb-7 lg:-mt-2 xl:-mt-4 relative text-left overflow-visible hero-text-414 hero-text-375 hero-text-640 hero-text-900 hero-text-lg" style={{
             textShadow: '0 4px 20px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(0, 0, 0, 0.3)',
             fontFamily: 'DM Sans, sans-serif'
           }}>
@@ -1207,9 +1207,9 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
               className="absolute -z-10 left-1/2 -translate-x-1/2 top-1/5 h-72 w-72 sm:h-96 sm:w-96 bg-[#7BB9E8]/35 blur-[90px] rounded-full"
               aria-hidden="true"
             />
-            <span className="block uppercase lg:-ml-24 xl:-ml-52">WE ENGINEER</span>
-            <span className="block uppercase md:ml-36 lg:ml-16 xl:ml-24 whitespace-nowrap">GROWTH THAT</span>
-            <span className="block uppercase md:ml-64 lg:ml-36 xl:ml-48">SCALES</span>
+            <span className="block uppercase lg:-ml-24 xl:-ml-52 we-engineer-375 we-engineer-414 we-engineer-640 we-engineer-768 we-engineer-900 we-engineer-lg we-engineer-xl">WE ENGINEER</span>
+            <span className="block uppercase md:ml-36 lg:ml-16 xl:ml-24 whitespace-nowrap growth-that-414 growth-that-375 growth-that-640 growth-that-768 growth-that-900 growth-that-lg growth-that-xl">GROWTH THAT</span>
+            <span className="block uppercase md:ml-64 lg:ml-36 xl:ml-48 scales-414 scales-375 scales-640 scales-768 scales-900 scales-lg">SCALES</span>
           </h1>
           <div className="mb-6 md:mb-8 h-[5rem] md:h-[4rem] flex items-center justify-center">
             <span className="text-lg md:text-xl lg:text-2xl text-white/90 font-light max-w-4xl leading-relaxed break-words line-clamp-4 sm:line-clamp-none capitalize" style={{ fontFamily: 'DM Sans, sans-serif' }}>
