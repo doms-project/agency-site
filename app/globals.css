@@ -1868,6 +1868,9 @@ section#cpg-brands .service-card,
   .influence-375-adjust {
     margin-left: 5px !important;
   }
+  .noise-375-adjust {
+    margin-left: -60px !important;
+  }
 }
 
 /* 414px specific adjustments */
@@ -1878,12 +1881,22 @@ section#cpg-brands .service-card,
   .of-414-adjust {
     margin-left: 55px !important;
   }
+  .noise-414-adjust {
+    margin-left: -40px !important;
+  }
   .gohighlevel-414-adjust {
     margin-left: 15px !important;
   }
   /* Hero text size adjustment */
   .hero-text-414 {
     font-size: 60px !important;
+  }
+}
+
+/* Tablet specific adjustments */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .noise-tablet-adjust {
+    margin-left: -50px !important;
   }
 }
 

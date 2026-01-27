@@ -1199,7 +1199,7 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
               </span>
             </div>
           </div>
-          <h1 className="w-full max-w-6xl text-[55px] sm:text-[55px] md:text-[120px] lg:text-[150px] xl:text-[150px] font-extrabold text-white leading-[0.9] tracking-tight mb-5 md:mb-7 lg:-mt-2 xl:-mt-4 relative text-left break-words overflow-visible hero-text-414" style={{
+          <h1 className="w-full max-w-6xl lg:max-w-7xl xl:max-w-screen-xl text-[55px] sm:text-[55px] md:text-[120px] lg:text-[150px] xl:text-[160px] font-extrabold text-white leading-[0.9] tracking-tight mb-5 md:mb-7 lg:-mt-2 xl:-mt-4 relative text-left overflow-visible hero-text-414" style={{
             textShadow: '0 4px 20px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(0, 0, 0, 0.3)',
             fontFamily: 'DM Sans, sans-serif'
           }}>
@@ -1207,28 +1207,9 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
               className="absolute -z-10 left-1/2 -translate-x-1/2 top-1/5 h-72 w-72 sm:h-96 sm:w-96 bg-[#7BB9E8]/35 blur-[90px] rounded-full"
               aria-hidden="true"
             />
-            <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2 sm:gap-y-0.5">
-              <span className="block uppercase ml-6 sm:-ml-8 md:ml-8 lg:-ml-[90px] xl:-ml-[130px] we-build-414-adjust we-build-375-adjust">We Build</span>
-              <span className="block uppercase text-white ml-auto pr-1 sm:pr-2 text-right md:mr-8 lg:ml-[452px] lg:pr-0 brands-375-adjust" style={{ marginRight: '15px' }}>Brands</span>
-            </div>
-            <div className="flex flex-col gap-1.5 sm:gap-0.5 mt-1.5 sm:mt-1">
-              <span
-                className="block uppercase of-414-adjust of-375-adjust"
-                style={{
-                  marginLeft: 'clamp(27px, calc(12vw + 43px), 165px)'
-                }}
-              >
-                Of
-              </span>
-              <span
-                className="block uppercase text-white whitespace-nowrap influence-375-adjust"
-                style={{
-                  marginLeft: 'clamp(8px, calc(4vw + 32px), 32px)'
-                }}
-              >
-                Influence.
-              </span>
-            </div>
+            <span className="block uppercase lg:-ml-24 xl:-ml-52">WE ENGINEER</span>
+            <span className="block uppercase md:ml-36 lg:ml-16 xl:ml-24 whitespace-nowrap">GROWTH THAT</span>
+            <span className="block uppercase md:ml-64 lg:ml-36 xl:ml-48">SCALES</span>
           </h1>
           <div className="mb-6 md:mb-8 h-[5rem] md:h-[4rem] flex items-center justify-center">
             <span className="text-lg md:text-xl lg:text-2xl text-white/90 font-light max-w-4xl leading-relaxed break-words line-clamp-4 sm:line-clamp-none capitalize" style={{ fontFamily: 'DM Sans, sans-serif' }}>
