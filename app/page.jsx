@@ -33,29 +33,24 @@ const WebsiteRevisionModal = lazy(() => import('@/components/WebsiteRevisionModa
 const GetStartedModal = lazy(() => import('@/components/GetStartedModal'))
 
 const heroPhrases = [
-  'Drive Traffic, automate leads, & grow Businesses Fast',
-  'We build websites, run automations, and grow businesses.',
-  'Our system helps businesses rank higher on Google and get more views guaranteed.',
-  'We give you cutting edge, proven winning strategies to get more leads and views on Google',
-  'We can automate your texts, emails, calls, sales, fulfillment; any process in your business',
-  'We currently are helping over 100+ businesses grow their business with no money out of pocket',
-  'If you don\'t have a website, we will make you one for free if you qualify',
-  'Empowering businesses with expert website design, optimized Google profiles, and targeted lead generation',
+  'Expect an extra 5-15 inbound high quality leads a month',
+  'Guarantee Grow Your Business or You Don\'t Pay',
+  'Ranking higher on Google can double your business.',
 ]
 
 const heroStats = [
   { 
-    label: 'Texts Sent', 
-    value: '150,000',
+    label: 'Longterm Clients', 
+    value: '35+',
     icon: (
       <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
       </svg>
     )
   },
   { 
-    label: 'Calls Made', 
-    value: '50,000+',
+    label: 'Calls Received', 
+    value: '25,000+',
     icon: (
       <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
         <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -1211,12 +1206,21 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
               className="absolute -z-10 left-1/2 -translate-x-1/2 top-1/5 h-72 w-72 sm:h-96 sm:w-96 bg-[#7BB9E8]/35 blur-[90px] rounded-full"
               aria-hidden="true"
             />
-            <span className="block uppercase lg:-ml-24 xl:-ml-52 we-engineer-375 we-engineer-414 we-engineer-640 we-engineer-768 we-engineer-900 we-engineer-lg we-engineer-xl">WE ENGINEER</span>
-            <span className="block uppercase md:ml-36 lg:ml-16 xl:ml-24 whitespace-nowrap growth-that-414 growth-that-375 growth-that-640 growth-that-768 growth-that-900 growth-that-lg growth-that-xl">GROWTH THAT</span>
-            <span className="block uppercase md:ml-64 lg:ml-36 xl:ml-48 scales-414 scales-375 scales-640 scales-768 scales-900 scales-lg">SCALES</span>
+            <span className="block w-full">
+              <span className="block uppercase w-full text-center">WE RANK</span>
+              <span className="block uppercase w-full text-center">BUSINESSES</span>
+            </span>
+            <span className="block w-full text-center uppercase">
+              <span className="flex flex-col items-center md:hidden leading-[0.9] tracking-tight">
+                <span className="text-[clamp(1.85rem,10vw,2.85rem)]">TOP OF PAGE</span>
+                <span className="text-[clamp(1.85rem,10vw,2.85rem)]">ON</span>
+              </span>
+              <span className="hidden md:block whitespace-nowrap md:text-[112px] lg:text-[168px] xl:text-[180px]">TOP OF PAGE ON</span>
+            </span>
+            <span className="block uppercase w-full text-center whitespace-nowrap">GOOGLE</span>
           </h1>
           <div className="mb-6 md:mb-8 h-[5rem] md:h-[4rem] flex items-center justify-center">
-            <span className="text-lg md:text-xl lg:text-2xl text-white/90 font-light max-w-4xl leading-relaxed break-words line-clamp-4 sm:line-clamp-none capitalize" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+            <span className="text-lg md:text-xl lg:text-2xl text-white/90 font-light max-w-4xl leading-relaxed break-words line-clamp-4 sm:line-clamp-none" style={{ fontFamily: 'DM Sans, sans-serif' }}>
               {typedText}
               <span className="typewriter-cursor text-[#7BB9E8] animate-pulse">|</span>
             </span>

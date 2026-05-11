@@ -77,57 +77,6 @@ const portfolioCards = [
       statsLayout: 'vertical', // 'grid' or 'vertical'
     },
   },
-  {
-    id: 5,
-    title: 'Tuckers Cleaning Service',
-    backgroundImage: null, // No background image, using solid color
-    logo: '/images/TUCK.png',
-    description: 'Tuckers Cleaning Service delivers reliable residential and commercial cleaning with attention to detail, friendly teams, and flexible scheduling. Book a one-time deep clean or set up regular visits — we make your space shine',
-    stats: [
-      { label: 'Properties Cleaned', value: '500+' },
-      { label: 'Customer Satisfaction', value: '98%' },
-      { label: 'Service Coverage', value: '100%' },
-    ],
-    link: 'https://tuckerscleaningservices.com/',
-    design: {
-      brightness: 1.3,
-      contrast: 1.3,
-      overlay: { from: '35', via: '45', to: '70' },
-      logoSize: 'h-48 sm:h-56 md:h-64 lg:h-72',
-      logoPosition: 'center', // 'center' or 'top-left'
-      padding: 'p-6 sm:p-8 md:p-10',
-      logoPadding: '-mt-8 sm:-mt-8 md:-mt-6',
-      statsMargin: '-mt-8 sm:-mt-10 md:-mt-12',
-      statsLayout: 'grid', // 'grid' or 'vertical'
-      statsWidth: 'w-full max-w-full', // Wider stats
-      cardColor: '#F6EFE6', // Background color - light beige/cream
-    },
-  },
-  {
-    id: 6,
-    title: "Blough's Window Cleaning",
-    backgroundImage: '/logo/man-cleaning-window.jpg',
-    logo: '/logo/background_removal%23TUFHNWM3WTd1c3MjMSM2Y2FmMjhhNTNhMzRiYzBiNTFlMTQ3ZGQxNmEyZTRmMCM1MDAjI1RSQU5TRk9STUFUSU9OX1JFUVVFU1Q.png',
-    description: "Blough's Window Cleaning and Property Maintenance delivers professional window cleaning, power washing, gutter services and full exterior & interior property care — fast, reliable, and made for homeowners, contractors, and property managers",
-    stats: [
-      { label: 'Properties Serviced', value: '800+' },
-      { label: 'Customer Rating', value: '5-Star' },
-      { label: 'Repeat Customers', value: '92%' },
-    ],
-    link: 'https://bloughswindowcleaningpropertymaintenance.com/',
-    design: {
-      brightness: 1.1,
-      contrast: 1.2,
-      overlay: { from: '45', via: '55', to: '75' },
-      logoSize: 'h-32 sm:h-40 md:h-48 lg:h-56',
-      logoPosition: 'center',
-      padding: 'p-6 sm:p-8 md:p-10',
-      logoPadding: 'pt-4 sm:pt-6 md:pt-8',
-      statsMargin: '-mt-12 sm:-mt-16 md:-mt-20',
-      statsLayout: 'grid',
-      statsWidth: 'w-full max-w-full',
-    },
-  },
 ]
 
 // Duplicate cards for seamless infinite loop - reduced for performance
@@ -695,7 +644,7 @@ export default function SuccessStoriesCarousel() {
                       <div className={`flex flex-col gap-4 ${card.design?.statsMargin || '-mt-12 sm:-mt-16 md:-mt-20'}`}>
                         {/* Stats Section - Enhanced with icons and gradients */}
                         {card.stats && (
-                          <div className={`${card.design?.statsLayout === 'vertical' ? 'flex flex-col gap-3 sm:gap-4' : 'grid grid-cols-3 gap-3 sm:gap-4 text-center'} ${card.design?.statsWidth || ''} ${card.id === 3 || card.id === 4 ? 'mb-[60px]' : ''} ${card.id === 5 ? 'mb-4' : ''}`}>
+                          <div className={`${card.design?.statsLayout === 'vertical' ? 'flex flex-col gap-3 sm:gap-4' : 'grid grid-cols-3 gap-3 sm:gap-4 text-center'} ${card.design?.statsWidth || ''} ${card.id === 3 || card.id === 4 ? 'mb-[60px]' : ''}`}>
                             {card.stats.map((stat, statIndex) => {
                               // Get icon based on stat label
                               const getIcon = (label) => {
