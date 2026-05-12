@@ -1198,7 +1198,7 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
               </span>
             </div>
           </div>
-          <h1 className="w-full max-w-6xl lg:max-w-7xl xl:max-w-screen-xl text-[55px] sm:text-[55px] md:text-[100px] lg:text-[150px] xl:text-[160px] font-extrabold text-white leading-[0.9] tracking-tight mb-5 md:mb-7 lg:-mt-2 xl:-mt-4 relative text-left overflow-visible hero-text-414 hero-text-375 hero-text-640 hero-text-900 hero-text-lg" style={{
+          <h1 className="w-full max-w-6xl lg:max-w-7xl xl:max-w-screen-xl text-[55px] sm:text-[55px] md:text-[100px] lg:text-[150px] xl:text-[160px] font-extrabold text-white leading-[0.9] tracking-tight mb-5 md:mb-7 lg:-mt-2 xl:-mt-4 relative text-center overflow-visible hero-text-414 hero-text-375 hero-text-640 hero-text-900 hero-text-lg" style={{
             textShadow: '0 4px 20px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(0, 0, 0, 0.3)',
             fontFamily: 'DM Sans, sans-serif'
           }}>
@@ -1211,13 +1211,18 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
               <span className="block uppercase w-full text-center">BUSINESSES</span>
             </span>
             <span className="block w-full text-center uppercase">
-              <span className="flex flex-col items-center md:hidden leading-[0.9] tracking-tight">
-                <span className="text-[clamp(1.85rem,10vw,2.85rem)]">TOP OF PAGE</span>
-                <span className="text-[clamp(1.85rem,10vw,2.85rem)]">ON</span>
+              <span className="flex flex-col items-center md:hidden leading-[0.9] tracking-tight w-full">
+                <span className="block w-full text-center">TOP OF PAGE</span>
+                <span className="block w-full text-center">ON</span>
               </span>
-              <span className="hidden md:block whitespace-nowrap md:text-[112px] lg:text-[168px] xl:text-[180px]">TOP OF PAGE ON</span>
+              {/* inline-block inside text-center: centers the nowrap line on SSR + client without flex quirks */}
+              <span className="hidden md:block w-full text-center">
+                <span className="inline-block whitespace-nowrap md:text-[112px] lg:text-[168px] xl:text-[180px]">TOP OF PAGE ON</span>
+              </span>
             </span>
-            <span className="block uppercase w-full text-center whitespace-nowrap">GOOGLE</span>
+            <span className="block w-full text-center uppercase">
+              <span className="inline-block whitespace-nowrap">GOOGLE</span>
+            </span>
           </h1>
           <div className="mb-6 md:mb-8 h-[5rem] md:h-[4rem] flex items-center justify-center">
             <span className="text-lg md:text-xl lg:text-2xl text-white/90 font-light max-w-4xl leading-relaxed break-words line-clamp-4 sm:line-clamp-none" style={{ fontFamily: 'DM Sans, sans-serif' }}>

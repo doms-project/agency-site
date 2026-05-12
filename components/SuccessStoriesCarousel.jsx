@@ -77,6 +77,32 @@ const portfolioCards = [
       statsLayout: 'vertical', // 'grid' or 'vertical'
     },
   },
+  {
+    id: 7,
+    title: 'Cleveland Home Buyers',
+    backgroundImage: '/uploads/cle%20home%20background.jpg',
+    logo: '/uploads/cle%20home%20logo.png',
+    description:
+      'Fast and reliable cash home buying service helping homeowners sell without repairs or agent fees.',
+    stats: [
+      { label: 'Page 1 local keywords', value: '12+' },
+      { label: 'Organic search views', value: 'Top 3' },
+      { label: 'Leads from search', value: '85%+' },
+    ],
+    link: 'https://clehomebuyers.com/home-279646',
+    design: {
+      brightness: 1.15,
+      contrast: 1.25,
+      overlay: { from: '42', via: '52', to: '78' },
+      logoSize: 'h-28 sm:h-32 md:h-40 lg:h-48',
+      logoPosition: 'center',
+      padding: 'p-6 sm:p-8 md:p-10',
+      logoPadding: 'pt-2 sm:pt-3 md:pt-4',
+      statsMargin: '-mt-12 sm:-mt-16 md:-mt-20',
+      statsLayout: 'grid',
+      statsWidth: 'w-full max-w-full',
+    },
+  },
 ]
 
 // Duplicate cards for seamless infinite loop - reduced for performance
