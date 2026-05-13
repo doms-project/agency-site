@@ -1215,9 +1215,9 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
                 <span className="block w-full text-center">TOP OF PAGE</span>
                 <span className="block w-full text-center">ON</span>
               </span>
-              {/* inline-block inside text-center: centers the nowrap line on SSR + client without flex quirks */}
-              <span className="hidden md:block w-full text-center">
-                <span className="inline-block whitespace-nowrap md:text-[112px] lg:text-[168px] xl:text-[180px]">TOP OF PAGE ON</span>
+              {/* flex justify-center: reliably centers the nowrap line at all large resolutions */}
+              <span className="hidden md:flex md:items-center md:justify-center w-full">
+                <span className="whitespace-nowrap md:text-[112px] lg:text-[168px] xl:text-[180px]">TOP OF PAGE ON</span>
               </span>
             </span>
             <span className="block w-full text-center uppercase">
