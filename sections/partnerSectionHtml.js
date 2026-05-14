@@ -22,57 +22,62 @@ export const partnerSectionHtml = String.raw`<section class="partner-carousel pb
       }
     }
    </style>
-    <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="GoHighLevel" class="h-6 md:h-10 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" src="/images/ghl.png" width="80" height="80" loading="lazy"/>
+    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:220px;">
+     <img alt="GoHighLevel" class="w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" src="/images/ghl.png" width="80" height="80" style="height:40px;" loading="lazy"/>
     </div>
-    <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="GoHighLevel" class="h-6 md:h-10 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" src="/images/ghl.png" width="80" height="80" loading="lazy"/>
+    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:260px;">
+     <img alt="Justin Sells Vegas" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/logo/justin sells vegas.png" width="200" height="160" style="height:150px;" loading="lazy"/>
     </div>
-    <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="GoHighLevel" class="h-6 md:h-10 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" src="/images/ghl.png" width="80" height="80" loading="lazy"/>
+    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
+     <img alt="Silent Warrior" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/uploads/silentwarrior logo.png" width="180" height="140" style="height:130px;" loading="lazy"/>
     </div>
-    <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="GoHighLevel" class="h-6 md:h-10 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" src="/images/ghl.png" width="80" height="80" loading="lazy"/>
+    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
+     <img alt="CLE Home" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/uploads/cle home logo2.png" width="180" height="140" style="height:130px;" loading="lazy"/>
     </div>
-    <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="GoHighLevel" class="h-6 md:h-10 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" src="/images/ghl.png" width="80" height="80" loading="lazy"/>
+    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
+     <img alt="Rent a Scooter Tulum" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/logo/Logo Rent a scooter tulum.png" width="180" height="140" style="height:130px;" loading="lazy"/>
     </div>
-    <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="GoHighLevel" class="h-6 md:h-10 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" src="/images/ghl.png" width="80" height="80" loading="lazy"/>
+    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
+     <img alt="Partner" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/logo/ChatGPT Image Sep 18, 2025, 11_14_48 PM.png" width="180" height="140" style="height:130px;" loading="lazy"/>
     </div>
-    <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="GoHighLevel" class="h-6 md:h-10 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" src="/images/ghl.png" width="80" height="80" loading="lazy"/>
+    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:220px;">
+     <img alt="GoHighLevel" class="w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" src="/images/ghl.png" width="80" height="80" style="height:40px;" loading="lazy"/>
     </div>
-    <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="GoHighLevel" class="h-6 md:h-10 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" src="/images/ghl.png" width="80" height="80" loading="lazy"/>
+    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:260px;">
+     <img alt="Justin Sells Vegas" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/logo/justin sells vegas.png" width="200" height="160" style="height:150px;" loading="lazy"/>
     </div>
-    <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="GoHighLevel" class="h-6 md:h-10 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" src="/images/ghl.png" width="80" height="80" loading="lazy"/>
+    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
+     <img alt="Silent Warrior" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/uploads/silentwarrior logo.png" width="180" height="140" style="height:130px;" loading="lazy"/>
     </div>
-    <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="GoHighLevel" class="h-6 md:h-10 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" src="/images/ghl.png" width="80" height="80" loading="lazy"/>
+    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
+     <img alt="CLE Home" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/uploads/cle home logo2.png" width="180" height="140" style="height:130px;" loading="lazy"/>
     </div>
-    <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="GoHighLevel" class="h-6 md:h-10 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" src="/images/ghl.png" width="80" height="80" loading="lazy"/>
+    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
+     <img alt="Rent a Scooter Tulum" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/logo/Logo Rent a scooter tulum.png" width="180" height="140" style="height:130px;" loading="lazy"/>
     </div>
-    <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="GoHighLevel" class="h-6 md:h-10 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" src="/images/ghl.png" width="80" height="80" loading="lazy"/>
+    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
+     <img alt="Partner" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/logo/ChatGPT Image Sep 18, 2025, 11_14_48 PM.png" width="180" height="140" style="height:130px;" loading="lazy"/>
     </div>
-    <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="GoHighLevel" class="h-6 md:h-10 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" src="/images/ghl.png" width="80" height="80" loading="lazy"/>
+    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:220px;">
+     <img alt="GoHighLevel" class="w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" src="/images/ghl.png" width="80" height="80" style="height:40px;" loading="lazy"/>
     </div>
-    <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="GoHighLevel" class="h-6 md:h-10 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" src="/images/ghl.png" width="80" height="80" loading="lazy"/>
+    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:260px;">
+     <img alt="Justin Sells Vegas" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/logo/justin sells vegas.png" width="200" height="160" style="height:150px;" loading="lazy"/>
     </div>
-    <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="GoHighLevel" class="h-6 md:h-10 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" src="/images/ghl.png" width="80" height="80" loading="lazy"/>
+    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
+     <img alt="Silent Warrior" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/uploads/silentwarrior logo.png" width="180" height="140" style="height:130px;" loading="lazy"/>
     </div>
-    <div class="flex items-center justify-center h-20 md:h-24 min-w-[120px] md:min-w-[150px] lg:min-w-[180px] max-w-[160px] md:max-w-[200px] lg:max-w-[240px] flex-shrink-0">
-     <img alt="GoHighLevel" class="h-6 md:h-10 w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" src="/images/ghl.png" width="80" height="80" loading="lazy"/>
+    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
+     <img alt="CLE Home" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/uploads/cle home logo2.png" width="180" height="140" style="height:130px;" loading="lazy"/>
+    </div>
+    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
+     <img alt="Rent a Scooter Tulum" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/logo/Logo Rent a scooter tulum.png" width="180" height="140" style="height:130px;" loading="lazy"/>
+    </div>
+    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
+     <img alt="Partner" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/logo/ChatGPT Image Sep 18, 2025, 11_14_48 PM.png" width="180" height="140" style="height:130px;" loading="lazy"/>
     </div>
    </div>
   </div>
  </div>
 </section>
 `;
-
