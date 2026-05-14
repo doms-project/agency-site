@@ -38,7 +38,7 @@ export const pricingSectionHtml = String.raw`<section id="pricing" class="w-full
      <div class="p-8 flex-grow flex flex-col">
      <div class="mb-6">
        <h3 class="text-2xl font-bold text-white mb-2" style="font-family:'DM Sans', sans-serif">
-        Custom Website + Gohighlevel Subaccount + Support
+        Custom Website + CRM + Support
       </h3>
        <div class="flex flex-col gap-1 mb-4">
         <div class="flex items-baseline gap-2 flex-wrap">
@@ -46,8 +46,8 @@ export const pricingSectionHtml = String.raw`<section id="pricing" class="w-full
          <span class="text-white/60 text-lg">one time</span>
         </div>
         <div class="flex items-baseline gap-2 flex-wrap">
-         <span class="text-4xl font-extrabold text-[#7BB9E8]" style="font-family:'DM Sans', sans-serif">$99</span>
-         <span class="text-white/60 text-lg">/mo</span>
+         <span class="text-lg font-extrabold text-[#7BB9E8]" style="font-family:'DM Sans', sans-serif">$99</span>
+         <span class="text-white/60 text-sm">/mo</span>
         </div>
        </div>
        <p class="text-white/70 text-base leading-relaxed" style="font-family:'DM Sans', sans-serif">
@@ -118,12 +118,12 @@ export const pricingSectionHtml = String.raw`<section id="pricing" class="w-full
        </h3>
        <div class="flex flex-col gap-1 mb-4">
         <div class="flex items-baseline gap-2 flex-wrap">
-         <span class="text-5xl font-extrabold text-[#7BB9E8]" style="font-family:'DM Sans', sans-serif">$595</span>
+         <span class="text-5xl font-extrabold text-[#7BB9E8]" style="font-family:'DM Sans', sans-serif">$2,850</span>
          <span class="text-white/60 text-lg">upfront</span>
         </div>
         <div class="flex items-baseline gap-2 flex-wrap">
-         <span class="text-4xl font-extrabold text-[#7BB9E8]" style="font-family:'DM Sans', sans-serif">$350</span>
-         <span class="text-white/60 text-lg">/mo</span>
+         <span class="text-lg font-extrabold text-[#7BB9E8]" style="font-family:'DM Sans', sans-serif">$350</span>
+         <span class="text-white/60 text-sm">/mo</span>
         </div>
        </div>
        <p class="text-white/70 text-base leading-relaxed" style="font-family:'DM Sans', sans-serif">
