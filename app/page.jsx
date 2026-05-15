@@ -1198,7 +1198,8 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
               </span>
             </div>
           </div>
-          <h1 className="w-full max-w-6xl lg:max-w-7xl xl:max-w-screen-xl text-[55px] sm:text-[55px] md:text-[100px] lg:text-[150px] xl:text-[160px] font-extrabold text-white leading-[0.9] tracking-tight mb-5 md:mb-7 lg:-mt-2 xl:-mt-4 relative text-center overflow-visible hero-text-414 hero-text-375 hero-text-640 hero-text-900 hero-text-lg" style={{
+          <h1 className="w-full max-w-6xl lg:max-w-7xl xl:max-w-screen-xl font-extrabold text-white leading-[0.9] tracking-tight mb-5 md:mb-7 lg:-mt-2 xl:-mt-4 relative text-center overflow-visible" style={{
+            fontSize: 'clamp(38px, 12.5vw, 160px)',
             textShadow: '0 4px 20px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(0, 0, 0, 0.3)',
             fontFamily: 'DM Sans, sans-serif'
           }}>
@@ -1207,8 +1208,8 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
               aria-hidden="true"
             />
             <span className="block w-full">
-              <span className="block uppercase w-full text-center">WE RANK</span>
-              <span className="block uppercase w-full text-center">BUSINESSES</span>
+              <span className="block uppercase w-full text-center">WE RANK YOUR</span>
+              <span className="block uppercase w-full text-center">BUSINESS TO</span>
             </span>
             <span className="block w-full text-center uppercase">
               <span className="flex flex-col items-center md:hidden leading-[0.9] tracking-tight w-full">
@@ -1217,7 +1218,7 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
               </span>
               {/* flex justify-center: reliably centers the nowrap line at all large resolutions */}
               <span className="hidden md:flex md:items-center md:justify-center w-full">
-                <span className="whitespace-nowrap md:text-[112px] lg:text-[168px] xl:text-[180px]">TOP OF PAGE ON</span>
+                <span className="whitespace-nowrap" style={{ fontSize: 'clamp(38px, 11vw, 180px)' }}>TOP OF PAGE ON</span>
               </span>
             </span>
             <span className="block w-full text-center uppercase">
