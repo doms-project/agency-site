@@ -50,8 +50,8 @@ export const contactSectionHtml = String.raw`<section class="w-full pb-16 md:pb-
        <path d="M2 4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4zm2 0v.01L12 13l8-8.99V4H4zm16 2.41l-7.29 7.3a1 1 0 0 1-1.42 0L4 6.41V20h16V6.41z">
        </path>
       </svg>
-      <a class="hover:underline" href="mailto:youngstownmarketingco@gmail.com" style="font-family:'DM Sans', sans-serif">
-       youngstownmarketingco@gmail.com
+      <a class="hover:underline" href="mailto:Yomarketingco@gmail.com" style="font-family:'DM Sans', sans-serif">
+       Yomarketingco@gmail.com
       </a>
      </div>
      <div class="flex items-center space-x-3 text-white/70 hover:text-[#7BB9E8] transition-colors">

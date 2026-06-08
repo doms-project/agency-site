@@ -5,8 +5,34 @@ import { useEffect, useRef, useState } from 'react'
 // Card data with glassmorphism design - Real Estate Business
 const portfolioCards = [
   {
+    id: 10,
+    title: 'Silent Warriors Foundation',
+    backgroundImage: '/uploads/silentwarrior%20background%20.png',
+    logo: '/uploads/silentwarrior%20logo.png',
+    description:
+      'Nonprofit supporting veterans through reintegration programs, mental wellness initiatives, and long-term legacy giving solutions.',
+    stats: [
+      { label: 'Branded Search Visibility', value: '+340%' },
+      { label: 'Map Pack Ranking', value: 'Top 3' },
+      { label: 'Mission Reach Online', value: '50K+' },
+    ],
+    link: 'https://silentwarriors.com/home',
+    design: {
+      brightness: 1.1,
+      contrast: 1.25,
+      overlay: { from: '40', via: '55', to: '82' },
+      logoSize: 'h-24 sm:h-28 md:h-36 lg:h-44',
+      logoPosition: 'center',
+      padding: 'p-6 sm:p-8 md:p-10',
+      logoPadding: 'pt-2 sm:pt-3 md:pt-4',
+      statsMargin: '-mt-12 sm:-mt-16 md:-mt-20',
+      statsLayout: 'grid',
+      statsWidth: 'w-full max-w-full',
+    },
+  },
+  {
     id: 1,
-    title: 'Real Estate Success',
+    title: 'Mahoning Home Buyers',
     backgroundImage: '/images/johnson.webp',
     logo: '/images/chatgpt-logo.webp',
     description: 'Transforming real estate businesses with cutting-edge digital strategies and proven growth systems.',
@@ -20,42 +46,72 @@ const portfolioCards = [
       brightness: 1.2,
       contrast: 1.3,
       overlay: { from: '40', via: '50', to: '75' },
-      logoSize: 'h-32 sm:h-40 md:h-48 lg:h-56',
-      logoPosition: 'center', // 'center' or 'top-left'
+      logoSize: 'h-24 sm:h-28 md:h-36 lg:h-44',
+      logoPosition: 'center',
       padding: 'p-6 sm:p-8 md:p-10',
-      logoPadding: 'pt-2 sm:pt-2 md:pt-3',
+      logoPadding: 'pt-2 sm:pt-3 md:pt-4',
       statsMargin: '-mt-12 sm:-mt-16 md:-mt-20',
+      statsLayout: 'grid',
+      statsWidth: 'w-full max-w-full',
     },
   },
   {
-    id: 3,
-    title: 'Rent a Scooter Tulum',
-    backgroundImage: null, // No background image, using solid color
-    logo: '/images/Logo Rent a scooter tulum.png',
-    description: 'Rental business running on our CRM with website, automation, and wider business expansion.',
+    id: 11,
+    title: 'Opportunities of Harvest Power Washing',
+    backgroundImage: '/uploads/opportunity%20harvesting%20.jpg',
+    logo: '/uploads/opportunity%20harvest%20logo.png',
+    description:
+      'A Dallas-Fort Worth power washing company serving residential and commercial clients across 8+ DFW cities. We built their website from the ground up and ranked them #1 on Google — turning their online presence into a lead-generating machine.',
     stats: [
-      { label: 'CRM Integration', value: '100%' },
-      { label: 'Website Traffic', value: '50K+' },
-      { label: 'Automation Rate', value: '85%' },
+      { label: 'Google Ranking', value: '#1 in DFW' },
+      { label: 'Monthly Traffic', value: '+300%' },
+      { label: 'Quote Requests', value: '500+' },
     ],
-    link: 'https://rentscootertulum.com/',
+    link: 'https://opportunitiesofharvestpowerwashing.com/home',
     design: {
-      brightness: 1.3,
-      contrast: 1.3,
-      overlay: { from: '35', via: '45', to: '70' },
-      logoSize: 'h-24 sm:h-28 md:h-32 lg:h-36',
-      logoPosition: 'center', // 'center' or 'top-left'
+      brightness: 1.15,
+      contrast: 1.25,
+      overlay: { from: '40', via: '55', to: '82' },
+      logoSize: 'h-24 sm:h-28 md:h-36 lg:h-44',
+      logoPosition: 'center',
       padding: 'p-6 sm:p-8 md:p-10',
-      logoPadding: 'pt-6 sm:pt-8 md:pt-10',
-      statsMargin: '-mt-16 sm:-mt-20 md:-mt-24',
-      statsLayout: 'grid', // 'grid' or 'vertical'
-      statsWidth: 'w-full max-w-full', // Wider stats
-      cardColor: '#E6E6E6', // Background color
+      logoPadding: 'pt-2 sm:pt-3 md:pt-4',
+      statsMargin: '-mt-12 sm:-mt-16 md:-mt-20',
+      statsLayout: 'grid',
+      statsWidth: 'w-full max-w-full',
+    },
+  },
+  {
+    id: 13,
+    title: 'Justin Vegas Realtor',
+    backgroundImage: '/uploads/justin%20vegas%20background.png',
+    logo: '/uploads/justin%20vegas%20logo.png',
+    description:
+      'A top-rated Las Vegas & Henderson REALTOR® with Berkshire Hathaway HomeServices Nevada Properties, specializing in buyers, sellers, and out-of-state relocators. We built his website and ranked him on Google — putting him in front of home buyers searching Northwest Las Vegas every day.',
+    stats: [
+      { label: 'Homes Closed', value: '57+' },
+      { label: 'Google Ranking', value: '#1 Las Vegas' },
+      { label: 'Lead Growth', value: '4x in 90 Days' },
+    ],
+    link: 'https://justinvegasrealtor.com/home',
+    design: {
+      brightness: 1.15,
+      contrast: 1.25,
+      overlay: { from: '40', via: '55', to: '82' },
+      logoSize: 'h-24 sm:h-28 md:h-36 lg:h-44',
+      logoPosition: 'center',
+      padding: 'p-6 sm:p-8 md:p-10',
+      logoPadding: 'pt-2 sm:pt-3 md:pt-4',
+      statsMargin: '-mt-12 sm:-mt-16 md:-mt-20',
+      statsLayout: 'grid',
+      statsWidth: 'w-full max-w-full',
+      statsValueSize: 'text-base sm:text-lg md:text-xl',
+      statsLabelSize: 'text-xs sm:text-sm',
     },
   },
   {
     id: 2,
-    title: 'Dirt Bike Stunter',
+    title: 'Choppin Throttles',
     backgroundImage: '/images/instasave.website_476927403_18482611003022000_5756383078473439164_n.jpg',
     logo: '/images/Black White Modern Grunge Typographic Brand Logo (Website) (1).png',
     description: 'Dirt bike stunter showing the world via social media sponsoring to companies related to his stunt.',
@@ -69,12 +125,13 @@ const portfolioCards = [
       brightness: 1.5,
       contrast: 1.4,
       overlay: { from: '30', via: '40', to: '65' },
-      logoSize: 'h-20 sm:h-24 md:h-28 lg:h-32',
-      logoPosition: 'center', // 'center' or 'top-left'
-      padding: 'p-4 sm:p-6 md:p-8',
-      logoPadding: 'pt-4 sm:pt-5 md:pt-6',
-      statsMargin: '-mt-8 sm:-mt-10 md:-mt-12',
-      statsLayout: 'vertical', // 'grid' or 'vertical'
+      logoSize: 'h-24 sm:h-28 md:h-36 lg:h-44',
+      logoPosition: 'center',
+      padding: 'p-6 sm:p-8 md:p-10',
+      logoPadding: 'pt-2 sm:pt-3 md:pt-4',
+      statsMargin: '-mt-12 sm:-mt-16 md:-mt-20',
+      statsLayout: 'grid',
+      statsWidth: 'w-full max-w-full',
     },
   },
   {
@@ -94,13 +151,95 @@ const portfolioCards = [
       brightness: 1.15,
       contrast: 1.25,
       overlay: { from: '42', via: '52', to: '78' },
-      logoSize: 'h-28 sm:h-32 md:h-40 lg:h-48',
+      logoSize: 'h-24 sm:h-28 md:h-36 lg:h-44',
       logoPosition: 'center',
       padding: 'p-6 sm:p-8 md:p-10',
       logoPadding: 'pt-2 sm:pt-3 md:pt-4',
       statsMargin: '-mt-12 sm:-mt-16 md:-mt-20',
       statsLayout: 'grid',
       statsWidth: 'w-full max-w-full',
+    },
+  },
+  {
+    id: 14,
+    title: 'Luxe Auto Rental',
+    backgroundImage: '/uploads/luxe%20rental%20background.png',
+    logo: '/uploads/logo.webp',
+    description:
+      'A locally owned car rental shop in Cleveland, OH offering flat $50/day rates with no hidden fees or counter lines. We built their website and ranked them on Google — putting them in front of Cleveland locals searching for affordable car rentals every day.',
+    stats: [
+      { label: 'Flat Daily Rate', value: '$50/Day' },
+      { label: 'Google Ranking', value: '#1 Cleveland' },
+      { label: 'Site Built & Ranked', value: '30 Days' },
+    ],
+    link: 'https://luxeautorental.com/home',
+    design: {
+      brightness: 1.15,
+      contrast: 1.25,
+      overlay: { from: '40', via: '55', to: '82' },
+      logoSize: 'h-24 sm:h-28 md:h-36 lg:h-44',
+      logoPosition: 'center',
+      padding: 'p-6 sm:p-8 md:p-10',
+      logoPadding: 'pt-2 sm:pt-3 md:pt-4',
+      statsMargin: '-mt-12 sm:-mt-16 md:-mt-20',
+      statsLayout: 'grid',
+      statsWidth: 'w-full max-w-full',
+      statsValueSize: 'text-base sm:text-lg md:text-xl',
+      statsLabelSize: 'text-xs sm:text-sm',
+    },
+  },
+  {
+    id: 3,
+    title: 'Rent a Scooter Tulum',
+    backgroundImage: null,
+    logo: '/images/Logo Rent a scooter tulum.png',
+    description: 'Rental business running on our CRM with website, automation, and wider business expansion.',
+    stats: [
+      { label: 'CRM Integration', value: '100%' },
+      { label: 'Website Traffic', value: '50K+' },
+      { label: 'Automation Rate', value: '85%' },
+    ],
+    link: 'https://rentscootertulum.com/',
+    design: {
+      brightness: 1.3,
+      contrast: 1.3,
+      overlay: { from: '35', via: '45', to: '70' },
+      logoSize: 'h-24 sm:h-28 md:h-36 lg:h-44',
+      logoPosition: 'center',
+      padding: 'p-6 sm:p-8 md:p-10',
+      logoPadding: 'pt-2 sm:pt-3 md:pt-4',
+      statsMargin: '-mt-12 sm:-mt-16 md:-mt-20',
+      statsLayout: 'grid',
+      statsWidth: 'w-full max-w-full',
+      cardColor: '#E6E6E6',
+    },
+  },
+  {
+    id: 12,
+    title: 'Astra Home Buyer',
+    backgroundImage: '/uploads/astra%20home%20background.jpg',
+    logo: '/uploads/astra%20home%20logo.png',
+    description:
+      'A California cash home buying company serving 10 markets from San Diego to Sacramento. We built their website and ranked them on Google — connecting motivated sellers to fast, no-hassle cash offers across the state.',
+    stats: [
+      { label: 'Google Ranking', value: '#1 San Diego' },
+      { label: 'Markets Ranked', value: '10 in CA' },
+      { label: 'Offer Turnaround', value: '24 Hours' },
+    ],
+    link: 'https://astrahomebuyer.com/home',
+    design: {
+      brightness: 1.15,
+      contrast: 1.25,
+      overlay: { from: '40', via: '55', to: '82' },
+      logoSize: 'h-24 sm:h-28 md:h-36 lg:h-44',
+      logoPosition: 'center',
+      padding: 'p-6 sm:p-8 md:p-10',
+      logoPadding: 'pt-2 sm:pt-3 md:pt-4',
+      statsMargin: '-mt-12 sm:-mt-16 md:-mt-20',
+      statsLayout: 'grid',
+      statsWidth: 'w-full max-w-full',
+      statsValueSize: 'text-base sm:text-lg md:text-xl',
+      statsLabelSize: 'text-xs sm:text-sm',
     },
   },
   {
@@ -155,32 +294,6 @@ const portfolioCards = [
       statsWidth: 'w-full max-w-full',
     },
   },
-  {
-    id: 10,
-    title: 'Silent Warriors Foundation',
-    backgroundImage: '/uploads/silentwarrior%20background%20.png',
-    logo: '/uploads/silentwarrior%20logo.png',
-    description:
-      'Nonprofit supporting veterans through reintegration programs, mental wellness initiatives, and long-term legacy giving solutions.',
-    stats: [
-      { label: 'Branded Search Visibility', value: '+340%' },
-      { label: 'Map Pack Ranking', value: 'Top 3' },
-      { label: 'Mission Reach Online', value: '50K+' },
-    ],
-    link: 'https://silentwarriors.com/home',
-    design: {
-      brightness: 1.1,
-      contrast: 1.25,
-      overlay: { from: '40', via: '55', to: '82' },
-      logoSize: 'h-24 sm:h-28 md:h-36 lg:h-44',
-      logoPosition: 'center',
-      padding: 'p-6 sm:p-8 md:p-10',
-      logoPadding: 'pt-2 sm:pt-3 md:pt-4',
-      statsMargin: '-mt-12 sm:-mt-16 md:-mt-20',
-      statsLayout: 'grid',
-      statsWidth: 'w-full max-w-full',
-    },
-  },
 ]
 
 // Duplicate cards for seamless infinite loop - reduced for performance
@@ -205,10 +318,10 @@ export default function SuccessStoriesCarousel() {
     isSwipe: false, // Track if this is a swipe gesture
     rafId: null, // RAF ID for smooth updates
   })
-  
+
   // Use fewer card duplicates on mobile for better performance
   // Keep 2 sets for smooth infinite loop
-  const cardsToRender = isMobile 
+  const cardsToRender = isMobile
     ? [...portfolioCards, ...portfolioCards] // 2 sets on mobile (10 cards) for smooth loop
     : duplicatedCards // 2 sets on desktop (10 cards total) - reduced from 3 for performance
 
@@ -243,262 +356,262 @@ export default function SuccessStoriesCarousel() {
 
     // Detect mobile device once for performance optimizations
     const isMobileDevice = window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-    
+
     // Store cleanup function for GSAP resources
     let gsapCleanup = null
-    
+
     // Dynamically import GSAP with error handling
     import('gsap').then(({ gsap }) => {
       // Disable 3D perspective for better performance - use simple 2D scrolling
       // 3D effects removed to eliminate lag
 
-    // Get carousel dimensions for infinite loop
-    const cardWidth = cards[0]?.offsetWidth || 320
-    const gap = 12 // gap-3 = 12px
-    const cardTotalWidth = cardWidth + gap
-    const halfWidth = (cards.length * cardTotalWidth) / 2
+      // Get carousel dimensions for infinite loop
+      const cardWidth = cards[0]?.offsetWidth || 320
+      const gap = 12 // gap-3 = 12px
+      const cardTotalWidth = cardWidth + gap
+      const halfWidth = (cards.length * cardTotalWidth) / 2
 
-    // Set initial position via CSS for better performance
+      // Set initial position via CSS for better performance
       carousel.style.transform = 'translateX(0)'
 
-    // Create infinite scrolling animation (right to left)
-    // Enable CSS animation on both desktop and mobile; slower on mobile
-    carousel.style.setProperty('--scroll-distance', `-${halfWidth}px`)
-    const animationDuration = isMobileDevice ? 80 : 100
-    carousel.style.animation = `portfolio-scroll-mobile ${animationDuration}s linear infinite`
-    carousel.style.animationDuration = `${animationDuration}s`
-    carousel.style.willChange = 'transform'
+      // Create infinite scrolling animation (right to left)
+      // Enable CSS animation on both desktop and mobile; slower on mobile
+      carousel.style.setProperty('--scroll-distance', `-${halfWidth}px`)
+      const animationDuration = isMobileDevice ? 70 : 100
+      carousel.style.animation = `portfolio-scroll-mobile ${animationDuration}s linear infinite`
+      carousel.style.animationDuration = `${animationDuration}s`
+      carousel.style.willChange = 'transform'
 
       // Force slow animation on mobile with inline style
       if (isMobileDevice) {
         carousel.setAttribute('data-mobile-carousel', 'true')
       }
 
-    // Add swipe functionality for manual control on mobile
-    if (isMobileDevice && carousel) {
-      const swipeState = swipeStateRef.current
-      
-      const handleTouchStart = (e) => {
-        swipeState.isDragging = true
-        swipeState.startX = e.touches[0].clientX
-        swipeState.startY = e.touches[0].clientY
-        swipeState.currentX = e.touches[0].clientX
-        swipeState.startTime = Date.now()
-        swipeState.isSwipe = false // Reset swipe flag
-        // Pause auto animation immediately for swipe and remember it
-        swipeState.prevAnimation = carousel.style.animation
-        carousel.style.animationPlayState = 'paused'
-        swipeState.animationPaused = true
-        carousel.style.transition = ''
-        carousel.style.willChange = 'transform'
-        
-        // Get current transform position
-        const transform = window.getComputedStyle(carousel).transform
-        if (transform !== 'none') {
-          const matrix = new DOMMatrix(transform)
-          swipeState.currentTranslateX = matrix.m41
-        } else {
-          swipeState.currentTranslateX = 0
-        }
-      }
-      
-      const handleTouchMove = (e) => {
-        if (!swipeState.isDragging) return
-        
-        const currentX = e.touches[0].clientX
-        const currentY = e.touches[0].clientY
-        const deltaX = Math.abs(currentX - swipeState.startX)
-        const deltaY = Math.abs(currentY - swipeState.startY)
-        
-        // Determine if this is a swipe gesture (more horizontal than vertical movement)
-        // and if movement exceeds threshold (10px)
-        if (!swipeState.isSwipe && (deltaX > 8 || deltaY > 8)) {
-          swipeState.isSwipe = deltaX > deltaY // Horizontal movement = swipe
-          
-          if (swipeState.isSwipe) {
-            // Pause auto-scroll animation only when confirmed swipe
-            carousel.style.animationPlayState = 'paused'
-            carousel.style.animation = 'none'
-            swipeState.animationPaused = true
-            carousel.style.willChange = 'transform'
-          }
-        }
-        
-        // Only update carousel position if this is confirmed as a swipe
-        if (swipeState.isSwipe) {
-          const delta = currentX - swipeState.startX
-          const newTranslateX = (swipeState.currentTranslateX || 0) + delta
-          
-          // Use requestAnimationFrame for smooth updates
-          if (!swipeState.rafId) {
-            swipeState.rafId = requestAnimationFrame(() => {
-              carousel.style.transform = `translate3d(${newTranslateX}px, 0, 0)`
-              swipeState.rafId = null
-            })
-          }
-          
-          e.preventDefault() // Prevent scrolling when swiping
-        }
-        
-        swipeState.currentX = currentX
-      }
-      
-      const handleTouchEnd = (e) => {
-        if (!swipeState.isDragging) return
-        
-        // Cancel any pending RAF
-        if (swipeState.rafId) {
-          cancelAnimationFrame(swipeState.rafId)
-          swipeState.rafId = null
-        }
-        
-        const wasSwiping = swipeState.isSwipe
-        swipeState.isDragging = false
-        swipeState.isSwipe = false
-        
-        const resumeAnimation = () => {
-          const animationDuration = isMobileDevice ? 80 : 100
-          const currentTransform = window.getComputedStyle(carousel).transform
-          let currentTranslateX = 0
-          if (currentTransform !== 'none') {
-            const matrix = new DOMMatrix(currentTransform)
-            currentTranslateX = matrix.m41
-          }
-          const effectiveWidth = halfWidth || 1
-          const progress = (Math.abs(currentTranslateX) % effectiveWidth) / effectiveWidth
-          carousel.style.transition = ''
-          // Keep current transform; just set animation with proper offset
-          carousel.style.animation = `portfolio-scroll-mobile ${animationDuration}s linear infinite`
-          carousel.style.animationDuration = `${animationDuration}s`
-          carousel.style.animationDelay = `-${progress * animationDuration}s`
-          carousel.style.animationPlayState = 'running'
-          swipeState.animationPaused = false
-        }
+      // Add swipe functionality for manual control on mobile
+      if (isMobileDevice && carousel) {
+        const swipeState = swipeStateRef.current
 
-        // Only apply momentum if this was a swipe gesture
-        if (wasSwiping) {
-          // Stop any transition and resume animation from current position (no momentum to reduce jitter)
+        const handleTouchStart = (e) => {
+          swipeState.isDragging = true
+          swipeState.startX = e.touches[0].clientX
+          swipeState.startY = e.touches[0].clientY
+          swipeState.currentX = e.touches[0].clientX
+          swipeState.startTime = Date.now()
+          swipeState.isSwipe = false // Reset swipe flag
+          // Pause auto animation immediately for swipe and remember it
+          swipeState.prevAnimation = carousel.style.animation
+          carousel.style.animationPlayState = 'paused'
+          swipeState.animationPaused = true
           carousel.style.transition = ''
-          carousel.style.willChange = 'auto'
-          resumeAnimation()
-        } else {
-          // If not swiping, just resume animation immediately
-          if (swipeState.animationPaused) {
-            resumeAnimation()
-            carousel.style.willChange = 'auto'
-          }
-        }
-      }
-      
-      // Optimize touch event listeners for smooth performance
-      carousel.addEventListener('touchstart', handleTouchStart, { passive: true })
-      carousel.addEventListener('touchmove', handleTouchMove, { passive: false }) // passive: false to allow preventDefault
-      carousel.addEventListener('touchend', handleTouchEnd, { passive: true })
-      carousel.addEventListener('touchcancel', handleTouchEnd, { passive: true })
-      
-      // Ensure GPU acceleration
-      carousel.style.transform = carousel.style.transform || 'translateZ(0)'
-      carousel.style.WebkitTransform = carousel.style.WebkitTransform || 'translateZ(0)'
-      
-      carousel._swipeTouchStart = handleTouchStart
-      carousel._swipeTouchMove = handleTouchMove
-      carousel._swipeTouchEnd = handleTouchEnd
-    }
-    
-    // OPTIMIZED: Add automatic 3D perspective tilt with throttling
-    let perspectiveLastUpdate = 0
-    const perspectiveThrottle = isMobileDevice ? 100 : 50 // Update less frequently on mobile
-    
-    const update3DPerspective = (forceUpdate = false) => {
-      if (isMobileDevice) return // skip 3D updates on mobile to avoid flicker
-      const now = Date.now()
-      if (!forceUpdate && now - perspectiveLastUpdate < perspectiveThrottle) return
-      perspectiveLastUpdate = now
-      
-      if (!container) return
-      
-      const containerRect = container.getBoundingClientRect()
-      const containerCenter = containerRect.left + containerRect.width / 2
-      
-      cards.forEach((card) => {
-        if (!card) return
-        
-        const cardRect = card.getBoundingClientRect()
-        const cardCenter = cardRect.left + cardRect.width / 2
-        
-        // Calculate distance from center (-1 to 1, where 0 is center)
-        const distanceFromCenter = (cardCenter - containerCenter) / (containerRect.width / 2)
-        
-        // OPTIMIZED: Reduced rotation effect (was 15, now 10)
-        const maxRotation = isMobileDevice ? 8 : 10
-        const rotateY = -distanceFromCenter * maxRotation
-        
-        // OPTIMIZED: Reduced lift effect (was 15, now 10)
-        const maxLift = isMobileDevice ? 6 : 10
-        const liftY = -Math.abs(distanceFromCenter) * maxLift + maxLift
-        
-        // OPTIMIZED: Reduced scale effect
-        const maxScale = 1.03
-        const minScale = 0.97
-        const scale = maxScale - Math.abs(distanceFromCenter) * (maxScale - minScale)
-        
-        // OPTIMIZED: Less opacity variation
-        const opacity = 1 - Math.abs(distanceFromCenter) * 0.2
-        
-        // Apply transforms - use CSS transition for smoothing
-        card.style.transform = `perspective(1000px) rotateY(${rotateY}deg) translateY(${liftY}px) scale(${scale})`
-        card.style.opacity = Math.max(0.8, opacity)
-      })
-    }
-    
-    // OPTIMIZED: Update 3D perspective with visibility check
-    let isCarouselVisible = true
-    const startPerspectiveUpdates = () => {
-      const updateLoop = () => {
-        if (isCarouselVisible) {
-          update3DPerspective()
-        }
-        perspectiveTickerRef.current = requestAnimationFrame(updateLoop)
-      }
-      updateLoop()
-    }
-    
-    if (!isMobileDevice) {
-      startPerspectiveUpdates()
-    }
-    
-    // Removed touch tilt - only using automatic carousel 3D perspective
+          carousel.style.willChange = 'transform'
 
-    // Pause animation when not visible (IntersectionObserver) - especially important for mobile
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          // OPTIMIZED: Also pause perspective updates when not visible
-          isCarouselVisible = entry.isIntersecting
-          
-          if (entry.isIntersecting) {
-            // Resume animation when visible
-            if (isMobileDevice && carousel) {
-              carousel.style.animationPlayState = 'running'
-            } else if (animationRef.current) {
-              animationRef.current.resume()
-            }
+          // Get current transform position
+          const transform = window.getComputedStyle(carousel).transform
+          if (transform !== 'none') {
+            const matrix = new DOMMatrix(transform)
+            swipeState.currentTranslateX = matrix.m41
           } else {
-            // Pause animation when not visible to save resources
-            if (isMobileDevice && carousel) {
+            swipeState.currentTranslateX = 0
+          }
+        }
+
+        const handleTouchMove = (e) => {
+          if (!swipeState.isDragging) return
+
+          const currentX = e.touches[0].clientX
+          const currentY = e.touches[0].clientY
+          const deltaX = Math.abs(currentX - swipeState.startX)
+          const deltaY = Math.abs(currentY - swipeState.startY)
+
+          // Determine if this is a swipe gesture (more horizontal than vertical movement)
+          // and if movement exceeds threshold (10px)
+          if (!swipeState.isSwipe && (deltaX > 8 || deltaY > 8)) {
+            swipeState.isSwipe = deltaX > deltaY // Horizontal movement = swipe
+
+            if (swipeState.isSwipe) {
+              // Pause auto-scroll animation only when confirmed swipe
               carousel.style.animationPlayState = 'paused'
-            } else if (animationRef.current) {
-              animationRef.current.pause()
+              carousel.style.animation = 'none'
+              swipeState.animationPaused = true
+              carousel.style.willChange = 'transform'
             }
           }
-        })
-      },
-      { threshold: 0.1 }
-    )
 
-    if (container) {
-      observer.observe(container)
-    }
+          // Only update carousel position if this is confirmed as a swipe
+          if (swipeState.isSwipe) {
+            const delta = currentX - swipeState.startX
+            const newTranslateX = (swipeState.currentTranslateX || 0) + delta
+
+            // Use requestAnimationFrame for smooth updates
+            if (!swipeState.rafId) {
+              swipeState.rafId = requestAnimationFrame(() => {
+                carousel.style.transform = `translate3d(${newTranslateX}px, 0, 0)`
+                swipeState.rafId = null
+              })
+            }
+
+            e.preventDefault() // Prevent scrolling when swiping
+          }
+
+          swipeState.currentX = currentX
+        }
+
+        const handleTouchEnd = (e) => {
+          if (!swipeState.isDragging) return
+
+          // Cancel any pending RAF
+          if (swipeState.rafId) {
+            cancelAnimationFrame(swipeState.rafId)
+            swipeState.rafId = null
+          }
+
+          const wasSwiping = swipeState.isSwipe
+          swipeState.isDragging = false
+          swipeState.isSwipe = false
+
+          const resumeAnimation = () => {
+            const animationDuration = isMobileDevice ? 70 : 100
+            const currentTransform = window.getComputedStyle(carousel).transform
+            let currentTranslateX = 0
+            if (currentTransform !== 'none') {
+              const matrix = new DOMMatrix(currentTransform)
+              currentTranslateX = matrix.m41
+            }
+            const effectiveWidth = halfWidth || 1
+            const progress = (Math.abs(currentTranslateX) % effectiveWidth) / effectiveWidth
+            carousel.style.transition = ''
+            // Keep current transform; just set animation with proper offset
+            carousel.style.animation = `portfolio-scroll-mobile ${animationDuration}s linear infinite`
+            carousel.style.animationDuration = `${animationDuration}s`
+            carousel.style.animationDelay = `-${progress * animationDuration}s`
+            carousel.style.animationPlayState = 'running'
+            swipeState.animationPaused = false
+          }
+
+          // Only apply momentum if this was a swipe gesture
+          if (wasSwiping) {
+            // Stop any transition and resume animation from current position (no momentum to reduce jitter)
+            carousel.style.transition = ''
+            carousel.style.willChange = 'auto'
+            resumeAnimation()
+          } else {
+            // If not swiping, just resume animation immediately
+            if (swipeState.animationPaused) {
+              resumeAnimation()
+              carousel.style.willChange = 'auto'
+            }
+          }
+        }
+
+        // Optimize touch event listeners for smooth performance
+        carousel.addEventListener('touchstart', handleTouchStart, { passive: true })
+        carousel.addEventListener('touchmove', handleTouchMove, { passive: false }) // passive: false to allow preventDefault
+        carousel.addEventListener('touchend', handleTouchEnd, { passive: true })
+        carousel.addEventListener('touchcancel', handleTouchEnd, { passive: true })
+
+        // Ensure GPU acceleration
+        carousel.style.transform = carousel.style.transform || 'translateZ(0)'
+        carousel.style.WebkitTransform = carousel.style.WebkitTransform || 'translateZ(0)'
+
+        carousel._swipeTouchStart = handleTouchStart
+        carousel._swipeTouchMove = handleTouchMove
+        carousel._swipeTouchEnd = handleTouchEnd
+      }
+
+      // OPTIMIZED: Add automatic 3D perspective tilt with throttling
+      let perspectiveLastUpdate = 0
+      const perspectiveThrottle = isMobileDevice ? 100 : 50 // Update less frequently on mobile
+
+      const update3DPerspective = (forceUpdate = false) => {
+        if (isMobileDevice) return // skip 3D updates on mobile to avoid flicker
+        const now = Date.now()
+        if (!forceUpdate && now - perspectiveLastUpdate < perspectiveThrottle) return
+        perspectiveLastUpdate = now
+
+        if (!container) return
+
+        const containerRect = container.getBoundingClientRect()
+        const containerCenter = containerRect.left + containerRect.width / 2
+
+        cards.forEach((card) => {
+          if (!card) return
+
+          const cardRect = card.getBoundingClientRect()
+          const cardCenter = cardRect.left + cardRect.width / 2
+
+          // Calculate distance from center (-1 to 1, where 0 is center)
+          const distanceFromCenter = (cardCenter - containerCenter) / (containerRect.width / 2)
+
+          // OPTIMIZED: Reduced rotation effect (was 15, now 10)
+          const maxRotation = isMobileDevice ? 8 : 10
+          const rotateY = -distanceFromCenter * maxRotation
+
+          // OPTIMIZED: Reduced lift effect (was 15, now 10)
+          const maxLift = isMobileDevice ? 6 : 10
+          const liftY = -Math.abs(distanceFromCenter) * maxLift + maxLift
+
+          // OPTIMIZED: Reduced scale effect
+          const maxScale = 1.03
+          const minScale = 0.97
+          const scale = maxScale - Math.abs(distanceFromCenter) * (maxScale - minScale)
+
+          // OPTIMIZED: Less opacity variation
+          const opacity = 1 - Math.abs(distanceFromCenter) * 0.2
+
+          // Apply transforms - use CSS transition for smoothing
+          card.style.transform = `perspective(1000px) rotateY(${rotateY}deg) translateY(${liftY}px) scale(${scale})`
+          card.style.opacity = Math.max(0.8, opacity)
+        })
+      }
+
+      // OPTIMIZED: Update 3D perspective with visibility check
+      let isCarouselVisible = true
+      const startPerspectiveUpdates = () => {
+        const updateLoop = () => {
+          if (isCarouselVisible) {
+            update3DPerspective()
+          }
+          perspectiveTickerRef.current = requestAnimationFrame(updateLoop)
+        }
+        updateLoop()
+      }
+
+      if (!isMobileDevice) {
+        startPerspectiveUpdates()
+      }
+
+      // Removed touch tilt - only using automatic carousel 3D perspective
+
+      // Pause animation when not visible (IntersectionObserver) - especially important for mobile
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            // OPTIMIZED: Also pause perspective updates when not visible
+            isCarouselVisible = entry.isIntersecting
+
+            if (entry.isIntersecting) {
+              // Resume animation when visible
+              if (isMobileDevice && carousel) {
+                carousel.style.animationPlayState = 'running'
+              } else if (animationRef.current) {
+                animationRef.current.resume()
+              }
+            } else {
+              // Pause animation when not visible to save resources
+              if (isMobileDevice && carousel) {
+                carousel.style.animationPlayState = 'paused'
+              } else if (animationRef.current) {
+                animationRef.current.pause()
+              }
+            }
+          })
+        },
+        { threshold: 0.1 }
+      )
+
+      if (container) {
+        observer.observe(container)
+      }
 
       // Store cleanup function for GSAP resources
       gsapCleanup = () => {
@@ -534,7 +647,7 @@ export default function SuccessStoriesCarousel() {
             carousel.removeEventListener('touchend', carousel._swipeTouchEnd)
           }
         }
-        
+
         // Clean up hover handlers and animations
         cards.forEach((card) => {
           if (card) {
@@ -555,7 +668,7 @@ export default function SuccessStoriesCarousel() {
             }
           }
         })
-        
+
         // Clean up button hover handlers
         const hoverTargets = container?.querySelectorAll('[data-gsap-hover-target="true"]')
         hoverTargets?.forEach((target) => {
@@ -570,7 +683,7 @@ export default function SuccessStoriesCarousel() {
       }
     }).catch((error) => {
       if (process.env.NODE_ENV === 'development') {
-      console.error('Failed to load GSAP for SuccessStoriesCarousel:', error)
+        console.error('Failed to load GSAP for SuccessStoriesCarousel:', error)
       }
       // Fallback: Use CSS animations only on mobile, disable 3D effects on desktop
       if (isMobileDevice && carousel) {
@@ -591,7 +704,7 @@ export default function SuccessStoriesCarousel() {
         cancelAnimationFrame(perspectiveTickerRef.current)
         perspectiveTickerRef.current = null
       }
-      
+
       // Call GSAP cleanup if it was set
       if (gsapCleanup) {
         gsapCleanup()
@@ -611,30 +724,29 @@ export default function SuccessStoriesCarousel() {
     <section
       className="section-padding bg-gradient-to-b from-[#0a0a0a] via-[#10151a] to-[#181c22] overflow-hidden relative"
       id="portfolio"
-      style={{ 
-        scrollMarginTop: '120px', 
-        maxHeight: isMobile ? '1300px' : 'none'
+      style={{
+        scrollMarginTop: '120px',
       }}
     >
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-8 md:mb-12 mt-8 md:mt-16">
-          <span className="block uppercase tracking-[0.25em] text-xs text-neutral-400 font-semibold mb-4">
-            OUR WORK
-          </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-            Real Results. Real Businesses.{' '}
-            <span className="text-[#7BB9E8]">Real Growth.</span>
-          </h2>
-          <div className="w-20 h-1 rounded-full bg-[#7BB9E8] mb-6 mt-2 mx-auto"></div>
-          <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto px-4">
-            See how we&apos;ve transformed businesses across industries with proven strategies and measurable outcomes.
-          </p>
+          <div className="text-center mb-8 md:mb-12 mt-8 md:mt-16">
+            <span className="block uppercase tracking-[0.25em] text-xs text-neutral-400 font-semibold mb-4">
+              OUR WORK
+            </span>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+              Real Results. Real Businesses.{' '}
+              <span className="text-[#7BB9E8]">Real Growth.</span>
+            </h2>
+            <div className="w-20 h-1 rounded-full bg-[#7BB9E8] mb-6 mt-2 mx-auto"></div>
+            <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto px-4">
+              See how we&apos;ve transformed businesses across industries with proven strategies and measurable outcomes.
+            </p>
+          </div>
         </div>
-        </div>
-        <div className="relative mb-16" ref={containerRef} style={{ height: 'auto', maxHeight: '650px' }}>
+        <div className="relative mb-16" ref={containerRef} style={{ height: 'auto' }}>
           <div className="overflow-hidden">
-            <div className="flex gap-3 w-fit" ref={carouselRef}>
+            <div className="flex gap-3 w-fit portfolio-carousel-scroll" ref={carouselRef}>
               {cardsToRender.map((card, index) => (
                 <a
                   key={`${card.id}-${index}`}
@@ -642,11 +754,11 @@ export default function SuccessStoriesCarousel() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-[240px] sm:w-[280px] md:w-[320px] lg:w-[400px] flex-shrink-0 block"
-                  style={{ 
-                    pointerEvents: 'auto', 
-                    position: 'relative', 
-                    zIndex: 1, 
-                    marginTop: '20px', 
+                  style={{
+                    pointerEvents: 'auto',
+                    position: 'relative',
+                    zIndex: 1,
+                    marginTop: '20px',
                     marginBottom: '20px',
                     userSelect: 'none',
                     WebkitUserSelect: 'none',
@@ -657,13 +769,12 @@ export default function SuccessStoriesCarousel() {
                       cardsRef.current[index] = el
                     }}
                     className="card-content relative rounded-3xl overflow-hidden cursor-pointer group"
-                    style={{ 
+                    style={{
                       willChange: 'transform',
                       transformStyle: isMobile ? 'flat' : 'preserve-3d',
                       backfaceVisibility: 'hidden',
                       WebkitBackfaceVisibility: 'hidden',
                       boxShadow: isMobile ? '0 6px 12px rgba(0, 0, 0, 0.35)' : '0 10px 20px 5px rgba(0, 0, 0, 0.4)',
-                      maxHeight: isMobile ? '360px' : 'none',
                       touchAction: 'pan-x pan-y',
                       transform: 'translate3d(0,0,0)',
                       WebkitTransform: 'translate3d(0,0,0)',
@@ -675,7 +786,7 @@ export default function SuccessStoriesCarousel() {
                       {card.backgroundImage && card.design?.imagePosition ? (
                         <>
                           {/* Solid Color Background */}
-                          <div 
+                          <div
                             className="absolute inset-0 transition-all duration-500"
                             style={{
                               background: card.design?.cardColor || '#01010F',
@@ -689,7 +800,7 @@ export default function SuccessStoriesCarousel() {
                             loading="lazy"
                             decoding="async"
                             fetchPriority={index < 3 ? 'high' : 'low'}
-                            style={{ 
+                            style={{
                               willChange: 'auto',
                               transform: 'translateZ(0) translateX(-50%)',
                               contentVisibility: 'auto',
@@ -699,23 +810,23 @@ export default function SuccessStoriesCarousel() {
                         </>
                       ) : card.backgroundImage ? (
                         <>
-                      <img
-                        alt={card.title}
+                          <img
+                            alt={card.title}
                             className="w-full h-full object-cover"
                             src={card.backgroundImage}
-                        loading="lazy"
-                        decoding="async"
-                        fetchPriority={index < 3 ? 'high' : 'low'}
-                        style={{ 
-                          transform: 'translateZ(0)',
-                          transformStyle: 'preserve-3d',
-                          backfaceVisibility: 'hidden',
-                          contentVisibility: 'auto',
+                            loading="lazy"
+                            decoding="async"
+                            fetchPriority={index < 3 ? 'high' : 'low'}
+                            style={{
+                              transform: 'translateZ(0)',
+                              transformStyle: 'preserve-3d',
+                              backfaceVisibility: 'hidden',
+                              contentVisibility: 'auto',
                               filter: `brightness(${card.design?.brightness || 1.2}) contrast(${card.design?.contrast || 1.3})`,
                             }}
-                      />
+                          />
                           {/* Dark Overlay - Card specific */}
-                          <div 
+                          <div
                             className="absolute inset-0 transition-all duration-500 group-hover:opacity-90"
                             style={{
                               background: `linear-gradient(to bottom, rgba(0,0,0,${(parseInt(card.design?.overlay?.from || '40')) / 100}), rgba(0,0,0,${(parseInt(card.design?.overlay?.via || '50')) / 100}), rgba(0,0,0,${(parseInt(card.design?.overlay?.to || '75')) / 100}))`,
@@ -724,7 +835,7 @@ export default function SuccessStoriesCarousel() {
                         </>
                       ) : (
                         /* Solid Color Background */
-                        <div 
+                        <div
                           className="absolute inset-0 transition-all duration-500"
                           style={{
                             background: card.design?.cardColor || '#F5F5F5',
@@ -870,9 +981,9 @@ export default function SuccessStoriesCarousel() {
                                     </div>
                                     {card.design?.statsLayout === 'vertical' && (
                                       <div className="flex flex-col">
-                                        <div 
+                                        <div
                                           className={`${textColorClass} text-lg sm:text-xl md:text-2xl font-bold transition-all duration-300`}
-                                          style={{ 
+                                          style={{
                                             textShadow: textShadow
                                           }}
                                         >
@@ -886,15 +997,15 @@ export default function SuccessStoriesCarousel() {
                                   </div>
                                   {card.design?.statsLayout !== 'vertical' && (
                                     <>
-                                      <div 
-                                        className={`${textColorClass} text-xl sm:text-2xl md:text-3xl font-bold transition-all duration-300`}
-                                        style={{ 
+                                      <div
+                                        className={`${textColorClass} ${card.design?.statsValueSize || 'text-base sm:text-lg md:text-xl'} font-bold transition-all duration-300 break-words leading-tight`}
+                                        style={{
                                           textShadow: textShadow
                                         }}
                                       >
                                         {stat.value}
                                       </div>
-                                      <div className={`${textColorSecondaryClass} text-xs sm:text-sm font-medium mt-0.5 group-hover/stat:${isLightBackground ? 'text-gray-900' : 'text-white/90'} transition-colors duration-300`}>
+                                      <div className={`${textColorSecondaryClass} ${card.design?.statsLabelSize || 'text-xs sm:text-sm'} font-medium mt-0.5 group-hover/stat:${isLightBackground ? 'text-gray-900' : 'text-white/90'} transition-colors duration-300 break-words leading-tight`}>
                                         {stat.label}
                                       </div>
                                     </>
@@ -911,21 +1022,21 @@ export default function SuccessStoriesCarousel() {
                             className={`${card.design?.cardColor && !card.backgroundImage ? 'bg-white text-black hover:bg-gray-100' : 'bg-white text-black hover:bg-gray-100'} px-5 py-3 sm:px-7 sm:py-4 rounded-xl font-bold text-sm sm:text-base shadow-xl inline-flex items-center gap-2`}
                             style={{ fontFamily: 'DM Sans, sans-serif' }}
                             data-gsap-hover-target="true"
-                      >
-                        See Case Study
-                        <svg
+                          >
+                            See Case Study
+                            <svg
                               className="w-4 h-4 sm:w-5 sm:h-5"
-                          fill="none"
+                              fill="none"
                               viewBox="0 0 24 24"
                               stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                                 strokeWidth="2.5"
                                 d="M13 7l5 5m0 0l-5 5m5-5H6"
-                          />
-                        </svg>
+                              />
+                            </svg>
                           </div>
                         </div>
                       </div>
@@ -934,7 +1045,7 @@ export default function SuccessStoriesCarousel() {
                       {card.design?.cardColor && !card.backgroundImage && (
                         <div className="absolute bottom-0 left-0 right-0 h-12 sm:h-16 overflow-hidden z-20">
                           {/* Vintage Pattern */}
-                          <div 
+                          <div
                             className="absolute inset-0 opacity-20"
                             style={{
                               backgroundImage: `repeating-linear-gradient(
@@ -949,7 +1060,7 @@ export default function SuccessStoriesCarousel() {
                           {/* Vintage Border */}
                           <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-gray-400 to-transparent opacity-40" />
                           {/* Vintage Texture Overlay */}
-                          <div 
+                          <div
                             className="absolute inset-0"
                             style={{
                               background: `radial-gradient(circle at 2px 2px, rgba(0,0,0,0.15) 1px, transparent 0)`,
@@ -968,7 +1079,7 @@ export default function SuccessStoriesCarousel() {
             </div>
           </div>
         </div>
-        
+
         {/* CTA Section */}
         <div className="text-center mt-20 max-w-4xl mx-auto pb-8">
           <h3 className="text-2xl md:text-3xl font-bold text-white mb-4" style={{ fontFamily: 'DM Sans, sans-serif' }}>

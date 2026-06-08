@@ -149,7 +149,7 @@ const connectLinks = [
     ),
   },
   {
-    href: 'mailto:youngstownmarketingco@gmail.com',
+    href: 'mailto:Yomarketingco@gmail.com',
     label: 'Email',
     icon: (
       <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
@@ -569,6 +569,101 @@ export default function Page() {
       const button = document.getElementById('open-get-started-modal')
       if (button) {
         button.removeEventListener('click', handleOpenGetStartedModal)
+      }
+      clearInterval(checkInterval)
+    }
+  }, [])
+
+  // Handle Lead Capture form submission
+  useEffect(() => {
+    const handleSubmit = async (e) => {
+      e.preventDefault()
+      
+      const form = e.target
+      const submitBtn = document.getElementById('lead-submit-btn')
+      const spinner = document.getElementById('submit-btn-spinner')
+      const errorContainer = document.getElementById('lead-error-container')
+      const successContainer = document.getElementById('lead-success-container')
+      const successMessage = document.getElementById('lead-success-message')
+
+      if (!submitBtn) return
+
+      // UI states
+      submitBtn.disabled = true
+      if (spinner) spinner.classList.remove('hidden')
+      if (errorContainer) {
+        errorContainer.classList.add('hidden')
+        errorContainer.innerText = ''
+      }
+
+      // Gather form inputs
+      const fullName = document.getElementById('lead_fullName')?.value || ''
+      const email = document.getElementById('lead_email')?.value || ''
+      const phone = document.getElementById('lead_phone')?.value || ''
+      const businessName = document.getElementById('lead_businessName')?.value || ''
+      const domainName = document.getElementById('lead_domainName')?.value || ''
+      const websiteGoals = document.getElementById('lead_websiteGoals')?.value || ''
+      const marketingBudget = document.getElementById('lead_marketingBudget')?.value || ''
+      const message = document.getElementById('lead_message')?.value || ''
+      const agreeToTerms = document.getElementById('lead_agreeToTerms')?.checked || false
+
+      try {
+        const response = await fetch('/api/lead-capture', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            fullName,
+            email,
+            phone,
+            businessName,
+            domainName,
+            websiteGoals,
+            marketingBudget,
+            message,
+            agreeToTerms
+          })
+        })
+
+        const result = await response.json()
+
+        if (!response.ok) {
+          throw new Error(result.error || 'Failed to submit lead request.')
+        }
+
+        // Show success state
+        if (form) form.classList.add('hidden')
+        if (successContainer) successContainer.classList.remove('hidden')
+        if (successMessage && result.message) {
+          successMessage.innerText = result.message
+        }
+      } catch (err) {
+        console.error('Lead submission error:', err)
+        if (errorContainer) {
+          errorContainer.innerText = err.message || 'An error occurred. Please try again.'
+          errorContainer.classList.remove('hidden')
+        }
+        submitBtn.disabled = false
+        if (spinner) spinner.classList.add('hidden')
+      }
+    }
+
+    const attachListener = () => {
+      const form = document.getElementById('lead-capture-form')
+      if (form && !form.hasAttribute('data-listener-attached')) {
+        form.setAttribute('data-listener-attached', 'true')
+        form.addEventListener('submit', handleSubmit)
+      }
+    }
+
+    attachListener()
+    const checkInterval = setInterval(attachListener, 500)
+
+    return () => {
+      const form = document.getElementById('lead-capture-form')
+      if (form) {
+        form.removeEventListener('submit', handleSubmit)
       }
       clearInterval(checkInterval)
     }
@@ -1208,22 +1303,12 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
               aria-hidden="true"
             />
             <span className="block w-full">
-              <span className="block uppercase w-full text-center">WE RANK YOUR</span>
+              <span className="block uppercase w-full text-center" style={{ fontSize: 'clamp(40px, 10vw, 115px)' }}>GROW YOUR</span>
+              <span className="block uppercase w-full text-center" style={{ fontSize: 'clamp(40px, 10vw, 115px)' }}>BUSINESS</span>
             </span>
-            <span className="block w-full text-center uppercase">
-              <span className="block w-full text-center">BUSINESS</span>
-            </span>
-            <span className="block w-full text-center uppercase">
-              <span className="flex flex-col items-center md:hidden leading-[0.9] tracking-tight w-full">
-                <span className="block w-full text-center">TOP OF PAGE ON</span>
-              </span>
-              {/* flex justify-center: reliably centers the nowrap line at all large resolutions */}
-              <span className="hidden md:flex md:items-center md:justify-center w-full">
-                <span className="whitespace-nowrap" style={{ fontSize: 'clamp(28px, 7.5vw, 95px)' }}>TOP OF PAGE ON</span>
-              </span>
-            </span>
-            <span className="block w-full text-center uppercase">
-              <span className="inline-block whitespace-nowrap">GOOGLE</span>
+            <span className="block w-full text-center uppercase" style={{ fontSize: 'clamp(28px, 7.5vw, 95px)' }}>
+              <span className="block w-full text-center">OR WE DON&apos;T</span>
+              <span className="block w-full text-center">GET PAID</span>
             </span>
           </h1>
           <div className="mb-6 md:mb-8 h-[5rem] md:h-[4rem] flex items-center justify-center">

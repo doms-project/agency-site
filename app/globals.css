@@ -895,7 +895,7 @@ a[href],
   [data-mobile-carousel="true"],
   .portfolio-carousel-scroll,
   #portfolio .flex.gap-3 {
-    animation-duration: 70s !important;
+    animation-duration: 70s;
   }
 }
 
