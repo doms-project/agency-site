@@ -1273,10 +1273,10 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
       </Suspense>
       {/* Mobile header now at page level - spacer for fixed navbar */}
       <div className="lg:hidden h-24" aria-hidden="true" />
-      <section className="hero relative z-10 w-full flex flex-col justify-center items-center pb-16 mb-0 overflow-visible lg:pt-8">
+      <section className="hero relative z-10 w-full flex flex-col justify-center items-center pb-16 mb-0 overflow-visible lg:pt-20">
         <div className="max-w-5xl mx-auto w-full px-1 sm:px-2 md:px-3 flex flex-col items-center justify-center text-center">
           <div
-            className="flex items-center justify-center w-full mb-6 md:mb-7 mt-2 sm:mt-1 md:mt-0 lg:-mt-2"
+            className="flex items-center justify-center w-full mb-6 md:mb-7 mt-2 sm:mt-1 md:mt-0 lg:mt-0"
           >
             <div className="flex items-center gap-1 md:gap-2 bg-white/10 px-2 py-0.5 md:px-3 md:py-1 rounded-full border-2 border-white/30 shadow-md shadow-white/5 backdrop-blur-sm ring-1 ring-white/10 scale-90 md:scale-100">
               <Image
