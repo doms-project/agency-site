@@ -34,7 +34,7 @@ const GetStartedModal = lazy(() => import('@/components/GetStartedModal'))
 
 const heroPhrases = [
   'Expect an extra 5-15 inbound high quality leads a month',
-  'Guarantee Grow Your Business or You Don\'t Pay',
+  'Guaranteed to Grow Your Business or You Don\'t Pay',
   'Ranking higher on Google can double your business.',
 ]
 
@@ -102,7 +102,7 @@ const mobileNavLinks = [
   { label: 'Home', href: '#hero' },
   { label: 'Services', href: '#services' },
   { label: 'Pricing', href: '#pricing' },
-  { label: 'About us', href: '#about' },
+  // { label: 'About us', href: '#about' },
   { label: 'Testimonials', href: '#testimonials' },
   { label: 'Contact us', href: '#contact' },
 ]
@@ -987,11 +987,11 @@ export default function Page() {
           </div>
         </ErrorBoundary>
         
-        <ErrorBoundary>
+        {/* <ErrorBoundary>
           <Suspense fallback={<div className="min-h-screen bg-[#0a0a0a]" />}>
             <TeamScrollSection />
           </Suspense>
-        </ErrorBoundary>
+        </ErrorBoundary> */}
         
         <ErrorBoundary>
           <div className="scroll-fade-in section-overlap-next" style={{ paddingTop: '0', paddingBottom: '0', marginTop: '-1rem', marginBottom: '-1rem' }}>
@@ -1111,7 +1111,7 @@ function DesktopNav({ navSolid, hideNav }) {
               </div>
             </div>
             <NavTextLink href="#pricing" label="Pricing" />
-            <NavTextLink href="#about" label="About us" />
+            {/* <NavTextLink href="#about" label="About us" /> */}
             <NavTextLink href="#testimonials" label="Testimonials" />
             <NavTextLink href="#contact" label="Contact us" />
           </div>
@@ -1303,12 +1303,9 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
               aria-hidden="true"
             />
             <span className="block w-full">
-              <span className="block uppercase w-full text-center" style={{ fontSize: 'clamp(40px, 10vw, 115px)' }}>GROW YOUR</span>
-              <span className="block uppercase w-full text-center" style={{ fontSize: 'clamp(40px, 10vw, 115px)' }}>BUSINESS</span>
-            </span>
-            <span className="block w-full text-center uppercase" style={{ fontSize: 'clamp(28px, 7.5vw, 95px)' }}>
-              <span className="block w-full text-center">OR WE DON&apos;T</span>
-              <span className="block w-full text-center">GET PAID</span>
+              <span className="block uppercase w-full text-center" style={{ fontSize: 'clamp(40px, 10vw, 115px)' }}>MORE RANKINGS.</span>
+              <span className="block uppercase w-full text-center" style={{ fontSize: 'clamp(40px, 10vw, 115px)' }}>MORE CALLS.</span>
+              <span className="block uppercase w-full text-center" style={{ fontSize: 'clamp(40px, 10vw, 115px)' }}>MORE REVENUE.</span>
             </span>
           </h1>
           <div className="mb-6 md:mb-8 h-[5rem] md:h-[4rem] flex items-center justify-center">

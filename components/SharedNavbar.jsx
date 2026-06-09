@@ -7,7 +7,7 @@ const mobileNavLinks = [
   { label: 'Home', href: '/' },
   { label: 'Services', href: '/#services' },
   { label: 'Pricing', href: '/#pricing' },
-  { label: 'About us', href: '/#about' },
+  // { label: 'About us', href: '/#about' },
   { label: 'Testimonials', href: '/#testimonials' },
   { label: 'Contact us', href: '/#contact' },
 ]
@@ -197,7 +197,7 @@ export default function SharedNavbar() {
                 </div>
               </div>
               <NavTextLink href="/#pricing" label="Pricing" />
-              <NavTextLink href="/#about" label="About us" />
+              {/* <NavTextLink href="/#about" label="About us" /> */}
               <NavTextLink href="/#testimonials" label="Testimonials" />
               <NavTextLink href="/#contact" label="Contact us" />
             </div>
