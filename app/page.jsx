@@ -1293,7 +1293,7 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
               </span>
             </div>
           </div>
-          <h1 className="w-full max-w-6xl lg:max-w-7xl xl:max-w-screen-xl font-extrabold text-white leading-[0.95] tracking-tight mb-5 md:mb-7 lg:-mt-2 xl:-mt-4 relative text-center overflow-visible" style={{
+          <h1 className="w-full max-w-6xl lg:max-w-7xl xl:max-w-screen-xl font-extrabold text-white leading-[0.95] tracking-tight mb-2 md:mb-7 lg:-mt-2 xl:-mt-4 relative text-center overflow-visible" style={{
             fontSize: 'clamp(32px, 8vw, 100px)',
             textShadow: '0 4px 20px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(0, 0, 0, 0.3)',
             fontFamily: 'DM Sans, sans-serif'
@@ -1308,7 +1308,7 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
               <span className="block uppercase w-full text-center" style={{ fontSize: 'clamp(40px, 10vw, 115px)' }}>MORE REVENUE.</span>
             </span>
           </h1>
-          <div className="mb-6 md:mb-8 h-[5rem] md:h-[4rem] flex items-center justify-center">
+          <div className="mb-3 md:mb-8 h-[3.5rem] md:h-[4rem] flex items-center justify-center">
             <span className="text-lg md:text-xl lg:text-2xl text-white/90 font-light max-w-4xl leading-relaxed break-words line-clamp-4 sm:line-clamp-none" style={{ fontFamily: 'DM Sans, sans-serif' }}>
               {typedText}
               <span className="typewriter-cursor text-[#7BB9E8] animate-pulse">|</span>
