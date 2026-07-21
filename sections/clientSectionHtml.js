@@ -62,6 +62,15 @@ export const clientSectionHtml = String.raw`<section class="client-logos-section
      <img alt="Rent a Scooter Tulum" class="client-logo" draggable="false" src="/logo/Logo%20Rent%20a%20scooter%20tulum.png" width="180" height="128" loading="lazy"/>
     </div>
     <div class="flex items-center justify-center h-28 md:h-32 w-[160px] md:w-[180px]">
+     <img alt="GTS Roadside" class="client-logo" draggable="false" src="/uploads/gts-logo.png" width="180" height="128" loading="lazy"/>
+    </div>
+    <div class="flex items-center justify-center h-28 md:h-32 w-[160px] md:w-[180px]">
+     <img alt="Helical Foundation Repair" class="client-logo" draggable="false" src="/uploads/6a43d8c64c02d14b8da1ff81.webp" width="180" height="128" loading="lazy"/>
+    </div>
+    <div class="flex items-center justify-center h-28 md:h-32 w-[160px] md:w-[180px]">
+     <img alt="Ohio Inspired Electric" class="client-logo" draggable="false" src="/uploads/6a347098de4900e889a65a16.png" width="180" height="128" loading="lazy"/>
+    </div>
+    <div class="flex items-center justify-center h-28 md:h-32 w-[160px] md:w-[180px]">
      <img alt="Home Care Logo" class="client-logo" draggable="false" src="/logo/Red%20Monoline%20Home%20Care%20Logo.png" width="180" height="128" loading="lazy"/>
     </div>
     <div class="flex items-center justify-center h-28 md:h-32 w-[160px] md:w-[180px]">

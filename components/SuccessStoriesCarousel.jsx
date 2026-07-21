@@ -13,7 +13,7 @@ const portfolioCards = [
       'Nonprofit supporting veterans through reintegration programs, mental wellness initiatives, and long-term legacy giving solutions.',
     stats: [
       { label: 'Branded Search Visibility', value: '+340%' },
-      { label: 'Map Pack Ranking', value: 'Top 3' },
+      { label: 'Veterans Helped', value: '100+' },
       { label: 'Mission Reach Online', value: '50K+' },
     ],
     link: 'https://silentwarriors.com/home',
@@ -33,6 +33,7 @@ const portfolioCards = [
   {
     id: 1,
     title: 'Mahoning Home Buyers',
+    badge: '/uploads/business_tripled_transparent.webp',
     backgroundImage: '/images/johnson.webp',
     logo: '/images/chatgpt-logo.webp',
     description: 'Transforming real estate businesses with cutting-edge digital strategies and proven growth systems.',
@@ -56,67 +57,14 @@ const portfolioCards = [
     },
   },
   {
-    id: 11,
-    title: 'Opportunities of Harvest Power Washing',
-    backgroundImage: '/uploads/opportunity%20harvesting%20.jpg',
-    logo: '/uploads/opportunity%20harvest%20logo.png',
-    description:
-      'A Dallas-Fort Worth power washing company serving residential and commercial clients across 8+ DFW cities. We built their website from the ground up and ranked them #1 on Google — turning their online presence into a lead-generating machine.',
-    stats: [
-      { label: 'Google Ranking', value: '#1 in DFW' },
-      { label: 'Monthly Traffic', value: '+300%' },
-      { label: 'Quote Requests', value: '500+' },
-    ],
-    link: 'https://opportunitiesofharvestpowerwashing.com/home',
-    design: {
-      brightness: 1.15,
-      contrast: 1.25,
-      overlay: { from: '40', via: '55', to: '82' },
-      logoSize: 'h-24 sm:h-28 md:h-36 lg:h-44',
-      logoPosition: 'center',
-      padding: 'p-6 sm:p-8 md:p-10',
-      logoPadding: 'pt-2 sm:pt-3 md:pt-4',
-      statsMargin: '-mt-12 sm:-mt-16 md:-mt-20',
-      statsLayout: 'grid',
-      statsWidth: 'w-full max-w-full',
-    },
-  },
-  {
-    id: 13,
-    title: 'Justin Vegas Realtor',
-    backgroundImage: '/uploads/justin%20vegas%20background.png',
-    logo: '/uploads/justin%20vegas%20logo.png',
-    description:
-      'A top-rated Las Vegas & Henderson REALTOR® with Berkshire Hathaway HomeServices Nevada Properties, specializing in buyers, sellers, and out-of-state relocators. We built his website and ranked him on Google — putting him in front of home buyers searching Northwest Las Vegas every day.',
-    stats: [
-      { label: 'Homes Closed', value: '57+' },
-      { label: 'Google Ranking', value: '#1 Las Vegas' },
-      { label: 'Lead Growth', value: '4x in 90 Days' },
-    ],
-    link: 'https://justinvegasrealtor.com/home',
-    design: {
-      brightness: 1.15,
-      contrast: 1.25,
-      overlay: { from: '40', via: '55', to: '82' },
-      logoSize: 'h-24 sm:h-28 md:h-36 lg:h-44',
-      logoPosition: 'center',
-      padding: 'p-6 sm:p-8 md:p-10',
-      logoPadding: 'pt-2 sm:pt-3 md:pt-4',
-      statsMargin: '-mt-12 sm:-mt-16 md:-mt-20',
-      statsLayout: 'grid',
-      statsWidth: 'w-full max-w-full',
-      statsValueSize: 'text-base sm:text-lg md:text-xl',
-      statsLabelSize: 'text-xs sm:text-sm',
-    },
-  },
-  {
     id: 2,
     title: 'Choppin Throttles',
+    badge: '/uploads/business_tripled_transparent.webp',
     backgroundImage: '/images/instasave.website_476927403_18482611003022000_5756383078473439164_n.jpg',
     logo: '/images/Black White Modern Grunge Typographic Brand Logo (Website) (1).png',
     description: 'Dirt bike stunter showing the world via social media sponsoring to companies related to his stunt.',
     stats: [
-      { label: 'Monthly Views', value: '3M+' },
+      { label: 'Monthly Views', value: '20M+' },
       { label: 'Sponsor Campaigns', value: '20+' },
       { label: 'Social Growth', value: '250%' },
     ],
@@ -135,8 +83,89 @@ const portfolioCards = [
     },
   },
   {
+    id: 20,
+    title: 'GTS Roadside',
+    badge: '/uploads/business_doubled_transparent.webp',
+    backgroundImage: '/uploads/GTS image.png',
+    logo: '/uploads/gts-logo.png',
+    description:
+      'A professional roadside assistance company serving drivers across the region. We built their website, ranked them on Google, and built out their lead system — putting them in front of drivers who need help fast.',
+    stats: [
+      { label: 'Inbound Calls', value: '70+' },
+      { label: 'Google Ranking', value: 'Top 3' },
+      { label: 'Reach Growth', value: '4x' },
+    ],
+    link: 'https://gtsroadside.com/',
+    design: {
+      brightness: 1.2,
+      contrast: 1.3,
+      overlay: { from: '40', via: '55', to: '80' },
+      logoSize: 'h-24 sm:h-28 md:h-36 lg:h-44',
+      logoPosition: 'center',
+      padding: 'p-6 sm:p-8 md:p-10',
+      logoPadding: 'pt-2 sm:pt-3 md:pt-4',
+      statsMargin: '-mt-12 sm:-mt-16 md:-mt-20',
+      statsLayout: 'grid',
+      statsWidth: 'w-full max-w-full',
+    },
+  },
+  {
+    id: 21,
+    title: 'Helical Foundation Repair',
+    badge: '/uploads/business_doubled_transparent.webp',
+    backgroundImage: '/uploads/6a344ee5162c3e3e341232e2.jpg',
+    logo: '/uploads/6a43d8c64c02d14b8da1ff81.webp',
+    description:
+      'A foundation repair specialist serving homeowners across Ohio. We built their website from scratch, ranked them on Google, and built out a lead system — turning searches into booked jobs every week.',
+    stats: [
+      { label: 'Inbound Leads/Mo', value: '40+' },
+      { label: 'Google Ranking', value: 'Top 3' },
+      { label: 'Site Built & Ranked', value: '30 Days' },
+    ],
+    link: 'https://helicalfoundationrepair.com/',
+    design: {
+      brightness: 1.15,
+      contrast: 1.3,
+      overlay: { from: '40', via: '58', to: '82' },
+      logoSize: 'h-20 sm:h-24 md:h-28 lg:h-36',
+      logoPosition: 'center',
+      padding: 'p-6 sm:p-8 md:p-10',
+      logoPadding: 'pt-2 sm:pt-3 md:pt-4',
+      statsMargin: '-mt-10 sm:-mt-14 md:-mt-18',
+      statsLayout: 'grid',
+      statsWidth: 'w-full max-w-full',
+    },
+  },
+  {
+    id: 22,
+    title: 'Ohio Inspired Electric LLC',
+    backgroundImage: '/uploads/6a39748618f53fe5a68e2deb.jpg',
+    logo: '/uploads/6a347098de4900e889a65a16.png',
+    description:
+      'A trusted Ohio-based electrical contractor serving residential and commercial clients. We built their website, set up their Google Business Profile, and ranked them locally — turning online searches into booked electrical jobs.',
+    stats: [
+      { label: 'Inbound Leads/Mo', value: '35+' },
+      { label: 'Google Ranking', value: 'Top 3' },
+      { label: 'Site Built & Live', value: '30 Days' },
+    ],
+    link: 'https://ohioinspiredelectric.com/',
+    design: {
+      brightness: 1.2,
+      contrast: 1.3,
+      overlay: { from: '40', via: '58', to: '82' },
+      logoSize: 'h-24 sm:h-28 md:h-36 lg:h-44',
+      logoPosition: 'center',
+      padding: 'p-6 sm:p-8 md:p-10',
+      logoPadding: 'pt-2 sm:pt-3 md:pt-4',
+      statsMargin: '-mt-12 sm:-mt-16 md:-mt-20',
+      statsLayout: 'grid',
+      statsWidth: 'w-full max-w-full',
+    },
+  },
+  {
     id: 7,
     title: 'Cleveland Home Buyers',
+    badge: '/uploads/business_doubled_transparent.webp',
     backgroundImage: '/uploads/cle%20home%20background.jpg',
     logo: '/uploads/cle%20home%20logo2.png',
     description:
@@ -163,13 +192,14 @@ const portfolioCards = [
   {
     id: 14,
     title: 'Luxe Auto Rental',
+    badge: '/uploads/business_tripled_transparent.webp',
     backgroundImage: '/uploads/luxe%20rental%20background.png',
     logo: '/uploads/logo.webp',
     description:
       'A locally owned car rental shop in Cleveland, OH offering flat $50/day rates with no hidden fees or counter lines. We built their website and ranked them on Google — putting them in front of Cleveland locals searching for affordable car rentals every day.',
     stats: [
-      { label: 'Flat Daily Rate', value: '$50/Day' },
-      { label: 'Google Ranking', value: '#1 Cleveland' },
+      { label: 'Lead Growth', value: '4x in 60 Days' },
+      { label: 'Google Ranking', value: 'Top in Cleveland' },
       { label: 'Site Built & Ranked', value: '30 Days' },
     ],
     link: 'https://luxeautorental.com/home',
@@ -191,13 +221,14 @@ const portfolioCards = [
   {
     id: 3,
     title: 'Rent a Scooter Tulum',
+    badge: '/uploads/business_tripled_transparent.webp',
     backgroundImage: null,
     logo: '/images/Logo Rent a scooter tulum.png',
     description: 'Rental business running on our CRM with website, automation, and wider business expansion.',
     stats: [
-      { label: 'CRM Integration', value: '100%' },
-      { label: 'Website Traffic', value: '50K+' },
-      { label: 'Automation Rate', value: '85%' },
+      { label: 'Monthly Revenue Added', value: '+$25,000' },
+      { label: 'Organic Leads / Month', value: '100+' },
+      { label: 'Automation Rate', value: '95%' },
     ],
     link: 'https://rentscootertulum.com/',
     design: {
@@ -222,7 +253,7 @@ const portfolioCards = [
     description:
       'A California cash home buying company serving 10 markets from San Diego to Sacramento. We built their website and ranked them on Google — connecting motivated sellers to fast, no-hassle cash offers across the state.',
     stats: [
-      { label: 'Google Ranking', value: '#1 San Diego' },
+      { label: 'Keyword Ranked', value: 'San Diego Home Buyer' },
       { label: 'Markets Ranked', value: '10 in CA' },
       { label: 'Offer Turnaround', value: '24 Hours' },
     ],
@@ -245,6 +276,7 @@ const portfolioCards = [
   {
     id: 8,
     title: 'Flow Renovations',
+    badge: '/uploads/business_doubled_transparent.webp',
     backgroundImage: '/uploads/flow%20reno%20abck.png',
     logo: '/uploads/flow%20reno%20logo2.png',
     description:
@@ -276,8 +308,8 @@ const portfolioCards = [
     description:
       'Real estate investment company helping homeowners sell fast with fair cash offers, no repairs, no commissions, and flexible closing timelines.',
     stats: [
-      { label: 'Monthly Search Impressions', value: '15K+' },
-      { label: 'Keyword Dominance', value: '#1 Local' },
+      { label: 'Site Built & Launched', value: '3 Days' },
+      { label: 'GMB Setup From Scratch', value: '2 Weeks' },
       { label: 'Seller Inquiry Rate', value: '+220%' },
     ],
     link: 'https://portcityhomebuyers.com/home',
@@ -292,6 +324,60 @@ const portfolioCards = [
       statsMargin: '-mt-12 sm:-mt-16 md:-mt-20',
       statsLayout: 'grid',
       statsWidth: 'w-full max-w-full',
+    },
+  },
+  {
+    id: 11,
+    title: 'Opportunities of Harvest Power Washing',
+    backgroundImage: '/uploads/opportunity%20harvesting%20.jpg',
+    logo: '/uploads/opportunity%20harvest%20logo.png',
+    description:
+      'A Dallas-Fort Worth power washing company serving residential and commercial clients across 8+ DFW cities. We built their website from the ground up and ranked them on Google — turning their online presence into a lead-generating machine.',
+    stats: [
+      { label: 'Google Ranking', value: 'Top in DFW' },
+      { label: 'Monthly Traffic', value: '+300%' },
+      { label: 'Quote Requests', value: '500+' },
+    ],
+    link: 'https://opportunitiesofharvestpowerwashing.com/home',
+    design: {
+      brightness: 1.15,
+      contrast: 1.25,
+      overlay: { from: '40', via: '55', to: '82' },
+      logoSize: 'h-24 sm:h-28 md:h-36 lg:h-44',
+      logoPosition: 'center',
+      padding: 'p-6 sm:p-8 md:p-10',
+      logoPadding: 'pt-2 sm:pt-3 md:pt-4',
+      statsMargin: '-mt-12 sm:-mt-16 md:-mt-20',
+      statsLayout: 'grid',
+      statsWidth: 'w-full max-w-full',
+    },
+  },
+  {
+    id: 13,
+    title: 'Justin Vegas Realtor',
+    backgroundImage: '/uploads/justin%20vegas%20background.png',
+    logo: '/uploads/justin%20vegas%20logo.png',
+    description:
+      'A top-rated Las Vegas & Henderson REALTOR® with Berkshire Hathaway HomeServices Nevada Properties, specializing in buyers, sellers, and out-of-state relocators. We built his website and ranked them on Google — putting him in front of home buyers searching Northwest Las Vegas every day.',
+    stats: [
+      { label: 'Homes Closed', value: '57+' },
+      { label: 'Google Ranking', value: 'Top Agent in Vegas' },
+      { label: 'Site Built & Ranked', value: '30 Days' },
+    ],
+    link: 'https://justinvegasrealtor.com/home',
+    design: {
+      brightness: 1.15,
+      contrast: 1.25,
+      overlay: { from: '40', via: '55', to: '82' },
+      logoSize: 'h-24 sm:h-28 md:h-36 lg:h-44',
+      logoPosition: 'center',
+      padding: 'p-6 sm:p-8 md:p-10',
+      logoPadding: 'pt-2 sm:pt-3 md:pt-4',
+      statsMargin: '-mt-12 sm:-mt-16 md:-mt-20',
+      statsLayout: 'grid',
+      statsWidth: 'w-full max-w-full',
+      statsValueSize: 'text-base sm:text-lg md:text-xl',
+      statsLabelSize: 'text-xs sm:text-sm',
     },
   },
 ]
@@ -846,13 +932,20 @@ export default function SuccessStoriesCarousel() {
 
                     {/* Glassmorphism Container */}
                     <div className={`relative w-full h-[360px] sm:h-[420px] md:h-[480px] lg:h-[600px] flex flex-col justify-between ${card.design?.padding || 'p-6 sm:p-8 md:p-10'} z-30`}>
-                      {/* Top Section - Logo */}
+                      {/* Top Section - Logo + Badge */}
                       <div className={`flex flex-col ${card.design?.logoPosition === 'top-left' ? 'items-start' : 'items-center'} justify-start ${card.design?.logoPadding || 'pt-2 sm:pt-2 md:pt-3'}`}>
                         <img
                           alt={`${card.title} Logo`}
                           src={card.logo}
                           className={`${card.design?.logoSize || 'h-32 sm:h-40 md:h-48 lg:h-56'} w-auto object-contain`}
                         />
+                        {card.badge && (
+                          <img
+                            src={card.badge}
+                            alt="Performance Badge"
+                            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain mt-1 drop-shadow-[0_4px_12px_rgba(0,0,0,0.7)] pointer-events-none"
+                          />
+                        )}
                       </div>
 
                       {/* Bottom Section - Stats and CTA */}

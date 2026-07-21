@@ -33,9 +33,8 @@ const WebsiteRevisionModal = lazy(() => import('@/components/WebsiteRevisionModa
 const GetStartedModal = lazy(() => import('@/components/GetStartedModal'))
 
 const heroPhrases = [
-  'Expect an extra 5-15 inbound high quality leads a month',
-  'Guaranteed to Grow Your Business or You Don\'t Pay',
-  'Ranking higher on Google can double your business.',
+  'Expect an extra 15-30+ inbound high quality leads each month',
+  'Rankings, a whole system built for you to grow your business. Our clients add $10K–$100K+/month in revenue.',
 ]
 
 const heroStats = [
@@ -1293,19 +1292,43 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
               </span>
             </div>
           </div>
-          <h1 className="w-full max-w-6xl lg:max-w-7xl xl:max-w-screen-xl font-extrabold text-white leading-[0.95] tracking-tight mb-2 md:mb-7 lg:-mt-2 xl:-mt-4 relative text-center overflow-visible" style={{
-            fontSize: 'clamp(32px, 8vw, 100px)',
-            textShadow: '0 4px 20px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(0, 0, 0, 0.3)',
+          <h1 className="w-full max-w-6xl lg:max-w-7xl xl:max-w-screen-xl font-extrabold text-white leading-none tracking-tight mb-2 md:mb-7 lg:-mt-2 xl:-mt-4 relative text-center overflow-visible" style={{
             fontFamily: 'DM Sans, sans-serif'
           }}>
+            {/* Glow orb behind text */}
             <span
-              className="absolute -z-10 left-1/2 -translate-x-1/2 top-1/5 h-72 w-72 sm:h-96 sm:w-96 bg-[#7BB9E8]/35 blur-[90px] rounded-full"
+              className="absolute -z-10 left-1/2 -translate-x-1/2 top-1/4 h-72 w-72 sm:h-96 sm:w-96 bg-[#7BB9E8]/30 blur-[100px] rounded-full"
               aria-hidden="true"
             />
-            <span className="block w-full">
-              <span className="block uppercase w-full text-center" style={{ fontSize: 'clamp(40px, 10vw, 115px)' }}>MORE RANKINGS.</span>
-              <span className="block uppercase w-full text-center" style={{ fontSize: 'clamp(40px, 10vw, 115px)' }}>MORE CALLS.</span>
-              <span className="block uppercase w-full text-center" style={{ fontSize: 'clamp(40px, 10vw, 115px)' }}>MORE REVENUE.</span>
+            {/* Line 1 — BIG: More Calls. More Deals. */}
+            <span
+              className="block uppercase w-full text-center text-white"
+              style={{
+                fontSize: 'clamp(38px, 9.5vw, 118px)',
+                lineHeight: '1',
+                letterSpacing: '-0.02em',
+                textShadow: '0 4px 24px rgba(0,0,0,0.55), 0 2px 10px rgba(0,0,0,0.35)',
+              }}
+            >
+              More Calls. More Deals.
+            </span>
+            {/* Line 2 — Smaller but bold: Guaranteed — Or You Don't Pay. */}
+            <span
+              className="block w-full text-center mt-2 md:mt-3"
+              style={{
+                fontSize: 'clamp(20px, 5vw, 62px)',
+                lineHeight: '1.1',
+                letterSpacing: '-0.01em',
+                fontWeight: 700,
+                background: 'linear-gradient(90deg, #C9A84C 0%, #F0CF6E 40%, #C9A84C 80%, #D4A940 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                textShadow: 'none',
+                filter: 'drop-shadow(0 2px 12px rgba(201,168,76,0.45))',
+              }}
+            >
+              Guaranteed — Or You Don&apos;t Pay.
             </span>
           </h1>
           <div className="mb-3 md:mb-8 h-[3.5rem] md:h-[4rem] flex items-center justify-center">
@@ -1328,7 +1351,7 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
               }}
               className="group relative px-8 py-4 md:px-12 md:py-5 bg-gradient-to-r from-[#7BB9E8] via-[#6ba8d8] to-[#5fa6d6] text-white font-semibold text-base md:text-lg lg:text-xl rounded-xl border border-[#7BB9E8]/30 shadow-lg shadow-[#7BB9E8]/20 hover:shadow-xl hover:shadow-[#7BB9E8]/30 hover:scale-105 active:scale-95 transition-all duration-300 w-full sm:w-auto text-center overflow-hidden touch-manipulation"
             >
-              <span className="relative z-10">Start Your Project</span>
+              <span className="relative z-10">Talk to an Expert</span>
               <div className="absolute inset-0 bg-gradient-to-r from-[#9BC5E8] via-[#7BB9E8] to-[#6ba8d8] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </button>
             <button
@@ -1347,7 +1370,28 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
               <span className="relative z-10">View Our Work</span>
             </button>
           </div>
+          {/* Guarantee Badge */}
+          <div className="flex items-center justify-center mt-3 mb-2">
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-[#C9A84C]/30 bg-[#C9A84C]/5 backdrop-blur-sm shadow-sm shadow-[#C9A84C]/10">
+              {/* Shield icon */}
+              <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                <path d="M9 12l2 2 4-4" />
+              </svg>
+              <p className="text-[11px] md:text-xs text-white/70 font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                Qualify and we don&apos;t deliver?{' '}
+                <span className="text-[#C9A84C] font-semibold">You don&apos;t pay.</span>{' '}
+                <a
+                  href="/refund-policy"
+                  className="underline underline-offset-2 text-white/50 hover:text-[#C9A84C] transition-colors duration-200"
+                >
+                  See terms.
+                </a>
+              </p>
+            </div>
+          </div>
           {/* Stats - Horizontal Layout */}
+
           <div className="flex flex-wrap items-center justify-center gap-2 md:gap-6 lg:gap-8 mt-4 mb-6 md:mb-8 pb-4 md:pb-6">
             {heroStats.map((stat, index) => (
               <div key={stat.label} className="flex items-center gap-2 md:gap-3">

@@ -40,6 +40,15 @@ export const partnerSectionHtml = String.raw`<section class="partner-carousel pb
     <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
      <img alt="Partner" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/logo/ChatGPT Image Sep 18, 2025, 11_14_48 PM.png" width="180" height="140" style="height:130px;" loading="lazy"/>
     </div>
+    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
+     <img alt="GTS Roadside" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/uploads/gts-logo.png" width="180" height="140" style="height:110px;" loading="lazy"/>
+    </div>
+    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:280px;">
+     <img alt="Helical Foundation Repair" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/uploads/6a43d8c64c02d14b8da1ff81.webp" width="220" height="140" style="height:80px;" loading="lazy"/>
+    </div>
+    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
+     <img alt="Ohio Inspired Electric" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/uploads/6a347098de4900e889a65a16.png" width="180" height="140" style="height:130px;" loading="lazy"/>
+    </div>
     <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:220px;">
      <img alt="GoHighLevel" class="w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" src="/images/ghl.png" width="80" height="80" style="height:40px;" loading="lazy"/>
     </div>
@@ -58,6 +67,15 @@ export const partnerSectionHtml = String.raw`<section class="partner-carousel pb
     <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
      <img alt="Partner" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/logo/ChatGPT Image Sep 18, 2025, 11_14_48 PM.png" width="180" height="140" style="height:130px;" loading="lazy"/>
     </div>
+    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
+     <img alt="GTS Roadside" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/uploads/gts-logo.png" width="180" height="140" style="height:110px;" loading="lazy"/>
+    </div>
+    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:280px;">
+     <img alt="Helical Foundation Repair" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/uploads/6a43d8c64c02d14b8da1ff81.webp" width="220" height="140" style="height:80px;" loading="lazy"/>
+    </div>
+    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
+     <img alt="Ohio Inspired Electric" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/uploads/6a347098de4900e889a65a16.png" width="180" height="140" style="height:130px;" loading="lazy"/>
+    </div>
     <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:220px;">
      <img alt="GoHighLevel" class="w-auto object-contain filter brightness-0 invert partner-logo" decoding="async" draggable="false" src="/images/ghl.png" width="80" height="80" style="height:40px;" loading="lazy"/>
     </div>
@@ -75,6 +93,15 @@ export const partnerSectionHtml = String.raw`<section class="partner-carousel pb
     </div>
     <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
      <img alt="Partner" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/logo/ChatGPT Image Sep 18, 2025, 11_14_48 PM.png" width="180" height="140" style="height:130px;" loading="lazy"/>
+    </div>
+    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
+     <img alt="GTS Roadside" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/uploads/gts-logo.png" width="180" height="140" style="height:110px;" loading="lazy"/>
+    </div>
+    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:280px;">
+     <img alt="Helical Foundation Repair" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/uploads/6a43d8c64c02d14b8da1ff81.webp" width="220" height="140" style="height:80px;" loading="lazy"/>
+    </div>
+    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
+     <img alt="Ohio Inspired Electric" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/uploads/6a347098de4900e889a65a16.png" width="180" height="140" style="height:130px;" loading="lazy"/>
     </div>
    </div>
   </div>

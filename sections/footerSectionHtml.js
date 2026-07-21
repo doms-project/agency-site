@@ -134,6 +134,10 @@ export const footerSectionHtml = String.raw`<footer class="w-full bg-gradient-to
      <a class="text-white/70 hover:text-[#7BB9E8] transition-all duration-200 text-xs font-medium hover:translate-x-1" href="#contact">
       FAQ & Contact Center
      </a>
+     <div class="flex items-start gap-2 text-white/60 text-xs font-medium mt-1">
+      <svg class="text-[#7BB9E8] w-3.5 h-3.5 flex-shrink-0 mt-0.5" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+      <span>4954 Mahoning Ave,<br/>Austintown, OH 44515</span>
+     </div>
     </div>
    </div>
    <div class="hidden md:flex flex-col items-start text-left md:col-span-3">
@@ -146,6 +150,9 @@ export const footerSectionHtml = String.raw`<footer class="w-full bg-gradient-to
      </a>
      <a class="text-white/70 hover:text-[#7BB9E8] transition-all duration-200 text-xs font-medium hover:translate-x-1" href="/terms-of-service">
       Terms of Service
+     </a>
+     <a class="text-white/70 hover:text-[#7BB9E8] transition-all duration-200 text-xs font-medium hover:translate-x-1" href="/refund-policy">
+      Refund Policy
      </a>
     </div>
     <h3 class="text-white font-semibold text-xs mb-2 tracking-wider uppercase opacity-80" style="font-family:'DM Sans', sans-serif">
@@ -192,6 +199,9 @@ export const footerSectionHtml = String.raw`<footer class="w-full bg-gradient-to
      <div class="text-white/60 text-sm font-light">
       Serving Youngstown, Boardman, Canfield, Cleveland, and surrounding Northeast Ohio communities.
      </div>
+     <div class="text-white/50 text-xs font-light">
+      📍 4954 Mahoning Ave, Austintown, OH 44515
+     </div>
      <div class="text-white/50 text-sm font-light">
       © Copyright 2025. Yo Marketing Company. All Rights Reserved.
      </div>
@@ -204,10 +214,13 @@ export const footerSectionHtml = String.raw`<footer class="w-full bg-gradient-to
      <a class="text-white/50 hover:text-[#7BB9E8] transition-all duration-200 font-light" href="/terms-of-service">
       Terms of Service
      </a>
+     <span class="text-white/30">|</span>
+     <a class="text-white/50 hover:text-[#7BB9E8] transition-all duration-200 font-light" href="/refund-policy">
+      Refund Policy
+     </a>
     </div>
    </div>
   </div>
  </div>
 </footer>
 `;
-
