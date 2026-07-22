@@ -932,20 +932,33 @@ export default function SuccessStoriesCarousel() {
 
                     {/* Glassmorphism Container */}
                     <div className={`relative w-full h-[360px] sm:h-[420px] md:h-[480px] lg:h-[600px] flex flex-col justify-between ${card.design?.padding || 'p-6 sm:p-8 md:p-10'} z-30`}>
-                      {/* Top Section - Logo + Badge */}
+                      {/* Badge seal - top right corner */}
+                      {card.badge && (
+                        <div className="absolute top-2 right-2 sm:top-3 sm:right-3 md:top-4 md:right-4 z-50 pointer-events-none select-none">
+                          <img
+                            src={card.badge}
+                            alt={card.badge.includes('tripled') ? 'Business Tripled' : 'Business Doubled'}
+                            width={200}
+                            height={200}
+                            loading="lazy"
+                            decoding="async"
+                            className="w-[52px] h-[52px] sm:w-[60px] sm:h-[60px] md:w-[68px] md:h-[68px] lg:w-[76px] lg:h-[76px] object-contain"
+                            style={{
+                              imageRendering: '-webkit-optimize-contrast',
+                              filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.6))',
+                              transform: 'translateZ(0)',
+                              willChange: 'transform',
+                            }}
+                          />
+                        </div>
+                      )}
+                      {/* Top Section - Logo */}
                       <div className={`flex flex-col ${card.design?.logoPosition === 'top-left' ? 'items-start' : 'items-center'} justify-start ${card.design?.logoPadding || 'pt-2 sm:pt-2 md:pt-3'}`}>
                         <img
                           alt={`${card.title} Logo`}
                           src={card.logo}
                           className={`${card.design?.logoSize || 'h-32 sm:h-40 md:h-48 lg:h-56'} w-auto object-contain`}
                         />
-                        {card.badge && (
-                          <img
-                            src={card.badge}
-                            alt="Performance Badge"
-                            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain mt-1 drop-shadow-[0_4px_12px_rgba(0,0,0,0.7)] pointer-events-none"
-                          />
-                        )}
                       </div>
 
                       {/* Bottom Section - Stats and CTA */}
