@@ -29,9 +29,6 @@ export const partnerSectionHtml = String.raw`<section class="partner-carousel pb
      <img alt="Justin Sells Vegas" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/logo/justin sells vegas.png" width="200" height="160" style="height:150px;" loading="lazy"/>
     </div>
     <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
-     <img alt="Silent Warrior" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/uploads/silentwarrior logo.png" width="180" height="140" style="height:130px;" loading="lazy"/>
-    </div>
-    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
      <img alt="CLE Home" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/uploads/cle home logo2.png" width="180" height="140" style="height:130px;" loading="lazy"/>
     </div>
     <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
@@ -56,9 +53,6 @@ export const partnerSectionHtml = String.raw`<section class="partner-carousel pb
      <img alt="Justin Sells Vegas" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/logo/justin sells vegas.png" width="200" height="160" style="height:150px;" loading="lazy"/>
     </div>
     <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
-     <img alt="Silent Warrior" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/uploads/silentwarrior logo.png" width="180" height="140" style="height:130px;" loading="lazy"/>
-    </div>
-    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
      <img alt="CLE Home" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/uploads/cle home logo2.png" width="180" height="140" style="height:130px;" loading="lazy"/>
     </div>
     <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
@@ -81,9 +75,6 @@ export const partnerSectionHtml = String.raw`<section class="partner-carousel pb
     </div>
     <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:260px;">
      <img alt="Justin Sells Vegas" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/logo/justin sells vegas.png" width="200" height="160" style="height:150px;" loading="lazy"/>
-    </div>
-    <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
-     <img alt="Silent Warrior" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/uploads/silentwarrior logo.png" width="180" height="140" style="height:130px;" loading="lazy"/>
     </div>
     <div class="flex items-center justify-center flex-shrink-0" style="height:160px;min-width:150px;max-width:240px;">
      <img alt="CLE Home" class="w-auto object-contain partner-logo" decoding="async" draggable="false" src="/uploads/cle home logo2.png" width="180" height="140" style="height:130px;" loading="lazy"/>
