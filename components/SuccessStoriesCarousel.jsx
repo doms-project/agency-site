@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 
 // Card data with glassmorphism design - Real Estate Business
 const portfolioCards = [
+  /*
   {
     id: 10,
     title: 'Silent Warriors Foundation',
@@ -30,6 +31,7 @@ const portfolioCards = [
       statsWidth: 'w-full max-w-full',
     },
   },
+  */
   {
     id: 1,
     title: 'Mahoning Home Buyers',

@@ -1381,12 +1381,12 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
               <p className="text-[11px] md:text-xs text-white/70 font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                 Qualify and we don&apos;t deliver?{' '}
                 <span className="text-[#C9A84C] font-semibold">You don&apos;t pay.</span>{' '}
-                <a
+                <Link
                   href="/refund-policy"
                   className="underline underline-offset-2 text-white/50 hover:text-[#C9A84C] transition-colors duration-200"
                 >
                   See terms.
-                </a>
+                </Link>
               </p>
             </div>
           </div>
