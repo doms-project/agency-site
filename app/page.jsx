@@ -18,13 +18,13 @@ import ErrorBoundary from '@/components/ErrorBoundary'
 const SuccessStoriesCarousel = lazy(() => import('@/components/SuccessStoriesCarousel'))
 const TestimonialsCarousel = lazy(() => import('@/components/TestimonialsCarousel'))
 // Hero backgrounds - Multiple options
-import BlackHoleBackground from '@/components/BlackHoleBackground'
-import LightweightHeroBackground from '@/components/LightweightHeroBackground'
-import PyramidHeroBackground from '@/components/PyramidHeroBackground'
-import ParticleNetworkBackground from '@/components/ParticleNetworkBackground'
-import RingParticlesBackground from '@/components/RingParticlesBackground'
+const BlackHoleBackground = lazy(() => import('@/components/BlackHoleBackground'))
+const LightweightHeroBackground = lazy(() => import('@/components/LightweightHeroBackground'))
+const PyramidHeroBackground = lazy(() => import('@/components/PyramidHeroBackground'))
+const ParticleNetworkBackground = lazy(() => import('@/components/ParticleNetworkBackground'))
+const RingParticlesBackground = lazy(() => import('@/components/RingParticlesBackground'))
 import CSSGlowBackground from '@/components/CSSGlowBackground'
-import ServiceHeroBackground from '@/components/ServiceHeroBackground'
+const ServiceHeroBackground = lazy(() => import('@/components/ServiceHeroBackground'))
 // Lazy load heavy WebGL background to improve initial load performance
 const PrismHeroBackground = lazy(() => import('@/components/PrismHeroBackground'))
 // Lazy load modals - only load when needed
@@ -167,11 +167,7 @@ export default function Page() {
   const [isWebsiteRevisionModalOpen, setIsWebsiteRevisionModalOpen] = useState(false)
   const [isGetStartedModalOpen, setIsGetStartedModalOpen] = useState(false)
   const [getStartedModalKey, setGetStartedModalKey] = useState(0)
-  const [phraseIndex, setPhraseIndex] = useState(0)
-  const [typedText, setTypedText] = useState('')
-  const [isDeleting, setIsDeleting] = useState(false)
 
-  const currentPhrase = useMemo(() => heroPhrases[phraseIndex], [phraseIndex])
 
   useEffect(() => {
     document.body.classList.add('homepage')
@@ -428,24 +424,7 @@ export default function Page() {
     }
   }, [])
 
-  useEffect(() => {
-    let timer
-    if (!isDeleting && typedText.length < currentPhrase.length) {
-      timer = setTimeout(() => {
-        setTypedText(currentPhrase.slice(0, typedText.length + 1))
-      }, 80)
-    } else if (!isDeleting && typedText.length === currentPhrase.length) {
-      timer = setTimeout(() => setIsDeleting(true), 1800)
-    } else if (isDeleting && typedText.length > 0) {
-      timer = setTimeout(() => {
-        setTypedText(currentPhrase.slice(0, typedText.length - 1))
-      }, 45)
-    } else if (isDeleting && typedText.length === 0) {
-      setIsDeleting(false)
-      setPhraseIndex((prev) => (prev + 1) % heroPhrases.length)
-    }
-    return () => clearTimeout(timer)
-  }, [typedText, isDeleting, currentPhrase])
+
 
   // Portfolio carousel animation removed - now handled by SuccessStoriesCarousel component
 
@@ -935,8 +914,8 @@ export default function Page() {
       </header>
       <main style={{ margin: 0, padding: 0 }}>
         <ErrorBoundary>
-          <Suspense fallback={<HeroSectionSkeleton onOpenMobileNav={() => setMobileNavOpen(true)} typedText={typedText} isMobileNavOpen={isMobileNavOpen} />}>
-            <HeroSection onOpenMobileNav={() => setMobileNavOpen(true)} typedText={typedText} isMobileNavOpen={isMobileNavOpen} />
+          <Suspense fallback={<HeroSectionSkeleton onOpenMobileNav={() => setMobileNavOpen(true)} isMobileNavOpen={isMobileNavOpen} />}>
+            <HeroSection onOpenMobileNav={() => setMobileNavOpen(true)} isMobileNavOpen={isMobileNavOpen} />
           </Suspense>
         </ErrorBoundary>
         
@@ -1208,12 +1187,40 @@ function NavTextLink({ href, label }) {
   )
 }
 
-function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
+function Typewriter() {
+  const [phraseIndex, setPhraseIndex] = useState(0)
+  const [typedText, setTypedText] = useState('')
+  const [isDeleting, setIsDeleting] = useState(false)
+  const currentPhrase = heroPhrases[phraseIndex]
+
+  useEffect(() => {
+    let timer
+    if (!isDeleting && typedText.length < currentPhrase.length) {
+      timer = setTimeout(() => {
+        setTypedText(currentPhrase.slice(0, typedText.length + 1))
+      }, 80)
+    } else if (!isDeleting && typedText.length === currentPhrase.length) {
+      timer = setTimeout(() => setIsDeleting(true), 1800)
+    } else if (isDeleting && typedText.length > 0) {
+      timer = setTimeout(() => {
+        setTypedText(currentPhrase.slice(0, typedText.length - 1))
+      }, 45)
+    } else if (isDeleting && typedText.length === 0) {
+      setIsDeleting(false)
+      setPhraseIndex((prev) => (prev + 1) % heroPhrases.length)
+    }
+    return () => clearTimeout(timer)
+  }, [typedText, isDeleting, currentPhrase])
+
+  return typedText
+}
+
+function HeroSection({ onOpenMobileNav, isMobileNavOpen = false }) {
   const [isMobile, setIsMobile] = useState(false)
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
   // Animation options now include 'serviceHero' (lighter, like Website Design page)
   // Other options: 'blackhole', 'pyramid', 'gradient', 'particles', 'ringParticles', 'cssGlow', 'prism'
-  const [heroAnimation, setHeroAnimation] = useState('prism') // Force prism for debugging
+  const [heroAnimation, setHeroAnimation] = useState('cssGlow')
   // Color options for particles
   const [particleColor, setParticleColor] = useState('multiColor')
   // Multicolor + white palette for ServiceHeroBackground
@@ -1236,8 +1243,8 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
     updatePRM()
     media.addEventListener('change', updatePRM)
 
-    // Default animation: use Prism everywhere; fallback to CSS glow only for reduced-motion
-    setHeroAnimation(media.matches ? 'cssGlow' : 'prism')
+    // Default animation: use Prism on desktop; CSS glow on mobile or reduced-motion
+    setHeroAnimation(media.matches || mobile ? 'cssGlow' : 'prism')
 
     return () => {
       media.removeEventListener('change', updatePRM)
@@ -1333,7 +1340,7 @@ function HeroSection({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
           </h1>
           <div className="mb-3 md:mb-8 h-[3.5rem] md:h-[4rem] flex items-center justify-center">
             <span className="text-lg md:text-xl lg:text-2xl text-white/90 font-light max-w-4xl leading-relaxed break-words line-clamp-4 sm:line-clamp-none" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-              {typedText}
+              <Typewriter />
               <span className="typewriter-cursor text-[#7BB9E8] animate-pulse">|</span>
             </span>
           </div>
@@ -1655,7 +1662,7 @@ function RawHtml({ html, onInjected }) {
   )
 }
 
-function HeroSectionSkeleton({ onOpenMobileNav, typedText, isMobileNavOpen = false }) {
+function HeroSectionSkeleton({ onOpenMobileNav, isMobileNavOpen = false }) {
   return (
     <section
       id="hero"
